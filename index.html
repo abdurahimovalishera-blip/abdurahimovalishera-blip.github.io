@@ -7,27 +7,83 @@
 <meta name="description" content="Alisher Abduraximovning shaxsiy sayti">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,Roboto,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-.card{max-width:420px;width:100%;text-align:center}
-.avatar{width:96px;height:96px;border-radius:50%;background:#2563eb;color:#fff;font-size:36px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
-h1{font-size:28px;margin-bottom:6px}
-.role{color:#94a3b8;margin-bottom:20px}
-p{line-height:1.6;margin-bottom:28px}
-a.btn{display:block;padding:14px;margin-bottom:12px;border-radius:12px;background:#1e293b;color:#e2e8f0;text-decoration:none;font-weight:600}
-a.btn:hover{background:#2563eb}
-footer{margin-top:24px;font-size:13px;color:#64748b}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,Roboto,sans-serif;background:#0f172a;color:#e2e8f0;line-height:1.6}
+header{position:sticky;top:0;z-index:10;background:rgba(15,23,42,.92);border-bottom:1px solid #1e293b}
+nav{max-width:720px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.logo{font-weight:800;color:#60a5fa;text-decoration:none;font-size:20px}
+nav div a{color:#cbd5e1;text-decoration:none;margin-left:12px;font-size:14px}
+section{max-width:720px;margin:auto;padding:64px 20px}
+.hero{text-align:center;min-height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.avatar{width:110px;height:110px;border-radius:50%;background:#2563eb;color:#fff;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+h1{font-size:32px}
+h2{font-size:26px;margin-bottom:20px}
+.role{color:#94a3b8;margin:6px 0 28px}
+.btn{display:inline-block;padding:14px 28px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;border:0;font-size:16px;cursor:pointer}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tags span{background:#1e293b;padding:6px 14px;border-radius:20px;font-size:14px}
+.grid{display:grid;gap:16px}
+.card{background:#1e293b;border-radius:16px;padding:20px;cursor:pointer;border:1px solid #1e293b;text-align:left;color:inherit;font:inherit;width:100%}
+.card:hover{border-color:#2563eb}
+.card h3{margin-bottom:6px}
+.card p{color:#94a3b8;font-size:15px}
+.card small{color:#60a5fa;display:block;margin-top:10px}
+.links a{display:block;padding:14px;margin-bottom:12px;border-radius:12px;background:#1e293b;color:#e2e8f0;text-decoration:none;font-weight:600;text-align:center}
+dialog{margin:auto;max-width:480px;width:90%;border:0;border-radius:16px;padding:0;background:#1e293b;color:#e2e8f0}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+.box{padding:24px}
+.box h3{margin-bottom:12px;font-size:22px}
+.box p{margin-bottom:20px;color:#cbd5e1}
+.fade{opacity:0;transform:translateY(30px);transition:.6s}
+.fade.show{opacity:1;transform:none}
+footer{text-align:center;padding:32px;color:#64748b;font-size:13px}
 </style>
 </head>
 <body>
-<main class="card">
+<header><nav><a href="#" class="logo">AA</a><div><a href="#about">Men haqimda</a><a href="#work">Ishlarim</a><a href="#contact">Aloqa</a></div></nav></header>
+
+<section class="hero">
 <div class="avatar">AA</div>
 <h1>Alisher Abduraximov</h1>
-<div class="role">Kasbingiz shu yerda</div>
-<p>Oʻzingiz haqingizda 2–3 gap shu yerda boʻladi.</p>
-<a class="btn" href="https://t.me/username">Telegram</a>
-<a class="btn" href="tel:+998000000000">Qoʻngʻiroq qilish</a>
-<a class="btn" href="mailto:email@example.com">Email yozish</a>
+<p class="role">Kasbingiz shu yerda</p>
+<a href="#contact" class="btn">Bog‘lanish</a>
+</section>
+
+<section id="about" class="fade">
+<h2>Men haqimda</h2>
+<p>O‘zingiz haqingizda 2–3 gap shu yerda bo‘ladi. Nima bilan shug‘ullanasiz, qanday tajribangiz bor.</p>
+<div class="tags"><span>Ko‘nikma 1</span><span>Ko‘nikma 2</span><span>Ko‘nikma 3</span></div>
+</section>
+
+<section id="work" class="fade">
+<h2>Ishlarim</h2>
+<div class="grid">
+<button class="card" onclick="o('d1')"><h3>Birinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
+<button class="card" onclick="o('d2')"><h3>Ikkinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
+<button class="card" onclick="o('d3')"><h3>Uchinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
+</div>
+</section>
+
+<section id="contact" class="fade">
+<h2>Aloqa</h2>
+<div class="links">
+<a href="https://t.me/username">Telegram</a>
+<a href="tel:+998000000000">Qo‘ng‘iroq qilish</a>
+<a href="mailto:email@example.com">Email yozish</a>
+</div>
+</section>
+
 <footer>© 2026 Alisher Abduraximov</footer>
-</main>
+
+<dialog id="d1"><div class="box"><h3>Birinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
+<dialog id="d2"><div class="box"><h3>Ikkinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
+<dialog id="d3"><div class="box"><h3>Uchinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
+
+<script>
+function o(id){document.getElementById(id).showModal()}
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});
+document.querySelectorAll('.fade').forEach(el=>ob.observe(el));
+</script>
 </body>
-</html>
+  </html>
