@@ -1,89 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cusdis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://cusdis.com; frame-src https://cusdis.com; connect-src 'self' https://cusdis.com; media-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Alisher Abduraximov — shaxsiy sayt: yangiliklar, rasm va videolar, aloqa.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#060a12">
+<link rel="canonical" href="https://alisher.live/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="alisher.live">
+<meta property="og:title" content="Alisher Abduraximov">
+<meta property="og:description" content="Yangiliklar, rasm va videolar, aloqa.">
+<meta property="og:url" content="https://alisher.live/">
+<meta property="og:image" content="https://alisher.live/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <title>Alisher Abduraximov</title>
-<meta name="description" content="Alisher Abduraximovning shaxsiy sayti">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Unbounded:wght@600;700&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:system-ui,-apple-system,Roboto,sans-serif;background:#0f172a;color:#e2e8f0;line-height:1.6}
-header{position:sticky;top:0;z-index:10;background:rgba(15,23,42,.92);border-bottom:1px solid #1e293b}
-nav{max-width:720px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-.logo{font-weight:800;color:#60a5fa;text-decoration:none;font-size:20px}
-nav div a{color:#cbd5e1;text-decoration:none;margin-left:12px;font-size:14px}
-section{max-width:720px;margin:auto;padding:64px 20px}
-.hero{text-align:center;min-height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.avatar{width:110px;height:110px;border-radius:50%;background:#2563eb;color:#fff;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-h1{font-size:32px}
-h2{font-size:26px;margin-bottom:20px}
-.role{color:#94a3b8;margin:6px 0 28px}
-.btn{display:inline-block;padding:14px 28px;border-radius:12px;background:#2563eb;color:#fff;text-decoration:none;font-weight:600;border:0;font-size:16px;cursor:pointer}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.tags span{background:#1e293b;padding:6px 14px;border-radius:20px;font-size:14px}
-.grid{display:grid;gap:16px}
-.card{background:#1e293b;border-radius:16px;padding:20px;cursor:pointer;border:1px solid #1e293b;text-align:left;color:inherit;font:inherit;width:100%}
-.card:hover{border-color:#2563eb}
-.card h3{margin-bottom:6px}
-.card p{color:#94a3b8;font-size:15px}
-.card small{color:#60a5fa;display:block;margin-top:10px}
-.links a{display:block;padding:14px;margin-bottom:12px;border-radius:12px;background:#1e293b;color:#e2e8f0;text-decoration:none;font-weight:600;text-align:center}
-dialog{margin:auto;max-width:480px;width:90%;border:0;border-radius:16px;padding:0;background:#1e293b;color:#e2e8f0}
-dialog::backdrop{background:rgba(0,0,0,.7)}
-.box{padding:24px}
-.box h3{margin-bottom:12px;font-size:22px}
-.box p{margin-bottom:20px;color:#cbd5e1}
-.fade{opacity:0;transform:translateY(30px);transition:.6s}
-.fade.show{opacity:1;transform:none}
-footer{text-align:center;padding:32px;color:#64748b;font-size:13px}
+/* One deliberate look: night background, white text, neon blue and neon green only.
+   Layout: sticky header with a blue/white/green glow strip; short hero (name); feed left, contact icons right; small icons in footer. */
+:root{
+  --bg:#060a12;
+  --surface:#0b111c;
+  --surface-2:#101827;
+  --line:#1b2638;
+  --white:#f4f8ff;
+  --muted:#8b9bb3;
+  --blue:#2ea8ff;
+  --green:#2dff8a;
+  --glow-blue:0 0 6px rgba(46,168,255,.55),0 0 22px rgba(46,168,255,.35);
+  --glow-green:0 0 6px rgba(45,255,138,.5),0 0 22px rgba(45,255,138,.3);
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --s-xs:.8125rem; --s-sm:.9375rem; --s-md:1.0625rem; --s-lg:1.375rem;
+  --radius:14px; --radius-sm:10px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--white);font-family:var(--f-body);font-size:var(--s-md);line-height:1.6;
+  background-image:radial-gradient(900px 420px at 85% -10%,rgba(46,168,255,.13),transparent 70%),radial-gradient(700px 380px at -10% 30%,rgba(45,255,138,.07),transparent 70%);background-repeat:no-repeat}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+img,video{max-width:100%;display:block}
+a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono);font-size:var(--s-xs);letter-spacing:.02em}
+.flag{display:grid;grid-template-rows:3px 2px 3px}
+.flag i:nth-child(1){background:var(--blue);box-shadow:var(--glow-blue)}
+.flag i:nth-child(2){background:var(--white)}
+.flag i:nth-child(3){background:var(--green);box-shadow:var(--glow-green)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(6,10,18,.84);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);min-width:0}
+.mark{width:36px;height:36px;border-radius:9px;border:1px solid var(--blue);box-shadow:var(--glow-blue),inset 0 0 10px rgba(46,168,255,.25);color:var(--white);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:.78rem;flex:none}
+.brand b{font-family:var(--f-display);font-weight:600;font-size:.95rem;white-space:nowrap}
+.brand b span{color:var(--green);text-shadow:0 0 12px rgba(45,255,138,.5)}
+.top-right{display:flex;align-items:center;gap:6px}
+.nav{display:none;gap:4px;margin-right:8px}
+.nav a{color:var(--white);text-decoration:none;font-weight:500;font-size:var(--s-sm);padding:8px 12px;border-radius:8px}
+.nav a:hover{color:var(--blue)}
+@media (min-width:720px){.nav{display:flex}}
+.lang{display:flex;border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.lang button{border:0;background:transparent;padding:6px 10px;border-radius:7px;cursor:pointer;font-family:var(--f-mono);font-size:.78rem;font-weight:500;color:var(--muted)}
+.lang button:hover{color:var(--white)}
+.lang button[aria-pressed="true"]{background:var(--blue);color:#04101d;box-shadow:var(--glow-blue)}
+.hero-band{position:relative;overflow:hidden;border-bottom:1px solid var(--line);margin-bottom:36px}
+.pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%232ea8ff' stroke-width='1' stroke-opacity='.42'%3E%3Cpath d='M48 18L78 48L48 78L18 48Z'/%3E%3Cpath d='M27 27H69V69H27Z'/%3E%3Cpath d='M48 0V18M48 78V96M0 48H18M78 48H96M0 0L27 27M96 0L69 27M0 96L27 69M96 96L69 69'/%3E%3C/g%3E%3Ccircle cx='48' cy='48' r='2' fill='%232dff8a' fill-opacity='.55'/%3E%3C/svg%3E");background-size:96px 96px;background-position:center top;-webkit-mask-image:radial-gradient(ellipse 75% 95% at 85% 35%,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%);mask-image:radial-gradient(ellipse 75% 95% at 85% 35%,#000 0%,rgba(0,0,0,.35) 55%,transparent 85%)}
+.hero{position:relative;padding-block:clamp(40px,9vw,96px) clamp(36px,6vw,64px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:var(--s-xs);text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--green);box-shadow:var(--glow-green)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.2rem,7.6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 18px;text-wrap:balance}
+h1 .ln2{display:block;color:var(--blue);text-shadow:0 0 18px rgba(46,168,255,.55),0 0 42px rgba(46,168,255,.25)}
+.bio{max-width:52ch;color:var(--muted);margin:0;font-size:var(--s-md)}
+.main{display:grid;grid-template-columns:1fr;gap:40px;padding-block:0 72px}
+@media (min-width:900px){.main{grid-template-columns:minmax(0,1fr) 280px;gap:48px;align-items:start}}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:20px;position:relative}
+.sec-head::after{content:"";position:absolute;left:0;bottom:-1px;width:48px;height:2px;background:var(--blue);box-shadow:var(--glow-blue)}
+h2{font-family:var(--f-display);font-weight:600;font-size:var(--s-lg);margin:0}
+.feed{display:grid;gap:22px;min-width:0}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0;scroll-margin-top:90px;transition:border-color .2s ease}
+.post:hover{border-color:#24344d}
+.post-head{display:flex;align-items:center;gap:12px;padding:16px 18px 0}
+.post-head .mark{width:34px;height:34px;font-size:.7rem}
+.who{min-width:0;flex:1}
+.who b{display:block;font-size:var(--s-sm);font-weight:600;line-height:1.3}
+.who .mono{color:var(--muted)}
+.tag{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;padding:4px 8px;border-radius:6px;border:1px solid rgba(45,255,138,.35);color:var(--green);white-space:nowrap}
+.post-text{padding:12px 18px 0;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.media{margin:14px 0 0;display:grid;gap:3px}
+.media.g2{grid-template-columns:1fr 1fr}
+.media button{border:0;padding:0;background:var(--surface-2);cursor:zoom-in;display:block;width:100%}
+.media img{width:100%;height:auto}
+.media.g2 img{aspect-ratio:1/1;object-fit:cover}
+.media video{width:100%;background:#000}
+.yt{display:block;margin:14px 18px 0;border-radius:var(--radius-sm);overflow:hidden;position:relative;text-decoration:none;color:var(--white);background:radial-gradient(circle at 50% 45%,rgba(46,168,255,.28),transparent 60%),linear-gradient(160deg,#0c1626,#060a12);border:1px solid var(--line);aspect-ratio:16/9;max-width:100%}
+.yt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.yt .play{position:absolute;inset:0;display:grid;place-items:center}
+.yt .play i{width:66px;height:66px;border-radius:50%;border:2px solid var(--blue);background:rgba(6,10,18,.6);display:grid;place-items:center;box-shadow:var(--glow-blue);transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.yt:hover .play i{transform:scale(1.07);border-color:var(--green);box-shadow:var(--glow-green)}
+.yt .play svg{width:24px;height:24px;fill:var(--white);margin-left:3px}
+.yt .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:linear-gradient(transparent,rgba(0,0,0,.75));font-weight:600;font-size:var(--s-sm)}
+.lnk{display:flex;align-items:center;gap:14px;margin:14px 18px 0;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);text-decoration:none;color:var(--white);background:var(--surface-2);min-width:0;transition:border-color .15s ease}
+.lnk:hover{border-color:var(--blue)}
+.lnk .ic{width:38px;height:38px;border-radius:9px;border:1px solid var(--blue);box-shadow:var(--glow-blue);display:grid;place-items:center;flex:none;color:var(--white)}
+.lnk .ic svg{width:18px;height:18px}
+.lnk span{min-width:0;flex:1}
+.lnk b{display:block;font-size:var(--s-sm);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lnk .arr{color:var(--green);font-size:1.2rem;flex:none}
+.post-foot{display:flex;gap:6px;padding:12px;margin-top:14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.act{display:inline-flex;align-items:center;gap:8px;border:0;background:transparent;padding:8px 12px;border-radius:9px;cursor:pointer;font-size:var(--s-sm);font-weight:500;color:var(--muted)}
+.act:hover{color:var(--white);background:var(--surface-2)}
+.act svg{width:18px;height:18px;stroke:currentColor;fill:none}
+.act[aria-expanded="true"]{color:var(--green);background:var(--surface-2)}
+.cmts{padding:4px 18px 18px}
+.soon{border:1px dashed var(--line);border-radius:var(--radius-sm);padding:14px 16px;color:var(--muted);font-size:var(--s-sm);background:var(--surface-2)}
+.state{color:var(--muted);padding:24px;border:1px dashed var(--line);border-radius:var(--radius);text-align:center}
+.side{min-width:0}
+@media (min-width:900px){.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px)}}
+.clist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (min-width:900px){.clist{grid-template-columns:1fr}}
+.clist a{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--white);text-decoration:none;font-weight:500;font-size:var(--s-sm);transition:border-color .15s ease,box-shadow .15s ease}
+.clist a:hover{border-color:var(--blue);box-shadow:0 0 18px rgba(46,168,255,.18)}
+.clist a span:nth-child(2){flex:1;min-width:0}
+.cic{width:36px;height:36px;border-radius:10px;border:1px solid var(--blue);box-shadow:var(--glow-blue);display:grid;place-items:center;flex:none;color:var(--white)}
+.cic svg{width:18px;height:18px}
+.clist a:hover .cic{border-color:var(--green);box-shadow:var(--glow-green)}
+.clist .arr{color:var(--muted);font-size:.9rem}
+footer{background:#04070c}
+.foot{padding-block:36px 26px;display:grid;gap:24px}
+@media (min-width:760px){.foot{grid-template-columns:1fr auto;align-items:start}}
+.foot-name{font-family:var(--f-display);font-weight:600;font-size:1.05rem}
+.foot-name span{color:var(--green)}
+.rights{margin:10px 0 0;color:var(--muted);font-size:var(--s-sm);line-height:1.7}
+.rights b{color:var(--white);font-weight:500}
+.soc{display:flex;gap:8px;flex-wrap:wrap}
+.soc a{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:color .15s ease}
+.soc a:hover{color:var(--blue)}
+.soc svg{width:18px;height:18px}
+.foot-bar{border-top:1px solid var(--line);padding-block:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.foot-bar .mono{color:var(--muted)}
+.linkbtn{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:var(--s-sm)}
+.linkbtn:hover{color:var(--white)}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(2,4,8,.88);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.ov img{max-height:86vh;width:auto;border-radius:8px}
+.x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:calc(env(safe-area-inset-right,0px) + 14px);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--white);font-size:1.4rem;cursor:pointer;line-height:1}
+.modal{background:var(--surface);border:1px solid var(--line);color:var(--white);border-radius:var(--radius);max-width:640px;width:100%;max-height:84vh;overflow:auto;padding:26px 22px}
+.modal h3{font-family:var(--f-display);font-weight:600;margin:0 0 4px;font-size:1.2rem}
+.modal ul{padding-left:1.1em;margin:16px 0;color:#d5deeb}
+.modal li{margin-bottom:10px}
+.modal li::marker{color:var(--green)}
+.modal .mono{color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);transform:translateX(-50%);background:var(--surface-2);border:1px solid rgba(45,255,138,.4);color:var(--white);padding:10px 16px;border-radius:10px;font-size:var(--s-sm);z-index:60;display:flex;gap:8px;align-items:center}
+.toast::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:var(--glow-green)}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none}
+main,footer{position:relative;z-index:1}
+.post{background:linear-gradient(180deg,rgba(22,38,64,.95),rgba(14,24,42,.95));border-color:rgba(46,168,255,.35);box-shadow:0 0 0 1px rgba(46,168,255,.06),0 10px 34px -14px rgba(46,168,255,.35)}
+.post:hover{border-color:rgba(46,168,255,.6)}
+.post-text{color:#ffffff}
+.post .who .mono{color:#a9bbd4}
+.post .post-foot{border-top-color:rgba(46,168,255,.2)}
+.post .act{color:#b9c8dc}
+.post .lnk,.post .soon{background:rgba(30,52,86,.55);border-color:rgba(46,168,255,.3)}
+.post .yt{border-color:rgba(46,168,255,.35);background:radial-gradient(circle at 50% 45%,rgba(46,168,255,.42),transparent 62%),linear-gradient(160deg,#13253f,#0a1322)}
+.post .tag{background:rgba(45,255,138,.08);border-color:rgba(45,255,138,.5)}
+.cats{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 18px}
+.cats button{border:1px solid var(--line);background:rgba(11,17,28,.7);color:var(--muted);padding:7px 14px;border-radius:999px;cursor:pointer;font-size:var(--s-sm);font-weight:500;transition:color .15s ease,border-color .15s ease}
+.cats button:hover{color:var(--white)}
+.cats button[aria-pressed="true"]{color:var(--green);border-color:rgba(45,255,138,.55);box-shadow:0 0 14px rgba(45,255,138,.18)}
+.privline{margin:12px 0 0;color:var(--green);font-size:var(--s-sm)}
 </style>
 </head>
 <body>
-<header><nav><a href="#" class="logo">AA</a><div><a href="#about">Men haqimda</a><a href="#work">Ishlarim</a><a href="#contact">Aloqa</a></div></nav></header>
+<header class="top">
+  <div class="flag" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap top-row">
+    <a class="brand" href="#top" aria-label="alisher.live">
+      <b>alisher<span>.live</span></b>
+    </a>
+    <div class="top-right">
+      <nav class="nav" aria-label="Menu">
+        <a href="#posts" data-i18n="nav_posts">Postlar</a>
+        <a href="#contact" data-i18n="nav_contact">Aloqa</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Til / Language / Язык">
+        <button type="button" id="lang-uz" data-lang="uz" aria-pressed="true">UZ</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" id="lang-ru" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+    </div>
+  </div>
+</header>
 
-<section class="hero">
-<div class="avatar">AA</div>
-<h1>Alisher Abduraximov</h1>
-<p class="role">Kasbingiz shu yerda</p>
-<a href="#contact" class="btn">Bog‘lanish</a>
-</section>
+<main id="top">
+  <section class="hero-band">
+    <div class="pattern" aria-hidden="true"></div>
+    <div class="wrap hero">
+    <h1>Alisher <span class="ln2">Abduraximov</span></h1>
+    <p class="bio" data-i18n="bio">Yangiliklar, sport va turli yo‘nalishlardagi foydali ma’lumotlar.</p>
+    </div>
+  </section>
 
-<section id="about" class="fade">
-<h2>Men haqimda</h2>
-<p>O‘zingiz haqingizda 2–3 gap shu yerda bo‘ladi. Nima bilan shug‘ullanasiz, qanday tajribangiz bor.</p>
-<div class="tags"><span>Ko‘nikma 1</span><span>Ko‘nikma 2</span><span>Ko‘nikma 3</span></div>
-</section>
+  <div class="wrap main">
+    <section id="posts" aria-labelledby="posts-h">
+      <div class="sec-head"><h2 id="posts-h" data-i18n="posts_title">Postlar</h2></div>
+      <div class="cats" role="group" aria-label="Bo‘limlar">
+        <button type="button" id="cat-all" data-cat="all" aria-pressed="true" data-i18n="cat_all">Barchasi</button>
+        <button type="button" id="cat-news" data-cat="news" aria-pressed="false" data-i18n="cat_news">Yangiliklar</button>
+        <button type="button" id="cat-sport" data-cat="sport" aria-pressed="false" data-i18n="cat_sport">Sport</button>
+        <button type="button" id="cat-other" data-cat="other" aria-pressed="false" data-i18n="cat_other">Turli</button>
+      </div>
+      <div class="feed" id="feed">
+        <div class="state" data-i18n="loading">Postlar yuklanmoqda…</div>
+      </div>
+      <noscript><div class="state">JavaScript yoqilmagan.</div></noscript>
+    </section>
 
-<section id="work" class="fade">
-<h2>Ishlarim</h2>
-<div class="grid">
-<button class="card" onclick="o('d1')"><h3>Birinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
-<button class="card" onclick="o('d2')"><h3>Ikkinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
-<button class="card" onclick="o('d3')"><h3>Uchinchi loyiha</h3><p>Qisqa tavsif</p><small>Batafsil →</small></button>
+    <aside class="side" id="contact" aria-labelledby="contact-h">
+      <div class="sec-head"><h2 id="contact-h" data-i18n="contact_title">Aloqa</h2></div>
+      <ul class="clist">
+        <li><a href="https://t.me/Sample_Uz" target="_blank" rel="noopener noreferrer"><span class="cic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 3.6 2.9 10.8c-1.2.5-1.2 1.3-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5zM9.4 14.3l-.4 4.1-1.4-4.6L18.3 7l-8.9 7.3z"/></svg></span><span>Telegram</span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://www.instagram.com/abduraximov.a16/" target="_blank" rel="noopener noreferrer"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></span><span>Instagram</span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <li><a href="https://www.youtube.com/@Sample_Uz" target="_blank" rel="noopener noreferrer"><span class="cic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12a31 31 0 0 0 .4 3.8 3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-3.8 31 31 0 0 0-.4-3.8zM10 15V9l5.2 3L10 15z"/></svg></span><span>YouTube</span><span class="arr" aria-hidden="true">↗</span></a></li>
+        <li><a href="mailto:abdurahimovalishera@gmail.com"><span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></span><span>Email</span><span class="arr" aria-hidden="true">↗</span></a></li>
+      </ul>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <div class="flag" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap foot">
+    <div>
+      <div class="foot-name">alisher<span>.live</span></div>
+      <p class="rights">
+        <b>© <span class="yr">2026</span></b><br>
+        Barcha huquqlar himoyalangan.<br>
+        All rights reserved.<br>
+        Все права защищены.
+      </p>
+    </div>
+    <nav class="soc" aria-label="Social">
+      <a href="https://t.me/Sample_Uz" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 3.6 2.9 10.8c-1.2.5-1.2 1.3-.2 1.6l4.8 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5zM9.4 14.3l-.4 4.1-1.4-4.6L18.3 7l-8.9 7.3z"/></svg></a>
+      <a href="https://www.instagram.com/abduraximov.a16/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://www.youtube.com/@Sample_Uz" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 8.2a3 3 0 0 0-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 0 0 2 8.2 31 31 0 0 0 1.6 12a31 31 0 0 0 .4 3.8 3 3 0 0 0 2.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-3.8 31 31 0 0 0-.4-3.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+      <a href="mailto:abdurahimovalishera@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg></a>
+    </nav>
+  </div>
+  <div class="wrap foot-bar">
+    <button type="button" class="linkbtn" id="privacy-open" data-i18n="privacy">Maxfiylik siyosati</button>
+    <span class="mono">alisher.live</span>
+  </div>
+</footer>
+
+<div class="ov" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Rasm">
+  <button type="button" class="x" id="lightbox-close" aria-label="Close">×</button>
+  <img id="lightbox-img" alt="">
 </div>
-</section>
 
-<section id="contact" class="fade">
-<h2>Aloqa</h2>
-<div class="links">
-<a href="https://t.me/username">Telegram</a>
-<a href="tel:+998000000000">Qo‘ng‘iroq qilish</a>
-<a href="mailto:email@example.com">Email yozish</a>
+<div class="ov" id="privacy" hidden role="dialog" aria-modal="true" aria-labelledby="privacy-h">
+  <button type="button" class="x" id="privacy-close" aria-label="Close">×</button>
+  <div class="modal">
+    <h3 id="privacy-h" data-i18n="privacy">Maxfiylik siyosati</h3>
+    <span class="mono" data-i18n="pv_updated">Yangilangan: 22.10.2026</span>
+    <ul id="privacy-list"></ul>
+  </div>
 </div>
-</section>
 
-<footer>© 2026 Alisher Abduraximov</footer>
+<div class="toast" id="toast" hidden role="status" aria-live="polite"></div>
 
-<dialog id="d1"><div class="box"><h3>Birinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
-<dialog id="d2"><div class="box"><h3>Ikkinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
-<dialog id="d3"><div class="box"><h3>Uchinchi loyiha</h3><p>Bu loyiha haqida batafsil maʼlumot shu yerda bo‘ladi.</p><form method="dialog"><button class="btn">Yopish</button></form></div></dialog>
-
-<script>
-function o(id){document.getElementById(id).showModal()}
-document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
-const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});
-document.querySelectorAll('.fade').forEach(el=>ob.observe(el));
-</script>
+<script src="app.js" defer></script>
 </body>
-  </html>
+</html>

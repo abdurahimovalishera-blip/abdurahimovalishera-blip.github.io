@@ -1,0 +1,34 @@
+[
+  {
+    "id": "xush-kelibsiz",
+    "date": "2026-10-22",
+    "text": {
+      "uz": "Assalomu alaykum! alisher.live saytimga xush kelibsiz.",
+      "en": "Hello and welcome to alisher.live!",
+      "ru": "Здравствуйте и добро пожаловать на alisher.live!"
+    },
+    "images": [
+      "og.jpg"
+    ],
+    "alt": {
+      "uz": "alisher.live sayti",
+      "en": "alisher.live website",
+      "ru": "Сайт alisher.live"
+    }
+  },
+  {
+    "id": "youtube-kanal",
+    "date": "2026-10-22",
+    "text": {
+      "uz": "YouTube kanalimga obuna bo‘ling. Yangi videolar shu yerda chiqadi.",
+      "en": "Subscribe to my YouTube channel. New videos come out there.",
+      "ru": "Подписывайтесь на мой YouTube-канал. Новые видео выходят там."
+    },
+    "youtube": "https://www.youtube.com/@Sample_Uz",
+    "youtubeTitle": {
+      "uz": "YouTube kanal",
+      "en": "YouTube channel",
+      "ru": "YouTube-канал"
+    }
+  }
+]
