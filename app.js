@@ -66,7 +66,16 @@
     // Cusdis'da ro'yxatdan o'tgach, "App ID" ni shu yerga yozing. Bo'sh bo'lsa, izohlar "tez orada" deb turadi.
     cusdisAppId: '',
     cusdisHost: 'https://cusdis.com',
-    author: 'Alisher Abduraximov'
+    author: 'Alisher Abduraximov',
+    pageSize: 10 // lentada bir martada nechta post ko'rinadi
+  };
+
+  // Kategoriyalar. posts.json dagi "category" maydoni shu kalitlardan biri bo'lishi kerak.
+  // Yangi kategoriya qo'shish uchun shu ro'yxatga bitta qator qo'shing.
+  var CATS = {
+    news:   { uz: 'Yangiliklar', en: 'News',   ru: 'Новости' },
+    sport:  { uz: 'Sport',       en: 'Sports', ru: 'Спорт' },
+    useful: { uz: 'Foydali',     en: 'Useful', ru: 'Полезное' }
   };
 
   var T = {
@@ -76,6 +85,8 @@
       posts_title: 'Yangiliklar', loading: 'Yangiliklar yuklanmoqda…',
       load_err: 'Yangiliklar yuklanmadi. Sahifani yangilab ko‘ring.', empty: 'Hozircha yangilik yo‘q.',
       contact_title: 'Aloqa',
+      all: 'Hammasi', filter: 'Kategoriyalar',
+      more: 'Davomini o‘qish', less: 'Yig‘ish', load_more: 'Ko‘proq yuklash',
       comments: 'Izohlar', copy_link: 'Havola', share: 'Ulashish', copied: 'Nusxalandi',
       watch_yt: 'YouTube’da ko‘rish', open_link: 'Havolani ochish',
       t_photo: 'Foto',
@@ -98,6 +109,8 @@
       posts_title: 'News', loading: 'Loading news…',
       load_err: 'News could not be loaded. Please refresh the page.', empty: 'No news yet.',
       contact_title: 'Contact',
+      all: 'All', filter: 'Categories',
+      more: 'Read more', less: 'Show less', load_more: 'Load more',
       comments: 'Comments', copy_link: 'Link', share: 'Share', copied: 'Copied',
       watch_yt: 'Watch on YouTube', open_link: 'Open link',
       t_photo: 'Photo',
@@ -120,6 +133,8 @@
       posts_title: 'Новости', loading: 'Загрузка новостей…',
       load_err: 'Не удалось загрузить новости. Обновите страницу.', empty: 'Новостей пока нет.',
       contact_title: 'Контакты',
+      all: 'Все', filter: 'Категории',
+      more: 'Читать далее', less: 'Свернуть', load_more: 'Показать ещё',
       comments: 'Комментарии', copy_link: 'Ссылка', share: 'Поделиться', copied: 'Скопировано',
       watch_yt: 'Смотреть на YouTube', open_link: 'Открыть ссылку',
       t_photo: 'Фото',
@@ -143,6 +158,9 @@
   var posts = [];
   var loaded = false;
   var openPostId = null;
+  var cat = 'all';                // tanlangan kategoriya
+  var shown = CONFIG.pageSize;    // hozir nechta post ko'rsatilgan
+  var expanded = {};              // "Davomini o'qish" ochilgan postlar
 
   // Telefonda (sensorli ekran) tizimning "Ulashish" oynasi ishlatiladi
   var canShare = typeof navigator.share === 'function' &&
@@ -219,12 +237,16 @@
     if (last < text.length) into.appendChild(document.createTextNode(text.slice(last)));
   }
 
+  function postLabel(p) {
+    return localized(p.title) || (localized(p.text) || p.id).slice(0, 80);
+  }
+
   function sharePost(p) {
     var url = location.href.split('#')[0] + '#post-' + p.id;
     if (!canShare) { copyText(url); return; }
     navigator.share({
-      title: document.title,
-      text: (localized(p.text) || '').slice(0, 120),
+      title: localized(p.title) || document.title,
+      text: (localized(p.title) ? '' : (localized(p.text) || '').slice(0, 120)),
       url: url
     }).catch(function (e) {
       if (!e || e.name !== 'AbortError') copyText(url);
@@ -242,10 +264,31 @@
     var dt = el('time', 'mono', fmtDate(p.date)); dt.dateTime = p.date || '';
     who.appendChild(dt);
     head.appendChild(mk); head.appendChild(who);
+    if (CATS[p.category]) head.appendChild(el('span', 'tag', localized(CATS[p.category])));
     art.appendChild(head);
 
+    var ttl = localized(p.title);
+    if (ttl) art.appendChild(el('h3', 'post-title', ttl));
+
     var txt = localized(p.text);
-    if (txt) { var pt = el('p', 'post-text'); linkify(txt, pt); art.appendChild(pt); }
+    if (txt) {
+      var pt = el('p', 'post-text'); linkify(txt, pt); art.appendChild(pt);
+      var isLong = txt.length > 320 || txt.split('\n').length > 6;
+      if (isLong) {
+        var isOpen = !!expanded[p.id];
+        if (!isOpen) pt.classList.add('clamp');
+        var mb = el('button', 'more', t(isOpen ? 'less' : 'more')); mb.type = 'button';
+        mb.setAttribute('aria-expanded', String(isOpen));
+        mb.addEventListener('click', function () {
+          var o = !expanded[p.id];
+          expanded[p.id] = o;
+          pt.classList.toggle('clamp', !o);
+          mb.textContent = t(o ? 'less' : 'more');
+          mb.setAttribute('aria-expanded', String(o));
+        });
+        art.appendChild(mb);
+      }
+    }
 
     var imgs = (p.images || []).map(safeUrl).filter(Boolean);
     if (imgs.length) {
@@ -328,7 +371,7 @@
     th.setAttribute('data-app-id', CONFIG.cusdisAppId);
     th.setAttribute('data-page-id', p.id);
     th.setAttribute('data-page-url', location.origin + location.pathname + '#post-' + p.id);
-    th.setAttribute('data-page-title', (localized(p.text) || p.id).slice(0, 80));
+    th.setAttribute('data-page-title', postLabel(p));
     th.setAttribute('data-theme', 'dark');
     box.appendChild(th);
     setTimeout(function () {
@@ -356,12 +399,66 @@
     if (!wasOpen) { art.appendChild(buildComments(p)); btn.setAttribute('aria-expanded', 'true'); }
   }
 
+  // ---- Kategoriya filtrlari ----
+  function visiblePosts() {
+    if (cat === 'all') return posts;
+    return posts.filter(function (p) { return p.category === cat; });
+  }
+
+  function renderCats() {
+    var feed = document.getElementById('feed');
+    var bar = document.getElementById('cats');
+    if (!bar) {
+      bar = el('div', 'cats'); bar.id = 'cats'; bar.setAttribute('role', 'group');
+      feed.parentNode.insertBefore(bar, feed);
+    }
+    bar.setAttribute('aria-label', t('filter'));
+    bar.textContent = '';
+    // Faqat postlari bor kategoriyalar ko'rsatiladi
+    var keys = Object.keys(CATS).filter(function (k) {
+      return posts.some(function (p) { return p.category === k; });
+    });
+    if (keys.length < 2) { bar.hidden = true; cat = 'all'; return; }
+    bar.hidden = false;
+    ['all'].concat(keys).forEach(function (k) {
+      var b = el('button', null, k === 'all' ? t('all') : localized(CATS[k]));
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(cat === k));
+      b.addEventListener('click', function () {
+        if (cat === k) return;
+        cat = k; shown = CONFIG.pageSize;
+        renderCats(); renderFeed();
+      });
+      bar.appendChild(b);
+    });
+  }
+
   // ---- Lenta ----
+  function moreButton(list, feed) {
+    var lm = el('button', 'loadmore', t('load_more')); lm.type = 'button';
+    lm.addEventListener('click', function () {
+      var from = shown;
+      shown += CONFIG.pageSize;
+      lm.remove();
+      var firstNew = null;
+      list.slice(from, shown).forEach(function (p) {
+        var n = renderPost(p);
+        if (!firstNew) firstNew = n;
+        feed.appendChild(n);
+      });
+      if (list.length > shown) feed.appendChild(moreButton(list, feed));
+      if (firstNew) { firstNew.setAttribute('tabindex', '-1'); firstNew.focus({ preventScroll: true }); }
+    });
+    return lm;
+  }
+
   function renderFeed() {
     var feed = document.getElementById('feed');
     feed.textContent = '';
-    if (!posts.length) { feed.appendChild(el('div', 'state', t('empty'))); return; }
-    posts.forEach(function (p) { feed.appendChild(renderPost(p)); });
+    var list = visiblePosts();
+    if (!list.length) { feed.appendChild(el('div', 'state', t('empty'))); return; }
+    list.slice(0, shown).forEach(function (p) { feed.appendChild(renderPost(p)); });
+    if (list.length > shown) feed.appendChild(moreButton(list, feed));
   }
 
   function loadPosts() {
@@ -374,7 +471,14 @@
           .sort(function (a, b) { return (b.date || '').localeCompare(a.date || '') || a._i - b._i; });
         loaded = true;
         var h = location.hash.replace('#', '');
-        if (h.indexOf('post-') === 0) openPostId = h.slice(5);
+        if (h.indexOf('post-') === 0) {
+          openPostId = h.slice(5);
+          // Havola orqali kelingan post keyingi sahifalarda bo'lsa ham ko'rinsin
+          var idx = -1;
+          for (var i = 0; i < posts.length; i++) { if (posts[i].id === openPostId) { idx = i; break; } }
+          if (idx >= shown) shown = Math.ceil((idx + 1) / CONFIG.pageSize) * CONFIG.pageSize;
+        }
+        renderCats();
         renderFeed();
         if (openPostId) {
           var target = document.getElementById('post-' + openPostId);
@@ -399,7 +503,7 @@
     });
     var ul = document.getElementById('privacy-list'); ul.textContent = '';
     t('pv').forEach(function (s) { ul.appendChild(el('li', null, s)); });
-    if (loaded) renderFeed();
+    if (loaded) { renderCats(); renderFeed(); }
   }
   document.querySelectorAll('.lang button').forEach(function (b) {
     b.addEventListener('click', function () {
