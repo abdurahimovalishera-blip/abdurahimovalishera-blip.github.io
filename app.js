@@ -4,26 +4,28 @@
 (function () {
   'use strict';
 
-  // ---- Kirish taqdimoti (sessiyada bir marta) ----
+  var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  // ---- Kirish taqdimoti (faqat birinchi tashrifda, 1.6 soniya) ----
   function intro() {
     if (/^#post-/.test(location.hash)) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    try { if (sessionStorage.getItem('intro')) return; sessionStorage.setItem('intro', '1'); } catch (e) {}
+    if (reduceMotion) return;
+    try { if (localStorage.getItem('intro_seen')) return; localStorage.setItem('intro_seen', '1'); } catch (e) { return; }
     var st = document.createElement('style');
     st.textContent = [
-      '#intro{position:fixed;inset:0;z-index:100;background:#060a12;display:grid;place-items:center;transition:opacity .6s ease,visibility .6s ease;cursor:pointer}',
+      '#intro{position:fixed;inset:0;z-index:100;background:#060a12;display:grid;place-items:center;transition:opacity .45s ease,visibility .45s ease;cursor:pointer}',
       '#intro.out{opacity:0;visibility:hidden}',
       '#intro .box{display:grid;justify-items:center;gap:16px;padding:24px;text-align:center}',
       '#intro svg{width:112px;height:112px;overflow:visible;filter:drop-shadow(0 0 8px rgba(46,168,255,.55))}',
-      '#intro path{fill:none;stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt;stroke-linejoin:miter;animation:introDraw .7s ease forwards}',
+      '#intro path{fill:none;stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt;stroke-linejoin:miter;animation:introDraw .5s ease forwards}',
       '#intro .p1{stroke:#2ea8ff;stroke-width:4.8}',
-      '#intro .p2{stroke:#2dff8a;stroke-width:4.8;animation-delay:.3s}',
-      '#intro .p3{stroke:#f4f8ff;stroke-width:3.4;animation-delay:.7s}',
-      '#intro .nm{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,6vw,2.4rem);line-height:1.15;color:#f4f8ff;opacity:0;animation:introUp .6s ease .9s forwards}',
+      '#intro .p2{stroke:#2dff8a;stroke-width:4.8;animation-delay:.2s}',
+      '#intro .p3{stroke:#f4f8ff;stroke-width:3.4;animation-delay:.45s}',
+      '#intro .nm{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,6vw,2.4rem);line-height:1.15;color:#f4f8ff;opacity:0;animation:introUp .45s ease .55s forwards}',
       '#intro .nm span{color:#2ea8ff;text-shadow:0 0 18px rgba(46,168,255,.55)}',
-      '#intro .ln{display:grid;grid-template-rows:2px 1px 2px;width:140px;transform:scaleX(0);animation:introLine .6s ease 1.2s forwards}',
+      '#intro .ln{display:grid;grid-template-rows:2px 1px 2px;width:140px;transform:scaleX(0);animation:introLine .45s ease .7s forwards}',
       '#intro .ln i:nth-child(1){background:#2ea8ff}#intro .ln i:nth-child(2){background:#f4f8ff}#intro .ln i:nth-child(3){background:#2dff8a}',
-      '#intro .dm{font-family:var(--f-mono);font-size:.85rem;letter-spacing:.2em;color:#2dff8a;opacity:0;animation:introUp .6s ease 1.4s forwards}',
+      '#intro .dm{font-family:var(--f-mono);font-size:.85rem;letter-spacing:.2em;color:#2dff8a;opacity:0;animation:introUp .45s ease .8s forwards}',
       '@keyframes introDraw{to{stroke-dashoffset:0}}',
       '@keyframes introUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
       '@keyframes introLine{to{transform:scaleX(1)}}'
@@ -51,11 +53,11 @@
       ov.classList.add('out');
       root.style.overflow = '';
       document.removeEventListener('keydown', done);
-      setTimeout(function () { ov.remove(); st.remove(); }, 700);
+      setTimeout(function () { ov.remove(); st.remove(); }, 500);
     }
     ov.addEventListener('click', done);
     document.addEventListener('keydown', done);
-    setTimeout(done, 2700);
+    setTimeout(done, 1600);
   }
   try { intro(); } catch (e) {}
 
@@ -69,15 +71,12 @@
 
   var T = {
     uz: {
-      nav_posts: 'Yangiliklar', nav_contact: 'Aloqa', founder: 'Sayt asoschisi',
-      bio: 'Yangiliklar va foydali ma’lumotlar.',
-      privacy_line: 'Sayt hech kimning shaxsiy daxlsizligini buzmaydi.',
-      btn_tg: 'Telegram’da yozish', btn_yt: 'YouTube kanal', btn_mail: 'Email yozish',
-      spec_domain: 'Domen', spec_langs: 'Tillar', spec_since: 'Asos', spec_status: 'Holat', spec_online: 'Onlayn',
-      posts_title: 'Yangiliklar', posts_sub: 'Yangilari yuqorida', loading: 'Yangiliklar yuklanmoqda…',
+      nav_posts: 'Yangiliklar', nav_contact: 'Aloqa',
+      bio: 'Yangiliklar, sport va turli yo‘nalishlardagi foydali ma’lumotlar.',
+      posts_title: 'Yangiliklar', loading: 'Yangiliklar yuklanmoqda…',
       load_err: 'Yangiliklar yuklanmadi. Sahifani yangilab ko‘ring.', empty: 'Hozircha yangilik yo‘q.',
-      contact_title: 'Aloqa', contact_sub: 'Qulay usulni tanlang. Bosganingizda kerakli ilova ochiladi.',
-      comments: 'Izohlar', copy_link: 'Havola', copied: 'Nusxalandi',
+      contact_title: 'Aloqa',
+      comments: 'Izohlar', copy_link: 'Havola', share: 'Ulashish', copied: 'Nusxalandi',
       watch_yt: 'YouTube’da ko‘rish', open_link: 'Havolani ochish',
       t_photo: 'Foto',
       cm_note: 'Ro‘yxatdan o‘tish shart emas. Izoh muallif tasdiqlagach ko‘rinadi.',
@@ -94,15 +93,12 @@
       ]
     },
     en: {
-      nav_posts: 'News', nav_contact: 'Contact', founder: 'Founder',
-      bio: 'News and useful information.',
-      privacy_line: 'This site respects everyone’s privacy.',
-      btn_tg: 'Message on Telegram', btn_yt: 'YouTube channel', btn_mail: 'Send an email',
-      spec_domain: 'Domain', spec_langs: 'Languages', spec_since: 'Since', spec_status: 'Status', spec_online: 'Online',
-      posts_title: 'News', posts_sub: 'Newest first', loading: 'Loading news…',
+      nav_posts: 'News', nav_contact: 'Contact',
+      bio: 'News, sports and useful information on many topics.',
+      posts_title: 'News', loading: 'Loading news…',
       load_err: 'News could not be loaded. Please refresh the page.', empty: 'No news yet.',
-      contact_title: 'Contact', contact_sub: 'Pick whichever suits you. Tapping opens the right app.',
-      comments: 'Comments', copy_link: 'Link', copied: 'Copied',
+      contact_title: 'Contact',
+      comments: 'Comments', copy_link: 'Link', share: 'Share', copied: 'Copied',
       watch_yt: 'Watch on YouTube', open_link: 'Open link',
       t_photo: 'Photo',
       cm_note: 'No sign-up needed. Comments appear after the author approves them.',
@@ -119,15 +115,12 @@
       ]
     },
     ru: {
-      nav_posts: 'Новости', nav_contact: 'Контакты', founder: 'Основатель сайта',
-      bio: 'Новости и полезная информация.',
-      privacy_line: 'Сайт уважает неприкосновенность частной жизни каждого.',
-      btn_tg: 'Написать в Telegram', btn_yt: 'YouTube-канал', btn_mail: 'Написать письмо',
-      spec_domain: 'Домен', spec_langs: 'Языки', spec_since: 'Основан', spec_status: 'Статус', spec_online: 'Онлайн',
-      posts_title: 'Новости', posts_sub: 'Сначала новые', loading: 'Загрузка новостей…',
+      nav_posts: 'Новости', nav_contact: 'Контакты',
+      bio: 'Новости, спорт и полезная информация на разные темы.',
+      posts_title: 'Новости', loading: 'Загрузка новостей…',
       load_err: 'Не удалось загрузить новости. Обновите страницу.', empty: 'Новостей пока нет.',
-      contact_title: 'Контакты', contact_sub: 'Выберите удобный способ. Кнопка откроет нужное приложение.',
-      comments: 'Комментарии', copy_link: 'Ссылка', copied: 'Скопировано',
+      contact_title: 'Контакты',
+      comments: 'Комментарии', copy_link: 'Ссылка', share: 'Поделиться', copied: 'Скопировано',
       watch_yt: 'Смотреть на YouTube', open_link: 'Открыть ссылку',
       t_photo: 'Фото',
       cm_note: 'Регистрация не нужна. Комментарий появится после одобрения автором.',
@@ -150,6 +143,10 @@
   var posts = [];
   var loaded = false;
   var openPostId = null;
+
+  // Telefonda (sensorli ekran) tizimning "Ulashish" oynasi ishlatiladi
+  var canShare = typeof navigator.share === 'function' &&
+    !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   function t(k) { return (T[lang] && T[lang][k]) || T.uz[k] || k; }
 
@@ -188,6 +185,7 @@
   var IC = {
     chat: 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
     link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1|M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
+    share: 'M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7|M16 6l-4-4-4 4|M12 2v13',
     play: 'M8 5v14l11-7z'
   };
 
@@ -219,6 +217,18 @@
       last = m.index + m[1].length;
     }
     if (last < text.length) into.appendChild(document.createTextNode(text.slice(last)));
+  }
+
+  function sharePost(p) {
+    var url = location.href.split('#')[0] + '#post-' + p.id;
+    if (!canShare) { copyText(url); return; }
+    navigator.share({
+      title: document.title,
+      text: (localized(p.text) || '').slice(0, 120),
+      url: url
+    }).catch(function (e) {
+      if (!e || e.name !== 'AbortError') copyText(url);
+    });
   }
 
   function renderPost(p) {
@@ -292,10 +302,9 @@
     cb.setAttribute('aria-controls', 'cm-' + p.id);
     cb.addEventListener('click', function () { toggleComments(p, art, cb); });
     var sb = el('button', 'act'); sb.type = 'button';
-    sb.appendChild(svg(IC.link, { stroke: true })); sb.appendChild(el('span', null, t('copy_link')));
-    sb.addEventListener('click', function () {
-      copyText(location.href.split('#')[0] + '#post-' + p.id);
-    });
+    sb.appendChild(svg(canShare ? IC.share : IC.link, { stroke: true }));
+    sb.appendChild(el('span', null, t(canShare ? 'share' : 'copy_link')));
+    sb.addEventListener('click', function () { sharePost(p); });
     foot.appendChild(cb); foot.appendChild(sb);
     art.appendChild(foot);
 
@@ -311,13 +320,16 @@
       box.appendChild(el('div', 'soon', t('cm_soon')));
       return box;
     }
+    var note = el('p', 'mono', t('cm_note'));
+    note.style.color = 'var(--muted)'; note.style.margin = '0 0 10px';
+    box.appendChild(note);
     var th = el('div'); th.id = 'cusdis_thread';
     th.setAttribute('data-host', CONFIG.cusdisHost);
     th.setAttribute('data-app-id', CONFIG.cusdisAppId);
     th.setAttribute('data-page-id', p.id);
     th.setAttribute('data-page-url', location.origin + location.pathname + '#post-' + p.id);
     th.setAttribute('data-page-title', (localized(p.text) || p.id).slice(0, 80));
-    th.setAttribute('data-theme', 'auto');
+    th.setAttribute('data-theme', 'dark');
     box.appendChild(th);
     setTimeout(function () {
       if (!cusdisLoaded) {
@@ -397,33 +409,35 @@
     });
   });
 
-  // ---- Suzuvchi shakllar (fon) ----
+  // ---- Suzuvchi shakllar (fon). Telefonda yengil rejim, trafik tejash rejimida o'chiq ----
   function floatingShapes() {
+    var conn = navigator.connection;
+    if (conn && conn.saveData) return;
     var cv = document.createElement('canvas');
     cv.className = 'bgfx'; cv.setAttribute('aria-hidden', 'true');
     document.body.insertBefore(cv, document.body.firstChild);
     var cx = cv.getContext && cv.getContext('2d');
     if (!cx) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var W = 0, H = 0, shapes = [], running = false;
+    var W = 0, H = 0, lite = false, shapes = [], running = false, frame = 0;
     var kinds = [3, 4, 6, 0, 3, 6, 4, 0];
     var cols = ['46,168,255', '45,255,138', '244,248,255'];
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function size() {
       var d = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth; H = window.innerHeight;
+      lite = W < 640;
       cv.width = Math.round(W * d); cv.height = Math.round(H * d);
       cv.style.width = W + 'px'; cv.style.height = H + 'px';
       cx.setTransform(d, 0, 0, d, 0, 0);
     }
     function build() {
-      var n = W < 640 ? 5 : 8, small = W < 640;
+      var n = lite ? 4 : 8;
       shapes = [];
       for (var i = 0; i < n; i++) {
         var sp = rnd(0.12, 0.3), dir = rnd(0, Math.PI * 2);
         shapes.push({
           k: kinds[i % kinds.length], c: cols[i % cols.length],
-          x: rnd(0, W), y: rnd(0, H), r: small ? rnd(14, 26) : rnd(20, 40),
+          x: rnd(0, W), y: rnd(0, H), r: lite ? rnd(14, 26) : rnd(20, 40),
           a: rnd(0, Math.PI * 2), va: rnd(0.0015, 0.004) * (Math.random() < 0.5 ? -1 : 1),
           vx: Math.cos(dir) * sp, vy: Math.sin(dir) * sp, o: rnd(0.35, 0.6)
         });
@@ -433,7 +447,7 @@
       cx.beginPath();
       if (s.k === 0) { cx.arc(0, 0, s.r, 0, Math.PI * 2); return; }
       for (var i = 0; i < s.k; i++) {
-        var t = s.a + i * Math.PI * 2 / s.k, px = Math.cos(t) * s.r, py = Math.sin(t) * s.r;
+        var a = s.a + i * Math.PI * 2 / s.k, px = Math.cos(a) * s.r, py = Math.sin(a) * s.r;
         if (i) cx.lineTo(px, py); else cx.moveTo(px, py);
       }
       cx.closePath();
@@ -446,7 +460,7 @@
         path(s);
         cx.lineWidth = 1.6;
         cx.strokeStyle = 'rgba(' + s.c + ',' + s.o + ')';
-        cx.shadowColor = 'rgba(' + s.c + ',.85)'; cx.shadowBlur = 12;
+        if (!lite) { cx.shadowColor = 'rgba(' + s.c + ',.85)'; cx.shadowBlur = 12; }
         cx.stroke();
         cx.restore();
       }
@@ -459,17 +473,18 @@
         if (s.x < -m) s.x = W + m; else if (s.x > W + m) s.x = -m;
         if (s.y < -m) s.y = H + m; else if (s.y > H + m) s.y = -m;
       }
-      draw();
+      frame++;
+      if (!lite || frame % 2 === 0) draw();
       requestAnimationFrame(step);
     }
-    function start() { if (reduce || running) return; running = true; requestAnimationFrame(step); }
+    function start() { if (reduceMotion || running) return; running = true; requestAnimationFrame(step); }
     size(); build(); draw(); start();
     var rt;
     window.addEventListener('resize', function () {
       clearTimeout(rt);
       rt = setTimeout(function () {
-        var oldW = W; size();
-        if ((oldW < 640) !== (W < 640)) build();
+        var wasLite = lite; size();
+        if (wasLite !== lite) build();
         draw();
       }, 150);
     });
@@ -498,14 +513,28 @@
       navigator.clipboard.writeText(text).then(function () { toast(t('copied')); }, fallback);
     } else fallback();
   }
-  document.querySelectorAll('.copy[data-copy]').forEach(function (b) {
-    b.addEventListener('click', function () { copyText(b.getAttribute('data-copy')); });
-  });
 
   // ---- Oynalar ----
+  var OVERLAYS = ['lightbox', 'privacy'];
   var lastFocus = null;
-  function openOv(id) { lastFocus = document.activeElement; var o = document.getElementById(id); o.hidden = false; o.querySelector('.x').focus(); }
-  function closeOv(id) { document.getElementById(id).hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  function openOverlay() {
+    for (var i = 0; i < OVERLAYS.length; i++) {
+      var o = document.getElementById(OVERLAYS[i]);
+      if (!o.hidden) return o;
+    }
+    return null;
+  }
+  function openOv(id) {
+    lastFocus = document.activeElement;
+    var o = document.getElementById(id); o.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    o.querySelector('.x').focus();
+  }
+  function closeOv(id) {
+    document.getElementById(id).hidden = true;
+    document.documentElement.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
   function openLightbox(src, alt) { var i = document.getElementById('lightbox-img'); i.src = src; i.alt = alt || ''; openOv('lightbox'); }
   document.getElementById('lightbox-close').addEventListener('click', function () { closeOv('lightbox'); });
   document.getElementById('lightbox').addEventListener('click', function (e) { if (e.target.id === 'lightbox') closeOv('lightbox'); });
@@ -513,8 +542,10 @@
   document.getElementById('privacy-close').addEventListener('click', function () { closeOv('privacy'); });
   document.getElementById('privacy').addEventListener('click', function (e) { if (e.target.id === 'privacy') closeOv('privacy'); });
   document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    ['lightbox', 'privacy'].forEach(function (id) { if (!document.getElementById(id).hidden) closeOv(id); });
+    var o = openOverlay();
+    if (!o) return;
+    if (e.key === 'Escape') closeOv(o.id);
+    else if (e.key === 'Tab') { e.preventDefault(); o.querySelector('.x').focus(); }
   });
 
   var yr = document.querySelector('.yr'); var y = new Date().getFullYear();
