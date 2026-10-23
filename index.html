@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>alisher.live — Sport, yangiliklar va foydali ma'lumotlar</title>
-<meta name="description" content="Har kuni sport va yangiliklar o'z tilingizda, ortiqcha gaplarsiz.">
+<title>alisher.live — Xabaringizni qoldiring</title>
+<meta name="description" content="Telegram orqali kiring va xabaringizni qoldiring.">
 <meta name="theme-color" content="#05070d">
 <meta property="og:title" content="alisher.live">
-<meta property="og:description" content="Sport, yangiliklar va foydali ma'lumotlar.">
+<meta property="og:description" content="Telegram orqali kiring va xabaringizni qoldiring.">
 <meta property="og:image" content="https://alisher.live/og.jpg">
 <meta property="og:url" content="https://alisher.live/">
 <meta name="twitter:card" content="summary_large_image">
@@ -22,6 +22,7 @@
   --bl:#2f7bff; --gr:#19e68c;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--wh);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body.lock{overflow:hidden}
@@ -59,40 +60,63 @@ header{display:flex;align-items:center;justify-content:space-between;gap:12px;fl
 .logo{display:flex;align-items:center;gap:10px;font-size:17px}
 .logo-a{width:36px;height:36px;border-radius:11px;background:var(--gr);color:var(--bg);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(25,230,140,.4)}
 nav{display:flex;align-items:center;gap:20px;font-size:14px;color:var(--tx2);flex-wrap:wrap}
-nav a:hover,nav button:hover{color:var(--wh)}
-nav button{background:none;border:none;color:inherit;cursor:pointer;font-size:18px;padding:0}
+nav a:hover{color:var(--wh)}
 .lang a{font-size:13px}
 .lang a.on{color:var(--gr)}
-.hero{margin:70px 0 40px}
+.hero{margin:70px 0 36px}
 .hero h1{font-size:clamp(30px,5vw,52px);line-height:1.1;margin:0 0 14px}
-.hero p{margin:0;font-size:16px;color:var(--tx2);max-width:480px;line-height:1.6}
+.hero p{margin:0;font-size:16px;color:var(--tx2);max-width:500px;line-height:1.6}
 .glow-g{color:var(--gr);text-shadow:0 0 14px rgba(25,230,140,.6)}
 .stats{display:flex;gap:30px;margin-top:24px;flex-wrap:wrap}
 .stats b{display:block;font-family:Unbounded,sans-serif;font-weight:500;font-size:24px}
 .stats span{font-size:13px;color:var(--tx3)}
-.cd{background:var(--sf);border:.5px solid var(--bd);border-radius:14px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .2s,transform .2s}
-.cd:hover{border-color:rgba(255,255,255,.22);transform:translateY(-2px)}
-.feat{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
-.feat .big{overflow:hidden;border-color:rgba(25,230,140,.35);display:flex;flex-direction:column}
-.feat .big .img{height:200px;background:rgba(25,230,140,.07);display:flex;align-items:flex-end;padding:14px;background-size:cover;background-position:center}
-.feat .side{display:flex;flex-direction:column;gap:14px}
-.feat .side .cd{padding:16px;flex:1}
-.tg{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500;border:1px solid currentColor}
+.cd{background:var(--sf);border:.5px solid var(--bd);border-radius:14px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .m{font-size:12px;color:var(--tx3)}
-.sec{display:flex;align-items:center;justify-content:space-between;margin:40px 0 14px;flex-wrap:wrap;gap:10px}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.ch{font:12px Inter,sans-serif;padding:6px 14px;border-radius:20px;border:.5px solid var(--bd);background:transparent;color:var(--tx2);cursor:pointer}
-.ch.on{background:var(--gr);color:var(--bg);border-color:var(--gr)}
-.row{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:.5px solid var(--bd)}
-.row:hover p{color:var(--gr)}
-.row .bar{width:4px;height:40px;border-radius:2px;flex-shrink:0}
-.row p{margin:0 0 4px;font-size:15px;font-weight:500;transition:color .2s}
+
+/* Xabar yozish */
+.write{padding:24px;max-width:640px;border-color:rgba(25,230,140,.3)}
+.write h2{font-size:20px;margin:0 0 6px}
+.write .sub{margin:0 0 18px;color:var(--tx2);font-size:14px;line-height:1.6}
+.who{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:14px}
+.who button{margin-left:auto;background:none;border:none;color:var(--tx3);cursor:pointer;font:13px Inter,sans-serif}
+.who button:hover{color:var(--wh)}
+textarea{width:100%;background:rgba(255,255,255,.04);border:.5px solid var(--bd);border-radius:12px;color:var(--wh);font:15px/1.5 Inter,sans-serif;padding:12px 14px;resize:vertical;outline:none;transition:border-color .2s}
+textarea:focus{border-color:var(--gr)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0 6px}
+.status{margin:12px 0 0;font-size:14px;min-height:20px}
+.status.ok{color:var(--gr)}
+.status.err{color:#ff6b6b}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--gr);color:var(--bg);border:none;border-radius:10px;font:500 14px Inter,sans-serif;padding:10px 18px;cursor:pointer;box-shadow:0 0 18px rgba(25,230,140,.4)}
+.btn:disabled{opacity:.6;cursor:wait}
+
+/* Avatar */
+.av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font:500 13px Unbounded,sans-serif}
+.av.g{background:rgba(25,230,140,.15);color:var(--gr)}
+.av.b{background:rgba(47,123,255,.18);color:#7fb0ff}
+.av.w{background:rgba(255,255,255,.1);color:var(--wh)}
+
+/* Suzuvchi xabarlar devori */
+.wall{margin:56px -24px 0}
+.wall-h{padding:0 24px;display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.wall-h h2{font-size:20px;margin:0}
+.lane{overflow:hidden;padding:10px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:14px;width:max-content;animation:mq var(--dur,40s) linear infinite}
+.lane.rev .track{animation-direction:reverse}
+.lane:hover .track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.bub{flex:0 0 auto;width:300px;background:var(--sf);border:.5px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;animation:bob 6s ease-in-out infinite}
+.bub:nth-child(3n){animation-duration:7.5s}
+.bub:nth-child(4n){animation-duration:5.2s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.bub b{font-size:13px;font-weight:500}
+.bub p{margin:4px 0 0;font-size:14px;line-height:1.45;word-wrap:break-word;overflow-wrap:anywhere}
+.empty{padding:20px 24px;color:var(--tx3);font-size:14px}
+
 .cta{margin-top:36px;border-radius:14px;border:1px solid rgba(47,123,255,.45);background:rgba(47,123,255,.08);padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;background:var(--gr);color:var(--bg);border:none;border-radius:10px;font-weight:500;padding:10px 18px;font-size:14px;cursor:pointer;box-shadow:0 0 18px rgba(25,230,140,.4)}
-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:36px;padding-top:18px;border-top:.5px solid var(--bd);flex-wrap:wrap}
+footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:40px;padding-top:18px;border-top:.5px solid var(--bd);flex-wrap:wrap}
 footer .soc{display:flex;gap:16px;font-size:20px;color:var(--tx2)}
 footer .soc a:hover{color:var(--gr)}
-@media(max-width:700px){.feat{grid-template-columns:1fr}.hero{margin:44px 0 30px}}
+@media(max-width:700px){.hero{margin:44px 0 28px}.bub{width:250px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -122,54 +146,45 @@ footer .soc a:hover{color:var(--gr)}
   <header>
     <a class="logo d" href="/"><span class="logo-a">A</span><span>alisher<span style="color:var(--gr)">.</span><span style="color:var(--bl)">live</span></span></a>
     <nav>
-      <a href="#posts" style="color:var(--wh)">Postlar</a>
-      <a href="/videolar">Videolar</a>
-      <a href="/men-haqimda">Men haqimda</a>
-      <button aria-label="Qidiruv"><i class="ti ti-search"></i></button>
+      <a href="#write" style="color:var(--wh)">Xabar qoldirish</a>
+      <a href="#wall">Xabarlar</a>
       <span class="lang"><a href="/" class="on">UZ</a> · <a href="/en/">EN</a> · <a href="/ru/">RU</a></span>
     </nav>
   </header>
 
   <section class="hero">
-    <h1 class="d">Muhim xabarlar,<br><span class="glow-g">qisqa</span> va <span style="color:var(--bl)">tushunarli.</span></h1>
-    <p>Har kuni sport va yangiliklar o'z tilingizda, ortiqcha gaplarsiz.</p>
+    <h1 class="d">Bu yer <span class="glow-g">sizning</span><br><span style="color:var(--bl)">so'zingiz</span> uchun.</h1>
+    <p>Telegram orqali kiring va xabaringizni qoldiring. Men o'qib chiqaman, tasdiqlanganlari pastda suzib turadi.</p>
     <div class="stats">
       <div><b style="color:var(--gr)">12K+</b><span>Telegram obunachi</span></div>
-      <div><b style="color:var(--bl)">340</b><span>Post</span></div>
-      <div><b>85</b><span>Video</span></div>
+      <div><b style="color:var(--bl)" id="msg-count">0</b><span>Tasdiqlangan xabar</span></div>
     </div>
   </section>
 
-  <section class="feat">
-    <a class="cd big" href="#">
-      <div class="img"><span class="tg" style="color:var(--gr)">Asosiy · Sport</span></div>
-      <div style="padding:16px"><h3 class="d" style="font-size:18px;line-height:1.35;margin:0 0 8px">Terma jamoa navbatdagi o'yinga qanday tayyorlanmoqda: tarkib va taxminlar</h3><span class="m">23-oktabr · 5 daqiqa</span></div>
-    </a>
-    <div class="side">
-      <a class="cd" href="#"><span class="tg" style="color:var(--bl)">Yangiliklar</span><p style="margin:10px 0 6px;font-weight:500;line-height:1.4">Toshkentda yangi metro bekatlari qachon ochiladi</p><span class="m">22-oktabr</span></a>
-      <a class="cd" href="#"><span class="tg" style="color:var(--wh)">Foydali</span><p style="margin:10px 0 6px;font-weight:500;line-height:1.4">Onlayn xavfsizlikning 5 oddiy qoidasi</p><span class="m">20-oktabr</span></a>
-    </div>
+  <section class="cd write" id="write">
+    <h2 class="d">Xabar qoldiring</h2>
+    <p class="sub">Xabaringizni avval men o'qiyman. Tasdiqlasam, u pastdagi xabarlar qatorida paydo bo'ladi.</p>
+    <div id="login"></div>
+    <form id="form" hidden novalidate>
+      <div class="who"><span class="av g" id="me-av"></span><span id="me-name"></span><button type="button" id="logout">Chiqish</button></div>
+      <textarea id="txt" maxlength="300" rows="4" placeholder="Fikringizni yozing..."></textarea>
+      <div class="frow"><span class="m" id="cnt">0 / 300</span><button class="btn" type="submit" id="send"><i class="ti ti-send"></i> Yuborish</button></div>
+      <p class="m" style="margin:4px 0 0">Saytda xabar bilan birga faqat ismingiz ko'rinadi.</p>
+    </form>
+    <p id="status" class="status" role="status"></p>
   </section>
-
-  <div class="sec" id="posts">
-    <h3 class="d" style="margin:0">So'nggi postlar</h3>
-    <div class="chips">
-      <button class="ch on" data-c="all">Hammasi</button>
-      <button class="ch" data-c="sp">Sport</button>
-      <button class="ch" data-c="nw">Yangiliklar</button>
-      <button class="ch" data-c="ac">Foydali</button>
-    </div>
-  </div>
-  <div id="ps">
-    <a class="row" data-c="sp" href="#"><div class="bar" style="background:var(--gr)"></div><div style="flex:1"><p>Superliga: 10-tur natijalari va jadval</p><span class="m"><span style="color:var(--gr)">Sport</span> · 21-oktabr</span></div><i class="ti ti-arrow-up-right" style="color:var(--tx3)"></i></a>
-    <a class="row" data-c="nw" href="#"><div class="bar" style="background:var(--bl)"></div><div style="flex:1"><p>Kommunal to'lovlar bo'yicha yangi tartib</p><span class="m"><span style="color:var(--bl)">Yangiliklar</span> · 19-oktabr</span></div><i class="ti ti-arrow-up-right" style="color:var(--tx3)"></i></a>
-    <a class="row" data-c="ac" href="#"><div class="bar" style="background:var(--wh)"></div><div style="flex:1"><p>Telefon batareyasini uzoq saqlash sirlari</p><span class="m">Foydali · 18-oktabr</span></div><i class="ti ti-arrow-up-right" style="color:var(--tx3)"></i></a>
-  </div>
 
   <div class="cta">
-    <div><p class="d" style="margin:0 0 4px;font-size:16px">Birinchi bo'lib biling</p><p style="margin:0;font-size:14px;color:var(--tx2)">Yangi postlar avval Telegram'da chiqadi.</p></div>
+    <div><p class="d" style="margin:0 0 4px;font-size:16px">Birinchi bo'lib biling</p><p style="margin:0;font-size:14px;color:var(--tx2)">Yangiliklarim avval Telegram'da chiqadi.</p></div>
     <a class="btn" href="https://t.me/Sample_Uz" target="_blank" rel="noopener"><i class="ti ti-brand-telegram"></i> Obuna bo'lish</a>
   </div>
+
+  <section class="wall" id="wall">
+    <div class="wall-h"><h2 class="d">Sizning so'zlaringiz</h2><span class="m">Sichqonchani ustiga olib borsangiz to'xtaydi</span></div>
+    <div class="lane"><div class="track" id="lane1"></div></div>
+    <div class="lane rev"><div class="track" id="lane2"></div></div>
+    <div class="empty" id="empty" hidden>Hozircha xabarlar yo'q. Birinchi bo'ling!</div>
+  </section>
 
   <footer>
     <div class="soc">
@@ -183,13 +198,20 @@ footer .soc a:hover{color:var(--gr)}
 </div>
 
 <script>
+/* =========================================================
+   SOZLAMALAR — bot va serverni sozlagach shu ikkisini to'ldiring
+   ========================================================= */
+const CONFIG = {
+  API_URL: '',        // masalan: 'https://alisher-xabarlar.SIZNING-NOM.workers.dev'
+  BOT_USERNAME: ''    // masalan: 'alisherlive_bot' (@ belgisisiz)
+};
+
 (() => {
-  /* ---------- SOZLAMALAR ---------- */
-  const SHAPE_COUNT = 32;          // shakllar soni
-  const INTRO_ONCE  = true;        // intro faqat birinchi tashrifda
+  const SHAPE_COUNT = 32;
+  const INTRO_ONCE  = true;
   const COLORS = ['#2f7bff', '#19e68c', '#f4f7fb'];
 
-  /* ---------- SHAKLLAR ---------- */
+  /* ---------- SUZUVCHI SHAKLLAR ---------- */
   const T = {
     hex:  '<polygon points="0,-17 15,-8.5 15,8.5 0,17 -15,8.5 -15,-8.5"/><polygon points="0,-8 7,-4 7,4 0,8 -7,4 -7,-4"/>',
     ring: '<circle r="17" stroke-dasharray="3 5"/><circle r="9"/>',
@@ -216,23 +238,17 @@ footer .soc a:hover{color:var(--gr)}
     bg.appendChild(el);
     items.push({ el, sz, x: 0, y: 0, vx: 0, vy: 0, a: 0, va: 0, rest: (0.25 + Math.random() * 0.3).toFixed(2) });
   }
-
   function toCenter() {
     items.forEach(p => {
-      p.x = innerWidth / 2 - p.sz / 2;
-      p.y = innerHeight / 2 - p.sz / 2;
-      p.vx = p.vy = p.va = 0;
-      p.el.style.transition = 'none';
-      p.el.style.opacity = '0';
+      p.x = innerWidth / 2 - p.sz / 2; p.y = innerHeight / 2 - p.sz / 2;
+      p.vx = p.vy = p.va = 0; p.el.style.transition = 'none'; p.el.style.opacity = '0';
     });
   }
   function scatterRandom() {
     items.forEach(p => {
-      p.x = Math.random() * (innerWidth - p.sz);
-      p.y = Math.random() * (innerHeight - p.sz);
+      p.x = Math.random() * (innerWidth - p.sz); p.y = Math.random() * (innerHeight - p.sz);
       const ang = Math.random() * Math.PI * 2;
-      p.vx = Math.cos(ang) * 0.35; p.vy = Math.sin(ang) * 0.35;
-      p.va = (Math.random() - 0.5) * 0.5;
+      p.vx = Math.cos(ang) * 0.35; p.vy = Math.sin(ang) * 0.35; p.va = (Math.random() - 0.5) * 0.5;
       p.el.style.opacity = p.rest;
     });
   }
@@ -240,15 +256,11 @@ footer .soc a:hover{color:var(--gr)}
     const k = Math.min(innerWidth, 1400) / 680;
     items.forEach(p => {
       const ang = Math.random() * Math.PI * 2, sp = (5 + Math.random() * 11) * k;
-      p.vx = Math.cos(ang) * sp; p.vy = Math.sin(ang) * sp * 0.85;
-      p.va = (Math.random() - 0.5) * 24;
+      p.vx = Math.cos(ang) * sp; p.vy = Math.sin(ang) * sp * 0.85; p.va = (Math.random() - 0.5) * 24;
       p.el.style.opacity = '.95';
     });
   }
-  function settle() {
-    items.forEach(p => { p.el.style.transition = 'opacity 1.2s ease'; p.el.style.opacity = p.rest; });
-  }
-
+  function settle() { items.forEach(p => { p.el.style.transition = 'opacity 1.2s ease'; p.el.style.opacity = p.rest; }); }
   (function tick() {
     const W = innerWidth, H = innerHeight;
     items.forEach(p => {
@@ -269,7 +281,6 @@ footer .soc a:hover{color:var(--gr)}
   const intro = document.getElementById('intro');
   const ht = document.getElementById('ht'), cr = document.getElementById('cr'), pen = document.getElementById('pen');
   let timers = [], raf, done = false;
-
   function write() {
     let bb; try { bb = ht.getBBox(); } catch (e) { bb = { x: 70, y: 30, width: 460, height: 90 }; }
     const L = 1600, t0 = performance.now(), D = 2400;
@@ -287,20 +298,15 @@ footer .soc a:hover{color:var(--gr)}
       if (p < 1) raf = requestAnimationFrame(f);
     })(t0);
   }
-
   function end() {
     if (done) return; done = true;
     timers.forEach(clearTimeout); cancelAnimationFrame(raf);
-    intro.classList.add('hide');
-    settle();
-    document.body.classList.remove('lock');
+    intro.classList.add('hide'); settle(); document.body.classList.remove('lock');
     setTimeout(() => { intro.remove(); bg.classList.remove('top'); }, 700);
     try { localStorage.setItem('introSeen', '1'); } catch (e) {}
   }
-
   function play() {
-    bg.classList.add('top');
-    toCenter();
+    bg.classList.add('top'); toCenter();
     const fontReady = document.fonts ? document.fonts.load('700 92px "Dancing Script"') : Promise.resolve();
     timers.push(setTimeout(() => intro.classList.add('charge'), 150));
     timers.push(setTimeout(() => { intro.classList.remove('charge'); intro.classList.add('boom'); burst(); }, 900));
@@ -308,26 +314,138 @@ footer .soc a:hover{color:var(--gr)}
     timers.push(setTimeout(() => intro.classList.add('wel'), 3900));
     timers.push(setTimeout(end, 5600));
   }
-
   document.getElementById('skip').addEventListener('click', end);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') end(); });
-
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !done) end(); });
   let seen = false; try { seen = localStorage.getItem('introSeen'); } catch (e) {}
-  const force = location.search.includes('intro');
-  if (still || (INTRO_ONCE && seen && !force)) {
-    intro.remove(); document.body.classList.remove('lock'); scatterRandom();
-  } else {
-    play();
-  }
+  if (still || (INTRO_ONCE && seen && !location.search.includes('intro'))) {
+    intro.remove(); document.body.classList.remove('lock'); scatterRandom(); done = true;
+  } else { play(); }
 
-  /* ---------- TOIFA FILTRI ---------- */
-  document.querySelectorAll('.ch').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.ch').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    document.querySelectorAll('#ps .row').forEach(r => {
-      r.style.display = (b.dataset.c === 'all' || r.dataset.c === b.dataset.c) ? '' : 'none';
-    });
-  }));
+  /* ---------- SUZUVCHI XABARLAR DEVORI ---------- */
+  const API = CONFIG.API_URL.replace(/\/$/, '');
+  const MONTHS = ['yan','fev','mar','apr','may','iyn','iyl','avg','sen','okt','noy','dek'];
+  const fmt = ts => { const d = new Date(ts); return d.getDate() + '-' + MONTHS[d.getMonth()]; };
+  const AVC = ['g', 'b', 'w'];
+
+  function bubble(m, i) {
+    const b = document.createElement('div'); b.className = 'bub';
+    b.style.animationDelay = (-(i % 7) * 0.9) + 's';
+    const av = document.createElement('span'); av.className = 'av ' + AVC[i % 3];
+    av.textContent = (m.name || '?').trim().charAt(0).toUpperCase();
+    const body = document.createElement('div');
+    const n = document.createElement('b'); n.textContent = m.name || 'Mehmon';
+    const d = document.createElement('span'); d.className = 'm'; d.textContent = ' · ' + fmt(m.ts);
+    const p = document.createElement('p'); p.textContent = m.text;   // xavfsiz: HTML sifatida emas, matn sifatida
+    body.append(n, d, p); b.append(av, body);
+    return b;
+  }
+  function fillLane(track, list) {
+    track.textContent = '';
+    if (!list.length) return;
+    let arr = list.slice();
+    while (arr.length < 6) arr = arr.concat(list);
+    [...arr, ...arr].forEach((m, i) => track.appendChild(bubble(m, i)));
+    track.style.setProperty('--dur', (arr.length * 6) + 's');
+  }
+  function renderWall(list) {
+    document.getElementById('msg-count').textContent = list.length;
+    const empty = !list.length;
+    document.getElementById('empty').hidden = !empty;
+    document.querySelectorAll('.lane').forEach(l => l.hidden = empty);
+    if (empty) return;
+    const a = list.filter((_, i) => i % 2 === 0), b = list.filter((_, i) => i % 2 === 1);
+    fillLane(document.getElementById('lane1'), a);
+    fillLane(document.getElementById('lane2'), b.length ? b : a);
+  }
+  const DEMO = [
+    { name: 'Dilshod', text: 'Sayt juda zo\'r chiqibdi, intro ajoyib!', ts: Date.now() - 864e5 },
+    { name: 'Madina', text: 'Har kuni kanalingizni kuzatib boraman, rahmat.', ts: Date.now() - 2 * 864e5 },
+    { name: 'Jasur', text: 'Omad tilayman, davom eting!', ts: Date.now() - 3 * 864e5 },
+    { name: 'Nodira', text: 'Ranglar va animatsiyalar juda chiroyli.', ts: Date.now() - 4 * 864e5 },
+    { name: 'Sardor', text: 'Toshkentdan salom!', ts: Date.now() - 5 * 864e5 },
+    { name: 'Kamola', text: 'Yangi videolarni kutib qolamiz.', ts: Date.now() - 6 * 864e5 }
+  ];
+  async function loadWall() {
+    if (!API) { renderWall(DEMO); return; }
+    try {
+      const r = await fetch(API + '/messages');
+      renderWall(r.ok ? await r.json() : []);
+    } catch (e) { renderWall([]); }
+  }
+  loadWall();
+  setInterval(() => { if (API) loadWall(); }, 120000);   // har 2 daqiqada yangilanadi
+
+  /* ---------- TELEGRAM ORQALI KIRISH VA XABAR YUBORISH ---------- */
+  const loginBox = document.getElementById('login'), form = document.getElementById('form');
+  const txt = document.getElementById('txt'), cnt = document.getElementById('cnt');
+  const statusEl = document.getElementById('status'), sendBtn = document.getElementById('send');
+  let user = null, widgetAdded = false;
+
+  function setStatus(msg, type) { statusEl.textContent = msg; statusEl.className = 'status ' + (type || ''); }
+  function showLogin() {
+    form.hidden = true; loginBox.hidden = false;
+    if (!API || !CONFIG.BOT_USERNAME) {
+      loginBox.innerHTML = '<p class="m">Telegram bot hali ulanmagan. Sozlab bo\'lgach, bu yerda "Telegram orqali kirish" tugmasi chiqadi.</p>';
+      return;
+    }
+    if (widgetAdded) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://telegram.org/js/telegram-widget.js?22';
+    s.setAttribute('data-telegram-login', CONFIG.BOT_USERNAME);
+    s.setAttribute('data-size', 'large');
+    s.setAttribute('data-radius', '10');
+    s.setAttribute('data-onauth', 'onTelegramAuth(user)');
+    loginBox.appendChild(s);
+    widgetAdded = true;
+  }
+  function showForm(u) {
+    user = u; loginBox.hidden = true; form.hidden = false;
+    const name = [u.first_name, u.last_name].filter(Boolean).join(' ');
+    document.getElementById('me-name').textContent = name;
+    document.getElementById('me-av').textContent = (u.first_name || '?').charAt(0).toUpperCase();
+  }
+  window.onTelegramAuth = u => {
+    try { localStorage.setItem('tgUser', JSON.stringify(u)); } catch (e) {}
+    setStatus('', ''); showForm(u);
+  };
+  document.getElementById('logout').addEventListener('click', () => {
+    try { localStorage.removeItem('tgUser'); } catch (e) {}
+    user = null; setStatus('', ''); showLogin();
+  });
+  txt.addEventListener('input', () => { cnt.textContent = txt.value.length + ' / 300'; if (statusEl.classList.contains('err')) setStatus('', ''); });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const text = txt.value.trim();
+    if (text.length < 2) { setStatus('Avval xabaringizni yozing.', 'err'); txt.focus(); return; }
+    sendBtn.disabled = true; setStatus('Yuborilmoqda…', '');
+    try {
+      const r = await fetch(API + '/message', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ auth: user, text })
+      });
+      if (r.ok) {
+        txt.value = ''; cnt.textContent = '0 / 300';
+        setStatus('Rahmat! Xabaringiz yuborildi. Tasdiqlangach pastda paydo bo\'ladi.', 'ok');
+      } else if (r.status === 401) {
+        setStatus('Kirish muddati tugagan. Qaytadan Telegram orqali kiring.', 'err');
+        try { localStorage.removeItem('tgUser'); } catch (e) {}
+        showLogin();
+      } else if (r.status === 429) {
+        setStatus('Juda tez. Bir daqiqa kutib, qayta urinib ko\'ring.', 'err');
+      } else {
+        setStatus('Xabar 2 dan 300 gacha belgidan iborat bo\'lishi kerak.', 'err');
+      }
+    } catch (err) {
+      setStatus('Internet bilan bog\'lanib bo\'lmadi. Qayta urinib ko\'ring.', 'err');
+    }
+    sendBtn.disabled = false;
+  });
+
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem('tgUser') || 'null'); } catch (e) {}
+  if (saved && API && Date.now() / 1000 - saved.auth_date < 82800) showForm(saved); else showLogin();
 })();
 </script>
 </body>
