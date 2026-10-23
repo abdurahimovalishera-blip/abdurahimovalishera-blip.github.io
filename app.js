@@ -4,6 +4,61 @@
 (function () {
   'use strict';
 
+  // ---- Kirish taqdimoti (sessiyada bir marta) ----
+  function intro() {
+    if (/^#post-/.test(location.hash)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try { if (sessionStorage.getItem('intro')) return; sessionStorage.setItem('intro', '1'); } catch (e) {}
+    var st = document.createElement('style');
+    st.textContent = [
+      '#intro{position:fixed;inset:0;z-index:100;background:#060a12;display:grid;place-items:center;transition:opacity .6s ease,visibility .6s ease;cursor:pointer}',
+      '#intro.out{opacity:0;visibility:hidden}',
+      '#intro .box{display:grid;justify-items:center;gap:16px;padding:24px;text-align:center}',
+      '#intro svg{width:112px;height:112px;overflow:visible;filter:drop-shadow(0 0 8px rgba(46,168,255,.55))}',
+      '#intro path{fill:none;stroke-dasharray:100;stroke-dashoffset:100;stroke-linecap:butt;stroke-linejoin:miter;animation:introDraw .7s ease forwards}',
+      '#intro .p1{stroke:#2ea8ff;stroke-width:4.8}',
+      '#intro .p2{stroke:#2dff8a;stroke-width:4.8;animation-delay:.3s}',
+      '#intro .p3{stroke:#f4f8ff;stroke-width:3.4;animation-delay:.7s}',
+      '#intro .nm{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,6vw,2.4rem);line-height:1.15;color:#f4f8ff;opacity:0;animation:introUp .6s ease .9s forwards}',
+      '#intro .nm span{color:#2ea8ff;text-shadow:0 0 18px rgba(46,168,255,.55)}',
+      '#intro .ln{display:grid;grid-template-rows:2px 1px 2px;width:140px;transform:scaleX(0);animation:introLine .6s ease 1.2s forwards}',
+      '#intro .ln i:nth-child(1){background:#2ea8ff}#intro .ln i:nth-child(2){background:#f4f8ff}#intro .ln i:nth-child(3){background:#2dff8a}',
+      '#intro .dm{font-family:var(--f-mono);font-size:.85rem;letter-spacing:.2em;color:#2dff8a;opacity:0;animation:introUp .6s ease 1.4s forwards}',
+      '@keyframes introDraw{to{stroke-dashoffset:0}}',
+      '@keyframes introUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
+      '@keyframes introLine{to{transform:scaleX(1)}}'
+    ].join('');
+    document.head.appendChild(st);
+    var ov = document.createElement('div');
+    ov.id = 'intro'; ov.setAttribute('aria-hidden', 'true');
+    ov.innerHTML = '<div class="box">' +
+      '<svg viewBox="0 0 64 64">' +
+      '<path class="p1" pathLength="100" d="M8.9 51 L23.8 13 L38.8 51"/>' +
+      '<path class="p2" pathLength="100" d="M25.2 51 L40.2 13 L55.1 51"/>' +
+      '<path class="p3" pathLength="100" d="M16.4 37.4 L46.3 37.4"/>' +
+      '</svg>' +
+      '<div class="nm">Alisher <span>Abduraximov</span></div>' +
+      '<div class="ln"><i></i><i></i><i></i></div>' +
+      '<div class="dm">alisher.live</div>' +
+      '</div>';
+    document.body.insertBefore(ov, document.body.firstChild);
+    var root = document.documentElement;
+    root.style.overflow = 'hidden';
+    var finished = false;
+    function done() {
+      if (finished) return;
+      finished = true;
+      ov.classList.add('out');
+      root.style.overflow = '';
+      document.removeEventListener('keydown', done);
+      setTimeout(function () { ov.remove(); st.remove(); }, 700);
+    }
+    ov.addEventListener('click', done);
+    document.addEventListener('keydown', done);
+    setTimeout(done, 2700);
+  }
+  try { intro(); } catch (e) {}
+
   // ---- Sozlamalar ----
   var CONFIG = {
     // Cusdis'da ro'yxatdan o'tgach, "App ID" ni shu yerga yozing. Bo'sh bo'lsa, izohlar "tez orada" deb turadi.
@@ -239,7 +294,7 @@
     var sb = el('button', 'act'); sb.type = 'button';
     sb.appendChild(svg(IC.link, { stroke: true })); sb.appendChild(el('span', null, t('copy_link')));
     sb.addEventListener('click', function () {
-      copyText(location.href.split('#')[0] + '#post-' + p.id, sb);
+      copyText(location.href.split('#')[0] + '#post-' + p.id);
     });
     foot.appendChild(cb); foot.appendChild(sb);
     art.appendChild(foot);
@@ -351,287 +406,7 @@
     if (!cx) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var W = 0, H = 0, shapes = [], running = false;
-    var kinds = [3, 4, 6, 0, 3, 6, 4, 0]; // 3 uchburchak, 4 to'rtburchak, 6 oltiburchak, 0 doira
-    var cols = ['46,168,255', '45,255,138', '244,248,255'];
-    function rnd(a, b) { return a + Math.random() * (b - a); }
-    function size() {
-      var d = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth; H = window.innerHeight;
-      cv.width = Math.round(W * d); cv.height = Math.round(H * d);
-      cv.style.width = W + 'px'; cv.style.height = H + 'px';
-      cx.setTransform(d, 0, 0, d, 0, 0);
-    }
-    function build() {
-      var n = W < 640 ? 5 : 8, small = W < 640;
-      shapes = [];
-      for (var i = 0; i < n; i++) {
-        var sp = rnd(0.12, 0.3), dir = rnd(0, Math.PI * 2);
-        shapes.push({
-          k: kinds[i % kinds.length], c: cols[i % cols.length],
-          x: rnd(0, W), y: rnd(0, H), r: small ? rnd(14, 26) : rnd(20, 40),
-          a: rnd(0, Math.PI * 2), va: rnd(0.0015, 0.004) * (Math.random() < 0.5 ? -1 : 1),
-          vx: Math.cos(dir) * sp, vy: Math.sin(dir) * sp, o: rnd(0.35, 0.6)
-        });
-      }
-    }
-    function path(s) {
-      cx.beginPath();
-      if (s.k === 0) { cx.arc(0, 0, s.r, 0, Math.PI * 2); return; }
-      for (var i = 0; i < s.k; i++) {
-        var t = s.a + i * Math.PI * 2 / s.k, px = Math.cos(t) * s.r, py = Math.sin(t) * s.r;
-        if (i) cx.lineTo(px, py); else cx.moveTo(px, py);
-      }
-      cx.closePath();
-    }
-    function draw() {
-      cx.clearRect(0, 0, W, H);
-      for (var i = 0; i < shapes.length; i++) {
-        var s = shapes[i];
-        cx.save(); cx.translate(s.x, s.y);
-        path(s);
-        cx.lineWidth = 1.6;
-        cx.strokeStyle = 'rgba(' + s.c + ',' + s.o + ')';
-        cx.shadowColor = 'rgba(' + s.c + ',.85)'; cx.shadowBlur = 12;
-        cx.stroke();
-        cx.restore();
-      }
-    }
-    function step() {
-      if (!running) return;
-      for (var i = 0; i < shapes.length; i++) {
-        var s = shapes[i], m = s.r + 10;
-        s.x += s.vx; s.y += s.vy; s.a += s.va;
-        if (s.x < -m) s.x = W + m; else if (s.x > W + m) s.x = -m;
-        if (s.y < -m) s.y = H + m; else if (s.y > H + m) s.y = -m;
-      }
-      draw();
-      requestAnimationFrame(step);
-    }
-    function start() { if (reduce || running) return; running = true; requestAnimationFrame(step); }
-    size(); build(); draw(); start();
-    var rt;
-    window.addEventListener('resize', function () {
-      clearTimeout(rt);
-      rt = setTimeout(function () {
-        var oldW = W; size();
-        if ((oldW < 640) !== (W < 640)) build();
-        draw();
-      }, 150);
-    });
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) running = false; else start();
-    });
-  }
-  try into.appendChild(a);
-      } else into.appendChild(document.createTextNode(m[1]));
-      last = m.index + m[1].length;
-    }
-    if (last < text.length) into.appendChild(document.createTextNode(text.slice(last)));
-  }
-
-  function postType(p) {
-    if (p.youtube || p.video) return 'video';
-    if (p.images && p.images.length) return 'photo';
-    if (p.link) return 'link';
-    return 'text';
-  }
-
-  function renderPost(p) {
-    var art = el('article', 'post');
-    art.id = 'post-' + p.id;
-
-    var head = el('div', 'post-head');
-    var mk = el('span', 'mark', 'AA'); mk.setAttribute('aria-hidden', 'true');
-    var who = el('div', 'who');
-    who.appendChild(el('b', null, CONFIG.author));
-    var dt = el('time', 'mono', fmtDate(p.date)); dt.dateTime = p.date || '';
-    who.appendChild(dt);
-    var ty = postType(p);
-    head.appendChild(mk); head.appendChild(who); head.appendChild(el('span', 'tag t-' + ty, t('t_' + ty)));
-    art.appendChild(head);
-
-    var txt = localized(p.text);
-    if (txt) { var pt = el('p', 'post-text'); linkify(txt, pt); art.appendChild(pt); }
-
-    var imgs = (p.images || []).map(safeUrl).filter(Boolean);
-    if (imgs.length) {
-      var g = el('div', 'media' + (imgs.length > 1 ? ' g2' : ''));
-      imgs.forEach(function (src, i) {
-        var b = el('button'); b.type = 'button'; b.setAttribute('aria-label', (localized(p.alt) || t('t_photo')) + ' ' + (i + 1));
-        var im = el('img'); im.src = src; im.alt = localized(p.alt) || ''; im.loading = 'lazy'; im.decoding = 'async';
-        b.appendChild(im);
-        b.addEventListener('click', function () { openLightbox(src, im.alt); });
-        g.appendChild(b);
-      });
-      art.appendChild(g);
-    }
-
-    var vid = safeUrl(p.video);
-    if (vid) {
-      var vg = el('div', 'media');
-      var v = el('video'); v.src = vid; v.controls = true; v.preload = 'metadata'; v.setAttribute('playsinline', '');
-      vg.appendChild(v); art.appendChild(vg);
-    }
-
-    var yt = safeUrl(p.youtube);
-    if (yt) {
-      var a = el('a', 'yt'); a.href = yt; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      var id = ytId(yt);
-      if (id) {
-        var th = el('img'); th.alt = ''; th.loading = 'lazy'; th.referrerPolicy = 'no-referrer';
-        th.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg';
-        th.addEventListener('error', function () { th.remove(); });
-        a.appendChild(th);
-      }
-      var pl = el('span', 'play'); var pi = el('i'); pi.appendChild(svg(IC.play)); pl.appendChild(pi); a.appendChild(pl);
-      var cap = el('span', 'cap');
-      cap.appendChild(el('span', null, localized(p.youtubeTitle) || t('watch_yt')));
-      a.appendChild(cap);
-      art.appendChild(a);
-    }
-
-    var lk = p.link && safeUrl(p.link.url);
-    if (lk) {
-      var l = el('a', 'lnk'); l.href = lk; l.target = '_blank'; l.rel = 'noopener noreferrer';
-      var ic = el('span', 'ic'); ic.appendChild(svg(IC.link, { stroke: true })); l.appendChild(ic);
-      var sp = el('span');
-      sp.appendChild(el('b', null, localized(p.link.title) || t('open_link')));
-      l.appendChild(sp);
-      l.appendChild(el('span', 'arr', '→'));
-      art.appendChild(l);
-    }
-
-    var foot = el('div', 'post-foot');
-    var cb = el('button', 'act'); cb.type = 'button';
-    cb.appendChild(svg(IC.chat, { stroke: true })); cb.appendChild(el('span', null, t('comments')));
-    cb.setAttribute('aria-expanded', String(openPostId === p.id));
-    cb.setAttribute('aria-controls', 'cm-' + p.id);
-    cb.addEventListener('click', function () { toggleComments(p, art, cb); });
-    var sb = el('button', 'act'); sb.type = 'button';
-    sb.appendChild(svg(IC.link, { stroke: true })); sb.appendChild(el('span', null, t('copy_link')));
-    sb.addEventListener('click', function () {
-      copyText(location.href.split('#')[0] + '#post-' + p.id, sb);
-    });
-    foot.appendChild(cb); foot.appendChild(sb);
-    art.appendChild(foot);
-
-    if (openPostId === p.id) art.appendChild(buildComments(p));
-    return art;
-  }
-
-  // ---- Izohlar (Cusdis) ----
-  var cusdisLoaded = false;
-  function buildComments(p) {
-    var box = el('div', 'cmts'); box.id = 'cm-' + p.id;
-    if (!CONFIG.cusdisAppId) {
-      box.appendChild(el('div', 'soon', t('cm_soon')));
-      return box;
-    }
-    var th = el('div'); th.id = 'cusdis_thread';
-    th.setAttribute('data-host', CONFIG.cusdisHost);
-    th.setAttribute('data-app-id', CONFIG.cusdisAppId);
-    th.setAttribute('data-page-id', p.id);
-    th.setAttribute('data-page-url', location.origin + location.pathname + '#post-' + p.id);
-    th.setAttribute('data-page-title', (localized(p.text) || p.id).slice(0, 80));
-    th.setAttribute('data-theme', 'auto');
-    box.appendChild(th);
-    setTimeout(function () {
-      if (!cusdisLoaded) {
-        cusdisLoaded = true;
-        var s = document.createElement('script');
-        s.src = CONFIG.cusdisHost + '/js/cusdis.es.js'; s.async = true; s.defer = true;
-        document.body.appendChild(s);
-      } else if (window.CUSDIS && typeof window.CUSDIS.initial === 'function') {
-        window.CUSDIS.initial();
-      }
-    }, 0);
-    return box;
-  }
-
-  function toggleComments(p, art, btn) {
-    var wasOpen = openPostId === p.id;
-    var prev = document.querySelector('.cmts');
-    if (prev) {
-      prev.remove();
-      var pb = document.querySelector('.act[aria-expanded="true"]');
-      if (pb) pb.setAttribute('aria-expanded', 'false');
-    }
-    openPostId = wasOpen ? null : p.id;
-    if (!wasOpen) { art.appendChild(buildComments(p)); btn.setAttribute('aria-expanded', 'true'); }
-  }
-
-  // ---- Feed ----
-  function renderFeed() {
-    var feed = document.getElementById('feed');
-    feed.textContent = '';
-    if (!posts.length) { feed.appendChild(el('div', 'state', t('empty'))); return; }
-    var list = cat === 'all' ? posts : posts.filter(function (p) { return p.category === cat; });
-    if (!list.length) { feed.appendChild(el('div', 'state', t('empty_cat'))); return; }
-    list.forEach(function (p) { feed.appendChild(renderPost(p)); });
-  }
-
-  function loadPosts() {
-    fetch('posts.json', { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (data) {
-        posts = (Array.isArray(data) ? data : [])
-          .filter(function (p) { return p && typeof p.id === 'string' && /^[\w-]{1,80}$/.test(p.id) && !p.draft; })
-          .map(function (p, i) { p._i = i; return p; })
-          .sort(function (a, b) { return (b.date || '').localeCompare(a.date || '') || a._i - b._i; });
-        var h = location.hash.replace('#', '');
-        if (h.indexOf('post-') === 0) openPostId = h.slice(5);
-        renderFeed();
-        if (openPostId) {
-          var target = document.getElementById('post-' + openPostId);
-          if (target) target.scrollIntoView();
-        }
-      })
-      .catch(function () {
-        var feed = document.getElementById('feed');
-        feed.textContent = '';
-        feed.appendChild(el('div', 'state', t('load_err')));
-      });
-  }
-
-  // ---- Til ----
-  function applyLang() {
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-i18n]').forEach(function (n) {
-      var v = t(n.getAttribute('data-i18n')); if (typeof v === 'string') n.textContent = v;
-    });
-    document.querySelectorAll('.lang button').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
-    });
-    var ul = document.getElementById('privacy-list'); ul.textContent = '';
-    t('pv').forEach(function (s) { ul.appendChild(el('li', null, s)); });
-    if (posts.length) renderFeed();
-  }
-  document.querySelectorAll('.lang button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      lang = b.getAttribute('data-lang');
-      try { localStorage.setItem('lang', lang); } catch (e) {}
-      applyLang();
-    });
-  });
-
-  document.querySelectorAll('.cats button').forEach(function (b) {
-    b.addEventListener('click', function () {
-      cat = b.getAttribute('data-cat');
-      document.querySelectorAll('.cats button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      renderFeed();
-    });
-  });
-
-  // ---- Suzuvchi shakllar (fon) ----
-  function floatingShapes() {
-    var cv = document.createElement('canvas');
-    cv.className = 'bgfx'; cv.setAttribute('aria-hidden', 'true');
-    document.body.insertBefore(cv, document.body.firstChild);
-    var cx = cv.getContext && cv.getContext('2d');
-    if (!cx) return;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var W = 0, H = 0, shapes = [], running = false;
-    var kinds = [3, 4, 6, 0, 3, 6, 4, 0]; // 3 uchburchak, 4 to'rtburchak, 6 oltiburchak, 0 doira
+    var kinds = [3, 4, 6, 0, 3, 6, 4, 0];
     var cols = ['46,168,255', '45,255,138', '244,248,255'];
     function rnd(a, b) { return a + Math.random() * (b - a); }
     function size() {
