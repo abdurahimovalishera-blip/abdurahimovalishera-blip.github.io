@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "id": "sayt-ochildi",
+    "date": "2026-10-23",
+    "category": "news",
+    "title": {
+      "uz": "alisher.live ishga tushdi",
+      "en": "alisher.live is live",
+      "ru": "alisher.live запущен"
+    },
+    "text": {
+      "uz": "Salom! Bu mening shaxsiy saytim. Bu yerda yangiliklar, sport va foydali ma’lumotlarni joylab boraman.",
+      "en": "Hi! This is my personal site. I’ll be posting news, sports and useful information here.",
+      "ru": "Привет! Это мой личный сайт. Здесь я буду публиковать новости, спорт и полезную информацию."
+    }
+  },
+  {
+    "id": "uch-tilda",
+    "date": "2026-10-23",
+    "category": "useful",
+    "title": {
+      "uz": "Saytni uch tilda o‘qing",
+      "en": "Read the site in three languages",
+      "ru": "Читайте сайт на трёх языках"
+    },
+    "text": {
+      "uz": "Tilni yuqori o‘ng burchakdagi UZ / EN / RU tugmalari orqali almashtiring. Tanlagan tilingiz eslab qolinadi.",
+      "en": "Switch the language with the UZ / EN / RU buttons in the top right corner. Your choice is remembered.",
+      "ru": "Переключайте язык кнопками UZ / EN / RU в правом верхнем углу. Ваш выбор запоминается."
+    }
+  },
+  {
+    "id": "namuna-post",
+    "draft": true,
+    "date": "2026-10-24",
+    "category": "sport",
+    "title": { "uz": "Sarlavha shu yerga", "en": "Title here", "ru": "Заголовок здесь" },
+    "text": { "uz": "Post matni.", "en": "Post text.", "ru": "Текст поста." },
+    "images": ["images/rasm1.jpg"],
+    "alt": { "uz": "Rasm tavsifi" },
+    "youtube": "https://www.youtube.com/watch?v=VIDEO_ID__",
+    "youtubeTitle": { "uz": "Video nomi" },
+    "link": { "url": "https://example.com", "title": { "uz": "Batafsil" } }
+  }
+]
