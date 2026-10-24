@@ -686,6 +686,16 @@ const $ = id => document.getElementById(id);
 const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
 const fmt = n => Number(n || 0).toLocaleString(S.lang === 'en' ? 'en-US' : 'ru-RU');
 const flag = cc => cc && /^[A-Z]{2}$/.test(cc) ? String.fromCodePoint(...[...cc].map(c => 127397 + c.charCodeAt(0))) : '🌐';
+/* Bayroq rasm sifatida (Windows bayroq emojilarini koʻrsatmaydi); rasm yuklanmasa emoji qoladi */
+function flagEl(cc, cls) {
+  const sp = el('span', cls);
+  if (!cc || !/^[A-Z]{2}$/.test(cc)) { sp.textContent = '🌐'; return sp; }
+  const im = new Image(); im.alt = cc; im.width = 20; im.height = 15; im.loading = 'lazy'; im.decoding = 'async';
+  im.src = 'https://flagcdn.com/w40/' + cc.toLowerCase() + '.png';
+  im.style.cssText = 'display:block;width:20px;height:15px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,.12)';
+  im.onerror = () => { sp.textContent = flag(cc); };
+  sp.appendChild(im); return sp;
+}
 
 async function api(path, opts = {}) {
   if (!API) throw Object.assign(new Error('no_api'), { code: 'no_api' });
@@ -761,7 +771,7 @@ function rowEl(r) {
   const d = el('div', 'row' + (r.me ? ' me' : '') + (r.rank <= 3 ? ' r' + r.rank : ''));
   d.appendChild(el('span', 'rk', String(r.rank)));
   const p = el('span', 'pl');
-  p.appendChild(el('span', 'flag', flag(r.country)));
+  p.appendChild(flagEl(r.country, 'flag'));
   p.appendChild(el('b', '', r.name));
   if (r.tg) { const i = el('i', 'ti ti-brand-telegram'); i.title = 'Telegram'; p.appendChild(i); }
   d.appendChild(p);
@@ -1202,7 +1212,12 @@ function intro() {
 /* ---------------- Jonli statistika ---------------- */
 let ST = null, statsShown = false;
 const locale = () => ({ uz: 'uz', en: 'en-GB', ru: 'ru' })[S.lang];
+const UZ_NAMES = { UZ: 'Oʻzbekiston', KZ: 'Qozogʻiston', KG: 'Qirgʻiziston', TJ: 'Tojikiston', TM: 'Turkmaniston', AF: 'Afgʻoniston', RU: 'Rossiya',
+  TR: 'Turkiya', US: 'AQSh', GB: 'Buyuk Britaniya', DE: 'Germaniya', FR: 'Fransiya', KR: 'Janubiy Koreya', JP: 'Yaponiya', CN: 'Xitoy', IN: 'Hindiston',
+  AE: 'BAA', SA: 'Saudiya Arabistoni', UA: 'Ukraina', BY: 'Belarus', AZ: 'Ozarbayjon', PL: 'Polsha', IT: 'Italiya', ES: 'Ispaniya', CA: 'Kanada',
+  NL: 'Niderlandiya', CZ: 'Chexiya', LT: 'Litva', LV: 'Latviya', EE: 'Estoniya', GE: 'Gruziya', AM: 'Armaniston', IR: 'Eron', PK: 'Pokiston', EG: 'Misr', IL: 'Isroil', FI: 'Finlyandiya', SE: 'Shvetsiya' };
 function regionName(cc) {
+  if (S.lang === 'uz' && UZ_NAMES[cc]) return UZ_NAMES[cc];
   try { return new Intl.DisplayNames([locale()], { type: 'region' }).of(cc) || cc; } catch (e) { return cc; }
 }
 const MON = { uz: ['yan','fev','mar','apr','may','iyn','iyl','avg','sen','okt','noy','dek'], ru: ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'],
@@ -1260,7 +1275,7 @@ function renderStats() {
     s.top.forEach(r => {
       const row = el('div', 'gr');
       const tr = el('span', 't'); const ti = el('i'); ti.style.setProperty('--w', Math.max(4, r.n / gmax * 100) + '%'); tr.appendChild(ti);
-      row.append(el('span', 'f', flag(r.country)), el('span', 'n', regionName(r.country)), el('span', 'c', fmt(r.n)), tr);
+      row.append(flagEl(r.country, 'f'), el('span', 'n', regionName(r.country)), el('span', 'c', fmt(r.n)), tr);
       list.appendChild(row);
     });
     geo.appendChild(list);
