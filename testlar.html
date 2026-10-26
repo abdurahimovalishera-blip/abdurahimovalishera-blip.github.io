@@ -256,7 +256,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
 'use strict';
 
 const DIRS = [
-  { id:'english', c:'#7EA6FF', ic:'i-lang', main:true, t:'Ingliz tili', d:'A1 dan C1 gacha bosqichma-bosqich. Har bir bosqichda soʻz tarjimasi, boʻsh joyni toʻldirish va grammatika.', tag:['5 bosqich','150 savol','talaffuz bilan'] },
+  { id:'english', c:'#7EA6FF', ic:'i-lang', main:true, t:'Ingliz tili', d:'A1 dan C1 gacha bosqichma-bosqich. Har bir bosqichda soʻz tarjimasi, boʻsh joyni toʻldirish va grammatika.', tag:['5 bosqich','450 savol','talaffuz bilan'] },
   { id:'abit', c:'#FFB547', ic:'i-grad', t:'Abituriyentlar', d:'Majburiy fanlar: ona tili va adabiyot, matematika, Oʻzbekiston tarixi.' },
   { id:'iq', c:'#C46BFF', ic:'i-bulb', t:'IQ va mantiq', d:'Sonlar ketma-ketligi, oʻxshatish va mantiqiy xulosa masalalari.', warn:'Natija taxminiy. Haqiqiy IQ koʻrsatkichi faqat maxsus standart testlar orqali aniqlanadi.' },
   { id:'psy', c:'#3DDC97', ic:'i-brain', t:'Psixologik testlar', d:'Oʻzingizni yaxshiroq tanish uchun: xarakter va stress darajasi.', warn:'Bu testlar psixologik tashxis emas. Holatingiz sizni bezovta qilsa, mutaxassis bilan maslahatlashing.' },
@@ -635,6 +635,561 @@ const TESTS = [
     note:'Bu roʻyxat faqat maʼlumot uchun. Shubha boʻlsa, har doim shifokorga murojaat qiling.' },
 ];
 
+/* ================= QOʻSHIMCHA SAVOLLAR =================
+   Bu yerdagi savollar yuqoridagi roʻyxatlarga qoʻshiladi.
+   Har safar test boshlanganda savollar aralashtirilib, ulardan bir qismi tanlanadi. */
+const EXTRA_EN = {
+  A1: {
+    words:[
+      ['bread',['non','sut','goʻsht','tuxum']],
+      ['window',['deraza','eshik','devor','tom']],
+      ['teacher',['oʻqituvchi','oʻquvchi','shifokor','haydovchi']],
+      ['to eat',['yemoq','ichmoq','uxlamoq','yugurmoq']],
+      ['to drink',['ichmoq','yemoq','oʻqimoq','yozmoq']],
+      ['big',['katta','kichik','qisqa','past']],
+      ['happy',['xursand','gʻamgin','charchagan','och']],
+      ['morning',['ertalab','kechqurun','tush payti','tun']],
+      ['brother',['aka yoki uka','opa yoki singil','ota','bobo']],
+      ['green',['yashil','qizil','oq','qora']],
+    ],
+    gap:[
+      ['We ___ in Tashkent.',['live','lives','living','is live'],'"we" bilan feʼl oʻzgarmaydi: we live.'],
+      ['___ is my sister. Her name is Lola.',['She','He','It','They'],'Ayol kishi uchun "she".'],
+      ['I ___ coffee. I like tea.',['don’t like','doesn’t like','not like','am not like'],'"I" bilan inkor: don’t + feʼl.'],
+      ['There ___ three chairs in the room.',['are','is','am','be'],'Koʻplikdagi narsa uchun "There are".'],
+      ['The cat is ___ the table.',['under','at','to','from'],'"under" — ostida.'],
+      ['I get up ___ 7 o’clock.',['at','in','on','by'],'Soat bilan "at" ishlatiladi.'],
+      ['What time ___ it?',['is','are','am','do'],'"What time is it?" — soat necha?'],
+      ['This is my friend. ___ name is Ali.',['His','He','Him','Her'],'Erkak kishiga egalik: his.'],
+      ['I can ___ English.',['speak','speaks','speaking','to speak'],'"can" dan keyin feʼl oʻzgarmaydi.'],
+      ['She ___ a red dress today.',['is wearing','wear','wearing','are wearing'],'Hozir sodir boʻlayotgan holat: is + feʼl-ing.'],
+    ],
+    gram:[
+      ['"I" olmoshining egalik shakli qaysi?',['my','me','I’s','myself'],'I → my (mening).'],
+      ['Qaysi soʻz feʼl?',['run','happy','table','slowly'],'run — yugurmoq, harakatni bildiradi.'],
+      ['"tooth" soʻzining koʻpligi qaysi?',['teeth','tooths','toothes','teeths'],'Istisno soʻz: tooth → teeth.'],
+      ['Qaysi gap grammatik jihatdan toʻgʻri?',['He is a doctor.','He are a doctor.','He am a doctor.','He be a doctor.'],'he / she / it bilan "is".'],
+      ['"___ are you?" — "I’m fine, thanks."',['How','What','Who','Where'],'Hol-ahvol soʻralganda "How".'],
+      ['"Monday" qaysi kun?',['dushanba','seshanba','juma','yakshanba'],'Monday — dushanba.'],
+      ['"She has ___ umbrella."',['an','a','two','many'],'Unli tovush oldidan "an".'],
+      ['"fifteen" qaysi son?',['15','50','5','51'],'fifteen — 15, fifty — 50.'],
+      ['"Where ___ you from?"',['are','is','do','does'],'"you" bilan "are".'],
+      ['Qaysi soʻz sifat?',['beautiful','beauty','beautifully','beautify'],'beautiful — chiroyli (sifat).'],
+    ]
+  },
+  A2: {
+    words:[
+      ['yesterday',['kecha','ertaga','bugun','doim']],
+      ['to arrive',['yetib kelmoq','ketmoq','kutmoq','qaytmoq']],
+      ['market',['bozor','doʻkon','bank','maktab']],
+      ['dangerous',['xavfli','xavfsiz','qulay','qiziq']],
+      ['to choose',['tanlamoq','sotib olmoq','sotmoq','yoʻqotmoq']],
+      ['quiet',['tinch','shovqinli','tez','katta']],
+      ['luggage',['yuk (bagaj)','chipta','pasport','xarita']],
+      ['to invite',['taklif qilmoq','rad etmoq','kutmoq','tashrif buyurmoq']],
+      ['early',['erta','kech','tez','sekin']],
+      ['hungry',['och','toʻq','chanqagan','charchagan']],
+    ],
+    gap:[
+      ['How long ___ you been here?',['have','has','are','did'],'Present Perfect savoli: have + you + been.'],
+      ['I didn’t ___ the film.',['like','liked','likes','liking'],'"didn’t" dan keyin feʼl birinchi shaklda keladi.'],
+      ['He drives ___ than his brother.',['more carefully','carefuller','most carefully','careful'],'Uzun ravishlar "more" bilan solishtiriladi.'],
+      ['We were tired, ___ we went home.',['so','because','but','or'],'Natijani bildirish uchun "so".'],
+      ['She is interested ___ music.',['in','on','at','for'],'"interested in" — doimiy birikma.'],
+      ['If you heat ice, it ___.',['melts','will melted','melted','melting'],'Umumiy haqiqat: If + Present Simple, Present Simple.'],
+      ['I’ve ___ finished my work. Can we go?',['already','yet','ever','still'],'Tasdiq gapda "already" — allaqachon.'],
+      ['___ you ever eaten sushi?',['Have','Did','Are','Do'],'Tajriba haqida: Have you ever + 3-shakl.'],
+      ['The shop ___ at 9 a.m. every day.',['opens','open','is opening','opened'],'Jadval va muntazam ish: Present Simple.'],
+      ['How ___ does this bag cost?',['much','many','long','often'],'Narx soʻralganda "How much".'],
+    ],
+    gram:[
+      ['Qaysi gap kelasi zamonda?',['I will call you tomorrow.','I called you yesterday.','I call you every day.','I am calling you now.'],'will + feʼl — kelasi zamon.'],
+      ['"bad" soʻzining orttirma darajasi:',['the worst','the baddest','the most bad','worse'],'bad → worse → the worst.'],
+      ['"You mustn’t…" qaysi maʼnoni beradi?',['mumkin emas, taqiqlangan','shart emas','kerak','ruxsat bor'],'mustn’t — taqiq.'],
+      ['"She ___ TV when I came."',['was watching','watched','is watching','watches'],'Oʻtmishda davom etayotgan ish: was + feʼl-ing.'],
+      ['"There are ___ people in the room."',['a lot of','much','a little','any'],'Koʻplikdagi sanaladigan otlar bilan "a lot of".'],
+      ['"I have lived here for five years." — qaysi zamon?',['Present Perfect','Past Simple','Present Continuous','Future Simple'],'have + 3-shakl.'],
+      ['"Could you ___ the window, please?"',['open','opening','opened','to open'],'"Could you" dan keyin feʼl oʻzgarmaydi.'],
+      ['"He is ___ honest man."',['an','a','two','—'],'"honest" da h oʻqilmaydi, soʻz unli tovush bilan boshlanadi.'],
+      ['Qaysi soʻz ravish?',['carefully','careful','care','careless'],'-ly bilan tugagan: carefully.'],
+      ['"Let’s ___ to the park."',['go','going','to go','went'],'"Let’s" dan keyin feʼl oʻzgarmaydi.'],
+    ]
+  },
+  B1: {
+    words:[
+      ['to increase',['oshirmoq','kamaytirmoq','toʻxtatmoq','yashirmoq']],
+      ['experience',['tajriba','tasodif','imkoniyat','xato']],
+      ['to suggest',['taklif qilmoq','rad etmoq','buyurmoq','soʻramoq']],
+      ['equipment',['jihozlar','xodimlar','hujjatlar','mablagʻ']],
+      ['to persuade',['koʻndirmoq','qoʻrqitmoq','aldamoq','kutmoq']],
+      ['crowded',['gavjum','boʻm-boʻsh','toza','sokin']],
+      ['to deliver',['yetkazib bermoq','buyurtma qilmoq','qaytarmoq','toʻlamoq']],
+      ['purpose',['maqsad','natija','sabab','vosita']],
+      ['to waste',['isrof qilmoq','tejamoq','yigʻmoq','ishlab topmoq']],
+      ['patient (sifat)',['sabrli','shoshqaloq','jahldor','dangasa']],
+    ],
+    gap:[
+      ['If I were you, I ___ that job.',['would take','will take','take','took'],'Maslahat berishda: If I were you, I would…'],
+      ['She asked me where I ___.',['lived','live','do live','living'],'Bilvosita soʻroqda zamon bir pogʻona orqaga suriladi.'],
+      ['This is the house ___ I was born.',['where','which','who','what'],'Joy haqida gapirilganda "where".'],
+      ['I’m not used to ___ so early.',['getting up','get up','got up','gets up'],'"be used to" + feʼl-ing.'],
+      ['He ___ have forgotten the meeting. He’s never late.',['can’t','must','should','will'],'Boʻlishi mumkin emasligiga ishonch: can’t have + 3-shakl.'],
+      ['The letter ___ yesterday.',['was sent','sent','is sent','has sent'],'Oʻtgan zamondagi majhul nisbat: was + 3-shakl.'],
+      ['I haven’t seen him ___ last year.',['since','for','from','ago'],'Boshlanish nuqtasi bilan "since".'],
+      ['You ___ bring food. We have plenty.',['don’t have to','mustn’t','can’t','shouldn’t to'],'Majburiy emas: don’t have to.'],
+      ['Unless you hurry, you ___ the bus.',['will miss','miss','would miss','missed'],'"Unless" = "if not"; birinchi shart gap.'],
+      ['She has been learning English ___ three years.',['for','since','during','in'],'Davomiylik bilan "for".'],
+    ],
+    gram:[
+      ['"I wish I ___ more free time."',['had','have','will have','would have'],'Hozirgi istak: wish + Past Simple.'],
+      ['Qaysi gapda majhul nisbat bor?',['The car was repaired.','He repaired the car.','He is repairing the car.','He will repair the car.'],'be + 3-shakl.'],
+      ['"___ it was raining, we went out."',['Although','Because','So','Unless'],'Qarama-qarshilik: although.'],
+      ['"She stopped ___ when she was 30."',['smoking','to smoke','smoke','smoked'],'stop + feʼl-ing — odatni tashlash.'],
+      ['He said, ‘I will come.’ — bilvosita nutqda:',['He said he would come.','He said he will came.','He said I would come.','He said he comes.'],'will → would, I → he.'],
+      ['"The film was so boring ___ I fell asleep."',['that','than','then','as'],'so … that — shunchalik … ki.'],
+      ['"Neither Ali ___ Vali came."',['nor','or','and','but'],'neither … nor — na …, na …'],
+      ['"This is the ___ interesting book I’ve read."',['most','more','much','very'],'Uzun sifatlarning orttirma darajasi: the most.'],
+      ['"I’d like you ___ me."',['to help','help','helping','helped'],'would like + kishi + to + feʼl.'],
+      ['"By next year, I ___ my studies."',['will have finished','will finish','finished','have finished'],'Kelasi zamondagi muddatgacha tugaydigan ish: will have + 3-shakl.'],
+    ]
+  },
+  B2: {
+    words:[
+      ['to comply',['rioya qilmoq','qarshi chiqmoq','unutmoq','kechiktirmoq']],
+      ['feasible',['amalga oshsa boʻladigan','imkonsiz','xavfli','qimmat']],
+      ['to cease',['toʻxtatmoq','boshlamoq','davom ettirmoq','tezlashtirmoq']],
+      ['insight',['chuqur tushuncha','xato fikr','shubha','taxmin']],
+      ['to enhance',['kuchaytirmoq, yaxshilamoq','buzmoq','kamaytirmoq','yashirmoq']],
+      ['bias',['tarafkashlik','adolat','tajriba','qoida']],
+      ['to allocate',['ajratmoq, taqsimlamoq','yigʻmoq','isrof qilmoq','qarz olmoq']],
+      ['outcome',['natija','sabab','jarayon','boshlanish']],
+      ['to anticipate',['oldindan kutmoq','eslamoq','unutmoq','afsuslanmoq']],
+      ['reluctantly',['istamasdan','zavq bilan','tez','ehtiyotsiz']],
+    ],
+    gap:[
+      ['If he had left earlier, he ___ the train.',['wouldn’t have missed','won’t miss','didn’t miss','wouldn’t miss'],'Uchinchi shart gap: would have + 3-shakl.'],
+      ['The project, ___ was started last year, is almost finished.',['which','that','what','who'],'Vergul bilan ajratilgan izohda "that" ishlatilmaydi.'],
+      ['I regret ___ him the truth.',['not telling','not to tell','don’t tell','not tell'],'regret + feʼl-ing — qilingan ishdan afsus.'],
+      ['She must ___ very tired after the trip.',['have been','be been','had been','has been'],'Oʻtmish haqida xulosa: must have been.'],
+      ['___ the bad weather, the match went ahead.',['Despite','Although','However','Even'],'despite + ot.'],
+      ['The more you read, the ___ you know.',['more','most','much','many'],'The more …, the more …'],
+      ['I’d rather you ___ smoke here.',['didn’t','don’t','won’t','not'],'I’d rather + kishi + Past Simple.'],
+      ['By 2030, scientists ___ a cure.',['will have found','will find','found','have found'],'Muayyan muddatgacha tugaydigan ish: Future Perfect.'],
+      ['He apologised ___ being late.',['for','about','of','to'],'apologise for — doimiy birikma.'],
+      ['Not until I got home ___ I had lost my keys.',['did I realise','I realised','I did realise','realised I'],'"Not until" bilan boshlangan gapda inversiya.'],
+    ],
+    gram:[
+      ['"She suggested ___ a taxi."',['taking','to take','take','that take'],'suggest + feʼl-ing.'],
+      ['"It’s no use ___ about it now."',['worrying','to worry','worry','worried'],'It’s no use + feʼl-ing.'],
+      ['"The work ___ by the time the manager arrived."',['had been done','has been done','was doing','is done'],'Past Perfect majhul nisbatda: had been + 3-shakl.'],
+      ['"He’s the person ___ I told you about."',['who','whose','which','what'],'Odam haqida: who (whom).'],
+      ['"___ he is rich, he isn’t happy."',['Although','Despite','In spite','However'],'although + toʻliq gap.'],
+      ['"I would have come if you ___ me."',['had invited','invited','have invited','would invite'],'Uchinchi shart gap: if + had + 3-shakl.'],
+      ['"You ___ have told me earlier! Now it’s too late."',['should','must','can','would'],'Oʻtmishdagi xato uchun tanqid: should have + 3-shakl.'],
+      ['"Hardly anyone came, ___?"',['did they','didn’t they','did he','came they'],'"Hardly" inkor maʼno beradi, shuning uchun soʻroq tasdiq shaklida.'],
+      ['"She is believed ___ the country."',['to have left','leaving','that left','to leaving'],'Oʻtmishdagi ish: to have + 3-shakl.'],
+      ['"He made me ___ the report again."',['write','to write','writing','written'],'make + kishi + feʼl ("to" siz).'],
+    ]
+  },
+  C1: {
+    words:[
+      ['ubiquitous',['hamma joyda uchraydigan','noyob','eskirgan','xavfli']],
+      ['to exacerbate',['yomonlashtirmoq','yengillashtirmoq','hal qilmoq','oldini olmoq']],
+      ['candid',['ochiq, samimiy','yashirin','qoʻpol','ehtiyotkor']],
+      ['to mitigate',['yumshatmoq, kamaytirmoq','kuchaytirmoq','qoʻzgʻatmoq','yashirmoq']],
+      ['pragmatic',['amaliy','xayolparast','qatʼiyatsiz','hissiyotga berilgan']],
+      ['to reconcile',['murosaga keltirmoq','ajratmoq','janjallashtirmoq','unutmoq']],
+      ['tenuous',['zaif, ishonchsiz','mustahkam','aniq','keng']],
+      ['to corroborate',['tasdiqlamoq','rad etmoq','oʻzgartirmoq','yashirmoq']],
+      ['conspicuous',['koʻzga tashlanadigan','koʻrinmas','oddiy','yashirin']],
+      ['to relinquish',['voz kechmoq','egallab olmoq','saqlab qolmoq','talab qilmoq']],
+    ],
+    gap:[
+      ['Under no circumstances ___ the door unlocked.',['should you leave','you should leave','you leave','leave you'],'Inkor iboradan keyin inversiya.'],
+      ['Were I ___ the truth, I would tell you.',['to know','knowing','know','known'],'"Were I to …" — rasmiy shart gap.'],
+      ['She is on the ___ of a breakthrough.',['verge','edge out','side','line'],'on the verge of — arafasida.'],
+      ['The new rules will come into ___ next month.',['force','power','action','work'],'come into force — kuchga kirmoq.'],
+      ['He takes ___ for granted.',['everything','for everything','of everything','about everything'],'take something for granted — oʻz-oʻzidan tushunarli deb bilmoq.'],
+      ['So ___ was the noise that nobody could sleep.',['loud','loudly','louder','loudness'],'So + sifat + feʼl + ega … that — inversiya.'],
+      ['It’s about time the government ___ action.',['took','takes','will take','has taken'],'It’s (about) time + Past Simple.'],
+      ['Only after the meeting ___ the truth.',['did we learn','we learned','we did learn','learned we'],'"Only after" bilan inversiya.'],
+      ['She has a ___ for languages.',['flair','flavour','flare','fluency'],'a flair for — tugʻma qobiliyat.'],
+      ['Should you ___ any questions, please contact us.',['have','had','having','to have'],'"Should you …" — rasmiy "If you …".'],
+    ],
+    gram:[
+      ['"Such ___ his anger that he couldn’t speak."',['was','is being','did','had'],'Such + be + ot … that — inversiya.'],
+      ['Qaysi gap toʻgʻri?',['Scarcely had we arrived when it started raining.','Scarcely we had arrived when it started raining.','Scarcely had we arrived than it started raining.','We scarcely had arrived when it started raining.'],'Scarcely had … when — doimiy tuzilma.'],
+      ['"It was Ali ___ broke the window."',['who','which','what','whom'],'Taʼkidli gap: It was … who …'],
+      ['"The house needs ___."',['painting','to paint','paint','painted'],'need + feʼl-ing — majhul maʼno.'],
+      ['"I’d have helped, ___ I known."',['had','if','did','have'],'"if" siz shart gap: had I known.'],
+      ['"He denied ___ the documents."',['having seen','to have seen','to see','have seen'],'deny + having + 3-shakl.'],
+      ['Qaysi ibora "juda qimmat" maʼnosini beradi?',['cost an arm and a leg','break the ice','hit the sack','under the weather'],'cost an arm and a leg — juda qimmatga tushmoq.'],
+      ['"Little ___ he know what awaited him."',['did','does','was','had'],'Little did he know — inversiya.'],
+      ['"The report, ___ conclusions were surprising, was published."',['whose','which','who’s','that’s'],'Egalik uchun "whose".'],
+      ['"By the time you read this, I ___ the country."',['will have left','will leave','left','have left'],'Future Perfect: will have + 3-shakl.'],
+    ]
+  },
+};
+
+const EXTRA_T = {
+  ona:[
+    ['"Kitobni" soʻzi qaysi kelishikda?',['tushum kelishigi','qaratqich kelishigi','joʻnalish kelishigi','chiqish kelishigi'],'"-ni" — tushum kelishigi qoʻshimchasi.'],
+    ['"Uydan" soʻzi qaysi kelishikda?',['chiqish kelishigi','oʻrin-payt kelishigi','joʻnalish kelishigi','bosh kelishik'],'"-dan" — chiqish kelishigi qoʻshimchasi.'],
+    ['Qaysi soʻz son?',['yetti','yetmoq','yetuk','yetarli'],'Son miqdor va tartibni bildiradi.'],
+    ['Qaysi soʻz olmosh?',['ular','uy','uzun','uchmoq'],'Olmosh ot, sifat yoki son oʻrnida keladi.'],
+    ['"Tez yurmoq" birikmasidagi "tez" qaysi soʻz turkumi?',['ravish','sifat','ot','feʼl'],'Ravish harakatning belgisini bildiradi: qanday? qachon?'],
+    ['"Oʻqituvchi" soʻzi qaysi qoʻshimcha yordamida yasalgan?',['-uvchi','-chi','-lik','-dosh'],'"-uvchi" qoʻshimchasi shaxs otini yasaydi.'],
+    ['Qaysi gap soʻroq gap?',['Qachon kelasan?','Men keldim.','Tezroq kel!','Qanday goʻzal kun!'],'Soʻroq gap savolni ifodalaydi.'],
+    ['Undov gap oxirida qaysi tinish belgisi qoʻyiladi?',['undov belgisi (!)','nuqta (.)','soʻroq belgisi (?)','vergul (,)'],'Hayajon va buyruq ifodalangan gaplarda undov belgisi qoʻyiladi.'],
+    ['"Oy" (osmondagi) va "oy" (yilning qismi) qanday soʻzlar?',['omonimlar','sinonimlar','antonimlar','paronimlar'],'Shakli bir xil, maʼnosi har xil soʻzlar — omonimlar.'],
+    ['Feʼlning noaniqlik shakli qaysi qoʻshimcha bilan yasaladi?',['-moq','-lar','-ning','-chi'],'Masalan: oʻqimoq, yozmoq.'],
+    ['Qoʻshma gap nechta sodda gapdan tuziladi?',['ikki va undan ortiq','faqat bitta','faqat uchta','ega va kesimdan'],'Qoʻshma gap kamida ikkita sodda gapdan iborat.'],
+    ['«Boburnoma» qaysi janrga mansub?',['memuar (esdalik)','doston','gʻazal','drama'],'Bobur oʻz hayoti va davri haqida yozgan.'],
+    ['«Shum bola» qissasining muallifi kim?',['Gʻafur Gʻulom','Abdulla Qahhor','Oybek','Erkin Vohidov'],'«Shum bola» — Gʻafur Gʻulomning mashhur qissasi.'],
+    ['«Kecha va kunduz» romanining muallifi kim?',['Choʻlpon','Oybek','Abdulla Qahhor','Hamza'],'«Navoiy» — Oybek, «Sarob» — Abdulla Qahhor asari.'],
+    ['«Mehrobdan chayon» romanining muallifi kim?',['Abdulla Qodiriy','Choʻlpon','Hamza','Abdulla Qahhor'],'Abdulla Qodiriyning ikkinchi romani.'],
+  ],
+  matem:[
+    ['3x − 5 = 2x + 4 tenglamaning yechimi:',['x = 9','x = 1','x = −9','x = 4,5'],'3x − 2x = 4 + 5, x = 9.'],
+    ['x + y = 10 va x − y = 4 boʻlsa, x = ?',['7','3','6','14'],'Tenglamalarni qoʻshsak: 2x = 14.'],
+    ['(a − b)² = ?',['a² − 2ab + b²','a² − b²','a² + 2ab + b²','a² + b²'],'Qisqa koʻpaytirish formulasi.'],
+    ['a² − b² = ?',['(a − b)(a + b)','(a − b)²','(a + b)²','a(a − b)'],'Kvadratlar ayirmasi formulasi.'],
+    ['5! = ?',['120','25','60','720'],'5 · 4 · 3 · 2 · 1 = 120.'],
+    ['Toʻgʻri burchakli uchburchakning katetlari 3 va 4. Gipotenuza:',['5','7','6','12'],'√(9 + 16) = 5.'],
+    ['Qirrasi 3 sm boʻlgan kubning hajmi:',['27 sm³','9 sm³','18 sm³','54 sm³'],'V = a³ = 27.'],
+    ['cos 60° = ?',['1/2','√3/2','1','0'],'Trigonometrik jadval qiymati.'],
+    ['tg 45° = ?',['1','0','√3','1/2'],'sin 45° = cos 45°, shuning uchun tg 45° = 1.'],
+    ['2⁰ = ?',['1','0','2','−1'],'Noldan farqli har qanday sonning nolinchi darajasi 1 ga teng.'],
+    ['Narx 20% ga oshib, 600 soʻm boʻldi. Avvalgi narx qancha edi?',['500 soʻm','480 soʻm','580 soʻm','520 soʻm'],'x · 1,2 = 600, x = 500.'],
+    ['Doira yuzining formulasi qaysi?',['πr²','2πr','πd','2r'],'S = πr².'],
+    ['(−3) · (−4) = ?',['12','−12','7','−7'],'Manfiy sonlarning koʻpaytmasi musbat.'],
+    ['3/5 kasr necha foizga teng?',['60%','35%','53%','30%'],'3/5 = 0,6 = 60%.'],
+    ['2x > 8 tengsizlikning yechimi:',['x > 4','x < 4','x > 16','x > 6'],'Ikkala tomonni 2 ga boʻlamiz.'],
+  ],
+  tarix:[
+    ['Mirzo Ulugʻbek rasadxonasi qaysi asrda qurilgan?',['XV asr','XIII asr','XVII asr','XI asr'],'1420-yillarda Samarqandda qurilgan.'],
+    ['Muhammad al-Xorazmiy qaysi ilmiy markazda faoliyat yuritgan?',['Bagʻdoddagi «Bayt ul-hikma»','Samarqand rasadxonasi','Buxorodagi Mir Arab madrasasi','Xivadagi Muhammad Aminxon madrasasi'],'IX asrda Bagʻdoddagi «Donishmandlar uyi»da ishlagan.'],
+    ['Xorazm Maʼmun akademiyasida qaysi olimlar ishlagan?',['Beruniy va Ibn Sino','Navoiy va Jomiy','Bobur va Ulugʻbek','Qodiriy va Choʻlpon'],'XI asr boshida Gurganjda faoliyat yuritgan.'],
+    ['Amir Temur qaysi yili vafot etgan?',['1405','1370','1336','1500'],'1405-yilda Oʻtrorda vafot etgan.'],
+    ['Bibixonim masjidi qaysi shaharda joylashgan?',['Samarqand','Buxoro','Xiva','Termiz'],'Amir Temur buyrugʻi bilan qurilgan.'],
+    ['Ark qalʼasi qaysi shaharda joylashgan?',['Buxoro','Samarqand','Qoʻqon','Toshkent'],'Buxoro hukmdorlarining qarorgohi boʻlgan.'],
+    ['Qoʻqon xonligining poytaxti qaysi shahar boʻlgan?',['Qoʻqon','Andijon','Margʻilon','Namangan'],'XVIII–XIX asrlarda Fargʻona vodiysidagi xonlik.'],
+    ['Buxoro amirligi qaysi yili tugatilgan?',['1920','1917','1924','1868'],'1920-yilda Buxoro Xalq Sovet Respublikasi tuzilgan.'],
+    ['Oʻzbekiston SSR qaysi yili tuzilgan?',['1924','1917','1936','1991'],'1924-yilda milliy-hududiy chegaralash natijasida tuzilgan.'],
+    ['Toshkent metrosi qaysi yili ochilgan?',['1977','1966','1991','1985'],'Oʻrta Osiyodagi birinchi metro.'],
+    ['Imom at-Termiziy qaysi sohada mashhur?',['hadis ilmi','astronomiya','tibbiyot','matematika'],'«Sunani Termiziy» toʻplamining muallifi.'],
+    ['Alisher Navoiy qaysi yillarda yashagan?',['1441–1501','1336–1405','1483–1530','1394–1449'],'Amir Temur 1336–1405, Bobur 1483–1530, Ulugʻbek 1394–1449-yillarda yashagan.'],
+    ['Oʻzbekiston Respublikasining birinchi Prezidenti kim boʻlgan?',['Islom Karimov','Shavkat Mirziyoyev','Sharof Rashidov','Abdulla Aripov'],'1991–2016-yillarda Prezident boʻlgan.'],
+    ['Konstitutsiyaning yangi tahriri qanday qabul qilingan?',['2023-yilgi referendumda','1992-yilgi Oliy Kengash sessiyasida','2016-yilgi saylovda','2017-yilgi farmon bilan'],'2023-yil 30-aprelda umumxalq referendumi oʻtkazilgan.'],
+    ['Abu Rayhon Beruniy qayerda tugʻilgan?',['Xorazmda (Kot shahri yaqinida)','Buxoroda','Samarqandda','Termizda'],'973-yilda Xorazmda tugʻilgan.'],
+  ],
+  iq:[
+    ['Ketma-ketlikni davom ettiring: 5, 10, 20, 40, …',['80','60','50','100'],'Har safar 2 marta oshadi.'],
+    ['Ketma-ketlikni davom ettiring: 1, 4, 9, 16, 25, …',['36','30','35','49'],'Natural sonlarning kvadratlari.'],
+    ['Ketma-ketlikni davom ettiring: 2, 3, 5, 7, 11, …',['13','12','15','14'],'Tub sonlar ketma-ketligi.'],
+    ['Ketma-ketlikni davom ettiring: 100, 95, 85, 70, …',['50','55','60','45'],'Ayirmalar: 5, 10, 15, 20.'],
+    ['Baliq — suv. Qush — ?',['havo','daraxt','tuxum','qanot'],'Baliq suvda, qush havoda harakatlanadi.'],
+    ['Ortiqchasini toping: 2, 4, 7, 8, 10',['7','2','8','10'],'Qolganlari juft sonlar.'],
+    ['Bugun chorshanba boʻlsa, 10 kundan keyin qaysi kun boʻladi?',['shanba','juma','yakshanba','payshanba'],'10 = 7 + 3; chorshanbadan 3 kun keyin — shanba.'],
+    ['3 ta mushuk 3 ta sichqonni 3 daqiqada tutadi. 100 ta sichqonni 100 daqiqada nechta mushuk tutadi?',['3','100','33','1'],'Har bir mushuk 3 daqiqada bitta sichqon tutadi.'],
+    ['Ota oʻgʻlidan 30 yosh katta. 5 yildan keyin ota oʻgʻlidan 3 marta katta boʻladi. Oʻgʻil hozir necha yoshda?',['10','5','15','20'],'x + 35 = 3(x + 5), demak x = 10.'],
+    ['Ketma-ketlikni davom ettiring: B, D, G, K, …',['P','O','N','Q'],'Harflar orasidagi masofa: 2, 3, 4, 5.'],
+    ['Baʼzi gullar qizil. Barcha atirgullar — gul. Qaysi xulosa toʻgʻri?',['baʼzi atirgullar qizil boʻlishi mumkin, lekin aniq emas','barcha atirgullar qizil','hech bir atirgul qizil emas','barcha qizil narsalar atirgul'],'Berilgan maʼlumotdan qatʼiy xulosa chiqmaydi.'],
+    ['Ketma-ketlikni davom ettiring: 1, 2, 6, 24, 120, …',['720','240','600','144'],'Har safar 2, 3, 4, 5, 6 ga koʻpaytiriladi.'],
+  ],
+  jobt:[
+    ['Suhbatga qanday kiyinish kerak?',['toza va kompaniya uslubiga mos','eng qimmat kiyimda','sport kiyimida','farqi yoʻq'],'Ozoda va oʻrinli koʻrinish ishonch uygʻotadi.'],
+    ['Rezyumeda nima boʻlmasligi kerak?',['haqiqatga toʻgʻri kelmaydigan maʼlumot','ish tajribasi','aloqa maʼlumotlari','taʼlim haqida maʼlumot'],'Notoʻgʻri maʼlumot tez aniqlanadi va ishonchni yoʻqotadi.'],
+    ['Suhbatdoshga qanday qarash kerak?',['koʻziga tabiiy qarab gapirish','pastga qarab gapirish','telefonga qarab turish','derazaga qarab turish'],'Koʻz bilan aloqa ishonch va eʼtiborni bildiradi.'],
+    ['Onlayn suhbatdan oldin nima qilish kerak?',['kamera, mikrofon va internetni tekshirish','hech narsa','suhbatni kechiktirish','faqat ovozli ulanish'],'Texnik muammolar vaqtni oladi va taassurotni buzadi.'],
+    ['Kompaniya haqida qachon maʼlumot yigʻish kerak?',['suhbatdan oldin','suhbat paytida','suhbatdan keyin','umuman kerak emas'],'Tayyorgarlik sizning qiziqishingizni koʻrsatadi.'],
+    ['"Nega aynan sizni ishga olishimiz kerak?" savoliga:',['tajribam va natijalarimni aniq misollar bilan aytaman','"Menga pul kerak" deyman','boshqa nomzodlarni tanqid qilaman','"Bilmadim" deyman'],'Kompaniyaga qanday foyda keltirishingizni koʻrsating.'],
+    ['Suhbatda xato gapirib qoʻysangiz:',['xotirjam tuzatib, davom etaman','asabiylashib, suhbatni toʻxtataman','xatoni yashirishga urinaman','kechirim soʻrab chiqib ketaman'],'Xatoni tan olib tuzatish — yetuklik belgisi.'],
+    ['Birinchi suhbatda qaysi savolni bermagan maʼqul?',['"Taʼtil qachon boshlanadi?"','"Jamoa qanday ishlaydi?"','"Mendan nimalar kutiladi?"','"Keyingi bosqich qanday?"'],'Avval ishning mazmuniga qiziqish bildiring.'],
+  ],
+};
+
+/* Bitta testda nechta savol chiqishi */
+const RUN = { en:10, ona:15, matem:15, tarix:15, iq:12, jobt:10 };
+
+for (const L of LEVELS) { const x = EXTRA_EN[L.id]; if (x) for (const k of ['words','gap','gram']) L[k] = L[k].concat(x[k] || []); }
+for (const t of TESTS) { if (EXTRA_T[t.id]) t.items = t.items.concat(EXTRA_T[t.id]); if (RUN[t.id]) t.run = RUN[t.id]; }
+
+/* ================= QOʻSHIMCHA SAVOLLAR (2-toʻplam) ================= */
+const EXTRA2_EN = {
+  A1: {
+    words:[
+      ['chair',['stul','stol','karavot','eshik']],
+      ['car',['mashina','velosiped','avtobus','poyezd']],
+      ['mother',['ona','ota','opa','buvi']],
+      ['yellow',['sariq','koʻk','qora','jigarrang']],
+      ['cold',['sovuq','issiq','iliq','quruq']],
+      ['to sleep',['uxlamoq','uygʻonmoq','yugurmoq','oʻynamoq']],
+      ['milk',['sut','suv','sharbat','qatiq']],
+      ['egg',['tuxum','non','guruch','piyoz']],
+      ['street',['koʻcha','uy','bogʻ','maydon']],
+      ['to write',['yozmoq','oʻqimoq','chizmoq','oʻchirmoq']],
+    ],
+    gap:[
+      ['My father ___ a car.',['has','have','is','are'],'he / she / it bilan "has".'],
+      ['They ___ at home now.',['are','is','am','be'],'"they" bilan "are".'],
+      ['I ___ breakfast at 8.',['have','has','am','having'],'"I" bilan "have".'],
+      ['Look! It ___.',['is raining','rains','rain','raining'],'Hozir sodir boʻlayotgan ish: is + feʼl-ing.'],
+      ['___ is your birthday? — In June.',['When','Where','Who','What colour'],'Vaqt soʻralganda "When".'],
+      ['She ___ speak French.',['can’t','don’t','isn’t','not'],'Qobiliyatning inkori: can’t.'],
+      ['There ___ any milk in the fridge.',['isn’t','aren’t','not','no'],'Sanalmaydigan ot bilan: There isn’t any.'],
+      ['My room is ___ the second floor.',['on','in','at','under'],'Qavat bilan "on".'],
+      ['This is my ___ book.',['sister’s','sisters’s','sister','sisters'],'Egalik: sister’s.'],
+      ['Please ___ the door.',['close','closes','closing','to close'],'Buyruq gapda feʼl oʻzgarmaydi.'],
+    ],
+    gram:[
+      ['"woman" soʻzining koʻpligi qaysi?',['women','womans','womens','woman'],'Istisno soʻz: woman → women.'],
+      ['"big" soʻzining maʼnodoshi qaysi?',['large','small','short','thin'],'big ≈ large — katta.'],
+      ['"I ___ 25 years old."',['am','have','is','do'],'Yosh "be" bilan aytiladi: I am 25.'],
+      ['"___ book is this?" — "It’s Ali’s."',['Whose','Who','Which','What'],'Egasi soʻralganda "Whose".'],
+      ['Qaysi gap soʻroq gap?',['Do you like apples?','You like apples.','Like you apples.','You do like apples.'],'Present Simple soʻrogʻi: Do + ega + feʼl.'],
+      ['"We ___ students."',['are','is','am','be'],'"we" bilan "are".'],
+      ['"He ___ to school every day."',['goes','go','going','gone'],'he / she / it bilan: go → goes.'],
+      ['"yesterday" qaysi zamonga mos keladi?',['oʻtgan zamon','hozirgi zamon','kelasi zamon','hech biriga'],'yesterday — kecha.'],
+      ['Qaysi gapda soʻz tartibi toʻgʻri?',['I always drink tea.','I drink always tea.','Always I drink tea.','Drink I always tea.'],'Chastota ravishi asosiy feʼldan oldin keladi.'],
+      ['"twelve" qaysi son?',['12','20','2','21'],'twelve — 12, twenty — 20.'],
+    ]
+  },
+  A2: {
+    words:[
+      ['to lose',['yoʻqotmoq','topmoq','olmoq','bermoq']],
+      ['bridge',['koʻprik','yoʻl','tunnel','minora']],
+      ['noisy',['shovqinli','tinch','sekin','toza']],
+      ['to repair',['taʼmirlamoq','buzmoq','sotmoq','tozalamoq']],
+      ['customer',['mijoz','sotuvchi','ishchi','rahbar']],
+      ['medicine',['dori','kasallik','shifokor','shifoxona']],
+      ['to explain',['tushuntirmoq','soʻramoq','unutmoq','yashirmoq']],
+      ['empty',['boʻsh','toʻla','ogʻir','keng']],
+      ['holiday',['dam olish, taʼtil','ish kuni','dars','imtihon']],
+      ['to save money',['pul jamgʻarmoq','pul sarflamoq','qarz bermoq','pul yoʻqotmoq']],
+    ],
+    gap:[
+      ['I ___ my keys. I can’t find them.',['have lost','lost have','losing','am lose'],'Natijasi hozir koʻrinadigan ish: Present Perfect.'],
+      ['She speaks English very ___.',['well','good','best','better than'],'Feʼlni ravish tasvirlaydi: well.'],
+      ['It’s ___ today than yesterday.',['colder','more cold','coldest','cold'],'Qisqa sifat: cold → colder.'],
+      ['I’m going ___ a new phone next week.',['to buy','buy','buying','bought'],'be going to + feʼl.'],
+      ['When I was a child, I ___ in a village.',['lived','have lived','live','am living'],'Oʻtmishdagi holat: Past Simple.'],
+      ['You look tired. You ___ go to bed.',['should','must not','can’t','would'],'Maslahat berishda: should.'],
+      ['There were ___ people at the concert.',['many','much','a little','any'],'Koʻplikdagi sanaladigan otlar bilan: many.'],
+      ['Ali is the ___ student in our class.',['tallest','taller','most tall','tall'],'Orttirma daraja: the tallest.'],
+      ['I’ll call you when I ___ home.',['get','will get','got','getting'],'"when" dan keyin kelasi zamon oʻrniga Present Simple.'],
+      ['We haven’t finished ___.',['yet','already','just','since'],'Inkor gap oxirida "yet".'],
+    ],
+    gram:[
+      ['"go" feʼlining 3-shakli qaysi?',['gone','went','goed','going'],'go — went — gone.'],
+      ['"I ___ my homework yet."',['haven’t done','didn’t do','don’t do','am not doing'],'yet bilan Present Perfect inkori.'],
+      ['"The film was ___ boring that I left."',['so','such','too','very'],'so + sifat + that.'],
+      ['"I usually ___ to work by bus."',['go','am going','went','goes'],'Odatiy ish: Present Simple.'],
+      ['"Who is ___, Ali or Vali?"',['older','oldest','the older than','more old'],'Ikki kishini solishtirishda: older.'],
+      ['Qaysi soʻz bogʻlovchi?',['but','under','quickly','table'],'but — lekin.'],
+      ['"___ you help me, please?"',['Could','Must','Should','Have'],'Iltimos qilishda: Could you…?'],
+      ['"He has ___ been to Paris."',['never','ever','yet','ago'],'has never been — hech qachon boʻlmagan.'],
+      ['"I was born ___ 1990."',['in','on','at','by'],'Yil oldidan "in".'],
+      ['"She didn’t go to school because she ___ ill."',['was','is','were','has'],'Oʻtmish: she was.'],
+    ]
+  },
+  B1: {
+    words:[
+      ['to reduce',['kamaytirmoq','oshirmoq','saqlamoq','yaratmoq']],
+      ['confident',['oʻziga ishongan','qoʻrqoq','uyatchan','xafa']],
+      ['to recommend',['tavsiya qilmoq','taqiqlamoq','eslatmoq','soʻramoq']],
+      ['deadline',['oxirgi muddat','boshlanish vaqti','tanaffus','jadval']],
+      ['to attend',['qatnashmoq','oʻtkazib yubormoq','tashkil qilmoq','bekor qilmoq']],
+      ['responsible',['masʼuliyatli','beparvo','dangasa','shoshqaloq']],
+      ['to earn',['ishlab topmoq','sarflamoq','qarz olmoq','yoʻqotmoq']],
+      ['knowledge',['bilim','odat','kuch','boylik']],
+      ['to rely on',['tayanmoq, ishonmoq','shubhalanmoq','qoʻrqmoq','unutmoq']],
+      ['convenient',['qulay','noqulay','qimmat','uzoq']],
+    ],
+    gap:[
+      ['I’ve known her ___ we were children.',['since','for','when','ago'],'since + boshlanish nuqtasi.'],
+      ['If it ___ tomorrow, we’ll stay at home.',['rains','will rain','rained','would rain'],'Birinchi shart gap: If + Present Simple.'],
+      ['The book ___ I bought yesterday is great.',['that','who','where','whose'],'Narsa haqida: that / which.'],
+      ['He asked me ___ I could help him.',['if','that','what','so'],'Ha/yoʻq soʻrogʻi bilvosita nutqda: if / whether.'],
+      ['I wasn’t able ___ the exam.',['to pass','pass','passing','passed'],'be able to + feʼl.'],
+      ['She ___ in this company since 2018.',['has worked','works','worked','is working'],'since bilan Present Perfect.'],
+      ['Can you remind me ___ the tickets?',['to buy','buying','buy','bought'],'remind + kishi + to + feʼl.'],
+      ['It was ___ a hot day that we stayed inside.',['such','so','too','very'],'such + a + sifat + ot.'],
+      ['The museum ___ every year by thousands of tourists.',['is visited','visits','is visiting','visited'],'Majhul nisbat: is + 3-shakl.'],
+      ['I’m thinking ___ changing my job.',['of','to','at','for'],'think of + feʼl-ing.'],
+    ],
+    gram:[
+      ['She said, ‘I can swim.’ — bilvosita nutqda:',['She said she could swim.','She said she can swam.','She said I could swim.','She told she could swim.'],'can → could.'],
+      ['"He’s too young ___ drive."',['to','for','that','so'],'too + sifat + to + feʼl.'],
+      ['"We had dinner after we ___ the film."',['had watched','watched have','have watched','watch'],'Avvalroq tugagan ish: Past Perfect.'],
+      ['"I don’t mind ___ the dishes."',['washing','to wash','wash','washed'],'mind + feʼl-ing.'],
+      ['"You’d better ___ late again."',['not be','not to be','don’t be','be not'],'had better not + feʼl.'],
+      ['Qaysi gap toʻgʻri?',['I have been waiting for an hour.','I am waiting for an hour.','I wait for an hour already.','I have wait for an hour.'],'Davomiylik: Present Perfect Continuous.'],
+      ['"Either you ___ I am wrong."',['or','nor','and','but'],'either … or — yo …, yo …'],
+      ['"Do you know where ___?"',['the station is','is the station','the station','is station'],'Ichki soʻroqda soʻz tartibi oddiy gapdagidek boʻladi.'],
+      ['"The man ___ car was stolen called the police."',['whose','who','which','that'],'Egalik: whose.'],
+      ['"I used ___ in Samarkand."',['to live','living','live','lived'],'used to + feʼl — oʻtmishdagi holat.'],
+    ]
+  },
+  B2: {
+    words:[
+      ['to overcome',['yengib oʻtmoq','taslim boʻlmoq','kutmoq','kechiktirmoq']],
+      ['to undergo',['boshdan kechirmoq','oldini olmoq','rad etmoq','rejalashtirmoq']],
+      ['vague',['noaniq, mavhum','aniq','batafsil','qisqa']],
+      ['to prevail',['ustun kelmoq','yutqazmoq','chekinmoq','kutmoq']],
+      ['scarce',['kam, tanqis','moʻl','arzon','keraksiz']],
+      ['to endorse',['qoʻllab-quvvatlamoq','qoralamoq','eʼtiborsiz qoldirmoq','yashirmoq']],
+      ['versatile',['koʻp qirrali','bir xil','cheklangan','eskirgan']],
+      ['to tackle',['hal qilishga kirishmoq','eʼtiborsiz qoldirmoq','qochmoq','kechiktirmoq']],
+      ['drawback',['kamchilik','afzallik','yutuq','imkoniyat']],
+      ['to retain',['saqlab qolmoq','yoʻqotmoq','sotmoq','almashtirmoq']],
+    ],
+    gap:[
+      ['I wish you ___ so much noise.',['wouldn’t make','don’t make','won’t make','didn’t made'],'Birovning odatidan norozilik: wish + would.'],
+      ['He is thought ___ the best player of all time.',['to be','being','be','that is'],'is thought to + feʼl.'],
+      ['Had I known, I ___ differently.',['would have acted','would act','had acted','will act'],'"if" siz uchinchi shart gap.'],
+      ['She got her hair ___ yesterday.',['cut','to cut','cutting','cuts'],'get + narsa + 3-shakl — birovga qildirmoq.'],
+      ['The meeting has been ___ until Friday.',['put off','put out','put up','put on'],'put off — keyinga qoldirmoq.'],
+      ['___ having little money, they were happy.',['Despite','Although','However','Because'],'despite + feʼl-ing.'],
+      ['He’s used to ___ long hours.',['working','work','worked','works'],'be used to + feʼl-ing.'],
+      ['By the time she arrives, we ___ dinner.',['will have finished','finished','have finished','will finish'],'Future Perfect.'],
+      ['Rarely ___ such a beautiful sunset.',['have I seen','I have seen','I saw','seen I have'],'Rarely bilan boshlangan gapda inversiya.'],
+      ['I’d rather ___ at home than go out tonight.',['stay','to stay','staying','stayed'],'I’d rather + feʼl ("to" siz).'],
+    ],
+    gram:[
+      ['"He must have forgotten." — maʼnosi:',['u unutgan boʻlsa kerak','u unutishi shart','u unutmagan','u unutishi mumkin edi'],'must have + 3-shakl — oʻtmish haqida qatʼiy xulosa.'],
+      ['"The car needs ___."',['repairing','to repair','repair','repaired'],'need + feʼl-ing — majhul maʼno.'],
+      ['"Not only ___ late, but she also lost her bag."',['was she','she was','did she be','she did'],'Not only bilan inversiya.'],
+      ['"I object ___ treated like this."',['to being','to be','being','for being'],'object to + feʼl-ing.'],
+      ['"If I ___ you, I’d apologise."',['were','am','had been','would be'],'If I were you…'],
+      ['"It’s worth ___ the museum."',['visiting','to visit','visit','visited'],'It’s worth + feʼl-ing.'],
+      ['"___ the rain, the event was cancelled."',['Due to','Despite','Although','However'],'due to — tufayli.'],
+      ['"She can’t have ___ it."',['done','did','do','doing'],'can’t have + 3-shakl.'],
+      ['"The more he earns, ___ he spends."',['the more','more','the most','much'],'The more …, the more …'],
+      ['"I’m looking forward to ___ from you."',['hearing','hear','heard','be hearing'],'look forward to + feʼl-ing.'],
+    ]
+  },
+  C1: {
+    words:[
+      ['to circumvent',['chetlab oʻtmoq','rioya qilmoq','qoʻllab-quvvatlamoq','kuchaytirmoq']],
+      ['eloquent',['notiq, soʻzga chechan','kamgap','qoʻpol','sokin']],
+      ['to discern',['farqlamoq, ilgʻamoq','chalkashtirmoq','unutmoq','yashirmoq']],
+      ['detrimental',['zararli','foydali','betaraf','muhim']],
+      ['to bolster',['mustahkamlamoq','zaiflashtirmoq','buzmoq','kamaytirmoq']],
+      ['arbitrary',['oʻzboshimcha, asossiz','asosli','adolatli','rejali']],
+      ['to elicit',['(javob, fikr) olishga erishmoq','yashirmoq','bostirmoq','unutmoq']],
+      ['resilient',['bardoshli','nozik','moʻrt','zaif']],
+      ['to deter',['qaytarmoq, toʻxtatib turmoq','ragʻbatlantirmoq','qoʻllamoq','tezlatmoq']],
+      ['paramount',['eng muhim','ahamiyatsiz','ikkinchi darajali','oddiy']],
+    ],
+    gap:[
+      ['Seldom ___ such dedication.',['have I witnessed','I have witnessed','I witnessed','witnessed I'],'Seldom bilan inversiya.'],
+      ['It’s high time you ___ responsibility for your actions.',['took','take','will take','have taken'],'It’s high time + Past Simple.'],
+      ['But for your advice, I ___ the wrong decision.',['would have made','will make','made','had made'],'But for … = If it hadn’t been for …'],
+      ['She was ___ of the risks involved.',['fully aware','fully awareness','full aware','fully know'],'be aware of — xabardor boʻlmoq.'],
+      ['On no account ___ this information be shared.',['should','must not','can’t','would'],'On no account bilan inversiya; maʼnosi — hech qachon.'],
+      ['The decision was made ___ the committee’s recommendations.',['in line with','in line to','on line with','inline of'],'in line with — muvofiq ravishda.'],
+      ['Much ___ I admire him, I can’t agree.',['as','though so','that','like'],'Much as … — qanchalik … boʻlsa ham.'],
+      ['He was accused ___ the documents.',['of forging','for forging','to forge','with forging'],'accuse of + feʼl-ing.'],
+      ['There’s no point ___ about it now.',['in arguing','to argue','for arguing','argue'],'There’s no point in + feʼl-ing.'],
+      ['Little did I ___ what would happen.',['know','knew','known','knowing'],'Little did I know.'],
+    ],
+    gram:[
+      ['"Were it not for the rain, we ___ outside."',['would be sitting','will sit','sat','had sat'],'Were it not for … — rasmiy shart gap.'],
+      ['"What he said was ___ true."',['partly','partial','part','partially of'],'Sifatni ravish tasvirlaydi: partly.'],
+      ['Qaysi gapda inversiya toʻgʻri qoʻllangan?',['No sooner had she left than it began to rain.','No sooner she had left than it began to rain.','No sooner had she left when it began to rain.','No sooner she left than it began to rain.'],'No sooner had … than — doimiy tuzilma.'],
+      ['"He insisted that she ___ immediately."',['leave','leaves','left','will leave'],'insist that + feʼlning oddiy shakli.'],
+      ['Qaysi ibora "oʻzini yomon his qilmoq" maʼnosini beradi?',['under the weather','on cloud nine','over the moon','in hot water'],'under the weather — betob, kayfiyati yoʻq.'],
+      ['"All ___ we need is time."',['that','what','which','who'],'All that … — taʼkidli tuzilma.'],
+      ['"___ tired he was, he kept working."',['However','Whatever','Although','Despite'],'However + sifat — qanchalik … boʻlmasin.'],
+      ['"She speaks as though she ___ everything."',['knew','knows','has known','will know'],'as though + Past Simple — haqiqatga zid tasavvur.'],
+      ['"Hardly ___ the phone rang again."',['had I hung up when','I had hung up when','had I hung up than','I hung up when'],'Hardly had … when.'],
+      ['"The proposal is subject ___ approval."',['to','for','of','with'],'subject to — bogʻliq, shartli.'],
+    ]
+  },
+};
+
+const EXTRA2_T = {
+  ona:[
+    ['Gapning ikkinchi darajali boʻlaklari qaysilar?',['toʻldiruvchi, aniqlovchi, hol','ega va kesim','faqat hol','undalma va kirish soʻz'],'Ikkinchi darajali boʻlaklar bosh boʻlaklarni izohlaydi.'],
+    ['"Kim?" soʻrogʻiga javob beradigan soʻz qaysi?',['oʻquvchi','kitob','daftar','uy'],'"Kim?" — shaxsni bildiruvchi otlar uchun.'],
+    ['"Kitobim" soʻzidagi "-im" qanday qoʻshimcha?',['egalik qoʻshimchasi','koʻplik qoʻshimchasi','kelishik qoʻshimchasi','soʻz yasovchi'],'"-im" — I shaxs birlikdagi egalik qoʻshimchasi.'],
+    ['"Bogʻda" soʻzi qaysi kelishikda?',['oʻrin-payt kelishigi','joʻnalish kelishigi','chiqish kelishigi','tushum kelishigi'],'"-da" — oʻrin-payt kelishigi qoʻshimchasi.'],
+    ['Qaysi soʻz feʼl?',['oʻqidi','kitob','chiroyli','koʻp'],'Feʼl harakatni bildiradi: nima qildi?'],
+    ['Qaysi soʻz koʻmakchi?',['uchun','va','juda','katta'],'Koʻmakchilar: uchun, bilan, kabi, sari.'],
+    ['Qaysi soʻz bogʻlovchi?',['va','uchun','juda','tez'],'Bogʻlovchilar: va, lekin, ammo, yoki.'],
+    ['Qaysi soʻz yuklama bilan kelgan?',['kelasanmi','kelasan','keldi','kelmoq'],'"-mi" — soʻroq yuklamasi.'],
+    ['Undalma nima?',['nutq qaratilgan shaxsni bildiruvchi soʻz','gapning egasi','kesimni izohlovchi soʻz','bogʻlovchi'],'Masalan: "Ali, bu yoqqa kel."'],
+    ['"Ota-ona" qanday soʻz?',['juft soʻz','qoʻshma soʻz','takroriy soʻz','yasama soʻz'],'Juft soʻzlar chiziqcha bilan yoziladi.'],
+    ['"Katta-katta" qanday soʻz?',['takroriy soʻz','juft soʻz','qoʻshma soʻz','sodda soʻz'],'Bitta soʻz takrorlanib hosil boʻlgan.'],
+    ['«Alpomish» qanday asar?',['xalq dostoni','roman','gʻazal','hikoya'],'Oʻzbek xalq ogʻzaki ijodining mashhur dostoni.'],
+    ['«Oʻtkan kunlar» romanining bosh qahramoni kim?',['Otabek','Anvar','Mirzakarim','Hasanali'],'Otabek va Kumushning hayoti tasvirlangan; Anvar — «Mehrobdan chayon» qahramoni.'],
+    ['«Sarob» romanining muallifi kim?',['Abdulla Qahhor','Oybek','Choʻlpon','Abdulla Qodiriy'],'«Sarob» — Abdulla Qahhorning romani.'],
+    ['«Ruhlar isyoni» dostonining muallifi kim?',['Erkin Vohidov','Abdulla Oripov','Gʻafur Gʻulom','Oybek'],'Erkin Vohidovning mashhur dostoni.'],
+  ],
+  matem:[
+    ['x² − 5x + 6 = 0 tenglama ildizlarining yigʻindisi:',['5','6','−5','1'],'Viyet teoremasi: x₁ + x₂ = 5.'],
+    ['√81 + √16 = ?',['13','97','10','5'],'9 + 4 = 13.'],
+    ['20 ning 1/4 qismi:',['5','4','8','10'],'20 : 4 = 5.'],
+    ['Toʻrtburchak ichki burchaklarining yigʻindisi:',['360°','180°','270°','540°'],'(4 − 2) · 180° = 360°.'],
+    ['log₃ 81 = ?',['4','3','27','9'],'3⁴ = 81.'],
+    ['0,5 + 1/4 = ?',['0,75','0,55','1,5','0,6'],'0,5 + 0,25 = 0,75.'],
+    ['y = x² funksiyaning grafigi qanday chiziq?',['parabola','toʻgʻri chiziq','aylana','giperbola'],'Kvadrat funksiyaning grafigi — parabola.'],
+    ['Arifmetik progressiya: 2, 5, 8, … Dastlabki 5 ta hadining yigʻindisi:',['40','30','35','45'],'2 + 5 + 8 + 11 + 14 = 40.'],
+    ['Uchburchakning ikki burchagi 50° va 60°. Uchinchi burchagi:',['70°','80°','90°','60°'],'180° − 110° = 70°.'],
+    ['Sonning 25 foizi 30 ga teng. Shu son:',['120','75','7,5','100'],'30 : 0,25 = 120.'],
+    ['(2³)² = ?',['64','32','12','36'],'Daraja darajaga koʻtarilganda koʻrsatkichlar koʻpaytiriladi: 2⁶ = 64.'],
+    ['Tezligi 60 km/soat boʻlgan avtomobil 3 soatda qancha yoʻl bosadi?',['180 km','20 km','63 km','120 km'],'S = v · t = 180 km.'],
+    ['Kvadratning perimetri 20 sm. Uning yuzi:',['25 sm²','20 sm²','16 sm²','100 sm²'],'Tomoni 5 sm, yuzi 5² = 25 sm².'],
+    ['|x| = 5 tenglamaning yechimlari:',['5 va −5','faqat 5','0','yechimi yoʻq'],'Moduli 5 ga teng sonlar: 5 va −5.'],
+    ['1 soat necha sekund?',['3600','360','600','6000'],'60 · 60 = 3600.'],
+  ],
+  tarix:[
+    ['Samarqand shahrining necha yilligi 2007-yilda nishonlangan?',['2750','2000','1000','2500'],'2007-yilda Samarqandning 2750 yilligi nishonlangan.'],
+    ['Buxoro va Xiva shaharlarining 2500 yilligi qaysi yili nishonlangan?',['1997','2007','1991','2017'],'1997-yilda nishonlangan.'],
+    ['Toshkentning 2200 yilligi qaysi yili nishonlangan?',['2009','1999','2019','1983'],'2009-yilda nishonlangan.'],
+    ['Shohi Zinda majmuasi qaysi shaharda joylashgan?',['Samarqand','Buxoro','Xiva','Qoʻqon'],'Samarqanddagi maqbaralar majmuasi.'],
+    ['Kalon minorasi qaysi shaharda joylashgan?',['Buxoro','Samarqand','Toshkent','Termiz'],'1127-yilda qurilgan.'],
+    ['Xudoyorxon oʻrdasi qaysi shaharda joylashgan?',['Qoʻqon','Xiva','Buxoro','Andijon'],'Qoʻqon xonining saroyi.'],
+    ['Zahiriddin Muhammad Bobur qaysi shaharda tugʻilgan?',['Andijon','Samarqand','Hirot','Kobul'],'1483-yilda Andijonda tugʻilgan.'],
+    ['Ahmad al-Fargʻoniy qaysi fan bilan mashhur?',['astronomiya','tibbiyot','tarix','sheʼriyat'],'IX asrda yashagan astronom.'],
+    ['Najmiddin Kubro qaysi yurt bilan bogʻliq?',['Xorazm','Buxoro','Samarqand','Termiz'],'XII–XIII asrlarda Xorazmda yashagan mutasavvuf.'],
+    ['Bahouddin Naqshband majmuasi qaysi viloyatda joylashgan?',['Buxoro','Samarqand','Qashqadaryo','Navoiy'],'Buxoro shahri yaqinida.'],
+    ['Toshkentdagi Amir Temur haykali qaysi yili oʻrnatilgan?',['1993','1991','2000','1966'],'1993-yilda Amir Temur xiyobonida oʻrnatilgan.'],
+    ['Oʻzbekiston Respublikasi Davlat gerbi qaysi yili qabul qilingan?',['1992','1991','1993','1995'],'1992-yil 2-iyulda qabul qilingan.'],
+    ['Toshkent qaysi yili «Islom madaniyati poytaxti» deb eʼlon qilingan?',['2007','2010','1997','2017'],'ISESCO tomonidan 2007-yilda eʼlon qilingan.'],
+    ['Termizdagi Fayoztepa yodgorligi qaysi din bilan bogʻliq?',['buddizm','zardushtiylik','xristianlik','islom'],'Kushonlar davridagi budda ibodatxonasi.'],
+    ['Afrosiyob nima?',['qadimgi Samarqand shahrining oʻrni','Buxorodagi masjid','Xivadagi qalʼa','Toshkentdagi bozor'],'Hozirgi Samarqand yonidagi qadimiy shahar xarobalari.'],
+  ],
+  iq:[
+    ['Ketma-ketlikni davom ettiring: 3, 9, 27, 81, …',['243','162','108','324'],'Har safar 3 ga koʻpaytiriladi.'],
+    ['Ketma-ketlikni davom ettiring: 1, 3, 6, 10, 15, …',['21','20','25','18'],'Qoʻshiladigan son har safar bittaga ortadi.'],
+    ['Ketma-ketlikni davom ettiring: 64, 32, 16, 8, …',['4','2','6','0'],'Har safar 2 ga boʻlinadi.'],
+    ['Ketma-ketlikni davom ettiring: 2, 5, 11, 23, …',['47','46','35','45'],'Har bir son: oldingi son · 2 + 1.'],
+    ['Shifokor — kasalxona. Oʻqituvchi — ?',['maktab','kitob','oʻquvchi','dars'],'Ish joyi boʻyicha oʻxshatish.'],
+    ['Ortiqchasini toping: uchburchak, kvadrat, doira, kub',['kub','uchburchak','kvadrat','doira'],'Kub — hajmli shakl, qolganlari tekis shakllar.'],
+    ['2 ta qalam 600 soʻm boʻlsa, 5 ta qalam necha soʻm?',['1500 soʻm','1200 soʻm','3000 soʻm','1000 soʻm'],'Bitta qalam 300 soʻm.'],
+    ['Aziz Bobur va Komildan katta. Bobur Komildan kichik. Eng kichik kim?',['Bobur','Komil','Aziz','aniqlab boʻlmaydi'],'Aziz > Komil > Bobur.'],
+    ['Birinchi quvur hovuzni 6 soatda, ikkinchisi 3 soatda toʻldiradi. Ikkalasi birga necha soatda toʻldiradi?',['2 soat','4,5 soat','9 soat','3 soat'],'1/6 + 1/3 = 1/2, demak 2 soat.'],
+    ['Ketma-ketlikni davom ettiring: Z, X, V, T, …',['R','S','Q','U'],'Teskari tartibda bittadan harf tashlab ketiladi.'],
+    ['Soat 9:00 da millar orasidagi burchak:',['90°','45°','180°','270°'],'Soat 9 da millar toʻgʻri burchak hosil qiladi.'],
+    ['Barcha mushuklar — hayvon. Mosh — mushuk. Demak:',['Mosh — hayvon','barcha hayvonlar mushuk','Mosh — it','xulosa chiqarib boʻlmaydi'],'Umumiy qoidadan xususiy xulosa.'],
+  ],
+  jobt:[
+    ['Suhbatchi ismingizni notoʻgʻri aytsa:',['xushmuomalalik bilan toʻgʻrilab qoʻyaman','xafa boʻlib, eʼtiroz bildiraman','indamay, keyin shikoyat qilaman','suhbatni toʻxtataman'],'Muloyim tuzatish noqulaylikni yoʻqotadi.'],
+    ['Oldingi ishdagi yutugʻingizni qanday aytish yaxshi?',['raqam va natija bilan','umumiy soʻzlar bilan','boshqalarning yutugʻi sifatida','umuman aytmaslik kerak'],'Masalan: "Hisobot tayyorlash vaqtini 30% qisqartirdim".'],
+    ['Tajribangiz kam boʻlsa:',['oʻqish, amaliyot va oʻz loyihalarimni misol qilaman','tajribam bor deb aldayman','faqat maosh haqida gapiraman','suhbatga bormayman'],'Halollik va oʻrganishga tayyorlik qadrlanadi.'],
+    ['Suhbatchi uzoq jim tursa:',['xotirjam kutaman yoki fikrimni qisqa toʻldiraman','asabiylashib, toʻxtovsiz gapiraman','telefonimga qarayman','xonadan chiqib ketaman'],'Sukut — baʼzan javobingizni tahlil qilish vaqti.'],
+    ['Rezyume qancha hajmda boʻlgani maʼqul?',['1–2 sahifa','10 sahifa','yarim satr','5 sahifadan ortiq'],'Qisqa va aniq rezyume tez oʻqiladi.'],
+    ['Suhbatga nimani olib borish foydali?',['rezyume nusxasi va yon daftar','hech narsa','oʻrnimga gapiradigan odamni','ovqat'],'Kerakli hujjat va eslatmalar uchun daftar.'],
+    ['Rad javobi olsangiz:',['minnatdorchilik bildirib, fikr-mulohaza soʻrayman','gʻazablanaman','ijtimoiy tarmoqda yomonlayman','qayta-qayta qoʻngʻiroq qilaman'],'Fikr-mulohaza keyingi suhbatga yordam beradi.'],
+    ['Taklif qilingan maosh sizni qoniqtirmasa:',['asosli sabab bilan muloyim muzokara qilaman','darhol rad etib chiqib ketaman','indamay rozi boʻlaman, keyin norozi boʻlaman','boshqa nomzodlarni yomonlayman'],'Muloyim va asosli muzokara — eng yaxshi yoʻl.'],
+  ],
+};
+
+for (const L of LEVELS) { const x = EXTRA2_EN[L.id]; if (x) for (const k of ['words','gap','gram']) L[k] = L[k].concat(x[k] || []); }
+for (const t of TESTS) { if (EXTRA2_T[t.id]) t.items = t.items.concat(EXTRA2_T[t.id]); }
+
 const PASS = 80;   // ingliz tilida keyingi bosqich uchun kerakli foiz
 
 /* ================= SAQLASh (faqat shu qurilmada) ================= */
@@ -718,7 +1273,7 @@ function renderEnglish(){
                 const b = best(L.id, k);
                 return `<button class="exb${b >= PASS ? ' done' : ''}" type="button" data-lv="${L.id}" data-k="${k}" ${open ? '' : 'disabled'}>
                   <span class="t">${b >= PASS ? ic('i-check') : ''}${esc(KIND[k].t)}</span>
-                  <span class="s">${b ? 'eng yaxshi: ' + b + '%' : L[k].length + ' ta savol'}</span>
+                  <span class="s">${b ? 'eng yaxshi: ' + b + '%' : 'har safar ' + RUN.en + ' ta · bazada ' + L[k].length + ' ta'}</span>
                   <span class="bar2"><i style="width:${b}%"></i></span>
                 </button>`;
               }).join('')}
@@ -752,7 +1307,7 @@ function renderDir(id){
           <span class="tc-main">
             <h3>${esc(t.t)}</h3>
             <p>${esc(t.d)}</p>
-            <span class="s">${t.items.length} ta ${TYPE_LBL[t.type]}${b != null && t.type === 'quiz' ? ` · eng yaxshi: ${b}%` : ''}</span>
+            <span class="s">${t.run ? `har safar ${t.run} ta savol · bazada ${t.items.length} ta` : `${t.items.length} ta ${TYPE_LBL[t.type]}`}${b != null && t.type === 'quiz' ? ` · eng yaxshi: ${b}%` : ''}</span>
           </span>
           <span class="go">${ic('i-arrow')}</span>
         </button>`;
@@ -769,7 +1324,7 @@ function runTest(id){
   if (!t) { go(''); return; }
   const d = dirOf(t.dir);
   const ctx = { back:'d/' + t.dir, path:[{t:'Testlar', href:''}, {t:d.t, href:'d/' + t.dir}, {t:t.t}], key:'t:' + t.id, test:t };
-  if (t.type === 'quiz') startQuizFrom(t.items, ctx, 'Toʻgʻri variantni tanlang.', t.t);
+  if (t.type === 'quiz') startQuizFrom(t.items, ctx, 'Toʻgʻri variantni tanlang.', t.t, t.run);
   else if (t.type === 'scale') renderScale(t, ctx);
   else if (t.type === 'check') renderCheck(t, ctx);
   else if (t.type === 'cards') renderCards(t, ctx);
@@ -781,10 +1336,10 @@ function startEnglish(lv, kind){
   const L = LEVELS.find(x => x.id === lv);
   if (!L || !L[kind] || !unlocked(LEVELS.indexOf(L))) { go('english'); return; }
   const ctx = { back:'english', path:[{t:'Testlar', href:''}, {t:'Ingliz tili', href:'english'}, {t:lv + ' · ' + KIND[kind].t}], key:lv + ':' + kind, kind, eng:true, pass:PASS };
-  startQuizFrom(L[kind], ctx, KIND[kind].h, KIND[kind].t);
+  startQuizFrom(L[kind], ctx, KIND[kind].h, KIND[kind].t, RUN.en);
 }
-function startQuizFrom(raw, ctx, hint, label){
-  const items = shuffle(raw).map(q => ({ q: q[0], right: q[1][0], opts: shuffle(q[1]), why: q[2] || '' }));
+function startQuizFrom(raw, ctx, hint, label, limit){
+  const items = shuffle(raw).slice(0, limit || raw.length).map(q => ({ q: q[0], right: q[1][0], opts: shuffle(q[1]), why: q[2] || '' }));
   Q = { items, n: 0, ok: 0, wrong: [], ctx, hint, label };
   renderQ();
 }
