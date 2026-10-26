@@ -534,6 +534,7 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
     <a class="logo" href="#top" aria-label="alisher.live"><span class="logo-t">a</span><span>alisher.live</span></a>
     <nav>
       <a href="#quiz" data-i18n="nav_quiz">Viktorina</a>
+      <a href="/testlar.html" data-i18n="nav_tests">Testlar</a>
       <a href="#stats" data-i18n="nav_stats">Statistika</a>
       <a href="#board" data-i18n="nav_board">Reyting</a>
       <a href="#info" data-i18n="nav_info">Maʼlumotlar</a>
@@ -582,7 +583,7 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
   <section class="board-sec" id="board">
     <div class="wrap">
       <h2 data-i18n="board_title">Dunyo reytingi</h2>
-      <p class="sub" data-i18n="board_sub">Har bir toʻgʻri javob 10 ball, tez javob bersangiz yana 10 tagacha qoʻshimcha ball.</p>
+      <p class="sub" data-i18n="board_sub">Toʻgʻri javob savol qiyinligiga qarab ball beradi: oddiy — 1, oʻrta — 3, qiyin — 5 ball.</p>
       <div class="chips" id="chips" role="group"></div>
       <div class="board" id="boardList" aria-live="polite"></div>
     </div>
@@ -684,7 +685,7 @@ const CATS = ['history','geography','astronomy','math','physics','chemistry','bi
 const ICON = { history:'ti-hourglass-high', geography:'ti-world', astronomy:'ti-planet', math:'ti-math-function', physics:'ti-atom-2', chemistry:'ti-flask', biology:'ti-dna-2', it:'ti-cpu', mix:'ti-arrows-shuffle' };
 const T = {
   uz: {
-    skip:'Oʻtkazib yuborish', nav_quiz:'Viktorina', nav_board:'Reyting', nav_contact:'Aloqa', nav_info:'Maʼlumotlar', start:'Boshlash', nav_stats:'Statistika',
+    skip:'Oʻtkazib yuborish', nav_quiz:'Viktorina', nav_tests:'Testlar', nav_board:'Reyting', nav_contact:'Aloqa', nav_info:'Maʼlumotlar', start:'Boshlash', nav_stats:'Statistika',
     stats_title:'Jonli statistika', stats_sub:'Saytga kimlar kirayotgani va qancha oʻyin oʻynalayotgani. Raqamlar oʻz-oʻzidan yangilanadi.',
     st_online:'Hozir saytda', st_online_s:'oxirgi 5 daqiqada', st_today:'Bugungi tashriflar', st_total:'Jami tashriflar', st_total_s:n=>`${n} ta davlatdan`,
     st_players:'Oʻyinchilar', st_players_s:n=>`${n} ta oʻyin oʻynalgan`, st_days:'Oxirgi 14 kun', st_sum:n=>`${n} tashrif`, st_geo:'Qayerdan kirishmoqda',
@@ -697,7 +698,7 @@ const T = {
     games_title:'Oʻyinlar', games_sub:'Bilimingizni oʻyin orqali mustahkamlang.', games_empty_t:'Oʻyinlar tayyorlanmoqda', games_empty:'Tez orada bu yerda mantiqiy oʻyinlar paydo boʻladi.', read:'Oʻqish', play:'Oʻynash', login:'Kirish', signed_as:'Siz:', logout:'Chiqish',
     h1:'Bilimlar viktorinasi', players:'oʻyinchi', games_played:'oʻyin oʻynalgan', questions:'savol',
     q_count:n=>`${n} ta savol`, best:'eng yaxshi', mix_desc:'Barcha yoʻnalishlardan 10 ta savol',
-    board_title:'Dunyo reytingi', board_sub:'Har bir toʻgʻri javob 10 ball, tez javob bersangiz yana 10 tagacha qoʻshimcha ball.',
+    board_title:'Dunyo reytingi', board_sub:'Toʻgʻri javob savol qiyinligiga qarab ball beradi: oddiy — 1, oʻrta — 3, qiyin — 5 ball.',
     all:'Umumiy', col_rank:'#', col_name:'Oʻyinchi', col_pts:'Ball', col_games:'Oʻyin', col_acc:'Aniqlik',
     empty_board:'Bu yoʻnalishda hali hech kim oʻynamagan.', be_first:'Birinchi boʻling', board_err:'Reytingni yuklab boʻlmadi. Internetni tekshirib, sahifani yangilang.',
     contact_title:'Aloqa', contact_sub:'Savol taklif qilmoqchimisiz yoki xato topdingizmi? Yozing.', privacy:'Maxfiylik siyosati',
@@ -717,7 +718,7 @@ const T = {
     rank_line:r=>`${r}-oʻrin`
   },
   en: {
-    skip:'Skip', nav_quiz:'Quiz', nav_board:'Leaderboard', nav_contact:'Contact', nav_info:'Articles', start:'Start', nav_stats:'Stats',
+    skip:'Skip', nav_quiz:'Quiz', nav_tests:'Tests', nav_board:'Leaderboard', nav_contact:'Contact', nav_info:'Articles', start:'Start', nav_stats:'Stats',
     stats_title:'Live stats', stats_sub:'Who is visiting and how many games are being played. Numbers update on their own.',
     st_online:'On the site now', st_online_s:'in the last 5 minutes', st_today:'Visits today', st_total:'Total visits', st_total_s:n=>`from ${n} countries`,
     st_players:'Players', st_players_s:n=>`${n} games played`, st_days:'Last 14 days', st_sum:n=>`${n} visits`, st_geo:'Where visitors come from',
@@ -730,7 +731,7 @@ const T = {
     games_title:'Games', games_sub:'Strengthen what you know through play.', games_empty_t:'Games are on the way', games_empty:'Logic games will appear here soon.', read:'Read', play:'Play', login:'Sign in', signed_as:'Signed in as', logout:'Sign out',
     h1:'Knowledge quiz', players:'players', games_played:'games played', questions:'questions',
     q_count:n=>`${n} questions`, best:'best', mix_desc:'10 questions from every subject',
-    board_title:'World leaderboard', board_sub:'Each correct answer earns 10 points, plus up to 10 bonus points for answering fast.',
+    board_title:'World leaderboard', board_sub:'Each correct answer scores by difficulty: easy 1, medium 3, hard 5 points.',
     all:'Overall', col_rank:'#', col_name:'Player', col_pts:'Points', col_games:'Games', col_acc:'Accuracy',
     empty_board:'Nobody has played this subject yet.', be_first:'Be the first', board_err:'Couldn’t load the leaderboard. Check your connection and refresh.',
     contact_title:'Contact', contact_sub:'Want to suggest a question or found a mistake? Get in touch.', privacy:'Privacy policy',
@@ -750,7 +751,7 @@ const T = {
     rank_line:r=>`#${r}`
   },
   ru: {
-    skip:'Пропустить', nav_quiz:'Викторина', nav_board:'Рейтинг', nav_contact:'Контакты', nav_info:'Статьи', start:'Начать', nav_stats:'Статистика',
+    skip:'Пропустить', nav_quiz:'Викторина', nav_tests:'Тесты', nav_board:'Рейтинг', nav_contact:'Контакты', nav_info:'Статьи', start:'Начать', nav_stats:'Статистика',
     stats_title:'Живая статистика', stats_sub:'Кто заходит на сайт и сколько игр сыграно. Цифры обновляются сами.',
     st_online:'Сейчас на сайте', st_online_s:'за последние 5 минут', st_today:'Визиты сегодня', st_total:'Всего визитов', st_total_s:n=>`из ${n} стран`,
     st_players:'Игроки', st_players_s:n=>`сыграно игр: ${n}`, st_days:'Последние 14 дней', st_sum:n=>`визитов: ${n}`, st_geo:'Откуда заходят',
@@ -763,7 +764,7 @@ const T = {
     games_title:'Игры', games_sub:'Закрепляйте знания в игре.', games_empty_t:'Игры готовятся', games_empty:'Скоро здесь появятся логические игры.', read:'Читать', play:'Играть', login:'Войти', signed_as:'Вы вошли как', logout:'Выйти',
     h1:'Викторина знаний', players:'игроков', games_played:'игр сыграно', questions:'вопросов',
     q_count:n=>`${n} вопросов`, best:'лучший', mix_desc:'10 вопросов из всех направлений',
-    board_title:'Мировой рейтинг', board_sub:'За каждый верный ответ 10 баллов и до 10 бонусных — за скорость.',
+    board_title:'Мировой рейтинг', board_sub:'Баллы за верный ответ зависят от сложности: лёгкий — 1, средний — 3, сложный — 5.',
     all:'Общий', col_rank:'#', col_name:'Игрок', col_pts:'Баллы', col_games:'Игры', col_acc:'Точность',
     empty_board:'В этом направлении ещё никто не играл.', be_first:'Станьте первым', board_err:'Не удалось загрузить рейтинг. Проверьте интернет и обновите страницу.',
     contact_title:'Контакты', contact_sub:'Хотите предложить вопрос или нашли ошибку? Напишите.', privacy:'Политика конфиденциальности',

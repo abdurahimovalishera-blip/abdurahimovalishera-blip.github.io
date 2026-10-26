@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Testlar — alisher.live</title>
+<meta name="description" content="Ingliz tili bosqichma-bosqich, abituriyentlar uchun fanlar, psixologik, IQ va mantiq testlari.">
+<meta name="theme-color" content="#07080B">
+<link rel="canonical" href="https://alisher.live/testlar.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#07080B; --bg2:#0C0E13; --panel:#101217;
+  --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.17);
+  --tx:#F3F4F6; --tx2:#A4A9B5; --tx3:#6F7581;
+  --amber:#FFB547; --ember:#FF7A45; --blue:#7EA6FF;
+  --ok:#3DDC97; --bad:#FF6B6B;
+  --r:20px;
+  --f-d:"Geist",Onest,system-ui,sans-serif;
+  --f-b:Onest,system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.125em}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(7,8,11,.95),rgba(7,8,11,.82));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-t{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#FFE0A8,var(--amber) 45%,var(--ember));color:#111;display:grid;place-items:center;font:600 17px var(--f-d);box-shadow:0 0 22px -4px rgba(255,140,60,.55)}
+.logo span:last-child{font:500 17px var(--f-d);letter-spacing:-.02em}
+nav{display:flex;gap:2px;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass);overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{text-decoration:none;color:var(--tx2);font-size:14.5px;padding:7px 14px;border-radius:999px;white-space:nowrap}
+nav a:hover{color:var(--tx);background:var(--glass2)}
+nav a[aria-current="page"]{background:var(--tx);color:#0B0C10}
+
+/* Hero */
+.hero{padding:44px 0 18px}
+.crumbs{font:500 12.5px var(--f-m);color:var(--tx3);margin:0 0 12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumbs button{border:0;background:none;padding:0;color:var(--tx2);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:3px}
+h1{font:500 clamp(30px,4.6vw,48px)/1.05 var(--f-d);letter-spacing:-.035em;margin:0 0 10px}
+.lead{color:var(--tx2);max-width:640px;margin:0;font-size:16.5px}
+
+/* Yoʻnalish kartalari */
+.dirs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 0 60px}
+.dir{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:20px;text-align:left;cursor:pointer;min-height:188px;display:flex;flex-direction:column;gap:6px;overflow:hidden;isolation:isolate;
+  background:radial-gradient(90% 80% at 85% 0%,color-mix(in srgb,var(--c) 30%,transparent),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012));background-color:rgba(12,13,18,.8);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.dir:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,var(--line));box-shadow:0 24px 50px -26px color-mix(in srgb,var(--c) 80%,transparent)}
+.dir.main{grid-column:span 2}
+.dir .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);margin-bottom:8px}
+.dir h3{margin:0;font:500 19px/1.2 var(--f-d);letter-spacing:-.015em}
+.dir p{margin:0;color:var(--tx2);font-size:14.5px}
+.dir .tag{margin-top:auto;padding-top:10px;font:500 12px var(--f-m);color:var(--tx3);display:flex;gap:8px;flex-wrap:wrap}
+.dir .tag b{color:var(--c);font-weight:500}
+.dir .soon{position:absolute;top:16px;right:16px;font:500 11.5px var(--f-m);padding:4px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--tx2);background:rgba(10,11,15,.6)}
+.note{font-size:13px;color:var(--tx3);border-left:2px solid var(--line2);padding:2px 0 2px 12px;margin:-36px 0 60px}
+
+/* Bosqichlar */
+.levels{display:grid;gap:12px;padding:24px 0 60px}
+.lvl{border:1px solid var(--line);border-radius:var(--r);background:var(--glass);padding:18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.lvl.locked{opacity:.55}
+.badge{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font:500 20px var(--f-d);letter-spacing:-.02em;color:#0B0C10;background:linear-gradient(135deg,#FFE0A8,var(--amber) 50%,var(--ember))}
+.lvl.locked .badge{background:var(--glass2);color:var(--tx3)}
+.lvl h3{margin:2px 0 2px;font:500 18px var(--f-d)}
+.lvl .sub{margin:0 0 12px;color:var(--tx2);font-size:14px}
+.ex{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.exb{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--line);border-radius:14px;background:rgba(10,11,15,.55);padding:12px;cursor:pointer;transition:border-color .2s,background .2s}
+.exb:hover:not([disabled]){border-color:var(--line2);background:var(--glass2)}
+.exb[disabled]{cursor:not-allowed}
+.exb .t{font-weight:500;font-size:14.5px;display:flex;gap:8px;align-items:center}
+.exb .s{font:400 12px var(--f-m);color:var(--tx3)}
+.bar2{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--ok);border-radius:4px}
+.exb.done .s{color:var(--ok)}
+.lockmsg{font:400 12.5px var(--f-m);color:var(--tx3);margin-top:10px;display:flex;gap:6px;align-items:center}
+
+/* Savol oynasi */
+.quiz{max-width:720px;margin:0 auto;padding:24px 0 70px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font:500 13px var(--f-m);color:var(--tx2)}
+.prog{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-bottom:22px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--ember));transition:width .35s ease}
+.card{border:1px solid var(--line);border-radius:24px;background:radial-gradient(120% 90% at 50% 0%,#141821 0%,#0A0B0F 65%);padding:26px}
+.kind{font:500 12px var(--f-m);color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+.qtext{font:500 clamp(21px,3.2vw,28px)/1.25 var(--f-d);letter-spacing:-.02em;margin:0 0 6px}
+.qtext .gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--amber);margin:0 4px}
+.qword{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.say{border:1px solid var(--line2);background:var(--glass);border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13.5px;color:var(--tx2);display:inline-flex;gap:6px;align-items:center}
+.say:hover{color:var(--tx);background:var(--glass2)}
+.hint{color:var(--tx3);font-size:14px;margin:0 0 18px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.opt{text-align:left;border:1px solid var(--line2);border-radius:14px;background:rgba(255,255,255,.03);padding:14px 16px;cursor:pointer;font-size:16px;display:flex;gap:12px;align-items:center;transition:background .15s,border-color .15s}
+.opt:hover:not([disabled]){background:var(--glass2)}
+.opt .k{font:500 12px var(--f-m);color:var(--tx3);width:22px;height:22px;border-radius:7px;border:1px solid var(--line2);display:grid;place-items:center;flex:none}
+.opt[disabled]{cursor:default}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.opt.right .k{border-color:var(--ok);color:var(--ok)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.opt.wrong .k{border-color:var(--bad);color:var(--bad)}
+.fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-size:14.5px;display:none}
+.fb.show{display:block}
+.fb.ok{background:color-mix(in srgb,var(--ok) 10%,transparent);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent)}
+.fb.no{background:color-mix(in srgb,var(--bad) 9%,transparent);border:1px solid color-mix(in srgb,var(--bad) 30%,transparent)}
+.fb b{font-weight:600}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:500;cursor:pointer;background:var(--tx);color:#0B0C10;display:inline-flex;gap:8px;align-items:center}
+.btn.ghost{background:var(--glass);color:var(--tx);border:1px solid var(--line2)}
+.btn:hover{filter:brightness(.92)}
+
+/* Natija */
+.res{text-align:center}
+.big{font:300 clamp(64px,10vw,96px)/1 var(--f-d);letter-spacing:-.05em;margin:6px 0}
+.big small{font-size:.35em;color:var(--tx2);letter-spacing:0}
+.verdict{font:500 18px var(--f-d);margin:0 0 6px}
+.verdict.pass{color:var(--ok)}
+.review{text-align:left;margin-top:22px;display:grid;gap:8px}
+.review h4{margin:0 0 4px;font:500 14px var(--f-m);color:var(--tx2)}
+.rv{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14.5px;background:rgba(255,255,255,.02)}
+.rv .a{color:var(--ok)}
+.rv .y{color:var(--bad);text-decoration:line-through}
+
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--tx3);font-size:13px}
+footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .dirs{grid-template-columns:1fr 1fr}
+  .dir.main{grid-column:span 2}
+  .ex{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .bar{height:auto;padding:10px 0;flex-wrap:wrap}
+  nav{margin-left:0;width:100%}
+  .dirs{grid-template-columns:1fr}
+  .dir.main{grid-column:auto}
+  .lvl{grid-template-columns:1fr}
+  .badge{width:48px;height:48px;font-size:17px}
+  .opts{grid-template-columns:1fr}
+  .card{padding:20px}
+  .note{margin-top:-40px}
+}
+
+/* Yoʻnalish ichidagi testlar */
+.tlist{display:grid;gap:12px;padding:22px 0 50px}
+.tcard{display:flex;gap:16px;align-items:center;text-align:left;border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;cursor:pointer;
+  background:radial-gradient(70% 120% at 100% 0%,color-mix(in srgb,var(--c) 18%,transparent),transparent 60%),var(--glass);transition:border-color .2s,transform .2s}
+.tcard:hover{border-color:color-mix(in srgb,var(--c) 50%,var(--line));transform:translateY(-2px)}
+.tc-main{flex:1;display:flex;flex-direction:column;gap:4px}
+.tcard h3{margin:0;font:500 18px var(--f-d)}
+.tcard p{margin:0;color:var(--tx2);font-size:14.5px}
+.tcard .s{font:400 12.5px var(--f-m);color:var(--tx3);margin-top:4px}
+.tcard .go{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c);font-size:18px;flex:none}
+.pc{font:400 13px var(--f-m);color:var(--tx2)}
+.h1s{font:500 clamp(26px,3.6vw,36px)/1.1 var(--f-d);letter-spacing:-.03em;margin:6px 0 8px}
+.disc{font-size:13px;color:var(--tx3);margin:18px 0 0;border-left:2px solid var(--line2);padding:2px 0 2px 12px;text-align:left}
+.tip{font-size:14.5px;color:var(--tx);background:var(--glass);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:left;margin:14px 0 0}
+/* Shkala */
+.scale{display:grid;gap:12px;margin-top:22px}
+.sq{border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:0;background:var(--glass)}
+.sq legend{padding:0;font-weight:500;font-size:15.5px;float:left;width:100%;margin-bottom:10px}
+.sq .n{color:var(--tx3);font:500 13px var(--f-m);margin-right:4px}
+.sopts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;clear:both}
+.sopts label{position:relative;cursor:pointer}
+.sopts input{position:absolute;opacity:0;inset:0}
+.sopts span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:44px;padding:6px;border:1px solid var(--line2);border-radius:10px;font-size:12.5px;color:var(--tx2);line-height:1.25;transition:background .15s,border-color .15s}
+.sopts input:checked+span{background:color-mix(in srgb,var(--ok) 16%,transparent);border-color:var(--ok);color:var(--tx)}
+.sopts input:focus-visible+span{outline:2px solid var(--amber);outline-offset:2px}
+.formerr{color:var(--bad);margin:0;font-size:14px}
+.meter{position:relative;height:8px;border-radius:8px;margin:6px auto 16px;max-width:360px;background:linear-gradient(90deg,var(--ok),var(--amber),var(--bad))}
+.meter i{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:var(--tx);border:3px solid var(--bg);transform:translate(-50%,-50%)}
+/* Belgilar */
+.checks{display:grid;gap:8px;margin-top:20px}
+.ck{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;background:var(--glass);position:relative}
+.ck input{position:absolute;opacity:0}
+.ck .box{width:24px;height:24px;border-radius:7px;border:1px solid var(--line2);display:grid;place-items:center;flex:none;color:transparent}
+.ck input:checked+.box{background:var(--ok);border-color:var(--ok);color:#0B0C10}
+.ck input:focus-visible+.box{outline:2px solid var(--amber);outline-offset:2px}
+.alert{display:flex;gap:10px;align-items:flex-start;border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);background:color-mix(in srgb,var(--bad) 10%,transparent);border-radius:14px;padding:12px 14px;margin-top:16px;font-size:14.5px;text-align:left}
+.alert svg{color:var(--bad);font-size:20px;margin-top:1px}
+.big-alert{font-size:16px;padding:16px}
+/* Kartochkalar */
+.qcards{display:grid;gap:10px;margin-top:20px}
+.qc{border:1px solid var(--line);border-radius:16px;background:var(--glass);overflow:hidden}
+.qc summary{display:flex;gap:12px;align-items:center;padding:16px;cursor:pointer;list-style:none;font-weight:500}
+.qc summary::-webkit-details-marker{display:none}
+.qc .n{font:500 12px var(--f-m);color:var(--tx3);width:26px;height:26px;border-radius:8px;border:1px solid var(--line2);display:grid;place-items:center;flex:none}
+.qc .q{flex:1}
+.qc .pl{width:14px;height:14px;position:relative;flex:none}
+.qc .pl::before,.qc .pl::after{content:"";position:absolute;left:0;top:6px;width:14px;height:2px;background:var(--tx2);border-radius:2px;transition:transform .2s}
+.qc .pl::after{transform:rotate(90deg)}
+.qc[open] .pl::after{transform:rotate(0)}
+.qc-b{padding:0 16px 16px 54px;color:var(--tx2);font-size:15px}
+.qc-b p{margin:0 0 10px}
+.qc-b .lb{font:500 11.5px var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin:4px 0 4px}
+.qc-b .sample{color:var(--tx);border-left:2px solid var(--amber);padding-left:12px;font-style:italic}
+@media (max-width:560px){
+  .sopts{grid-template-columns:1fr}
+  .sopts span{justify-content:flex-start;padding:10px 12px;font-size:14px;min-height:0}
+  .qc-b{padding-left:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h7M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c0 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9M19.1 18h-6.2"/></symbol>
+  <symbol id="i-grad" viewBox="0 0 24 24"><path d="M22 9L12 5 2 9l10 4 10-4v6"/><path d="M6 10.6V16c0 1.657 2.686 3 6 3s6-1.343 6-3v-5.4"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M15.5 13a3.5 3.5 0 0 0-3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"/><path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1-7 0v-1.8"/><path d="M17.5 16a3.5 3.5 0 0 0 0-7H17"/><path d="M19 9.3V6.5a3.5 3.5 0 0 0-7 0"/><path d="M6.5 16a3.5 3.5 0 0 1 0-7H7"/><path d="M5 9.3V6.5a3.5 3.5 0 0 1 7 0v10"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M3 12h1m8-9v1m8 8h1M5.6 5.6l.7.7m12.1-.7l-.7.7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0-1 3a2 2 0 0 1-4 0a3.5 3.5 0 0 0-1-3"/><path d="M9.7 17h4.6"/></symbol>
+  <symbol id="i-brief" viewBox="0 0 24 24"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M12 12v.01M3 13a20 20 0 0 0 18 0"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19.5 12.572L12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.572"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M5 13a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M8 11V7a4 4 0 1 1 8 0v4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+  <symbol id="i-vol" viewBox="0 0 24 24"><path d="M15 8a5 5 0 0 1 0 8M17.7 5a9 9 0 0 1 0 14"/><path d="M6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l3.5-4.5A.8.8 0 0 1 11 5v14a.8.8 0 0 1-1.5.5z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6M13 6l6 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.363 3.591L2.257 17.125a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636-2.87L13.637 3.59a1.914 1.914 0 0 0-3.274 0z"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M19.95 11a8 8 0 1 0-.5 4m.5 5v-5h-5"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="alisher.live bosh sahifa"><span class="logo-t">a</span><span>alisher.live</span></a>
+    <nav aria-label="Asosiy menyu">
+      <a href="/">Bosh sahifa</a>
+      <a href="/testlar.html" aria-current="page">Testlar</a>
+      <a href="/#board">Reyting</a>
+      <a href="/#donate">Qoʻllab-quvvatlash</a>
+      <a href="/#contact">Aloqa</a>
+    </nav>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 alisher.live</span>
+    <span>Testlar bepul. Natijalar faqat shu qurilmada saqlanadi.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+
+const DIRS = [
+  { id:'english', c:'#7EA6FF', ic:'i-lang', main:true, t:'Ingliz tili', d:'A1 dan C1 gacha bosqichma-bosqich. Har bir bosqichda soʻz tarjimasi, boʻsh joyni toʻldirish va grammatika.', tag:['5 bosqich','150 savol','talaffuz bilan'] },
+  { id:'abit', c:'#FFB547', ic:'i-grad', t:'Abituriyentlar', d:'Majburiy fanlar: ona tili va adabiyot, matematika, Oʻzbekiston tarixi.' },
+  { id:'iq', c:'#C46BFF', ic:'i-bulb', t:'IQ va mantiq', d:'Sonlar ketma-ketligi, oʻxshatish va mantiqiy xulosa masalalari.', warn:'Natija taxminiy. Haqiqiy IQ koʻrsatkichi faqat maxsus standart testlar orqali aniqlanadi.' },
+  { id:'psy', c:'#3DDC97', ic:'i-brain', t:'Psixologik testlar', d:'Oʻzingizni yaxshiroq tanish uchun: xarakter va stress darajasi.', warn:'Bu testlar psixologik tashxis emas. Holatingiz sizni bezovta qilsa, mutaxassis bilan maslahatlashing.' },
+  { id:'job', c:'#FF7A45', ic:'i-brief', t:'Ish suhbatiga tayyorgarlik', d:'Koʻp beriladigan savollar, namunaviy javoblar va vaziyatli test.' },
+  { id:'preg', c:'#FF6B9A', ic:'i-heart', t:'Homiladorlik belgilari', d:'Erta belgilar va homiladorlik davridagi xavfli belgilar. Javoblar saqlanmaydi.', warn:'Bu soʻrovnomalar faqat maʼlumot uchun va shifokor koʻrigi oʻrnini bosmaydi. Javoblaringiz hech qayerga yuborilmaydi.' },
+];
+
+const KIND = {
+  words:{ t:'Soʻz tarjimasi', h:'Ingliz tilidagi soʻzning oʻzbekcha tarjimasini tanlang.' },
+  gap:{ t:'Boʻsh joyni toʻldiring', h:'Gapni toʻgʻri toʻldiradigan variantni tanlang.' },
+  gram:{ t:'Grammatika', h:'Toʻgʻri variantni tanlang.' },
+};
+
+const LEVELS = [
+  { id:'A1', t:'Boshlangʻich', d:'Eng kerakli soʻzlar, "to be", oddiy hozirgi zamon.',
+    words:[
+      ['apple',['olma','nok','uzum','anor']],
+      ['book',['kitob','daftar','qalam','stol']],
+      ['water',['suv','sut','choy','non']],
+      ['house',['uy','eshik','deraza','koʻcha']],
+      ['dog',['it','mushuk','ot','sigir']],
+      ['cat',['mushuk','it','quyon','tovuq']],
+      ['school',['maktab','bozor','kasalxona','bank']],
+      ['friend',['doʻst','qoʻshni','oʻqituvchi','aka']],
+      ['red',['qizil','yashil','sariq','koʻk']],
+      ['small',['kichik','katta','uzun','baland']],
+    ],
+    gap:[
+      ['I ___ a student.',['am','is','are','be'],'"I" bilan doim "am" ishlatiladi.'],
+      ['She ___ from Tashkent.',['is','am','are','be'],'"he / she / it" bilan "is" ishlatiladi.'],
+      ['They ___ my friends.',['are','is','am','be'],'"we / you / they" bilan "are" ishlatiladi.'],
+      ['This is ___ apple.',['an','a','the','—'],'Unli tovush bilan boshlanadigan soʻzdan oldin "an" qoʻyiladi.'],
+      ['I have two ___.',['cats','cat','cates','caties'],'Koʻplikda odatda soʻz oxiriga -s qoʻshiladi.'],
+      ['He ___ football every day.',['plays','play','playing','is play'],'Present Simple: he / she / it bilan feʼlga -s qoʻshiladi.'],
+      ['___ you like tea?',['Do','Does','Are','Is'],'"you" bilan soʻroq gapda "Do" ishlatiladi.'],
+      ['My birthday is ___ May.',['in','on','at','to'],'Oylar oldidan "in" qoʻyiladi.'],
+      ['There ___ a book on the table.',['is','are','am','be'],'Birlikdagi narsa uchun "There is".'],
+      ['We go to school ___ bus.',['by','on','with','in'],'Transport turi bilan "by" ishlatiladi: by bus, by car.'],
+    ],
+    gram:[
+      ['Qaysi gap toʻgʻri?',['She doesn’t like milk.','She don’t like milk.','She not like milk.','She isn’t like milk.'],'he / she / it bilan inkor "doesn’t" orqali yasaladi.'],
+      ['"child" soʻzining koʻpligi qaysi?',['children','childs','childes','child'],'Bu istisno soʻz: child → children.'],
+      ['Hozir sodir boʻlayotgan ish: "I ___ English now."',['am learning','learn now','am learn','learning'],'Present Continuous: am / is / are + feʼl-ing.'],
+      ['Qaysi soʻz olmosh (pronoun)?',['he','table','quickly','green'],'"he" — olmosh. Qolganlari ot, ravish va sifat.'],
+      ['"___ is your name?"',['What','Who','Where','When'],'Ism soʻralganda "What" ishlatiladi.'],
+      ['"Can you swim?" savoliga toʻgʻri javob:',['Yes, I can.','Yes, I do.','Yes, I am.','Yes, I swim.'],'Savol "can" bilan boʻlsa, javob ham "can" bilan boʻladi.'],
+      ['"big" soʻzining zid maʼnolisi:',['small','tall','long','fat'],'big — katta, small — kichik.'],
+      ['"Give ___ the pen, please."',['me','I','my','mine'],'Feʼldan keyin obyekt olmoshi keladi: me, him, her, us, them.'],
+      ['"How ___ apples do you have?"',['many','much','lot','more'],'Sanaladigan narsalar uchun "many".'],
+      ['"These ___ my books."',['are','is','am','be'],'"These" koʻplikni bildiradi, shuning uchun "are".'],
+    ]
+  },
+  { id:'A2', t:'Elementar', d:'Oʻtgan zamon, solishturish, kelasi zamon.',
+    words:[
+      ['tomorrow',['ertaga','kecha','bugun','hozir']],
+      ['kitchen',['oshxona','yotoqxona','hammom','hovli']],
+      ['weather',['ob-havo','fasl','osmon','shamol']],
+      ['cheap',['arzon','qimmat','yangi','eski']],
+      ['expensive',['qimmat','arzon','bepul','kichik']],
+      ['to forget',['unutmoq','eslamoq','bilmoq','oʻrganmoq']],
+      ['neighbour',['qoʻshni','qarindosh','mehmon','hamkasb']],
+      ['healthy',['sogʻlom','kasal','charchagan','och']],
+      ['journey',['sayohat','uchrasuv','bayram','dars']],
+      ['to borrow',['qarzga olmoq','sotmoq','sovgʻa qilmoq','yoʻqotmoq']],
+    ],
+    gap:[
+      ['I ___ to Samarkand last summer.',['went','go','have gone','was go'],'"last summer" — oʻtgan vaqt, Past Simple: go → went.'],
+      ['She is ___ than her sister.',['taller','more tall','tallest','tall'],'Qisqa sifatlar solishturishda -er oladi.'],
+      ['I have lived here ___ 2015.',['since','for','from','ago'],'Aniq boshlangʻich nuqta bilan "since".'],
+      ['If it rains, we ___ at home.',['will stay','stay will','would stayed','staying'],'Birinchi shart gap: If + hozirgi zamon, will + feʼl.'],
+      ['He was watching TV when the phone ___.',['rang','was ringing','rings','ring'],'Davom etayotgan ish paytida qisqa voqea sodir boʻlsa, u Past Simple bilan aytiladi.'],
+      ['You ___ wear a seatbelt. It’s the law.',['must','may','might','could'],'Majburiyat uchun "must".'],
+      ['This is the ___ film I have ever seen.',['best','better','good','most good'],'good → better → best.'],
+      ['I’m not good ___ maths.',['at','in','on','for'],'"good at something" — birikma.'],
+      ['There isn’t ___ milk left.',['much','many','a few','few'],'Sanalmaydigan narsalar uchun "much".'],
+      ['We have ___ finished our homework.',['just','yet','since','ago'],'"just" — hozirgina; Present Perfect bilan.'],
+    ],
+    gram:[
+      ['"Have you ever ___ to London?"',['been','gone','went','be'],'"Have you ever been…?" — tajriba haqida soʻrash.'],
+      ['Qaysi gap oʻtgan zamonda (Past Simple)?',['I visited my grandmother.','I visit my grandmother.','I am visiting my grandmother.','I will visit my grandmother.'],'-ed qoʻshimchasi oʻtgan zamonni bildiradi.'],
+      ['"good" soʻzining qiyosiy darajasi:',['better','gooder','more good','best'],'good — istisno: better, best.'],
+      ['"I’m going ___ visit my aunt."',['to','for','at','—'],'"be going to + feʼl" — reja.'],
+      ['"Who ___ this book?"',['wrote','did write','writed','written'],'"Who" egasini soʻraganda yordamchi "did" kerak emas.'],
+      ['"I don’t have ___ money."',['any','some','no','many'],'Inkor gapda "any".'],
+      ['"quick" soʻzidan ravish:',['quickly','quickful','quicker','quickness'],'Ravish odatda -ly bilan yasaladi.'],
+      ['"I ___ play football, but now I don’t."',['used to','use to','was used','am used to'],'Oʻtmishdagi odat: used to + feʼl.'],
+      ['"This book ___ by millions of people."',['is read','reads','is reading','read'],'Majhul nisbat: is / are + 3-shakl.'],
+      ['"I’d like ___ coffee, please."',['some','any','a','many'],'Taklif va iltimosda "some".'],
+    ]
+  },
+  { id:'B1', t:'Oʻrta', d:'Present Perfect, shart gaplar, bilvosita nutq.',
+    words:[
+      ['achievement',['yutuq','xato','maqsad','odat']],
+      ['to improve',['yaxshilamoq','buzmoq','kamaytirmoq','oʻtkazib yubormoq']],
+      ['to avoid',['chetlab oʻtmoq','kutmoq','izlamoq','tanlamoq']],
+      ['opinion',['fikr','savol','javob','xabar']],
+      ['to apply for a job',['ishga ariza bermoq','ishdan ketmoq','maosh olmoq','taʼtilga chiqmoq']],
+      ['environment',['atrof-muhit','iqtisodiyot','jamiyat','madaniyat']],
+      ['reliable',['ishonchli','xavfli','qiziqarli','tez']],
+      ['to require',['talab qilmoq','rad etmoq','taklif qilmoq','kutmoq']],
+      ['advantage',['afzallik','kamchilik','xavf','sabab']],
+      ['to complain',['shikoyat qilmoq','maqtamoq','kulmoq','yordam bermoq']],
+    ],
+    gap:[
+      ['I ___ never been to Japan.',['have','has','had','am'],'"I" bilan Present Perfect: have + 3-shakl.'],
+      ['If I ___ more time, I would learn Chinese.',['had','have','will have','would have'],'Ikkinchi shart gap: If + oʻtgan zamon, would + feʼl.'],
+      ['She told me that she ___ tired.',['was','is','were','be'],'Bilvosita nutqda zamon bir pogʻona orqaga suriladi: is → was.'],
+      ['The man ___ lives next door is a doctor.',['who','which','whose','whom'],'Odam haqida gapirilganda "who".'],
+      ['I’m looking forward ___ you.',['to seeing','to see','seeing','see'],'"look forward to" dan keyin feʼl -ing bilan keladi.'],
+      ['He has been working here ___ ten years.',['for','since','during','ago'],'Vaqt davomiyligi bilan "for".'],
+      ['By the time we arrived, the film ___.',['had started','started','has started','starts'],'Oʻtmishdagi boshqa voqeadan oldin boʻlgan ish: Past Perfect.'],
+      ['You ___ smoke here. It’s not allowed.',['mustn’t','don’t have to','needn’t','shouldn’t to'],'Taqiq uchun "mustn’t".'],
+      ['I’d rather ___ at home tonight.',['stay','to stay','staying','stayed'],'"I’d rather" dan keyin feʼl "to" siz keladi.'],
+      ['She’s used to ___ early.',['getting up','get up','got up','gets up'],'"be used to" — oʻrganib qolmoq, keyin feʼl -ing bilan.'],
+    ],
+    gram:[
+      ['"I am busy," he said. Bilvosita nutqda:',['He said he was busy.','He said he is busy now.','He said I was busy.','He told he was busy.'],'am → was, I → he. "told" dan keyin kimga aytilgani kerak boʻladi.'],
+      ['Qaysi gap ikkinchi shart gap (tasavvurdagi holat)?',['If I were rich, I would travel.','If I am rich, I will travel.','If I was rich, I will travel.','If I had been rich, I would travel.'],'If + Past Simple, would + feʼl. "were" barcha shaxslar bilan ishlatilishi mumkin.'],
+      ['Narsalar uchun qaysi nisbiy olmosh ishlatiladi?',['which','who','whose','whom'],'Narsa va hayvonlar uchun "which" (yoki "that").'],
+      ['Present Perfect Continuous qaysi?',['I have been waiting.','I have waiting.','I am been waiting.','I had wait.'],'have / has + been + feʼl-ing.'],
+      ['"unless" qaysi maʼnoni beradi?',['agar … boʻlmasa','chunki','garchi','qachonki'],'"unless" = "if not".'],
+      ['"I enjoy ___ books."',['reading','to read','read','reads'],'"enjoy" dan keyin feʼl -ing bilan keladi.'],
+      ['"You’re a teacher, ___?"',['aren’t you','isn’t it','don’t you','are you'],'Tasdiq gapdan keyin inkor soʻroq: are → aren’t you.'],
+      ['"He isn’t old ___ to drive."',['enough','too','very','so'],'Sifat + enough: yetarlica.'],
+      ['"The bridge ___ in 1990."',['was built','built','is built','has build'],'Oʻtgan zamondagi majhul nisbat: was / were + 3-shakl.'],
+      ['"___ my brother and my sister live in Tashkent."',['Both','Either','Neither','All'],'"both … and" — ikkalasi ham.'],
+    ]
+  },
+  { id:'B2', t:'Oʻrtadan yuqori', d:'Murakkab zamonlar, majhul nisbat, iboralar.',
+    words:[
+      ['to postpone',['keyinga qoldirmoq','bekor qilmoq','tezlashtirmoq','boshlamoq']],
+      ['ambiguous',['ikki maʼnoli','aniq','oddiy','qisqa']],
+      ['to emphasise',['taʼkidlamoq','yashirmoq','rad etmoq','unutmoq']],
+      ['consequence',['oqibat','sabab','maqsad','boshlangʻich']],
+      ['to undermine',['putur yetkazmoq','quvvatlamoq','tiklamoq','qurmoq']],
+      ['thorough',['puxta','yuzaki','tasodifiy','sekin']],
+      ['to acknowledge',['tan olmoq','inkor etmoq','yashirmoq','soʻramoq']],
+      ['sustainable',['barqaror','vaqtinchalik','qimmat','eskirgan']],
+      ['reluctant',['ikkilanib turgan','xursand','shoshilayotgan','qiziquvchan']],
+      ['to deteriorate',['yomonlashmoq','yaxshilanmoq','barqarorlashmoq','oʻsmoq']],
+    ],
+    gap:[
+      ['If I had known, I ___ you.',['would have told','would tell','had told','will tell'],'Uchinchi shart gap: If + had + 3-shakl, would have + 3-shakl.'],
+      ['The report ___ by Friday.',['must be finished','must finish','must finished','must be finish'],'Modal feʼl bilan majhul nisbat: must be + 3-shakl.'],
+      ['I wish I ___ harder at school.',['had studied','studied','have studied','would study'],'Oʻtmishdagi afsus: wish + Past Perfect.'],
+      ['Hardly ___ arrived when it started to rain.',['had we','we had','did we','we did'],'"Hardly" gap boshida kelsa, tartib almashadi: had we.'],
+      ['She denied ___ the money.',['taking','to take','take','took'],'"deny" dan keyin feʼl -ing bilan keladi.'],
+      ['It’s high time we ___.',['left','leave','will leave','have left'],'"It’s high time" dan keyin oʻtgan zamon shakli keladi.'],
+      ['He is said ___ very rich.',['to be','being','be','that he is'],'"is said to + feʼl" — u haqda shunday deyishadi.'],
+      ['No sooner had I sat down ___ the phone rang.',['than','when','then','that'],'"No sooner … than" — doimiy birikma.'],
+      ['You’d better ___ a doctor.',['see','to see','seeing','saw'],'"had better" dan keyin feʼl "to" siz keladi.'],
+      ['I’m not used ___ in such a big city.',['to living','to live','living','live'],'"be used to" + feʼl-ing.'],
+    ],
+    gram:[
+      ['Qaysi gap uchinchi shart gap?',['If she had called, I would have answered.','If she called, I would have answered.','If she had called, I will answer.','If she calls, I would have answered.'],'If + had + 3-shakl, would have + 3-shakl — oʻtmishdagi boʻlmagan holat.'],
+      ['"Despite ___ tired, she continued."',['being','she was','to be','of being'],'"despite" dan keyin ot yoki feʼl-ing keladi.'],
+      ['"This problem can ___ easily."',['be solved','solved','be solve','being solved'],'can + be + 3-shakl.'],
+      ['"I had my car ___ yesterday."',['repaired','repair','to repair','repairing'],'Birovga ish qildirish: have + narsa + 3-shakl.'],
+      ['"I wish I ___ taller."',['were','am','will be','had been'],'Hozirgi istak: wish + oʻtgan zamon shakli.'],
+      ['"Where do you live?" — bilvosita soʻroq:',['She asked me where I lived.','She asked me where did I live.','She asked me where I live?','She asked me where do I live.'],'Bilvosita soʻroqda soʻz tartibi oddiy gapdagidek boʻladi va zamon suriladi.'],
+      ['"That’s the woman ___ son won the prize."',['whose','who','who’s','which'],'Egalik uchun "whose".'],
+      ['"He ___ have left already — his car is gone."',['must','can’t','should','would'],'Oʻtmish haqida qatʼiy xulosa: must have + 3-shakl.'],
+      ['"The team worked hard. ___, the plan failed."',['However','Although','Despite','Because'],'Yangi gap boshida, vergul bilan: However.'],
+      ['"___ the letter, she started to cry."',['Having read','Have read','Had read','Being read'],'Bir ish tugagandan keyin ikkinchisi: Having + 3-shakl.'],
+    ]
+  },
+  { id:'C1', t:'Yuqori', d:'Ilgʻor lugʻat, uslub va nozik grammatika.',
+    words:[
+      ['to alleviate',['yengillashtirmoq','kuchaytirmoq','yashirmoq','tekshirmoq']],
+      ['meticulous',['sinchkov','beparvo','shoshqaloq','uyatchan']],
+      ['to scrutinise',['sinchiklab tekshirmoq','tezda oʻtkazib yubormoq','maqtamoq','nusxa olmoq']],
+      ['inevitable',['muqarrar','kutilmagan','imkonsiz','ixtiyoriy']],
+      ['to undertake',['zimmaga olmoq','rad etmoq','keyinga surmoq','topshirmoq']],
+      ['elusive',['qoʻlga tushmas','aniq','odatiy','ochiq']],
+      ['to substantiate',['asoslamoq','inkor etmoq','taxmin qilmoq','qisqartirmoq']],
+      ['notwithstanding',['… ga qaramay','… tufayli','… uchun','… bilan birga']],
+      ['compelling',['ishonarli','zerikarli','shubhali','ortiqcha']],
+      ['to deem',['deb hisoblamoq','inkor etmoq','eshitmoq','kutmoq']],
+    ],
+    gap:[
+      ['Not only ___ late, but he also forgot the tickets.',['was he','he was','did he','he did'],'"Not only" gap boshida kelsa, tartib almashadi.'],
+      ['Had I known about the problem, I ___ earlier.',['would have acted','would act','had acted','will act'],'"If" siz uchinchi shart gap: Had I known…'],
+      ['The proposal was turned ___ by the committee.',['down','off','out','over'],'"turn down" — rad etmoq.'],
+      ['She is ___ to be the best candidate.',['widely considered','widely considering','wide considered','widely consider'],'Majhul nisbat: is considered to be.'],
+      ['___ it not been for your help, we would have failed.',['Had','If','Were','Should'],'"Had it not been for…" — sizning yordamingiz boʻlmaganda.'],
+      ['It is essential that he ___ on time.',['be','is','was','will be'],'Rasmiy uslubda "essential that" dan keyin feʼlning oddiy shakli keladi.'],
+      ['Little ___ that the decision would change everything.',['did they know','they knew','they did know','knew they'],'"Little" bilan boshlangan gapda tartib almashadi.'],
+      ['We need to come ___ with a better solution.',['up','down','in','off'],'"come up with" — oʻylab topmoq.'],
+      ['The more you practise, ___ you become.',['the better','better','the best','more better'],'"The more …, the better …" — qanca koʻp, shunca yaxshi.'],
+      ['I’d sooner you ___ tell anyone.',['didn’t','don’t','won’t','not'],'"I’d sooner you" dan keyin oʻtgan zamon shakli keladi.'],
+    ],
+    gram:[
+      ['Qaysi gapda inversiya toʻgʻri ishlatilgan?',['Rarely have I seen such talent.','Rarely I have seen such talent.','Rarely seen I have such talent.','Rarely I saw such talent.'],'Inkor maʼnoli ravishdan keyin yordamchi feʼl egadan oldin keladi.'],
+      ['"The doctor recommended that she ___ more."',['rest','rests','rested','will rest'],'"recommend that" dan keyin feʼlning oddiy shakli keladi.'],
+      ['"___ I need is a holiday."',['What','That','Which','It'],'Taʼkid uchun "What I need is …" tuzilmasi.'],
+      ['"If I had taken the job, I ___ in London now."',['would be living','would have lived','will live','lived'],'Aralash shart gap: oʻtmishdagi sabab, hozirgi natija.'],
+      ['"put up with" qaysi maʼnoni beradi?',['toqat qilmoq','qurmoq','qoldirmoq','kiyinmoq'],'"I can’t put up with the noise" — shovqinga chiday olmayman.'],
+      ['Qaysi jumla eng rasmiy uslubda?',['We regret to inform you that your application was unsuccessful.','Sorry, you didn’t get the job.','Bad news — no job for you.','Well, it didn’t work out, mate.'],'Rasmiy xatlarda "We regret to inform you…" ishlatiladi.'],
+      ['"Will it rain tomorrow?" — "I hope ___."',['not','no','don’t','isn’t'],'"I hope not" — yomgʻir yogʻmasligini istayman.'],
+      ['"___ an effort"',['make','do','take','give'],'Doimiy birikma: make an effort.'],
+      ['"Supposing you lost your job, what would you do?" — "Supposing" maʼnosi:',['… deb faraz qilsak','chunki','garchi','toki'],'"Supposing" = "agar … boʻlsa-chi?"'],
+      ['"___ twice, the letter was finally sent."',['Having been checked','Having checked','Being checking','Checked having'],'Xat oʻzi tekshirilgan: majhul nisbat — Having been + 3-shakl.'],
+    ]
+  },
+];
+
+/* Boshqa yoʻnalishlardagi testlar.
+   type: 'quiz'  — [savol, [toʻgʻri, xato, xato, xato], izoh]
+         'scale' — bayonotlar va javob shkalasi, natija ball oralıgʻiga qarab
+         'check' — belgilar roʻyxati (bir nechtasini tanlash mumkin)
+         'cards' — savol, maslahat va namunaviy javob */
+const TESTS = [
+  /* ---------- ABITURIYENTLAR ---------- */
+  { id:'ona', dir:'abit', type:'quiz', t:'Ona tili va adabiyot', d:'Soʻz turkumlari, kelishiklar, gap boʻlaklari, sinonim va antonimlar, adabiyot.',
+    items:[
+      ['Oʻzbek adabiy tilida nechta unli tovush bor?',['6','5','8','10'],'Unli tovushlar: a, o, u, e, i, oʻ.'],
+      ['"Kitoblar" soʻzidagi "-lar" qanday qoʻshimcha?',['koʻplik qoʻshimchasi','egalik qoʻshimchasi','kelishik qoʻshimchasi','soʻz yasovchi qoʻshimcha'],'"-lar" otga koʻplik maʼnosini beradi.'],
+      ['Qaysi soʻz ot soʻz turkumiga kiradi?',['daraxt','yugurmoq','chiroyli','tez'],'Ot narsa va hodisani bildiradi: kim? nima? savollariga javob beradi.'],
+      ['Qaysi soʻz sifat?',['baland','qalam','kelmoq','uch'],'Sifat belgini bildiradi: qanday? qanaqa? savollariga javob beradi.'],
+      ['Qaratqich kelishigining qoʻshimchasi qaysi?',['-ning','-ni','-ga','-da'],'-ni — tushum, -ga — joʻnalish, -da — oʻrin-payt kelishigi.'],
+      ['"Maktabga" soʻzi qaysi kelishikda?',['joʻnalish kelishigi','qaratqich kelishigi','chiqish kelishigi','tushum kelishigi'],'"-ga" — joʻnalish kelishigi qoʻshimchasi.'],
+      ['Gapning bosh boʻlaklari qaysilar?',['ega va kesim','ega va toʻldiruvchi','kesim va hol','aniqlovchi va hol'],'Ega va kesim gapning asosini tashkil etadi.'],
+      ['"Men kitob oʻqidim." gapida ega qaysi soʻz?',['Men','kitob','oʻqidim','egasi yoʻq'],'Ega "kim?" savoliga javob beradi: Men.'],
+      ['Qaysi juftlik sinonim?',['chiroyli — goʻzal','katta — kichik','oq — qora','issiq — sovuq'],'Sinonimlar — maʼnosi yaqin soʻzlar.'],
+      ['Qaysi juftlik antonim?',['yaxshi — yomon','aqlli — dono','ulkan — katta','tez — chaqqon'],'Antonimlar — qarama-qarshi maʼnoli soʻzlar.'],
+      ['"-chi" qoʻshimchasi ("ishchi" soʻzida) qanday qoʻshimcha?',['soʻz yasovchi','koʻplik','kelishik','egalik'],'"ish" soʻzidan yangi soʻz — "ishchi" yasalgan.'],
+      ['Qaysi soʻz qoʻshma soʻz?',['toshbaqa','kitobxon','kitoblar','yaxshilik'],'"tosh" va "baqa" soʻzlari qoʻshilib bitta soʻz boʻlgan.'],
+      ['Oʻzbek tili qaysi til oilasiga mansub?',['turkiy tillar','slavyan tillari','eroniy tillar','roman tillari'],'Oʻzbek tili turkiy tillarning qarluq guruhiga kiradi.'],
+      ['«Xamsa» asarining muallifi kim?',['Alisher Navoiy','Zahiriddin Muhammad Bobur','Abdulla Qodiriy','Mirzo Ulugʻbek'],'Navoiyning besh dostondan iborat «Xamsa»si oʻzbek adabiyotining choʻqqisi hisoblanadi.'],
+      ['«Oʻtkan kunlar» romanining muallifi kim?',['Abdulla Qodiriy','Abdulla Qahhor','Choʻlpon','Oybek'],'«Oʻtkan kunlar» — oʻzbek adabiyotidagi birinchi roman.'],
+    ]},
+  { id:'matem', dir:'abit', type:'quiz', t:'Matematika', d:'Tenglamalar, foiz, darajalar, progressiyalar, geometriya.',
+    items:[
+      ['2x + 6 = 14 tenglamaning yechimi:',['x = 4','x = 10','x = 3','x = 7'],'2x = 14 − 6 = 8, x = 4.'],
+      ['240 ning 15 foizi nechaga teng?',['36','24','30','40'],'240 · 0,15 = 36.'],
+      ['3² · 3³ nechaga teng?',['243','729','81','15'],'Darajalar koʻpaytirilganda koʻrsatkichlar qoʻshiladi: 3⁵ = 243.'],
+      ['Arifmetik progressiyada a₁ = 3, d = 4. a₁₀ = ?',['39','43','36','40'],'a₁₀ = a₁ + 9d = 3 + 36 = 39.'],
+      ['√50 ni soddalashtiring:',['5√2','2√5','25√2','10√5'],'√50 = √(25 · 2) = 5√2.'],
+      ['log₂ 32 = ?',['5','4','6','16'],'2⁵ = 32.'],
+      ['Asosi 10 sm, balandligi 6 sm boʻlgan uchburchakning yuzi:',['30 sm²','60 sm²','16 sm²','36 sm²'],'S = ½ · asos · balandlik = ½ · 10 · 6 = 30.'],
+      ['sin²α + cos²α = ?',['1','0','2','sin 2α'],'Asosiy trigonometrik ayniyat.'],
+      ['x² − 9 = 0 tenglamaning ildizlari:',['3 va −3','9 va −9','3','0 va 9'],'x² = 9, x = ±3.'],
+      ['Geometrik progressiya: 2, 6, 18, … 5-hadi nechaga teng?',['162','54','108','486'],'b₅ = 2 · 3⁴ = 162.'],
+      ['Radiusi 5 boʻlgan aylananing uzunligi:',['10π','25π','5π','20π'],'C = 2πr = 10π.'],
+      ['|−7| + |3| = ?',['10','4','−4','−10'],'Modul — sonning musbat qiymati: 7 + 3 = 10.'],
+      ['0,2 · 0,3 = ?',['0,06','0,6','6','0,006'],'2 · 3 = 6, verguldan keyin ikki xona.'],
+      ['y = 2x + 1 funksiya uchun y(3) = ?',['7','6','5','9'],'2 · 3 + 1 = 7.'],
+      ['Tomonlari 6 va 8 boʻlgan toʻgʻri toʻrtburchakning diagonali:',['10','14','12','7'],'Pifagor teoremasi: √(36 + 64) = 10.'],
+    ]},
+  { id:'tarix', dir:'abit', type:'quiz', t:'Oʻzbekiston tarixi', d:'Qadimgi davrdan mustaqillik yillarigacha.',
+    items:[
+      ['Oʻzbekiston qaysi yili mustaqillikka erishdi?',['1991','1990','1992','1989'],'1991-yil 31-avgustda mustaqillik eʼlon qilindi, 1-sentabr — Mustaqillik kuni.'],
+      ['Oʻzbekiston Respublikasining birinchi Konstitutsiyasi qachon qabul qilingan?',['1992-yil 8-dekabr','1991-yil 1-sentabr','1993-yil 2-mart','1994-yil 1-iyul'],'8-dekabr — Konstitutsiya kuni. 2023-yilda referendum orqali yangi tahriri qabul qilingan.'],
+      ['Amir Temur saltanatining poytaxti qaysi shahar boʻlgan?',['Samarqand','Buxoro','Shahrisabz','Hirot'],'Amir Temur Samarqandni poytaxt qilgan.'],
+      ['Oʻzbekiston davlat madhiyasi soʻzlarining muallifi kim?',['Abdulla Oripov','Erkin Vohidov','Hamid Olimjon','Muhammad Yusuf'],'Musiqasi — Mutal Burhonov, soʻz muallifi — Abdulla Oripov.'],
+      ['Somoniylar davlatining poytaxti qaysi shahar boʻlgan?',['Buxoro','Samarqand','Marv','Xiva'],'IX–X asrlarda Buxoro Somoniylar poytaxti boʻlgan.'],
+      ['Jaloliddin Manguberdi qaysi bosqinchilarga qarshi kurashgan?',['moʻgʻullar','arablar','makedoniyaliklar','ruslar'],'XIII asr boshlarida Chingizxon qoʻshinlariga qarshi kurashgan.'],
+      ['Shayboniylar sulolasining asoschisi kim?',['Muhammad Shayboniyxon','Abdullaxon II','Amir Temur','Bobur'],'XVI asr boshida Movarounnahrda Shayboniylar davlatiga asos solgan.'],
+      ['Zahiriddin Muhammad Bobur qayerda yangi saltanatga asos solgan?',['Hindistonda','Eronda','Turkiyada','Xitoyda'],'1526-yilda Hindistonda Boburiylar saltanatiga asos solingan.'],
+      ['Mirzo Ulugʻbek madrasasi Samarqandning qaysi maydonida joylashgan?',['Registon','Chorsu','Mustaqillik','Amir Temur'],'Registonda Ulugʻbek, Sherdor va Tillakori madrasalari bor.'],
+      ['1966-yilda Toshkentda qanday voqea sodir boʻlgan?',['kuchli zilzila','katta toshqin','olimpiada oʻyinlari','metro ochilishi'],'1966-yil 26-aprelda kuchli zilzila boʻlgan; metro 1977-yilda ochilgan.'],
+      ['Oʻzbekiston BMTga qaysi yili aʼzo boʻlgan?',['1992','1991','1993','1995'],'1992-yil 2-martda BMT aʼzoligiga qabul qilingan.'],
+      ['Oʻzbekiston davlat bayrogʻi qaysi yili qabul qilingan?',['1991','1992','1993','1990'],'Davlat bayrogʻi 1991-yil 18-noyabrda qabul qilingan.'],
+      ['Davlat gerbida qaysi afsonaviy qush tasvirlangan?',['Humo','Semurgʻ','Burgut','Laylak'],'Humo — baxt va erkinlik ramzi.'],
+      ['«Avesto» qaysi dinning muqaddas kitobi?',['zardushtiylik','buddizm','xristianlik','islom'],'«Avesto» — zardushtiylikning muqaddas kitobi.'],
+      ['«Temur tuzuklari» kimga nisbat beriladi?',['Amir Temur','Mirzo Ulugʻbek','Bobur','Alisher Navoiy'],'Davlat boshqaruvi va harbiy ishlar haqidagi asar.'],
+    ]},
+
+  /* ---------- IQ VA MANTIQ ---------- */
+  { id:'iq', dir:'iq', type:'quiz', t:'Mantiqiy fikrlash testi', d:'12 ta savol: sonlar ketma-ketligi, oʻxshatish, mantiqiy xulosa.',
+    bands:[[4,'Boshlangʻich daraja','Mantiqiy masalalar bilan koʻproq shugʻullaning — natija tez oʻsadi.'],[8,'Yaxshi','Mantiqiy fikrlashingiz yaxshi rivojlangan.'],[10,'Juda yaxshi','Qiyin masalalarni ham tez topyapsiz.'],[12,'Aʼlo','Ajoyib natija! Siz murakkab mantiqiy masalalarni yaxshi yechasiz.']],
+    note:'Bu test haqiqiy IQ koʻrsatkichini aniqlamaydi. IQ faqat maxsus standart testlar va mutaxassis orqali aniqlanadi.',
+    items:[
+      ['Ketma-ketlikni davom ettiring: 2, 4, 8, 16, …',['32','24','20','18'],'Har bir son oldingisidan 2 marta katta.'],
+      ['Ketma-ketlikni davom ettiring: 3, 6, 11, 18, 27, …',['38','36','35','40'],'Farqlar: 3, 5, 7, 9, 11 — har safar 2 taga oshadi.'],
+      ['Ketma-ketlikni davom ettiring: 1, 1, 2, 3, 5, 8, …',['13','11','12','16'],'Har bir son oldingi ikkitasining yigʻindisi.'],
+      ['Ketma-ketlikni davom ettiring: 81, 27, 9, 3, …',['1','0','2','−3'],'Har safar 3 ga boʻlinadi.'],
+      ['Qoʻl — qoʻlqop. Oyoq — ?',['paypoq','shapka','sharf','kamar'],'Qoʻlqop qoʻlga, paypoq oyoqqa kiyiladi.'],
+      ['Ortiqchasini toping:',['sabzi','olma','nok','oʻrik'],'Sabzi — sabzavot, qolganlari meva.'],
+      ['Barcha A lar B. Barcha B lar C. Demak:',['barcha A lar C','barcha C lar A','hech bir A C emas','ayrim C lar A emas'],'A guruhi B ning ichida, B esa C ning ichida.'],
+      ['Soat 3:15 ni koʻrsatyapti. Soat va daqiqa millari orasidagi burchak nechaga teng?',['7,5°','0°','15°','30°'],'Soat mili 15 daqiqada 7,5° siljiydi.'],
+      ['5 ta mashina 5 ta buyumni 5 daqiqada yasaydi. 100 ta mashina 100 ta buyumni necha daqiqada yasaydi?',['5 daqiqa','100 daqiqa','20 daqiqa','1 daqiqa'],'Har bir mashina 5 daqiqada bitta buyum yasaydi.'],
+      ['Ali Validan baland, Vali Salimdan baland. Eng past kim?',['Salim','Ali','Vali','aniqlab boʻlmaydi'],'Ali > Vali > Salim.'],
+      ['Ketma-ketlikni davom ettiring: A, C, E, G, …',['I','H','J','K'],'Bittadan harf tashlab oʻtiladi.'],
+      ['Toʻp va raketka birga 1 100 soʻm turadi. Raketka toʻpdan 1 000 soʻm qimmat. Toʻp necha soʻm?',['50 soʻm','100 soʻm','1 000 soʻm','150 soʻm'],'Toʻp = x, raketka = x + 1 000; 2x + 1 000 = 1 100, x = 50.'],
+    ]},
+
+  /* ---------- PSIXOLOGIK ---------- */
+  { id:'ie', dir:'psy', type:'scale', t:'Introvert yoki ekstravert?', d:'10 ta bayonot. Oʻzingizga qanchalik mos kelishini belgilang.',
+    scale:['Umuman mos emas','Mos emas','Bilmayman','Mos','Juda mos'], values:[1,2,3,4,5],
+    items:[
+      ['Yangi odamlar bilan tanishish menga yoqadi.',0],
+      ['Katta davralarda tez charchayman.',1],
+      ['Dam olish kunini doʻstlar bilan oʻtkazishni afzal koʻraman.',0],
+      ['Muhim qarordan oldin yolgʻiz oʻylab olishni xohlayman.',1],
+      ['Suhbatni odatda men boshlayman.',0],
+      ['Telefonda gaplashishdan koʻra yozish qulayroq.',1],
+      ['Diqqat markazida boʻlishdan qochmayman.',0],
+      ['Koʻp tanishdan koʻra bir-ikki yaqin doʻst afzal.',1],
+      ['Tinch kitob oʻqishdan koʻra shovqinli tadbirni afzal koʻraman.',0],
+      ['Uzoq muloqotdan keyin yolgʻiz dam olish kerak boʻladi.',1],
+    ],
+    bands:[[23,'Introvert','Siz kuch-quvvatni yolgʻizlikda va tinch muhitda tiklaysiz. Chuqur fikrlash va yaqin munosabatlar sizning kuchli tomoningiz.'],[36,'Ambivert','Sizda ikkala tomon ham bor: vaziyatga qarab ham davrada, ham yolgʻiz oʻzingizni yaxshi his qilasiz.'],[50,'Ekstravert','Siz odamlar orasida quvvat olasiz. Muloqot va yangi tanishlar sizga ilhom beradi.']],
+    note:'Bu test oʻzingizni yaxshiroq tanish uchun. U psixologik tashxis emas.' },
+  { id:'stress', dir:'psy', type:'scale', t:'Stress darajasi', d:'Oxirgi ikki hafta haqida oʻylab, har bir holat qanchalik tez-tez boʻlganini belgilang.',
+    scale:['Hech qachon','Kamdan-kam','Baʼzan','Tez-tez','Juda tez-tez'], values:[0,1,2,3,4],
+    items:[
+      ['Kutilmagan voqealardan asabiylashdim.',0],
+      ['Muhim ishlarimni nazorat qila olmayotgandek his qildim.',0],
+      ['Yaxshi uxlay olmadim.',0],
+      ['Kichik narsalardan jahlim chiqdi.',0],
+      ['Ishlarim koʻpayib, ulgura olmayapman deb oʻyladim.',0],
+      ['Diqqatimni bir joyga jamlash qiyin boʻldi.',0],
+      ['Bosh, boʻyin yoki yelkada zoʻriqish sezdim.',0],
+      ['Dam olsam ham charchoq ketmadi.',0],
+      ['Muammolarni hal qila olishimga ishondim.',1],
+      ['Kunlarimdan quvonch his qildim.',1],
+    ],
+    bands:[[13,'Past','Stress darajangiz past. Hozirgi dam olish va ish tartibingizni saqlang.'],[26,'Oʻrtacha','Stress sezilarli. Uyqu, sayr va yaqinlar bilan suhbatga koʻproq vaqt ajratib koʻring.'],[40,'Yuqori','Stress yuqori. Oʻzingizga dam bering va yaqin odamlaringiz bilan gaplashing. Agar bu holat uzoq davom etsa yoki kundalik hayotingizga xalaqit bersa, shifokor yoki psixolog bilan maslahatlashing.']],
+    note:'Bu test oʻzingizni kuzatish uchun. U psixologik tashxis emas.' },
+
+  /* ---------- ISh SUHBATI ---------- */
+  { id:'jobq', dir:'job', type:'cards', t:'Koʻp beriladigan 10 savol', d:'Har bir savol uchun maslahat va namunaviy javob.',
+    items:[
+      ['Oʻzingiz haqingizda gapirib bering.','1–2 daqiqa gapiring. Faqat ishga aloqador narsalar: kimsiz, qanday tajribangiz bor, nega shu ish sizga qiziq.','Men 5 yildan beri buxgalteriya sohasida ishlayman. Oxirgi 3 yilda kichik korxonada soliq hisobotlari va 1C bilan ishladim. Endi kattaroq jamoada tajribamni oshirmoqchiman.'],
+      ['Nega aynan bizning kompaniya?','Kompaniya haqida oldindan oʻrganing va aniq sabab ayting: mahsuloti, qadriyatlari, oʻsish imkoniyati.','Kompaniyangiz mijozlarga xizmatni sifatli yoʻlga qoʻygan. Men ham aniq va tartibli ishlashni yaxshi koʻraman, shuning uchun bu yerda foydali boʻlaman deb oʻylayman.'],
+      ['Kuchli tomonlaringiz nima?','Ikki-uchta sifat ayting va har biriga qisqa misol keltiring.','Men diqqatliman: oxirgi ishimda hisobotlarni bir marta ham kechikmasdan topshirganman.'],
+      ['Zaif tomoningiz nima?','Haqiqiy, lekin ish uchun halokatli boʻlmagan kamchilikni ayting va uni qanday tuzatayotganingizni qoʻshing.','Baʼzan ishni boshqalarga topshirishga qiynalaman. Hozir buni jamoada vazifalarni aniq taqsimlash orqali oʻrganyapman.'],
+      ['Oldingi ishingizdan nega ketdingiz?','Oldingi ish joyini yomonlamang. Oʻsish va yangi imkoniyatga eʼtibor qarating.','U yerda koʻp narsa oʻrgandim, lekin oʻsish imkoniyati cheklangan edi. Endi kattaroq vazifalarni bajarishni xohlayman.'],
+      ['5 yildan keyin oʻzingizni qayerda koʻryapsiz?','Rejangiz shu lavozim va kompaniya bilan bogʻliq boʻlsin.','Bu sohada chuqur mutaxassis boʻlishni va kelajakda kichik jamoaga rahbarlik qilishni xohlayman.'],
+      ['Qiyin vaziyatni qanday hal qilganingizga misol keltiring.','STAR usulidan foydalaning: Vaziyat, Vazifa, Harakat, Natija.','Hisobot topshirish muddatiga ikki kun qolganda dasturda xato chiqdi (vaziyat). Hisobotni vaqtida topshirish kerak edi (vazifa). Maʼlumotlarni qoʻlda tekshirib, xatoni topdim (harakat). Hisobot vaqtida topshirildi (natija).'],
+      ['Qanday maosh kutyapsiz?','Bozordagi narxlarni oldindan oʻrganing va aniq raqam emas, oraliq ayting.','Shu lavozim uchun bozordagi narxlarni hisobga olib, maʼlum bir oraliqni kutyapman. Vazifalar va imtiyozlarga qarab kelishishimiz mumkin.'],
+      ['Jamoada kelishmovchilik boʻlsa nima qilasiz?','Xotirjamlik, tinglash va yechim izlashni koʻrsating.','Avval hamkasbimning fikrini oxirigacha tinglayman, keyin ikkalamizga ham mos yechim taklif qilaman. Kerak boʻlsa rahbar bilan maslahatlashamiz.'],
+      ['Bizga savolingiz bormi?','Albatta 1–2 ta savol bering: jamoa, vazifalar, keyingi bosqichlar haqida.','Bu lavozimda birinchi uch oyda mendan nimalar kutiladi?'],
+    ]},
+  { id:'jobt', dir:'job', type:'quiz', t:'Suhbatda oʻzingizni tutish', d:'8 ta vaziyat: qaysi yoʻl toʻgʻri?',
+    items:[
+      ['Suhbatga qachon kelgan maʼqul?',['10–15 daqiqa oldin','aynan belgilangan vaqtda','30 daqiqa oldin','5 daqiqa kechikib'],'Biroz oldin kelib, xotirjam tayyorlanib olasiz.'],
+      ['Oldingi rahbaringiz haqida soʻrashsa:',['hurmat bilan, faktlarga tayanib gapiraman','barcha kamchiliklarini aytaman','javob bermayman','faqat maqtayman'],'Yomonlash sizga salbiy taʼsir qiladi.'],
+      ['Savolga javobni bilmasangiz:',['halol aytaman va qanday oʻrganishimni tushuntiraman','toʻqib gapiraman','mavzuni almashtiraman','jim turaman'],'Halollik va oʻrganishga tayyorlik qadrlanadi.'],
+      ['Maosh haqida soʻrashsa:',['bozor narxini oldindan oʻrganib, oraliq aytaman','"qanchasi boʻlsa ham boʻlaveradi" deyman','eng yuqori raqamni aytaman','javob bermayman'],'Oraliq aytish kelishishga joy qoldiradi.'],
+      ['Suhbat paytida telefon:',['ovozsiz rejimda va koʻrinmaydigan joyda','stol ustida','qoʻl ostida','qoʻngʻiroqqa javob beraman'],'Toʻliq eʼtibor suhbatdoshda boʻlsin.'],
+      ['Suhbat oxirida:',['savol beraman va vaqt ajratganlari uchun minnatdorchilik bildiraman','tezroq chiqib ketaman','maoshni yana soʻrayman','hech narsa demayman'],'Yaxshi yakun yaxshi taassurot qoldiradi.'],
+      ['STAR usuli nimani anglatadi?',['Vaziyat, Vazifa, Harakat, Natija','Sabr, Tajriba, Aql, Reja','Savol, Tahlil, Javob, Reja','Start, Test, Natija'],'Tajribangizni tartibli va aniq misol bilan gapirish usuli.'],
+      ['Suhbatdan keyin:',['qisqa minnatdorchilik xati yuboraman','har kuni qoʻngʻiroq qilaman','hech narsa qilmayman','boshqa xodimlarga yozaman'],'Bir-ikki gaplik xat sizni eslab qolish imkonini beradi.'],
+    ]},
+
+  /* ---------- HOMILADORLIK ---------- */
+  { id:'pregsign', dir:'preg', type:'check', t:'Homiladorlikning erta belgilari', d:'Oʻzingizda kuzatilayotgan belgilarni tanlang. Javoblar hech qayerga yuborilmaydi va saqlanmaydi.',
+    items:[
+      'Hayz kechikdi',
+      'Ertalab yoki kun davomida koʻngil aynishi',
+      'Koʻkrak sezgirligi yoki kattalashishi',
+      'Odatdagidan koʻra koʻp charchash, holsizlik',
+      'Tez-tez siyishga borish',
+      'Ayrim hid va taʼmlarga sezgirlik, ayrim ovqatlarni yoqtirmaslik yoki juda xohlash',
+      'Kayfiyatning tez oʻzgarishi',
+      'Qorinning pastki qismida yengil tortishish',
+      'Hayzdan oldinroq oz miqdorda qonli ajralma',
+    ],
+    bands:[[1,'Belgilar kam','Belgilangan belgilar homiladorlikni aniq koʻrsatmaydi.'],[4,'Bir nechta belgi bor','Bu belgilar homiladorlikka xos boʻlishi mumkin, lekin stress, gormonal oʻzgarish yoki kasallik sabab ham boʻlishi mumkin.'],[9,'Koʻp belgi bor','Belgilar homiladorlikka oʻxshaydi. Aniq javob uchun test qiling yoki shifokorga murojaat qiling.']],
+    always:'Aniq javobni faqat test beradi: dorixonadagi testni hayz kechikkan kundan boshlab qilish mumkin, qon tahlili (hCG) esa erta muddatda ham aniq koʻrsatadi. Shifokor-ginekologga murojaat qilishni maslahat beramiz.',
+    note:'Bu soʻrovnoma faqat maʼlumot uchun. U shifokor koʻrigi va tahlil oʻrnini bosmaydi.' },
+  { id:'pregdanger', dir:'preg', type:'check', danger:true, t:'Homiladorlik davrida xavfli belgilar', d:'Homiladorlik paytida quyidagilardan biri boʻlsa, kechikmasdan yordam kerak.',
+    items:[
+      'Qindan qon ketishi',
+      'Kuchli bosh ogʻrigʻi va koʻzning xiralashishi',
+      'Talvasa (tutqanoq)',
+      'Qorinda kuchli ogʻriq',
+      'Yuqori harorat',
+      'Nafas qisishi yoki juda tez nafas olish',
+      'Yuz va qoʻllarning keskin shishishi',
+      'Bola qimirlashining kamayishi yoki toʻxtashi',
+      'Muddatidan oldin suv ketishi',
+    ],
+    note:'Bu roʻyxat faqat maʼlumot uchun. Shubha boʻlsa, har doim shifokorga murojaat qiling.' },
+];
+
+const PASS = 80;   // ingliz tilida keyingi bosqich uchun kerakli foiz
+
+/* ================= SAQLASh (faqat shu qurilmada) ================= */
+const KEY = 'alisher_tests_v1';
+let mem = {};
+function load(){ try { mem = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { mem = {}; } }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch (e) {} }
+function best(lv, kind){ return (mem[lv + ':' + kind] || 0); }
+function levelScore(lv){ return Math.round(['words','gap','gram'].reduce((s,k) => s + best(lv,k), 0) / 3); }
+function unlocked(idx){
+  if (idx === 0) return true;
+  const prev = LEVELS[idx - 1];
+  return ['words','gap','gram'].every(k => best(prev.id, k) >= PASS);
+}
+
+/* ================= YORDAMChILAR ================= */
+const app = document.getElementById('app');
+const ic = id => `<svg class="i" aria-hidden="true"><use href="#${id}"/></svg>`;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function speak(text){
+  try {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/^to /, ''));
+    u.lang = 'en-US'; u.rate = .9; speechSynthesis.speak(u);
+  } catch (e) {}
+}
+function go(view){ location.hash = view; }
+function top(){ window.scrollTo(0, 0); }
+const dirOf = id => DIRS.find(d => d.id === id);
+function crumbs(parts){
+  return `<div class="crumbs">${parts.map(p => p.href != null ? `<button type="button" data-go="${esc(p.href)}">${esc(p.t)}</button>` : `<span>${esc(p.t)}</span>`).join('<span>/</span>')}</div>`;
+}
+function wireCrumbs(){ app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go)); }
+function band(bands, v){ return bands.find(b => v <= b[0]) || bands[bands.length - 1]; }
+
+/* ================= BOSH SAHIFA ================= */
+function renderHome(){
+  app.innerHTML = `
+    <section class="hero">
+      <h1>Testlar</h1>
+      <p class="lead">Bilimingizni tekshiring va bosqichma-bosqich oʻsib boring. Hamma testlar bepul, roʻyxatdan oʻtish shart emas.</p>
+    </section>
+    <section class="dirs">
+      ${DIRS.map(d => {
+        const n = d.id === 'english' ? null : TESTS.filter(t => t.dir === d.id).length;
+        return `
+        <button class="dir${d.main ? ' main' : ''}" style="--c:${d.c}" data-dir="${d.id}" type="button">
+          <span class="ic">${ic(d.ic)}</span>
+          <h3>${esc(d.t)}</h3>
+          <p>${esc(d.d)}</p>
+          <span class="tag">${d.tag ? d.tag.map((x,i) => i === 0 ? `<b>${esc(x)}</b>` : esc(x)).join(' · ') : `<b>${n} ta test</b>`}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <p class="note">Psixologik, IQ va homiladorlik testlari maʼlumot uchun moʻljallangan. Ular shifokor yoki psixolog xulosasining oʻrnini bosmaydi.</p>`;
+  app.querySelectorAll('[data-dir]').forEach(b => b.onclick = () => go(b.dataset.dir === 'english' ? 'english' : 'd/' + b.dataset.dir));
+}
+
+/* ================= INGLIZ TILI ================= */
+function renderEnglish(){
+  app.innerHTML = `
+    <section class="hero">
+      ${crumbs([{t:'Testlar', href:''}, {t:'Ingliz tili'}])}
+      <h1>Ingliz tili</h1>
+      <p class="lead">Har bir bosqichda uch xil mashq bor. Uchalasidan ${PASS}% va undan yuqori natija olsangiz, keyingi bosqich ochiladi.</p>
+    </section>
+    <section class="levels">
+      ${LEVELS.map((L, i) => {
+        const open = unlocked(i);
+        const sc = levelScore(L.id);
+        return `
+        <div class="lvl${open ? '' : ' locked'}">
+          <div class="badge">${L.id}</div>
+          <div>
+            <h3>${esc(L.t)}${sc ? ` <span class="pc">· ${sc}%</span>` : ''}</h3>
+            <p class="sub">${esc(L.d)}</p>
+            <div class="ex">
+              ${['words','gap','gram'].map(k => {
+                const b = best(L.id, k);
+                return `<button class="exb${b >= PASS ? ' done' : ''}" type="button" data-lv="${L.id}" data-k="${k}" ${open ? '' : 'disabled'}>
+                  <span class="t">${b >= PASS ? ic('i-check') : ''}${esc(KIND[k].t)}</span>
+                  <span class="s">${b ? 'eng yaxshi: ' + b + '%' : L[k].length + ' ta savol'}</span>
+                  <span class="bar2"><i style="width:${b}%"></i></span>
+                </button>`;
+              }).join('')}
+            </div>
+            ${open ? '' : `<div class="lockmsg">${ic('i-lock')} Ochish uchun ${LEVELS[i-1].id} bosqichining uchala mashqidan ${PASS}% oling</div>`}
+          </div>
+        </div>`;
+      }).join('')}
+    </section>`;
+  wireCrumbs();
+  app.querySelectorAll('.exb:not([disabled])').forEach(b => b.onclick = () => go('q/' + b.dataset.lv + '/' + b.dataset.k));
+}
+
+/* ================= YOʻNALISh SAHIFASI ================= */
+const TYPE_LBL = { quiz:'savol', scale:'bayonot', check:'belgi', cards:'savol' };
+function renderDir(id){
+  const d = dirOf(id);
+  if (!d || id === 'english') { go(''); return; }
+  const list = TESTS.filter(t => t.dir === id);
+  app.innerHTML = `
+    <section class="hero">
+      ${crumbs([{t:'Testlar', href:''}, {t:d.t}])}
+      <h1>${esc(d.t)}</h1>
+      <p class="lead">${esc(d.d)}</p>
+    </section>
+    <section class="tlist" style="--c:${d.c}">
+      ${list.map(t => {
+        const b = mem['t:' + t.id];
+        return `
+        <button class="tcard" type="button" data-t="${t.id}">
+          <span class="tc-main">
+            <h3>${esc(t.t)}</h3>
+            <p>${esc(t.d)}</p>
+            <span class="s">${t.items.length} ta ${TYPE_LBL[t.type]}${b != null && t.type === 'quiz' ? ` · eng yaxshi: ${b}%` : ''}</span>
+          </span>
+          <span class="go">${ic('i-arrow')}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    ${d.warn ? `<p class="note">${esc(d.warn)}</p>` : ''}`;
+  wireCrumbs();
+  app.querySelectorAll('[data-t]').forEach(b => b.onclick = () => go('t/' + b.dataset.t));
+}
+
+/* ================= TEST TURLARI ================= */
+function runTest(id){
+  const t = TESTS.find(x => x.id === id);
+  if (!t) { go(''); return; }
+  const d = dirOf(t.dir);
+  const ctx = { back:'d/' + t.dir, path:[{t:'Testlar', href:''}, {t:d.t, href:'d/' + t.dir}, {t:t.t}], key:'t:' + t.id, test:t };
+  if (t.type === 'quiz') startQuizFrom(t.items, ctx, 'Toʻgʻri variantni tanlang.', t.t);
+  else if (t.type === 'scale') renderScale(t, ctx);
+  else if (t.type === 'check') renderCheck(t, ctx);
+  else if (t.type === 'cards') renderCards(t, ctx);
+}
+
+/* --- Savol-javob (quiz) --- */
+let Q = null;
+function startEnglish(lv, kind){
+  const L = LEVELS.find(x => x.id === lv);
+  if (!L || !L[kind] || !unlocked(LEVELS.indexOf(L))) { go('english'); return; }
+  const ctx = { back:'english', path:[{t:'Testlar', href:''}, {t:'Ingliz tili', href:'english'}, {t:lv + ' · ' + KIND[kind].t}], key:lv + ':' + kind, kind, eng:true, pass:PASS };
+  startQuizFrom(L[kind], ctx, KIND[kind].h, KIND[kind].t);
+}
+function startQuizFrom(raw, ctx, hint, label){
+  const items = shuffle(raw).map(q => ({ q: q[0], right: q[1][0], opts: shuffle(q[1]), why: q[2] || '' }));
+  Q = { items, n: 0, ok: 0, wrong: [], ctx, hint, label };
+  renderQ();
+}
+function renderQ(){
+  const it = Q.items[Q.n], total = Q.items.length, c = Q.ctx;
+  const isWord = c.kind === 'words', enQ = c.eng && c.kind !== 'words' && c.kind !== 'gram';
+  const qhtml = isWord
+    ? `<div class="qword"><p class="qtext" lang="en">${esc(it.q)}</p><button class="say" type="button" data-say>${ic('i-vol')} Eshitish</button></div>`
+    : `<p class="qtext"${enQ ? ' lang="en"' : ''}>${esc(it.q).replace('___', '<span class="gap"></span>')}</p>`;
+  app.innerHTML = `
+    <section class="quiz">
+      ${crumbs(c.path)}
+      <div class="qhead"><span>${Q.n + 1} / ${total}</span><span>${ic('i-check')} ${Q.ok}</span></div>
+      <div class="prog"><i style="width:${(Q.n / total) * 100}%"></i></div>
+      <div class="card">
+        <p class="kind">${esc(Q.label)}</p>
+        ${qhtml}
+        <p class="hint">${esc(Q.hint)}</p>
+        <div class="opts">
+          ${it.opts.map((o, i) => `<button class="opt" type="button" data-i="${i}"><span class="k">${'ABCD'[i]}</span><span${c.eng && !isWord ? ' lang="en"' : ''}>${esc(o)}</span></button>`).join('')}
+        </div>
+        <div class="fb" role="status" aria-live="polite"></div>
+        <div class="actions" hidden><button class="btn" type="button" data-next>${Q.n + 1 < total ? 'Keyingi' : 'Natijani koʻrish'} ${ic('i-arrow')}</button></div>
+      </div>
+    </section>`;
+  wireCrumbs();
+  const sb = app.querySelector('[data-say]'); if (sb) sb.onclick = () => speak(it.q);
+  app.querySelectorAll('.opt').forEach(b => b.onclick = () => answer(b));
+  app.querySelector('[data-next]').onclick = () => { Q.n++; if (Q.n < total) { renderQ(); top(); } else finishQuiz(); };
+}
+function answer(btn){
+  const it = Q.items[Q.n];
+  const pick = it.opts[+btn.dataset.i];
+  const ok = pick === it.right;
+  app.querySelectorAll('.opt').forEach(b => { b.disabled = true; if (it.opts[+b.dataset.i] === it.right) b.classList.add('right'); });
+  if (ok) Q.ok++; else { btn.classList.add('wrong'); Q.wrong.push({ q: it.q, right: it.right, you: pick }); }
+  const fb = app.querySelector('.fb');
+  fb.className = 'fb show ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = (ok ? '<b>Toʻgʻri!</b> ' : `<b>Notoʻgʻri.</b> Toʻgʻri javob: <b>${esc(it.right)}</b>. `) + esc(it.why);
+  app.querySelector('.actions').hidden = false;
+  app.querySelector('[data-next]').focus();
+}
+function finishQuiz(){
+  const total = Q.items.length, pct = Math.round(Q.ok / total * 100), c = Q.ctx;
+  const prevBest = mem[c.key] || 0;
+  if (pct > prevBest || mem[c.key] == null) { mem[c.key] = Math.max(pct, prevBest); save(); }
+  let verdict;
+  if (c.eng) verdict = pct >= PASS ? `<p class="verdict pass">Ajoyib! Bu mashqni muvaffaqiyatli tugatdingiz.</p>` : `<p class="verdict">${pct}%. Keyingi bosqich uchun ${PASS}% kerak — yana bir urinib koʻring.</p>`;
+  else if (c.test && c.test.bands) { const b = band(c.test.bands, Q.ok); verdict = `<p class="verdict pass">${esc(b[1])}</p><p class="hint" style="margin:0 0 4px">${esc(b[2])}</p>`; }
+  else verdict = `<p class="verdict${pct >= 70 ? ' pass' : ''}">${pct >= 90 ? 'Aʼlo natija!' : pct >= 70 ? 'Yaxshi natija!' : pct >= 50 ? 'Yomon emas, yana mashq qiling.' : 'Mavzuni takrorlab, qayta urinib koʻring.'} ${pct}%</p>`;
+  app.innerHTML = `
+    <section class="quiz">
+      ${crumbs(c.path)}
+      <div class="prog"><i style="width:100%"></i></div>
+      <div class="card res">
+        <p class="kind">Natija</p>
+        <div class="big">${Q.ok}<small> / ${total}</small></div>
+        ${verdict}
+        <p class="hint" style="margin:0">${pct > prevBest && prevBest ? 'Yangi eng yaxshi natija!' : (prevBest ? 'Eng yaxshi natijangiz: ' + Math.max(pct, prevBest) + '%' : '')}</p>
+        ${c.test && c.test.note ? `<p class="disc">${esc(c.test.note)}</p>` : ''}
+        ${Q.wrong.length ? `<div class="review"><h4>Xatolar ustida ishlash</h4>${Q.wrong.map(w => `<div class="rv"><span${c.eng ? ' lang="en"' : ''}>${esc(w.q)}</span><br><span class="y">${esc(w.you)}</span> → <span class="a">${esc(w.right)}</span></div>`).join('')}</div>` : ''}
+        <div class="actions" style="justify-content:center">
+          <button class="btn ghost" type="button" data-again>${ic('i-redo')} Qayta ishlash</button>
+          <button class="btn" type="button" data-go="${esc(c.back)}">Roʻyxatga qaytish</button>
+        </div>
+      </div>
+    </section>`;
+  wireCrumbs();
+  app.querySelector('[data-again]').onclick = () => { const h = location.hash; route(true); top(); };
+  top();
+}
+
+/* --- Shkala (psixologik) --- */
+function renderScale(t, ctx){
+  app.innerHTML = `
+    <section class="quiz">
+      ${crumbs(ctx.path)}
+      <h1 class="h1s">${esc(t.t)}</h1>
+      <p class="lead">${esc(t.d)}</p>
+      <form class="scale" novalidate>
+        ${t.items.map((it, i) => `
+          <fieldset class="sq">
+            <legend><span class="n">${i + 1}.</span> ${esc(it[0])}</legend>
+            <div class="sopts">
+              ${t.scale.map((s, j) => `<label><input type="radio" name="q${i}" value="${j}"><span>${esc(s)}</span></label>`).join('')}
+            </div>
+          </fieldset>`).join('')}
+        <p class="formerr" hidden>Iltimos, barcha bayonotlarga javob bering.</p>
+        <div class="actions"><button class="btn" type="submit">Natijani koʻrish ${ic('i-arrow')}</button></div>
+      </form>
+      <p class="disc">${esc(t.note || '')}</p>
+    </section>`;
+  wireCrumbs();
+  const form = app.querySelector('form');
+  form.onsubmit = e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    let sum = 0, miss = -1;
+    t.items.forEach((it, i) => {
+      const v = fd.get('q' + i);
+      if (v == null) { if (miss < 0) miss = i; return; }
+      const j = +v, n = t.values.length;
+      sum += it[1] ? t.values[n - 1 - j] : t.values[j];
+    });
+    if (miss >= 0) {
+      const err = form.querySelector('.formerr'); err.hidden = false;
+      form.querySelectorAll('fieldset')[miss].scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+    const max = t.values[t.values.length - 1] * t.items.length, min = t.values[0] * t.items.length;
+    const b = band(t.bands, sum);
+    app.innerHTML = `
+      <section class="quiz">
+        ${crumbs(ctx.path)}
+        <div class="card res">
+          <p class="kind">Natija</p>
+          <div class="big">${sum}<small> / ${max}</small></div>
+          <div class="meter"><i style="left:${((sum - min) / (max - min)) * 100}%"></i></div>
+          <p class="verdict">${esc(b[1])}</p>
+          <p class="hint">${esc(b[2])}</p>
+          <p class="disc">${esc(t.note || '')}</p>
+          <div class="actions" style="justify-content:center">
+            <button class="btn ghost" type="button" data-again>${ic('i-redo')} Qayta topshirish</button>
+            <button class="btn" type="button" data-go="${esc(ctx.back)}">Roʻyxatga qaytish</button>
+          </div>
+        </div>
+      </section>`;
+    wireCrumbs();
+    app.querySelector('[data-again]').onclick = () => { renderScale(t, ctx); top(); };
+    top();
+  };
+}
+
+/* --- Belgilar roʻyxati (homiladorlik) --- */
+function renderCheck(t, ctx){
+  app.innerHTML = `
+    <section class="quiz">
+      ${crumbs(ctx.path)}
+      <h1 class="h1s">${esc(t.t)}</h1>
+      <p class="lead">${esc(t.d)}</p>
+      ${t.danger ? `<div class="alert">${ic('i-alert')} <span>Ahvol keskin yomonlashsa, testni kutmang — darhol <b>103</b> raqamiga qoʻngʻiroq qiling.</span></div>` : ''}
+      <form class="checks">
+        ${t.items.map((s, i) => `<label class="ck"><input type="checkbox" name="c" value="${i}"><span class="box">${ic('i-check')}</span><span>${esc(s)}</span></label>`).join('')}
+        <div class="actions"><button class="btn" type="submit">Natijani koʻrish ${ic('i-arrow')}</button></div>
+      </form>
+      <p class="disc">${esc(t.note || '')}</p>
+    </section>`;
+  wireCrumbs();
+  const form = app.querySelector('form');
+  form.onsubmit = e => {
+    e.preventDefault();
+    const n = form.querySelectorAll('input:checked').length;   // javoblar hech qayerga yuborilmaydi va saqlanmaydi
+    let body;
+    if (t.danger) {
+      body = n
+        ? `<div class="alert big-alert">${ic('i-alert')} <div><b>Kechiktirmang.</b> Siz belgilagan holat xavfli boʻlishi mumkin. Darhol shifokorga murojaat qiling yoki <b>103</b> raqamiga qoʻngʻiroq qiling.</div></div>`
+        : `<p class="verdict pass">Roʻyxatdagi xavfli belgilar yoʻq</p><p class="hint">Rejali koʻrikdan qolmang va shifokor tavsiyalariga amal qiling.</p>`;
+    } else {
+      const b = band(t.bands, n);
+      body = `<div class="big">${n}<small> / ${t.items.length}</small></div><p class="verdict">${esc(b[1])}</p><p class="hint">${esc(b[2])}</p><p class="tip">${esc(t.always)}</p>`;
+    }
+    app.innerHTML = `
+      <section class="quiz">
+        ${crumbs(ctx.path)}
+        <div class="card res">
+          <p class="kind">Natija</p>
+          ${body}
+          <p class="disc">${esc(t.note || '')}</p>
+          <div class="actions" style="justify-content:center">
+            <button class="btn ghost" type="button" data-again>${ic('i-redo')} Qayta belgilash</button>
+            <button class="btn" type="button" data-go="${esc(ctx.back)}">Roʻyxatga qaytish</button>
+          </div>
+        </div>
+      </section>`;
+    wireCrumbs();
+    app.querySelector('[data-again]').onclick = () => { renderCheck(t, ctx); top(); };
+    top();
+  };
+}
+
+/* --- Kartochkalar (ish suhbati) --- */
+function renderCards(t, ctx){
+  app.innerHTML = `
+    <section class="quiz">
+      ${crumbs(ctx.path)}
+      <h1 class="h1s">${esc(t.t)}</h1>
+      <p class="lead">Avval oʻzingiz javob berib koʻring, keyin maslahat va namunani oching.</p>
+      <div class="qcards">
+        ${t.items.map((it, i) => `
+          <details class="qc">
+            <summary><span class="n">${i + 1}</span><span class="q">${esc(it[0])}</span><span class="pl" aria-hidden="true"></span></summary>
+            <div class="qc-b">
+              <p class="lb">Maslahat</p><p>${esc(it[1])}</p>
+              <p class="lb">Namunaviy javob</p><p class="sample">${esc(it[2])}</p>
+            </div>
+          </details>`).join('')}
+      </div>
+    </section>`;
+  wireCrumbs();
+}
+
+/* ================= YOʻNALTIRISh ================= */
+function route(){
+  const h = location.hash.replace(/^#/, '');
+  if (h === 'english') renderEnglish();
+  else if (h.startsWith('q/')) { const [, lv, k] = h.split('/'); startEnglish(lv, k); }
+  else if (h.startsWith('d/')) renderDir(h.slice(2));
+  else if (h.startsWith('t/')) runTest(h.slice(2));
+  else renderHome();
+  top();
+}
+load();
+window.addEventListener('hashchange', route);
+route();
+})();
+</script>
+</body>
+</html>
