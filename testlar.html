@@ -2,6 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Testlar — alisher.live</title>
 <meta name="description" content="Ingliz tili bosqichma-bosqich, abituriyentlar uchun fanlar, psixologik, IQ va mantiq testlari.">
@@ -211,9 +212,76 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
   .qc-b{padding-left:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.logo-t{flex:none}
+.thm svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main,footer{position:relative;z-index:1}
+@media (max-width:560px){.bar .thm{margin-left:auto}.bar nav{order:3}}
+
+/* ---------- Dengiz toʻlqinlari (fon) ---------- */
+:root{--sea:#38BDF8;--w1:rgba(56,189,248,.055);--w2:rgba(126,166,255,.045);--w3:rgba(56,189,248,.035)}
+.sea{position:fixed;left:0;right:0;bottom:0;height:42vh;z-index:0;pointer-events:none;overflow:hidden}
+.sea i{position:absolute;left:0;bottom:0;width:200%;height:100%;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0 160C240 100 480 220 720 160S1200 220 1440 160V320H0z'/%3E%3C/svg%3E") repeat-x 0 100%/50% 100%;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0 160C240 100 480 220 720 160S1200 220 1440 160V320H0z'/%3E%3C/svg%3E") repeat-x 0 100%/50% 100%;
+  animation:seaMove 38s linear infinite;will-change:transform}
+.sea i:nth-child(1){background:var(--w1);height:100%;animation-duration:46s}
+.sea i:nth-child(2){background:var(--w2);height:78%;animation-duration:31s;animation-direction:reverse}
+.sea i:nth-child(3){background:var(--w3);height:56%;animation-duration:22s}
+@keyframes seaMove{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media (prefers-reduced-motion:reduce){.sea i{animation:none}}
+/* ---------- Rejim tugmasi ---------- */
+.thm{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--tx);display:grid;place-items:center;cursor:pointer;font-size:18px;padding:0}
+.thm:hover{background:var(--glass2)}
+.thm svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thm .sun{display:none}
+html[data-theme="light"] .thm .sun{display:block}
+html[data-theme="light"] .thm .moon{display:none}
+
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#F5F6F8; --bg2:#FFFFFF; --panel:#FFFFFF;
+  --glass:rgba(17,24,39,.035); --glass2:rgba(17,24,39,.07);
+  --line:rgba(17,24,39,.10); --line2:rgba(17,24,39,.18);
+  --tx:#111827; --tx2:#4B5563; --tx3:#6B7280;
+  --amber:#D97706; --ember:#EA580C; --blue:#1D4ED8;
+  --ok:#047857; --bad:#BE123C;
+  --sea:#0E7490;
+  --sh:0 10px 28px -18px rgba(17,24,39,.28);
+  --w1:rgba(14,116,144,.075); --w2:rgba(30,58,138,.055); --w3:rgba(14,116,144,.05);
+}
+html[data-theme="light"] body{background:radial-gradient(900px 480px at 10% -10%,rgba(217,119,6,.08),transparent 62%),radial-gradient(1000px 520px at 85% -12%,rgba(14,116,144,.11),transparent 62%),var(--bg);background-repeat:no-repeat}
+html[data-theme="light"] header{background:rgba(255,255,255,.88);box-shadow:0 6px 24px -20px rgba(17,24,39,.35)}
+html[data-theme="light"] header nav{background:rgba(255,255,255,.8)}
+html[data-theme="light"] nav a[aria-current="page"],html[data-theme="light"] .tabs button[aria-pressed="true"],html[data-theme="light"] .seg button[aria-pressed="true"]{color:#fff}
+html[data-theme="light"] .logo-t{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A);box-shadow:none}
+html[data-theme="light"] .btn.sun{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A);box-shadow:0 10px 22px -14px rgba(14,116,144,.8)}
+html[data-theme="light"] .thm{background:#fff}
+html[data-theme="light"] .dir{background:radial-gradient(90% 80% at 100% 0%,color-mix(in srgb,var(--c) 18%,transparent),transparent 60%),#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .dir .ic{color:color-mix(in srgb,var(--c) 88%,#111827);background:color-mix(in srgb,var(--c) 18%,#fff);border-color:color-mix(in srgb,var(--c) 30%,#fff)}
+html[data-theme="light"] .dir .tag b{color:color-mix(in srgb,var(--c) 75%,#111827)}
+html[data-theme="light"] .dir .soon{background:#fff}
+html[data-theme="light"] .lvl,html[data-theme="light"] .sq,html[data-theme="light"] .ck,html[data-theme="light"] .qc,html[data-theme="light"] .tip{background:#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .tcard{background:radial-gradient(70% 120% at 100% 0%,color-mix(in srgb,var(--c) 10%,transparent),transparent 60%),#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .tcard .go{color:color-mix(in srgb,var(--c) 80%,#111827)}
+html[data-theme="light"] .badge{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A)}
+html[data-theme="light"] .lvl.locked .badge{color:var(--tx3);background:var(--glass2)}
+html[data-theme="light"] .exb{background:#F8FAFC}
+html[data-theme="light"] .card{background:#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .btn{background:#111827;color:#fff}
+html[data-theme="light"] .btn.ghost{background:#fff;color:var(--tx)}
+html[data-theme="light"] .opt{background:#fff}
+html[data-theme="light"] .ck input:checked+.box{color:#fff}
+html[data-theme="light"] .prog i{background:linear-gradient(90deg,#155E75,var(--sea))}
+html[data-theme="light"] .kind,html[data-theme="light"] .qc-b .lb{color:var(--sea)}
+html[data-theme="light"] .qtext .gap{border-bottom-color:var(--sea)}
+html[data-theme="light"] .qc-b .sample{border-left-color:var(--sea)}
+
 </style>
 </head>
 <body>
+<div class="sea" aria-hidden="true"><i></i><i></i><i></i></div>
+
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h7M9 3v2c0 4.418-2.239 8-5 8"/><path d="M5 9c0 2.144 2.952 3.908 6.7 4"/><path d="M12 20l4-9 4 9M19.1 18h-6.2"/></symbol>
@@ -227,6 +295,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
   <symbol id="i-vol" viewBox="0 0 24 24"><path d="M15 8a5 5 0 0 1 0 8M17.7 5a9 9 0 0 1 0 14"/><path d="M6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l3.5-4.5A.8.8 0 0 1 11 5v14a.8.8 0 0 1-1.5.5z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6M13 6l6 6"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.363 3.591L2.257 17.125a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636-2.87L13.637 3.59a1.914 1.914 0 0 0-3.274 0z"/></symbol>
+  <symbol id="i-atom" viewBox="0 0 24 24"><path d="M12 12v.01"/><path d="M19.071 4.929c-1.562-1.562-6 .337-9.9 4.243-3.905 3.905-5.804 8.337-4.242 9.9 1.562 1.561 6-.338 9.9-4.244 3.905-3.905 5.804-8.337 4.242-9.9"/><path d="M4.929 4.929c-1.562 1.562.337 6 4.243 9.9 3.905 3.905 8.337 5.804 9.9 4.242 1.561-1.562-.338-6-4.244-9.9-3.905-3.905-8.337-5.804-9.9-4.242"/></symbol>
   <symbol id="i-redo" viewBox="0 0 24 24"><path d="M19.95 11a8 8 0 1 0-.5 4m.5 5v-5h-5"/></symbol>
 </svg>
 
@@ -236,11 +305,13 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
     <nav aria-label="Asosiy menyu">
       <a href="/">Bosh sahifa</a>
       <a href="/testlar.html" aria-current="page">Testlar</a>
+      <a href="/viktorina.html">Viktorina</a>
       <a href="/ijara.html">Ijara</a>
-      <a href="/#board">Reyting</a>
+      <a href="/viktorina.html#board">Reyting</a>
       <a href="/#donate">Qoʻllab-quvvatlash</a>
       <a href="/#contact">Aloqa</a>
     </nav>
+    <button class="thm" id="thm" type="button" aria-label="Oq / qora rejim"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg></button>
   </div>
 </header>
 
@@ -260,6 +331,7 @@ footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
 
 const DIRS = [
   { id:'english', c:'#7EA6FF', ic:'i-lang', main:true, t:'Ingliz tili', d:'A1 dan C1 gacha bosqichma-bosqich. Har bir bosqichda soʻz tarjimasi, boʻsh joyni toʻldirish va grammatika.', tag:['5 bosqich','450 savol','talaffuz bilan'] },
+  { id:'quiz', c:'#FF7A45', ic:'i-atom', link:'/viktorina.html', t:'Bilimlar viktorinasi', d:'8 fan: tarix, geografiya, astronomiya, matematika, fizika, kimyo, biologiya va informatika. Dunyo reytingi bilan.', tag:['8 fan','240 savol','dunyo reytingi'] },
   { id:'abit', c:'#FFB547', ic:'i-grad', t:'Abituriyentlar', d:'Majburiy fanlar: ona tili va adabiyot, matematika, Oʻzbekiston tarixi.' },
   { id:'iq', c:'#C46BFF', ic:'i-bulb', t:'IQ va mantiq', d:'Sonlar ketma-ketligi, oʻxshatish va mantiqiy xulosa masalalari.', warn:'Natija taxminiy. Haqiqiy IQ koʻrsatkichi faqat maxsus standart testlar orqali aniqlanadi.' },
   { id:'psy', c:'#3DDC97', ic:'i-brain', t:'Psixologik testlar', d:'Oʻzingizni yaxshiroq tanish uchun: xarakter va stress darajasi.', warn:'Bu testlar psixologik tashxis emas. Holatingiz sizni bezovta qilsa, mutaxassis bilan maslahatlashing.' },
@@ -1250,7 +1322,7 @@ function renderHome(){
       }).join('')}
     </section>
     <p class="note">Psixologik, IQ va homiladorlik testlari maʼlumot uchun moʻljallangan. Ular shifokor yoki psixolog xulosasining oʻrnini bosmaydi.</p>`;
-  app.querySelectorAll('[data-dir]').forEach(b => b.onclick = () => go(b.dataset.dir === 'english' ? 'english' : 'd/' + b.dataset.dir));
+  app.querySelectorAll('[data-dir]').forEach(b => b.onclick = () => { const d = dirOf(b.dataset.dir); if (d && d.link) location.href = d.link; else go(b.dataset.dir === 'english' ? 'english' : 'd/' + b.dataset.dir); });
 }
 
 /* ================= INGLIZ TILI ================= */
@@ -1557,6 +1629,18 @@ function route(){
 load();
 window.addEventListener('hashchange', route);
 route();
+})();
+</script>
+<script>
+/* ---------- Oq / qora rejim ---------- */
+(function(){
+  var b = document.getElementById('thm'); if (!b) return;
+  var meta = document.querySelector('meta[name="theme-color"]');
+  function set(t){ document.documentElement.setAttribute('data-theme', t); try { localStorage.setItem('theme', t); } catch (e) {}
+    if (meta) meta.setAttribute('content', t === 'light' ? '#F5F6F8' : '#07080B');
+    b.setAttribute('aria-label', t === 'light' ? 'Qora rejimga oʻtish' : 'Oq rejimga oʻtish'); b.title = b.getAttribute('aria-label'); }
+  set(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+  b.addEventListener('click', function(){ set(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
 })();
 </script>
 </body>

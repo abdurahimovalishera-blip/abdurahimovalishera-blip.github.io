@@ -2,6 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Boshqaruv — alisher.live</title>
@@ -111,9 +112,69 @@ textarea{min-height:90px;resize:vertical}
   .item .acts{grid-column:1 / -1;justify-content:flex-start}
   .dlg{padding:20px 16px}
 }
+
+.logo-t{flex:none}
+.thm svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main,footer{position:relative;z-index:1}
+@media (max-width:560px){.bar .thm{margin-left:auto}.bar nav{order:3}}
+.logo .logo-t{padding:0;border:0;font:600 16px var(--f-d);color:#fff}
+
+/* ---------- Dengiz toʻlqinlari (fon) ---------- */
+:root{--sea:#38BDF8;--w1:rgba(56,189,248,.055);--w2:rgba(126,166,255,.045);--w3:rgba(56,189,248,.035)}
+.sea{position:fixed;left:0;right:0;bottom:0;height:42vh;z-index:0;pointer-events:none;overflow:hidden}
+.sea i{position:absolute;left:0;bottom:0;width:200%;height:100%;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0 160C240 100 480 220 720 160S1200 220 1440 160V320H0z'/%3E%3C/svg%3E") repeat-x 0 100%/50% 100%;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath d='M0 160C240 100 480 220 720 160S1200 220 1440 160V320H0z'/%3E%3C/svg%3E") repeat-x 0 100%/50% 100%;
+  animation:seaMove 38s linear infinite;will-change:transform}
+.sea i:nth-child(1){background:var(--w1);height:100%;animation-duration:46s}
+.sea i:nth-child(2){background:var(--w2);height:78%;animation-duration:31s;animation-direction:reverse}
+.sea i:nth-child(3){background:var(--w3);height:56%;animation-duration:22s}
+@keyframes seaMove{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media (prefers-reduced-motion:reduce){.sea i{animation:none}}
+/* ---------- Rejim tugmasi ---------- */
+.thm{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--tx);display:grid;place-items:center;cursor:pointer;font-size:18px;padding:0}
+.thm:hover{background:var(--glass2)}
+.thm svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.thm .sun{display:none}
+html[data-theme="light"] .thm .sun{display:block}
+html[data-theme="light"] .thm .moon{display:none}
+
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#F5F6F8; --bg2:#FFFFFF; --panel:#FFFFFF;
+  --glass:rgba(17,24,39,.035); --glass2:rgba(17,24,39,.07);
+  --line:rgba(17,24,39,.10); --line2:rgba(17,24,39,.18);
+  --tx:#111827; --tx2:#4B5563; --tx3:#6B7280;
+  --amber:#D97706; --ember:#EA580C; --blue:#1D4ED8;
+  --ok:#047857; --bad:#BE123C;
+  --sea:#0E7490;
+  --sh:0 10px 28px -18px rgba(17,24,39,.28);
+  --w1:rgba(14,116,144,.075); --w2:rgba(30,58,138,.055); --w3:rgba(14,116,144,.05);
+}
+html[data-theme="light"] body{background:radial-gradient(900px 480px at 10% -10%,rgba(217,119,6,.08),transparent 62%),radial-gradient(1000px 520px at 85% -12%,rgba(14,116,144,.11),transparent 62%),var(--bg);background-repeat:no-repeat}
+html[data-theme="light"] header{background:rgba(255,255,255,.88);box-shadow:0 6px 24px -20px rgba(17,24,39,.35)}
+html[data-theme="light"] header nav{background:rgba(255,255,255,.8)}
+html[data-theme="light"] nav a[aria-current="page"],html[data-theme="light"] .tabs button[aria-pressed="true"],html[data-theme="light"] .seg button[aria-pressed="true"]{color:#fff}
+html[data-theme="light"] .logo-t{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A);box-shadow:none}
+html[data-theme="light"] .btn.sun{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A);box-shadow:0 10px 22px -14px rgba(14,116,144,.8)}
+html[data-theme="light"] .thm{background:#fff}
+html[data-theme="light"] .login,html[data-theme="light"] .dlg{background:#fff;box-shadow:0 30px 70px -26px rgba(17,24,39,.4)}
+html[data-theme="light"] .thumb,html[data-theme="light"] .ph{background-color:#EEF2F6}
+html[data-theme="light"] input[type=text],html[data-theme="light"] input[type=number],html[data-theme="light"] input[type=url],html[data-theme="light"] input[type=tel],html[data-theme="light"] input[type=date],html[data-theme="light"] select,html[data-theme="light"] textarea{background:#fff}
+html[data-theme="light"] .toast{background:#fff;box-shadow:0 14px 34px -14px rgba(17,24,39,.35)}
+html[data-theme="light"] .item,html[data-theme="light"] .firm{background:#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .overlay{background:rgba(17,24,39,.45)}
+html[data-theme="light"] .btn{background:#fff}
+html[data-theme="light"] .btn.tg{background:var(--tg);color:#fff}
+html[data-theme="light"] .ph button{background:rgba(17,24,39,.7)}
+html[data-theme="light"] .ph .main{color:#fff;background:#111827}
+html[data-theme="light"] .empty{background:#fff}
+
 </style>
 </head>
 <body>
+<div class="sea" aria-hidden="true"><i></i><i></i><i></i></div>
+
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-tg" viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></symbol>
@@ -127,6 +188,7 @@ textarea{min-height:90px;resize:vertical}
 <header>
   <div class="wrap bar">
     <a class="logo" href="/" target="_blank" rel="noopener"><span class="logo-t">a</span><b>alisher.live</b><span>boshqaruv</span></a>
+    <button class="thm" id="thm" type="button" aria-label="Oq / qora rejim"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg></button>
     <div class="who" id="who" hidden><span id="whoName"></span><button class="btn sm" type="button" id="out"><svg class="i"><use href="#i-out"/></svg> Chiqish</button></div>
   </div>
 </header>
@@ -451,6 +513,18 @@ function openForm(p0) {
 /* ---------------- Boshlash ---------------- */
 S.token = store.get('admTok'); S.name = store.get('admName') || '';
 if (S.token) boot(); else renderLogin();
+})();
+</script>
+<script>
+/* ---------- Oq / qora rejim ---------- */
+(function(){
+  var b = document.getElementById('thm'); if (!b) return;
+  var meta = document.querySelector('meta[name="theme-color"]');
+  function set(t){ document.documentElement.setAttribute('data-theme', t); try { localStorage.setItem('theme', t); } catch (e) {}
+    if (meta) meta.setAttribute('content', t === 'light' ? '#F5F6F8' : '#07080B');
+    b.setAttribute('aria-label', t === 'light' ? 'Qora rejimga oʻtish' : 'Oq rejimga oʻtish'); b.title = b.getAttribute('aria-label'); }
+  set(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+  b.addEventListener('click', function(){ set(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
 })();
 </script>
 </body>
