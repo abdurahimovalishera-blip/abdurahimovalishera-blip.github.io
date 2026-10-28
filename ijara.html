@@ -174,7 +174,7 @@ footer a:hover{color:var(--tx)}
 
 /* ================= FIRMALAR =================
    phone — "+998 90 123 45 67" koʻrinishida; tg — Telegram username (@ belgisisiz). */
-const FIRMS = [
+let FIRMS = [
   { id:'toshneft', c:'#FFB547', ic:'i-build', name:'«TOSHNEFTGAZISHCHITAʼMINOT» MChJ', d:'Noturar joylar va omborlarni ijaraga berish.', phone:'', tg:'' },
   { id:'shohjahon', c:'#7EA6FF', ic:'i-box', name:'«SHOHJAHON AGRO» MChJ', d:'Noturar joylar va omborlarni ijaraga berish.', phone:'', tg:'' },
 ];
@@ -183,7 +183,9 @@ const FIRMS = [
    Har bir eʼlon:
    { firm:'toshneft', title:'…', addr:'…', map:'https://…', m2:500, price:'45 000', unit:'soʻm / m² / oy',
      free:true, cond:['Elektr 380 V', …], use:['Quruq mahsulotlar ombori', …], photos:['/img/…jpg'], note:'…' } */
-const LISTINGS = [];
+let LISTINGS = [];
+const API = 'https://alisher-contact.abdurahimovalishera.workers.dev';
+let loaded = false;
 
 /* Faqat namuna koʻrish uchun (?namuna=1). Haqiqiy eʼlon emas. */
 const SAMPLE = { firm:'*', demo:true, title:'Isitiladigan yopiq ombor', addr:'Manzil shu yerda koʻrsatiladi', map:'', m2:600, price:'—', unit:'soʻm / m² / oy', free:true,
@@ -225,7 +227,7 @@ function renderHome(){
           <span class="ic">${ic(f.ic)}</span>
           <h2>${esc(f.name)}</h2>
           <p>${esc(f.d)}</p>
-          <span class="stat">${it.length ? `<span class="pill">${it.length} ta eʼlon</span><span class="pill free">${fr} ta boʻsh</span>` : '<span class="pill">Eʼlonlar tez orada</span>'}</span>
+          <span class="stat">${!loaded ? '<span class="pill">Yuklanmoqda…</span>' : it.length ? `<span class="pill">${it.length} ta eʼlon</span><span class="pill free">${fr} ta boʻsh</span>` : '<span class="pill">Eʼlonlar tez orada</span>'}</span>
         </button>`;
       }).join('')}
     </section>
@@ -248,7 +250,7 @@ function renderFirm(id){
       <p class="lead">${esc(f.d)}</p>
     </section>
     <section class="list">
-      ${it.length ? it.map((x, n) => post(f, x, n)).join('') : `
+      ${!loaded ? '<p class="lead">Yuklanmoqda…</p>' : it.length ? it.map((x, n) => post(f, x, n)).join('') : `
         <div class="empty">
           <b>Eʼlonlar tez orada joylanadi</b>
           Hozircha boʻsh joylar haqida telefon orqali bilib olishingiz mumkin.
@@ -294,13 +296,25 @@ function wireGal(g){
   dots.forEach((d, k) => d.onclick = () => show(k));
 }
 
-function route(){
+function route(keep){
   const h = location.hash.replace(/^#/, '');
   if (h.startsWith('f/')) renderFirm(h.slice(2)); else renderHome();
-  window.scrollTo(0, 0);
+  if (!keep) window.scrollTo(0, 0);
 }
-window.addEventListener('hashchange', route);
+async function loadData(){
+  try {
+    const r = await fetch(API + '/posts?kind=rent');
+    const j = await r.json();
+    if (Array.isArray(j.firms) && j.firms.length) {
+      FIRMS = j.firms.map((f, i) => Object.assign({ c: ['#FFB547', '#7EA6FF', '#3DDC97', '#C46BFF'][i % 4], ic: 'i-build' }, FIRMS.find(x => x.id === f.id) || {}, f));
+    }
+    if (Array.isArray(j.posts)) LISTINGS = j.posts.map(x => Object.assign({}, x, { photos: (x.photos || []).filter(id => /^[0-9a-f]{24}$/.test(id)).map(id => API + '/img/' + id) }));
+  } catch (e) {}
+  loaded = true; route(true);
+}
+window.addEventListener('hashchange', () => route());
 route();
+loadData();
 })();
 </script>
 </body>
