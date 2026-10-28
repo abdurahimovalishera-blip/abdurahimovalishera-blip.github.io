@@ -508,6 +508,17 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
   .ad-slot{grid-template-columns:1fr;padding:22px 18px}
   .ad-slot .btn{justify-self:start}
 }
+
+/* ---------- Kirish: bot va PIN ---------- */
+.tgbox{flex-direction:column;align-items:stretch;gap:8px}
+.tgbtn{background:#2AABEE!important;border-color:#2AABEE!important;color:#fff!important;box-shadow:0 0 30px -10px #2AABEE}
+.tgbtn i{font-size:19px}
+.btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass);margin:0 0 16px}
+.seg button{border:0;background:none;border-radius:999px;padding:8px 10px;font-size:13.5px;color:var(--tx2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--tx);color:#0B0C10}
+.field input[type=password]{letter-spacing:.3em}
+.dlg-act{display:grid;gap:8px}
 @media (max-width:1000px){
   .bar{flex-wrap:wrap;height:auto;padding-top:12px;row-gap:8px}
   nav{order:3;width:100%;margin:0 0 8px;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
@@ -594,6 +605,7 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
   </div>
   <div class="menu" id="menu" hidden>
     <div class="who"><span data-i18n="signed_as">Siz</span><b id="menu-name"></b><span id="menu-rank"></span></div>
+    <button type="button" id="setpin" hidden><i class="ti ti-key"></i><span data-i18n="pin_set">PIN oʻrnatish</span></button>
     <button type="button" id="logout"><i class="ti ti-logout"></i><span data-i18n="logout">Chiqish</span></button>
   </div>
 </header>
@@ -882,6 +894,8 @@ const CAT_T = {
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], DON_T[l]));
 const NEW_T = {"uz": {"intro_tag": "Viktorina · Testlar · Reyting", "hero_t": "Bilimingizni sinang va bosqichma-bosqich oʻsib boring", "hero_s": "Bepul viktorina, ingliz tili va abituriyent testlari, dunyo reytingi — barchasi bir joyda.", "hero_b1": "Viktorinani boshlash", "hero_b2": "Testlar", "hero_b3": "Ijara joylari", "hero_f1": "8 yoʻnalish", "hero_f2": "1 000+ savol", "hero_f3": "Ingliz tili A1–C1", "hero_f4": "Dunyo reytingi", "nav_tests": "Testlar", "nav_rent": "Ijara", "ads_title": "Reklama", "ads_sub": "Mahsulot yoki xizmatingizni saytimiz tashrifchilariga koʻrsating.", "ads_card_t": "Bu yerda sizning reklamangiz boʻlishi mumkin edi", "ads_card_s": "Narx, muddat va joylashuv boʻyicha bogʻlaning — shartlarni birga kelishamiz.", "ads_btn": "Reklama berish", "ads_note": "Barcha reklamalar «Reklama» belgisi bilan alohida ajratib koʻrsatiladi.", "don_title": "Moliyaviy qoʻllab-quvvatlash", "don_sub": "Sayt bepul. Foydali boʻlsa, xohlagan summangizni oʻtkazishingiz mumkin. Har bir donat ixtiyoriy.", "f_legal": "Huquqiy maʼlumot", "f_rules": "Foydalanish shartlari", "f_ads": "Reklama", "f_donate": "Donat qilish", "priv_more": "Toʻliq maxfiylik siyosati"}, "en": {"intro_tag": "Quiz · Tests · Leaderboard", "hero_t": "Test your knowledge and grow step by step", "hero_s": "Free quiz, English and entrance-exam tests, and a world leaderboard — all in one place.", "hero_b1": "Start the quiz", "hero_b2": "Tests", "hero_b3": "Spaces for rent", "hero_f1": "8 subjects", "hero_f2": "1,000+ questions", "hero_f3": "English A1–C1", "hero_f4": "World leaderboard", "nav_tests": "Tests", "nav_rent": "For rent", "ads_title": "Advertising", "ads_sub": "Show your product or service to our visitors.", "ads_card_t": "Your advert could be here", "ads_card_s": "Get in touch about price, duration and placement — we will agree the terms together.", "ads_btn": "Advertise", "ads_note": "All adverts are clearly marked with an «Ad» label.", "don_title": "Financial support", "don_sub": "The site is free. If you find it useful, you can send any amount you like. Every donation is voluntary.", "f_legal": "Legal information", "f_rules": "Terms of use", "f_ads": "Advertising", "f_donate": "Donate", "priv_more": "Full privacy policy"}, "ru": {"intro_tag": "Викторина · Тесты · Рейтинг", "hero_t": "Проверьте свои знания и растите шаг за шагом", "hero_s": "Бесплатная викторина, тесты по английскому и для абитуриентов, мировой рейтинг — всё в одном месте.", "hero_b1": "Начать викторину", "hero_b2": "Тесты", "hero_b3": "Аренда помещений", "hero_f1": "8 направлений", "hero_f2": "1 000+ вопросов", "hero_f3": "Английский A1–C1", "hero_f4": "Мировой рейтинг", "nav_tests": "Тесты", "nav_rent": "Аренда", "ads_title": "Реклама", "ads_sub": "Покажите свой товар или услугу посетителям сайта.", "ads_card_t": "Здесь могла быть ваша реклама", "ads_card_s": "Свяжитесь с нами по цене, сроку и размещению — условия согласуем вместе.", "ads_btn": "Разместить рекламу", "ads_note": "Вся реклама отдельно помечается знаком «Реклама».", "don_title": "Финансовая поддержка", "don_sub": "Сайт бесплатный. Если он полезен, вы можете перевести любую сумму. Каждый донат добровольный.", "f_legal": "Правовая информация", "f_rules": "Условия использования", "f_ads": "Реклама", "f_donate": "Поддержать", "priv_more": "Полная политика конфиденциальности"}};
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], NEW_T[l]));
+const AUTH_T = {"uz": {"tg_btn": "Telegram orqali kirish", "tg_hint": "Telegram ochiladi. Botda «Start» (Boshlash) tugmasini bosing — sayt sizni oʻzi kiritadi.", "tg_wait": "Telegram’da «Start» bosilishi kutilmoqda… Bosgach, shu sahifaga qayting.", "tg_exp": "Havola eskirdi. Oynani yopib, qaytadan oching.", "tab_new": "Yangi ism", "tab_old": "Ism va PIN bilan kirish", "pin_label": "PIN-kod (4–6 ta raqam)", "pin_hint": "Shu PIN bilan keyin istalgan qurilmadan qayta kirasiz. Uni eslab qoling.", "pin_bad": "PIN 4–6 ta raqamdan iborat boʻlsin.", "login_go": "Kirish", "login_bad": "Ism yoki PIN notoʻgʻri.", "login_wait": "Juda koʻp urinish. 15 daqiqadan keyin qayta urinib koʻring.", "login_nopin": "Bu ism uchun PIN oʻrnatilmagan. Yangi ism bilan roʻyxatdan oʻting.", "login_nopin_tg": "Bu akkaunt Telegram orqali ochilgan. «Telegram orqali kirish» tugmasini bosing.", "pin_set": "PIN oʻrnatish", "pin_set_t": "PIN-kod oʻrnating", "pin_set_s": "PIN oʻrnatsangiz, chiqib ketganingizdan keyin ham shu ism bilan istalgan qurilmadan qayta kira olasiz.", "pin_save": "Saqlash", "pin_saved": "PIN saqlandi. Endi ism va PIN bilan qayta kira olasiz.", "pin_nudge": "Keyin qayta kira olishingiz uchun PIN oʻrnating: yuqoridagi ismingizni bosing.", "out_warn_t": "Chiqishdan oldin PIN oʻrnating", "out_warn_s": "PIN oʻrnatmasangiz, bu ism bilan qayta kira olmaysiz va natijalaringiz yoʻqoladi.", "out_anyway": "Baribir chiqish", "name_device": "PIN bilan istalgan qurilmadan qayta kira olasiz."}, "en": {"tg_btn": "Sign in with Telegram", "tg_hint": "Telegram will open. Tap «Start» in the bot — the site will sign you in automatically.", "tg_wait": "Waiting for you to tap «Start» in Telegram… Then come back to this page.", "tg_exp": "The link has expired. Close this window and open it again.", "tab_new": "New name", "tab_old": "Sign in with name and PIN", "pin_label": "PIN (4–6 digits)", "pin_hint": "Use this PIN to sign in again from any device. Remember it.", "pin_bad": "The PIN must be 4–6 digits.", "login_go": "Sign in", "login_bad": "Wrong name or PIN.", "login_wait": "Too many attempts. Try again in 15 minutes.", "login_nopin": "This name has no PIN. Please register with a new name.", "login_nopin_tg": "This account was created with Telegram. Tap «Sign in with Telegram».", "pin_set": "Set a PIN", "pin_set_t": "Set a PIN", "pin_set_s": "With a PIN you can sign in again with this name from any device, even after signing out.", "pin_save": "Save", "pin_saved": "PIN saved. You can now sign in with your name and PIN.", "pin_nudge": "Set a PIN so you can sign in again later: tap your name at the top.", "out_warn_t": "Set a PIN before signing out", "out_warn_s": "Without a PIN you won’t be able to sign in with this name again and your results will be lost.", "out_anyway": "Sign out anyway", "name_device": "With a PIN you can sign in again from any device."}, "ru": {"tg_btn": "Войти через Telegram", "tg_hint": "Откроется Telegram. Нажмите «Start» в боте — сайт впустит вас автоматически.", "tg_wait": "Ждём нажатия «Start» в Telegram… Затем вернитесь на эту страницу.", "tg_exp": "Ссылка устарела. Закройте окно и откройте снова.", "tab_new": "Новое имя", "tab_old": "Войти по имени и PIN", "pin_label": "PIN-код (4–6 цифр)", "pin_hint": "С этим PIN вы сможете снова войти с любого устройства. Запомните его.", "pin_bad": "PIN должен состоять из 4–6 цифр.", "login_go": "Войти", "login_bad": "Неверное имя или PIN.", "login_wait": "Слишком много попыток. Попробуйте через 15 минут.", "login_nopin": "Для этого имени PIN не установлен. Зарегистрируйтесь с новым именем.", "login_nopin_tg": "Этот аккаунт создан через Telegram. Нажмите «Войти через Telegram».", "pin_set": "Установить PIN", "pin_set_t": "Установите PIN-код", "pin_set_s": "С PIN вы сможете снова войти под этим именем с любого устройства, даже после выхода.", "pin_save": "Сохранить", "pin_saved": "PIN сохранён. Теперь можно входить по имени и PIN.", "pin_nudge": "Установите PIN, чтобы потом снова войти: нажмите на своё имя вверху.", "out_warn_t": "Установите PIN перед выходом", "out_warn_s": "Без PIN вы не сможете снова войти под этим именем, и результаты пропадут.", "out_anyway": "Всё равно выйти", "name_device": "С PIN можно снова войти с любого устройства."}};
+['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], AUTH_T[l]));
 const API = (CONFIG.API_URL || '').replace(/\/$/, '');
 const store = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
@@ -1102,6 +1116,7 @@ function renderAcct() {
     b.classList.add('in'); b.append(el('i', 'ti ' + (S.me.tg ? 'ti-brand-telegram' : 'ti-user-circle')), el('span', '', S.me.name));
     $('menu-name').textContent = S.me.name;
     $('menu-rank').textContent = S.me.rank ? t('rank_line', S.me.rank.rank) + ' · ' + fmt(S.me.rank.points) + ' ' + t('points') : '';
+    $('setpin').hidden = !!(S.me.tg || S.me.has_pin);
   } else { b.classList.remove('in'); b.append(el('i', 'ti ti-user'), el('span', '', t('login'))); }
 }
 $('acct').addEventListener('click', e => {
@@ -1109,17 +1124,26 @@ $('acct').addEventListener('click', e => {
   if (S.token && S.me) { $('menu').hidden = !$('menu').hidden; } else openLogin();
 });
 document.addEventListener('click', e => { if (!$('menu').hidden && !$('menu').contains(e.target)) $('menu').hidden = true; });
-$('logout').addEventListener('click', async () => {
+$('logout').addEventListener('click', () => {
   $('menu').hidden = true;
-  try { await api('/logout', { body: {} }); } catch (e) {}
-  setToken(null); toast(t('logged_out')); loadBoard();
+  if (S.me && !S.me.tg && !S.me.has_pin) {
+    return dialog(d => {
+      d.appendChild(el('h3', '', t('out_warn_t'))); d.appendChild(el('p', '', t('out_warn_s')));
+      const row = el('div', 'dlg-act');
+      const a = el('button', 'btn', t('pin_set')); a.type = 'button'; a.onclick = () => openPin();
+      const b = el('button', 'btn ghost', t('out_anyway')); b.type = 'button'; b.onclick = () => { closeDlg(); doLogout(); };
+      row.append(a, b); d.appendChild(row);
+    });
+  }
+  doLogout();
 });
 async function loadMe() {
   if (!S.token) return;
   try {
     const r = await api('/me');
     if (!r.ok) return;
-    S.me = { name: r.data.name, tg: r.data.tg, country: r.data.country, rank: r.data.rank };
+    S.me = { name: r.data.name, tg: r.data.tg, has_pin: !!r.data.has_pin, country: r.data.country, rank: r.data.rank };
+    if (!S.me.tg && !S.me.has_pin && r.data.has_pin !== undefined && store.get('pinNudge') !== new Date().toISOString().slice(0, 10)) { store.set('pinNudge', new Date().toISOString().slice(0, 10)); setTimeout(() => toast(t('pin_nudge')), 1500); }
     S.stats = {}; (r.data.stats || []).forEach(s => S.stats[s.cat] = s);
     renderAcct(); renderTable();
   } catch (e) {}
@@ -1139,13 +1163,21 @@ function dialog(build) {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.querySelector('.overlay')) { pendingCat = null; closeDlg(); } });
 
-function nameField(d, initial, onSubmit) {
+function nameField(d, initial, onSubmit, withPin) {
   const lb = el('label', 'lb', t('name_label')); lb.htmlFor = 'nm';
   const f = el('div', 'field'); const inp = el('input'); inp.id = 'nm'; inp.maxLength = 20; inp.autocomplete = 'nickname'; inp.placeholder = t('name_ph'); inp.value = initial || '';
   const st = el('i', 'st ti'); f.append(inp, st);
   const hint = el('div', 'hint'); hint.setAttribute('aria-live', 'polite');
   const btn = el('button', 'btn', t('go')); btn.type = 'button'; btn.disabled = true;
-  d.append(lb, f, hint, btn);
+  let pin = null;
+  if (withPin) {
+    const pl = el('label', 'lb', t('pin_label')); pl.htmlFor = 'pn';
+    const pf = el('div', 'field'); pin = pinInput('pn'); pf.appendChild(pin);
+    const ph = el('div', 'hint', t('pin_hint'));
+    d.append(lb, f, hint, pl, pf, ph, btn);
+    pin.addEventListener('input', () => { btn.disabled = !(free && PIN_OK(pin.value)); });
+    pin.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+  } else d.append(lb, f, hint, btn);
   let timer, seq = 0, free = false;
   const local = v => v.length < 3 ? 'short' : v.length > 20 ? 'long' : !/^[\p{L}\p{N}][\p{L}\p{N} _.\-'ʻʼ‘’]*[\p{L}\p{N}]$/u.test(v) ? 'chars' : null;
   const show = (cls, msg, icon) => { f.className = 'field ' + cls; hint.className = 'hint ' + cls; hint.textContent = msg; st.className = 'st ti ' + icon; };
@@ -1157,32 +1189,36 @@ function nameField(d, initial, onSubmit) {
     try {
       const r = await api('/name?n=' + encodeURIComponent(v));
       if (my !== seq) return;
-      if (r.data.free) { free = true; btn.disabled = false; show('ok', t('name_free'), 'ti-circle-check'); }
+      if (r.data.free) { free = true; btn.disabled = withPin ? !PIN_OK(pin.value) : false; show('ok', t('name_free'), 'ti-circle-check'); }
       else show('bad', t('name_' + (r.data.reason || 'taken')), 'ti-alert-circle');
     } catch (e) { if (my === seq) show('bad', e.code === 'no_api' ? t('no_api') : t('net_err'), 'ti-wifi-off'); }
   }
   inp.addEventListener('input', () => { clearTimeout(timer); btn.disabled = true; timer = setTimeout(check, 350); });
   const submit = async () => {
-    if (!free) return; btn.disabled = true;
-    const res = await onSubmit(inp.value.replace(/\s+/g, ' ').trim()).catch(() => ({ err: 'net_err' }));
+    if (!free) return;
+    if (withPin && !PIN_OK(pin.value)) { pin.focus(); return; }
+    btn.disabled = true;
+    const res = await onSubmit(inp.value.replace(/\s+/g, ' ').trim(), pin && pin.value).catch(() => ({ err: 'net_err' }));
     if (res && res.err) { show('bad', t(res.err), 'ti-alert-circle'); if (res.err !== 'name_taken') btn.disabled = false; }
   };
   btn.addEventListener('click', submit);
-  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); clearTimeout(timer); if (free) submit(); else check(); } });
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); clearTimeout(timer); if (free) { if (withPin && !PIN_OK(pin.value)) pin.focus(); else submit(); } else check(); } });
   if (initial) check();
   return d;
 }
-async function register(name, auth) {
-  const r = await api('/register', { body: auth ? { name, auth } : { name } });
+async function register(name, extra) {
+  const body = Object.assign({ name }, extra && extra.hash ? { auth: extra } : (extra || {}));
+  const r = await api('/register', { body });
   if (r.ok) { afterLogin(r.data); return null; }
   if (r.data.error === 'taken') return { err: 'name_taken' };
   if (r.data.error === 'too_many') return { err: 'too_many' };
   if (r.data.error === 'tg_auth') return { err: 'tg_bad' };
+  if (r.data.error === 'pin') return { err: 'pin_bad' };
   if (['short','long','chars'].includes(r.data.error)) return { err: 'name_' + r.data.error };
   return { err: 'net_err' };
 }
 function afterLogin(data) {
-  S.me = { name: data.name, tg: !!data.tg }; setToken(data.token, data.name);
+  stopTgPoll(); S.me = { name: data.name, tg: !!data.tg, has_pin: !!data.has_pin }; setToken(data.token, data.name);
   closeDlg(); toast(t('welcome', data.name)); loadMe(); loadBoard();
   if (pendingCat) { const c = pendingCat; pendingCat = null; startQuiz(c); }
 }
@@ -1190,17 +1226,22 @@ function openLogin() {
   dialog(d => {
     d.appendChild(el('h3', '', t('login_title')));
     d.appendChild(el('p', '', t('login_sub')));
-    const tg = el('div', 'tgbox'); d.appendChild(tg);
     const onSite = /(^|\.)alisher\.live$/.test(location.hostname);
-    if (API && CONFIG.BOT_USERNAME && onSite) {
-      const s = document.createElement('script'); s.async = true; s.src = 'https://telegram.org/js/telegram-widget.js?22';
-      s.setAttribute('data-telegram-login', CONFIG.BOT_USERNAME); s.setAttribute('data-size', 'large'); s.setAttribute('data-radius', '12');
-      s.setAttribute('data-onauth', 'onTelegramAuth(user)'); s.setAttribute('data-request-access', 'write');
-      tg.appendChild(s); d.appendChild(el('div', 'tgnote', t('tg_note')));
-    } else { tg.remove(); d.appendChild(el('div', 'tgnote', t('tg_off'))); }
+    if (API && CONFIG.BOT_USERNAME && onSite) { const tg = el('div', 'tgbox'); d.appendChild(tg); tgLinkBox(tg); }
+    else d.appendChild(el('div', 'tgnote', t('tg_off')));
     d.appendChild(el('div', 'or', t('or')));
-    nameField(d, '', name => register(name));
-    d.appendChild(el('div', 'small', t('name_device')));
+    const tabs = el('div', 'seg'); tabs.setAttribute('role', 'group');
+    const b1 = el('button', '', t('tab_new')), b2 = el('button', '', t('tab_old')); b1.type = b2.type = 'button';
+    tabs.append(b1, b2); d.appendChild(tabs);
+    const pane = el('div', 'pane'); d.appendChild(pane);
+    const show = (which, focus) => {
+      b1.setAttribute('aria-pressed', which === 'new'); b2.setAttribute('aria-pressed', which === 'old');
+      pane.textContent = '';
+      if (which === 'new') { nameField(pane, '', (name, pin) => register(name, { pin }), true); pane.appendChild(el('div', 'small', t('name_device'))); }
+      else loginForm(pane);
+      if (focus) { const f = pane.querySelector('input'); if (f) f.focus(); }
+    };
+    b1.onclick = () => show('new', 1); b2.onclick = () => show('old', 1); show('new');
   });
 }
 window.onTelegramAuth = async user => {
@@ -1218,6 +1259,101 @@ window.onTelegramAuth = async user => {
     toast(t('tg_bad'));
   } catch (e) { toast(t('net_err')); }
 };
+
+
+/* ---------------- Kirish: bot orqali va ism + PIN ---------------- */
+const PIN_OK = v => /^\d{4,6}$/.test(v || '');
+function pinInput(id) {
+  const i = el('input'); i.id = id; i.type = 'password'; i.inputMode = 'numeric'; i.maxLength = 6; i.autocomplete = 'off'; i.placeholder = '••••';
+  i.addEventListener('input', () => { const v = i.value.replace(/\D/g, '').slice(0, 6); if (v !== i.value) i.value = v; });
+  return i;
+}
+let tgPoll = null;
+function stopTgPoll() { if (tgPoll) { clearTimeout(tgPoll.t); document.removeEventListener('visibilitychange', tgPoll.vis); tgPoll = null; } }
+async function tgLinkBox(box) {
+  const a = el('a', 'btn tgbtn'); a.innerHTML = '<i class="ti ti-brand-telegram"></i>'; a.append(t('tg_btn'));
+  a.target = '_blank'; a.rel = 'noopener'; a.setAttribute('aria-disabled', 'true');
+  const note = el('div', 'tgnote', t('tg_hint')); note.setAttribute('aria-live', 'polite');
+  box.append(a, note);
+  let code = null;
+  try { const r = await api('/tglink', { body: {} }); if (r.ok && r.data.code) code = r.data.code; } catch (e) {}
+  if (!code) { a.remove(); note.textContent = t('net_err'); return; }
+  a.href = 'https://t.me/' + CONFIG.BOT_USERNAME + '?start=login_' + code; a.removeAttribute('aria-disabled');
+  stopTgPoll();
+  const P = tgPoll = { t: 0, vis: null, on: false, t0: Date.now() };
+  async function check() {
+    if (tgPoll !== P) return;
+    if (!document.body.contains(a)) return stopTgPoll();
+    try {
+      const r = await api('/tglink?c=' + code);
+      const st = r.data && r.data.status;
+      if (st === 'ok') { stopTgPoll(); return afterLogin(r.data); }
+      if (st === 'need_name') {
+        stopTgPoll();
+        return dialog(d => {
+          d.appendChild(el('h3', '', t('tg_name_title'))); d.appendChild(el('p', '', t('tg_name_sub')));
+          nameField(d, r.data.suggest || '', name => register(name, { link: code }));
+        });
+      }
+      if (st === 'expired' || Date.now() - P.t0 > 600000) { stopTgPoll(); note.textContent = t('tg_exp'); a.setAttribute('aria-disabled', 'true'); return; }
+    } catch (e) {}
+    P.t = setTimeout(check, 2500);
+  }
+  a.addEventListener('click', () => { P.on = true; note.textContent = t('tg_wait'); clearTimeout(P.t); P.t = setTimeout(check, 2500); });
+  P.vis = () => { if (document.visibilityState === 'visible' && P.on) { clearTimeout(P.t); check(); } };
+  document.addEventListener('visibilitychange', P.vis);
+}
+function loginForm(d) {
+  const l1 = el('label', 'lb', t('name_label')); l1.htmlFor = 'ln';
+  const f1 = el('div', 'field'); const n = el('input'); n.id = 'ln'; n.maxLength = 20; n.autocomplete = 'username'; n.placeholder = t('name_ph'); f1.appendChild(n);
+  const l2 = el('label', 'lb', t('pin_label')); l2.htmlFor = 'lp'; l2.style.marginTop = '14px';
+  const f2 = el('div', 'field'); const p = pinInput('lp'); f2.appendChild(p);
+  const hint = el('div', 'hint'); hint.setAttribute('aria-live', 'polite');
+  const btn = el('button', 'btn', t('login_go')); btn.type = 'button';
+  d.append(l1, f1, l2, f2, hint, btn);
+  const say = (k, bad) => { hint.className = 'hint' + (bad ? ' bad' : ''); hint.textContent = k ? t(k) : ''; };
+  const go = async () => {
+    const name = n.value.replace(/\s+/g, ' ').trim(), pin = p.value;
+    if (name.length < 3) return say('name_short', 1);
+    if (!PIN_OK(pin)) return say('pin_bad', 1);
+    btn.disabled = true; say('');
+    try {
+      const r = await api('/login', { body: { name, pin } });
+      if (r.ok && r.data.token) return afterLogin(r.data);
+      const e = r.data.error;
+      say(e === 'wait' ? 'login_wait' : e === 'no_pin' ? (r.data.tg ? 'login_nopin_tg' : 'login_nopin') : 'login_bad', 1);
+    } catch (e) { say(e.code === 'no_api' ? 'no_api' : 'net_err', 1); }
+    btn.disabled = false;
+  };
+  btn.onclick = go;
+  [n, p].forEach(i => i.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } }));
+}
+function openPin() {
+  dialog(d => {
+    d.appendChild(el('h3', '', t('pin_set_t'))); d.appendChild(el('p', '', t('pin_set_s')));
+    const lb = el('label', 'lb', t('pin_label')); lb.htmlFor = 'sp';
+    const f = el('div', 'field'); const p = pinInput('sp'); f.appendChild(p);
+    const hint = el('div', 'hint', t('pin_hint')); hint.setAttribute('aria-live', 'polite');
+    const btn = el('button', 'btn', t('pin_save')); btn.type = 'button';
+    d.append(lb, f, hint, btn);
+    const go = async () => {
+      if (!PIN_OK(p.value)) { hint.className = 'hint bad'; hint.textContent = t('pin_bad'); return; }
+      btn.disabled = true;
+      try {
+        const r = await api('/pin', { body: { pin: p.value } });
+        if (r.ok) { if (S.me) S.me.has_pin = true; renderAcct(); closeDlg(); toast(t('pin_saved')); return; }
+        hint.className = 'hint bad'; hint.textContent = t(r.data.error === 'pin' ? 'pin_bad' : 'net_err');
+      } catch (e) { hint.className = 'hint bad'; hint.textContent = t('net_err'); }
+      btn.disabled = false;
+    };
+    btn.onclick = go; p.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+  });
+}
+async function doLogout() {
+  try { await api('/logout', { body: {} }); } catch (e) {}
+  setToken(null); toast(t('logged_out')); loadBoard();
+}
+$('setpin').addEventListener('click', () => { $('menu').hidden = true; openPin(); });
 
 /* ---------------- Viktorina ---------------- */
 let Q = null;
