@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ijaraga joylar va omborlar — alisher.live</title>
+<meta name="description" content="Ijaraga beriladigan noturar joylar va omborlar: manzil, maydon, sharoitlar va narxlar.">
+<meta name="theme-color" content="#07080B">
+<link rel="canonical" href="https://alisher.live/ijara.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400;500&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#07080B; --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.17);
+  --tx:#F3F4F6; --tx2:#A4A9B5; --tx3:#6F7581;
+  --amber:#FFB547; --ember:#FF7A45; --ok:#3DDC97; --bad:#FF6B6B; --blue:#7EA6FF;
+  --r:20px;
+  --f-d:"Geist",Onest,system-ui,sans-serif; --f-b:Onest,system-ui,sans-serif; --f-m:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:10px}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.125em}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(7,8,11,.96),rgba(7,8,11,.84));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-t{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#FFE0A8,var(--amber) 45%,var(--ember));color:#111;display:grid;place-items:center;font:600 17px var(--f-d)}
+.logo span:last-child{font:500 17px var(--f-d);letter-spacing:-.02em}
+nav.top{display:flex;gap:2px;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass);overflow-x:auto;scrollbar-width:none}
+nav.top::-webkit-scrollbar{display:none}
+nav.top a{text-decoration:none;color:var(--tx2);font-size:14.5px;padding:7px 14px;border-radius:999px;white-space:nowrap}
+nav.top a:hover{color:var(--tx);background:var(--glass2)}
+nav.top a[aria-current="page"]{background:var(--tx);color:#0B0C10}
+
+.hero{padding:44px 0 18px}
+.crumbs{font:500 12.5px var(--f-m);color:var(--tx3);margin:0 0 12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumbs a{color:var(--tx2)}
+h1{font:400 clamp(30px,4.6vw,50px)/1.05 var(--f-d);letter-spacing:-.04em;margin:0 0 10px;text-wrap:balance;overflow-wrap:anywhere}
+.lead{color:var(--tx2);max-width:640px;margin:0;font-size:16.5px}
+.demo{margin:16px 0 0;padding:10px 14px;border-radius:12px;border:1px dashed var(--amber);color:var(--amber);font:500 13px var(--f-m);max-width:640px}
+
+/* Firmalar */
+.firms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:22px 0 30px}
+.firm{position:relative;text-align:left;border:1px solid var(--line);border-radius:24px;padding:24px;cursor:pointer;min-height:210px;display:flex;flex-direction:column;gap:8px;overflow:hidden;isolation:isolate;
+  background:radial-gradient(90% 80% at 100% 0%,color-mix(in srgb,var(--c) 26%,transparent),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.012));background-color:rgba(12,13,18,.8);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s}
+.firm:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,var(--line));box-shadow:0 24px 50px -26px color-mix(in srgb,var(--c) 80%,transparent)}
+.firm .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:23px;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent);margin-bottom:6px}
+.firm h2{margin:0;overflow-wrap:anywhere;font:500 21px/1.2 var(--f-d);letter-spacing:-.015em}
+.firm p{margin:0;color:var(--tx2);font-size:14.5px}
+.firm .stat{margin-top:auto;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(10,11,15,.55);font:500 12.5px var(--f-m);color:var(--tx2)}
+.pill.free{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,transparent)}
+.pill.busy{color:var(--tx3)}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:0 0 60px}
+.how div{border:1px solid var(--line);border-radius:18px;padding:16px 18px;background:var(--glass)}
+.how b{display:block;font:500 15px var(--f-b);margin-bottom:4px}
+.how span{color:var(--tx2);font-size:14px}
+.how i{font:500 12px var(--f-m);color:var(--amber);font-style:normal;display:block;margin-bottom:6px}
+
+/* Eʼlonlar */
+.list{display:grid;gap:16px;padding:20px 0 30px}
+.post{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);border:1px solid var(--line);border-radius:24px;overflow:hidden;background:rgba(12,13,18,.8)}
+.gal{position:relative;min-height:280px;background:#0E1016;display:grid}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;grid-area:1/1}
+.gal .ph{grid-area:1/1;display:grid;place-items:center;color:var(--tx3);font:400 13px var(--f-m);text-align:center;padding:20px;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 12px,transparent 12px 24px)}
+.gal .ph svg{display:block;margin:0 auto 8px;font-size:34px}
+.gal .nav{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.gal .nav button{width:9px;height:9px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer}
+.gal .nav button[aria-current="true"]{background:#fff}
+.gal .arr{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line2);background:rgba(7,8,11,.6);display:grid;place-items:center;cursor:pointer}
+.gal .arr.l{left:10px}.gal .arr.r{right:10px}
+.status{position:absolute;top:12px;left:12px;z-index:2}
+.body{padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.body h3{margin:0;font:500 clamp(20px,2.4vw,24px)/1.2 var(--f-d);letter-spacing:-.02em}
+.addr{display:flex;gap:8px;align-items:flex-start;color:var(--tx2);font-size:14.5px;margin:0}
+.addr svg{margin-top:3px;color:var(--amber)}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.spec{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--glass)}
+.spec .k{font:400 11.5px var(--f-m);color:var(--tx3);letter-spacing:.04em;text-transform:uppercase}
+.spec .v{font:500 18px var(--f-d);letter-spacing:-.01em;margin-top:2px}
+.spec .v small{font:400 12.5px var(--f-m);color:var(--tx2)}
+.grp .k{font:500 12px var(--f-m);color:var(--tx3);letter-spacing:.04em;text-transform:uppercase;margin:0 0 6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px;color:var(--tx)}
+.chip svg{color:var(--ok)}
+.note{margin:0;color:var(--tx2);font-size:14.5px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 18px;font-weight:500;font-size:14.5px;cursor:pointer;text-decoration:none;border:1px solid var(--line2);background:var(--glass);color:var(--tx)}
+.btn.sun{color:#111;background:linear-gradient(135deg,#FFE0A8,var(--amber) 50%,var(--ember));border:0}
+.btn:hover{filter:brightness(1.08)}
+.btn[aria-disabled="true"]{opacity:.45;pointer-events:none}
+.empty{border:1px dashed var(--line2);border-radius:24px;padding:34px 24px;text-align:center;color:var(--tx2)}
+.empty b{display:block;color:var(--tx);font:500 20px var(--f-d);margin-bottom:6px}
+.empty .acts{justify-content:center;margin-top:16px}
+.tag-demo{position:absolute;top:12px;right:12px;z-index:2;font:500 11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:var(--amber);color:#111}
+
+footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--tx3);font:400 13px var(--f-m)}
+footer .wrap{display:flex;gap:10px 18px;justify-content:space-between;flex-wrap:wrap}
+footer nav{display:flex;gap:6px 18px;flex-wrap:wrap}
+footer a{color:var(--tx3);text-decoration:none}
+footer a:hover{color:var(--tx)}
+
+@media (max-width:860px){
+  .post{grid-template-columns:1fr}
+  .gal{min-height:220px;aspect-ratio:16/10}
+  .how{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .bar{height:auto;padding:10px 0;flex-wrap:wrap}
+  nav.top{margin-left:0;width:100%}
+  .firms{grid-template-columns:1fr}
+  .body{padding:18px}
+  .acts .btn{flex:1 1 auto}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-build" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0-6 0"/><path d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5-2.5l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M10 14L21 3M21 3l-6.5 18a.55.55 0 0 1-1 0L10 14l-7-3.5a.55.55 0 0 1 0-1z"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 7l6-3l6 3l6-3v13l-6 3l-6-3l-6 3z"/><path d="M9 4v13M15 7v13"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><path d="M15 8h.01"/><path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/><path d="M3 16l5-5c.928-.893 2.072-.893 3 0l5 5"/><path d="M14 14l1-1c.928-.893 2.072-.893 3 0l3 3"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 6l-6 6l6 6"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 6l6 6l-6 6"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="alisher.live bosh sahifa"><span class="logo-t">a</span><span>alisher.live</span></a>
+    <nav class="top" aria-label="Asosiy menyu">
+      <a href="/">Bosh sahifa</a>
+      <a href="/testlar.html">Testlar</a>
+      <a href="/ijara.html" aria-current="page">Ijara</a>
+      <a href="/#donate">Qoʻllab-quvvatlash</a>
+      <a href="/#contact">Aloqa</a>
+    </nav>
+  </div>
+</header>
+
+<main id="app" class="wrap"></main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 alisher.live</span>
+    <nav aria-label="Pastki menyu">
+      <a href="/huquqiy.html#shartlar">Foydalanish shartlari</a>
+      <a href="/huquqiy.html#maxfiylik">Maxfiylik siyosati</a>
+      <a href="/#donate">Donat qilish</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(() => {
+'use strict';
+
+/* ================= FIRMALAR =================
+   phone — "+998 90 123 45 67" koʻrinishida; tg — Telegram username (@ belgisisiz). */
+const FIRMS = [
+  { id:'toshneft', c:'#FFB547', ic:'i-build', name:'«TOSHNEFTGAZISHCHITAʼMINOT» MChJ', d:'Noturar joylar va omborlarni ijaraga berish.', phone:'', tg:'' },
+  { id:'shohjahon', c:'#7EA6FF', ic:'i-box', name:'«SHOHJAHON AGRO» MChJ', d:'Noturar joylar va omborlarni ijaraga berish.', phone:'', tg:'' },
+];
+
+/* ================= EʼLONLAR =================
+   Har bir eʼlon:
+   { firm:'toshneft', title:'…', addr:'…', map:'https://…', m2:500, price:'45 000', unit:'soʻm / m² / oy',
+     free:true, cond:['Elektr 380 V', …], use:['Quruq mahsulotlar ombori', …], photos:['/img/…jpg'], note:'…' } */
+const LISTINGS = [];
+
+/* Faqat namuna koʻrish uchun (?namuna=1). Haqiqiy eʼlon emas. */
+const SAMPLE = { firm:'*', demo:true, title:'Isitiladigan yopiq ombor', addr:'Manzil shu yerda koʻrsatiladi', map:'', m2:600, price:'—', unit:'soʻm / m² / oy', free:true,
+  cond:['Elektr quvvati 380 V','Suv','Isitish','24/7 qoʻriqlash','Yuk mashinasi kira oladi','Rampa'],
+  use:['Quruq mahsulotlar ombori','Qurilish materiallari','Ishlab chiqarish sexi'], photos:[], note:'Bu yerda qoʻshimcha shartlar yoziladi: minimal ijara muddati, toʻlov tartibi va hokazo.' };
+
+/* ================= YORDAMCHILAR ================= */
+const app = document.getElementById('app');
+const demo = /[?&]namuna=1/.test(location.search);
+const ic = id => `<svg class="i" aria-hidden="true"><use href="#${id}"/></svg>`;
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const safeUrl = u => /^(https?:\/\/|\/)/.test(String(u || '')) ? String(u) : '';
+const telHref = p => p ? 'tel:' + String(p).replace(/[^\d+]/g, '') : '';
+const tgHref = u => u ? 'https://t.me/' + String(u).replace(/^@/, '').replace(/[^\w]/g, '') : '';
+const fmt = n => Number(n).toLocaleString('ru-RU').replace(/,/g, ' ');
+const itemsOf = id => LISTINGS.filter(x => x.firm === id).concat(demo ? [Object.assign({}, SAMPLE, { firm:id })] : []);
+
+function contacts(f, mapUrl){
+  const tel = telHref(f.phone), tg = tgHref(f.tg), map = safeUrl(mapUrl);
+  return `
+    <a class="btn sun" ${tel ? `href="${esc(tel)}"` : 'aria-disabled="true"'}>${ic('i-phone')} ${tel ? 'Qoʻngʻiroq qilish' : 'Telefon tez orada'}</a>
+    ${tg ? `<a class="btn" href="${esc(tg)}" target="_blank" rel="noopener">${ic('i-send')} Telegram'da yozish</a>` : ''}
+    ${map ? `<a class="btn" href="${esc(map)}" target="_blank" rel="noopener">${ic('i-map')} Xaritada</a>` : ''}`;
+}
+
+/* ================= SAHIFALAR ================= */
+function renderHome(){
+  app.innerHTML = `
+    <section class="hero">
+      <h1>Ijaraga beriladigan joylar va omborlar</h1>
+      <p class="lead">Toshkentdagi noturar joylar va omborlar. Firmani tanlang — har bir joyning manzili, maydoni, sharoitlari va narxini koʻrasiz.</p>
+      ${demo ? '<p class="demo">Namuna rejimi: sahifadagi eʼlon faqat koʻrinishni koʻrsatish uchun.</p>' : ''}
+    </section>
+    <section class="firms">
+      ${FIRMS.map(f => {
+        const it = itemsOf(f.id), fr = it.filter(x => x.free).length;
+        return `
+        <button class="firm" type="button" style="--c:${f.c}" data-f="${f.id}">
+          <span class="ic">${ic(f.ic)}</span>
+          <h2>${esc(f.name)}</h2>
+          <p>${esc(f.d)}</p>
+          <span class="stat">${it.length ? `<span class="pill">${it.length} ta eʼlon</span><span class="pill free">${fr} ta boʻsh</span>` : '<span class="pill">Eʼlonlar tez orada</span>'}</span>
+        </button>`;
+      }).join('')}
+    </section>
+    <section class="how">
+      <div><i>01</i><b>Joyni tanlang</b><span>Maydon, sharoit va narxni solishtiring.</span></div>
+      <div><i>02</i><b>Bogʻlaning</b><span>Qoʻngʻiroq qiling yoki Telegram orqali yozing.</span></div>
+      <div><i>03</i><b>Joyni koʻring</b><span>Kelishilgan vaqtda joyni oʻzingiz koʻrib chiqing.</span></div>
+    </section>`;
+  app.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { location.hash = 'f/' + b.dataset.f; });
+}
+
+function renderFirm(id){
+  const f = FIRMS.find(x => x.id === id);
+  if (!f) { location.hash = ''; return; }
+  const it = itemsOf(id);
+  app.innerHTML = `
+    <section class="hero">
+      <div class="crumbs"><a href="#">Ijara</a><span>/</span><span>${esc(f.name)}</span></div>
+      <h1>${esc(f.name)}</h1>
+      <p class="lead">${esc(f.d)}</p>
+    </section>
+    <section class="list">
+      ${it.length ? it.map((x, n) => post(f, x, n)).join('') : `
+        <div class="empty">
+          <b>Eʼlonlar tez orada joylanadi</b>
+          Hozircha boʻsh joylar haqida telefon orqali bilib olishingiz mumkin.
+          <div class="acts">${contacts(f)}</div>
+        </div>`}
+    </section>`;
+  app.querySelectorAll('.gal[data-n]').forEach(wireGal);
+}
+
+function post(f, x, n){
+  const photos = (x.photos || []).map(safeUrl).filter(Boolean);
+  return `
+    <article class="post">
+      <div class="gal" data-n="${n}" data-i="0">
+        ${x.demo ? '<span class="tag-demo">Namuna</span>' : ''}
+        <span class="status pill ${x.free ? 'free' : 'busy'}">${x.free ? 'Boʻsh' : 'Band'}</span>
+        ${photos.length ? photos.map((p, i) => `<img src="${esc(p)}" alt="${esc(x.title)} — ${i + 1}-rasm" loading="lazy"${i ? ' hidden' : ''}>`).join('')
+          : `<div class="ph"><div>${ic('i-photo')}Rasmlar tez orada</div></div>`}
+        ${photos.length > 1 ? `<button class="arr l" type="button" aria-label="Oldingi rasm">${ic('i-l')}</button><button class="arr r" type="button" aria-label="Keyingi rasm">${ic('i-r')}</button>
+          <div class="nav">${photos.map((_, i) => `<button type="button" aria-label="${i + 1}-rasm"${i ? '' : ' aria-current="true"'}></button>`).join('')}</div>` : ''}
+      </div>
+      <div class="body">
+        <h3>${esc(x.title)}</h3>
+        <p class="addr">${ic('i-pin')}<span>${esc(x.addr)}</span></p>
+        <div class="specs">
+          <div class="spec"><div class="k">Maydoni</div><div class="v">${x.m2 ? fmt(x.m2) : '—'} <small>m²</small></div></div>
+          <div class="spec"><div class="k">Narxi</div><div class="v">${esc(x.price || 'Kelishiladi')} <small>${esc(x.price ? x.unit || '' : '')}</small></div></div>
+        </div>
+        ${(x.cond || []).length ? `<div class="grp"><p class="k">Sharoitlar</p><div class="chips">${x.cond.map(c => `<span class="chip">${ic('i-check')}${esc(c)}</span>`).join('')}</div></div>` : ''}
+        ${(x.use || []).length ? `<div class="grp"><p class="k">Nimaga mos</p><div class="chips">${x.use.map(c => `<span class="chip">${esc(c)}</span>`).join('')}</div></div>` : ''}
+        ${x.note ? `<p class="note">${esc(x.note)}</p>` : ''}
+        <div class="acts">${contacts(f, x.map)}</div>
+      </div>
+    </article>`;
+}
+
+function wireGal(g){
+  const imgs = [...g.querySelectorAll('img')], dots = [...g.querySelectorAll('.nav button')];
+  if (imgs.length < 2) return;
+  const show = i => { i = (i + imgs.length) % imgs.length; g.dataset.i = i; imgs.forEach((im, k) => im.hidden = k !== i); dots.forEach((d, k) => d.setAttribute('aria-current', k === i)); };
+  g.querySelector('.arr.l').onclick = () => show(+g.dataset.i - 1);
+  g.querySelector('.arr.r').onclick = () => show(+g.dataset.i + 1);
+  dots.forEach((d, k) => d.onclick = () => show(k));
+}
+
+function route(){
+  const h = location.hash.replace(/^#/, '');
+  if (h.startsWith('f/')) renderFirm(h.slice(2)); else renderHome();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+route();
+})();
+</script>
+</body>
+</html>

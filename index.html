@@ -465,6 +465,49 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
 .rules a{color:var(--amber)}
 .dlg.wide{width:min(640px,100%)}
 
+
+/* ---------- Yangi: kirish bloki, reklama, pastki qism ---------- */
+.hero{padding:18px 0 22px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px 32px;align-items:end}
+.hero h1{font:400 clamp(30px,4.4vw,52px)/1.04 var(--f-d);letter-spacing:-.045em;margin:0;text-wrap:balance}
+.hero .sub{margin:0 0 14px}
+.hero-act{display:flex;gap:10px;flex-wrap:wrap}
+.hero-act .btn{padding:11px 18px}
+.hero-f{grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.hero-f li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font:400 12.5px var(--f-m);color:var(--tx2)}
+.hero-f li i{color:var(--amber);font-size:14px}
+#intro .itxt{position:absolute;left:0;right:0;bottom:16%;text-align:center;pointer-events:none;transition:opacity .4s}
+#intro .itxt b{display:block;font:500 clamp(26px,5vw,40px)/1.1 var(--f-d);letter-spacing:-.03em;color:var(--tx)}
+#intro .itxt span{display:block;margin-top:8px;font:400 13px var(--f-m);letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+#intro.fly .itxt{opacity:0}
+/* ixcham jonli statistika */
+.stats-sec{padding:44px 0 6px}
+.stats-sec h2{font-size:clamp(26px,3.2vw,36px)}
+.stats-sec .sub{margin-bottom:16px}
+.bento .st{padding:14px 16px}
+.bento .st .v{margin-top:10px;font-size:clamp(28px,3vw,38px)}
+.bento .bars{height:104px}
+.bento .plot{margin-top:12px}
+.bento .geo-list{gap:9px;margin-top:12px}
+@media (min-width:1001px){.st.chart{grid-column:span 2}.st.geo{grid-column:span 2}}
+/* reklama */
+.ads-sec{padding:64px 0 10px}
+.ad-slot{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center;padding:26px;border-radius:24px;
+  border:1px dashed var(--line2);background:radial-gradient(70% 140% at 100% 0%,rgba(255,181,71,.12),transparent 60%),rgba(12,13,18,.72)}
+.ad-tag{position:absolute;top:12px;right:14px;font:500 11px var(--f-m);letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+.ad-slot b{display:block;font:400 clamp(21px,2.6vw,28px)/1.15 var(--f-d);letter-spacing:-.025em;margin:0 0 6px;padding-right:70px}
+.ad-slot p{margin:0;color:var(--tx2)}
+.ad-note{margin:12px 0 0;font:400 12.5px var(--f-m);color:var(--tx3)}
+/* pastki qism */
+.fnav{display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap}
+.fnav a{text-decoration:none;color:var(--tx3)}
+.fnav a:hover{color:var(--tx)}
+.fnav .btn{color:#111;font:500 13.5px var(--f-b);padding:8px 16px}
+.priv .more{display:inline-flex;margin-top:4px}
+@media (max-width:720px){
+  .hero{grid-template-columns:1fr;padding:6px 0 16px;gap:12px}
+  .ad-slot{grid-template-columns:1fr;padding:22px 18px}
+  .ad-slot .btn{justify-self:start}
+}
 @media (max-width:1000px){
   .bar{flex-wrap:wrap;height:auto;padding-top:12px;row-gap:8px}
   nav{order:3;width:100%;margin:0 0 8px;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
@@ -524,6 +567,7 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
 <!-- Ochilish: atom orbitasidagi yo'nalishlar jadvalga terilib yig'iladi -->
 <div id="intro" aria-hidden="true">
   <div class="nucleus"></div>
+  <div class="itxt"><b>alisher.live</b><span data-i18n="intro_tag">Viktorina · Testlar · Reyting</span></div>
   <button id="skip" type="button" data-i18n="skip">O‘tkazib yuborish</button>
 </div>
 
@@ -535,6 +579,7 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
     <nav>
       <a href="#quiz" data-i18n="nav_quiz">Viktorina</a>
       <a href="/testlar.html" data-i18n="nav_tests">Testlar</a>
+      <a href="/ijara.html" data-i18n="nav_rent">Ijara</a>
       <a href="#stats" data-i18n="nav_stats">Statistika</a>
       <a href="#board" data-i18n="nav_board">Reyting</a>
       <a href="#info" data-i18n="nav_info">Maʼlumotlar</a>
@@ -556,7 +601,25 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
 <main id="top">
   <section class="table-sec" id="quiz">
     <div class="wrap">
-      <h1 class="vh" data-i18n="h1">Bilimlar viktorinasi</h1>
+      <div class="hero">
+        <div>
+          <h1 data-i18n="hero_t">Bilimingizni sinang va bosqichma-bosqich oʻsib boring</h1>
+        </div>
+        <div>
+          <p class="sub" data-i18n="hero_s">Bepul viktorina, ingliz tili va abituriyent testlari, dunyo reytingi — barchasi bir joyda.</p>
+          <div class="hero-act">
+            <a class="btn sun" href="#ptable" data-i18n="hero_b1">Viktorinani boshlash</a>
+            <a class="btn ghost" href="/testlar.html" data-i18n="hero_b2">Testlar</a>
+            <a class="btn ghost" href="/ijara.html" data-i18n="hero_b3">Ijara joylari</a>
+          </div>
+        </div>
+        <ul class="hero-f">
+          <li><i class="ti ti-atom-2"></i><span data-i18n="hero_f1">8 yoʻnalish</span></li>
+          <li><i class="ti ti-list-check"></i><span data-i18n="hero_f2">1 000+ savol</span></li>
+          <li><i class="ti ti-language"></i><span data-i18n="hero_f3">Ingliz tili A1–C1</span></li>
+          <li><i class="ti ti-trophy"></i><span data-i18n="hero_f4">Dunyo reytingi</span></li>
+        </ul>
+      </div>
       <div class="stage">
         <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="stage-top">
@@ -605,10 +668,26 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
     </div>
   </section>
 
+  <section class="ads-sec" id="ads">
+    <div class="wrap">
+      <h2 data-i18n="ads_title">Reklama</h2>
+      <p class="sub" data-i18n="ads_sub">Mahsulot yoki xizmatingizni saytimiz tashrifchilariga koʻrsating.</p>
+      <div class="ad-slot">
+        <span class="ad-tag" data-i18n="ads_title">Reklama</span>
+        <div>
+          <b data-i18n="ads_card_t">Bu yerda sizning reklamangiz boʻlishi mumkin edi</b>
+          <p data-i18n="ads_card_s">Narx, muddat va joylashuv boʻyicha bogʻlaning — shartlarni birga kelishamiz.</p>
+        </div>
+        <a class="btn sun" href="#contact" data-i18n="ads_btn">Reklama berish</a>
+      </div>
+      <p class="ad-note" data-i18n="ads_note">Barcha reklamalar «Reklama» belgisi bilan alohida ajratib koʻrsatiladi.</p>
+    </div>
+  </section>
+
   <section class="donate-sec" id="donate">
     <div class="wrap">
-      <h2 data-i18n="don_title">Loyihani qoʻllab-quvvatlash</h2>
-      <p class="sub" data-i18n="don_sub">Sayt bepul va reklamasiz. Foydali boʻlsa, xohlagan summangizni oʻtkazishingiz mumkin. Har bir donat ixtiyoriy.</p>
+      <h2 data-i18n="don_title">Moliyaviy qoʻllab-quvvatlash</h2>
+      <p class="sub" data-i18n="don_sub">Sayt bepul. Foydali boʻlsa, xohlagan summangizni oʻtkazishingiz mumkin. Har bir donat ixtiyoriy.</p>
       <div class="don" id="donBox"></div>
     </div>
   </section>
@@ -628,7 +707,13 @@ label.lb{display:block;font-weight:500;font-size:14px;margin-bottom:8px}
 <footer>
   <div class="wrap">
     <span>© 2026 alisher.live</span>
-    <button type="button" class="linkbtn" id="privacyBtn" data-i18n="privacy">Maxfiylik siyosati</button>
+    <div class="fnav" role="navigation" aria-label="Pastki menyu">
+      <a href="/huquqiy.html" data-i18n="f_legal">Huquqiy maʼlumot</a>
+      <a href="/huquqiy.html#shartlar" data-i18n="f_rules">Foydalanish shartlari</a>
+      <button type="button" class="linkbtn" id="privacyBtn" data-i18n="privacy">Maxfiylik siyosati</button>
+      <a href="#ads" data-i18n="f_ads">Reklama</a>
+      <a class="btn sun" href="#donate" data-i18n="f_donate">Donat qilish</a>
+    </div>
   </div>
 </footer>
 
@@ -795,6 +880,8 @@ const CAT_T = {
 
 /* ---------------- Holat ---------------- */
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], DON_T[l]));
+const NEW_T = {"uz": {"intro_tag": "Viktorina · Testlar · Reyting", "hero_t": "Bilimingizni sinang va bosqichma-bosqich oʻsib boring", "hero_s": "Bepul viktorina, ingliz tili va abituriyent testlari, dunyo reytingi — barchasi bir joyda.", "hero_b1": "Viktorinani boshlash", "hero_b2": "Testlar", "hero_b3": "Ijara joylari", "hero_f1": "8 yoʻnalish", "hero_f2": "1 000+ savol", "hero_f3": "Ingliz tili A1–C1", "hero_f4": "Dunyo reytingi", "nav_tests": "Testlar", "nav_rent": "Ijara", "ads_title": "Reklama", "ads_sub": "Mahsulot yoki xizmatingizni saytimiz tashrifchilariga koʻrsating.", "ads_card_t": "Bu yerda sizning reklamangiz boʻlishi mumkin edi", "ads_card_s": "Narx, muddat va joylashuv boʻyicha bogʻlaning — shartlarni birga kelishamiz.", "ads_btn": "Reklama berish", "ads_note": "Barcha reklamalar «Reklama» belgisi bilan alohida ajratib koʻrsatiladi.", "don_title": "Moliyaviy qoʻllab-quvvatlash", "don_sub": "Sayt bepul. Foydali boʻlsa, xohlagan summangizni oʻtkazishingiz mumkin. Har bir donat ixtiyoriy.", "f_legal": "Huquqiy maʼlumot", "f_rules": "Foydalanish shartlari", "f_ads": "Reklama", "f_donate": "Donat qilish", "priv_more": "Toʻliq maxfiylik siyosati"}, "en": {"intro_tag": "Quiz · Tests · Leaderboard", "hero_t": "Test your knowledge and grow step by step", "hero_s": "Free quiz, English and entrance-exam tests, and a world leaderboard — all in one place.", "hero_b1": "Start the quiz", "hero_b2": "Tests", "hero_b3": "Spaces for rent", "hero_f1": "8 subjects", "hero_f2": "1,000+ questions", "hero_f3": "English A1–C1", "hero_f4": "World leaderboard", "nav_tests": "Tests", "nav_rent": "For rent", "ads_title": "Advertising", "ads_sub": "Show your product or service to our visitors.", "ads_card_t": "Your advert could be here", "ads_card_s": "Get in touch about price, duration and placement — we will agree the terms together.", "ads_btn": "Advertise", "ads_note": "All adverts are clearly marked with an «Ad» label.", "don_title": "Financial support", "don_sub": "The site is free. If you find it useful, you can send any amount you like. Every donation is voluntary.", "f_legal": "Legal information", "f_rules": "Terms of use", "f_ads": "Advertising", "f_donate": "Donate", "priv_more": "Full privacy policy"}, "ru": {"intro_tag": "Викторина · Тесты · Рейтинг", "hero_t": "Проверьте свои знания и растите шаг за шагом", "hero_s": "Бесплатная викторина, тесты по английскому и для абитуриентов, мировой рейтинг — всё в одном месте.", "hero_b1": "Начать викторину", "hero_b2": "Тесты", "hero_b3": "Аренда помещений", "hero_f1": "8 направлений", "hero_f2": "1 000+ вопросов", "hero_f3": "Английский A1–C1", "hero_f4": "Мировой рейтинг", "nav_tests": "Тесты", "nav_rent": "Аренда", "ads_title": "Реклама", "ads_sub": "Покажите свой товар или услугу посетителям сайта.", "ads_card_t": "Здесь могла быть ваша реклама", "ads_card_s": "Свяжитесь с нами по цене, сроку и размещению — условия согласуем вместе.", "ads_btn": "Разместить рекламу", "ads_note": "Вся реклама отдельно помечается знаком «Реклама».", "don_title": "Финансовая поддержка", "don_sub": "Сайт бесплатный. Если он полезен, вы можете перевести любую сумму. Каждый донат добровольный.", "f_legal": "Правовая информация", "f_rules": "Условия использования", "f_ads": "Реклама", "f_donate": "Поддержать", "priv_more": "Полная политика конфиденциальности"}};
+['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], NEW_T[l]));
 const API = (CONFIG.API_URL || '').replace(/\/$/, '');
 const store = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
@@ -1539,7 +1626,8 @@ function openRules() {
 /* ---------------- Maxfiylik ---------------- */
 $('privacyBtn').addEventListener('click', () => dialog(d => {
   d.appendChild(el('h3', '', t('privacy')));
-  const w = el('div', 'priv'); T[S.lang].privacy_t.forEach(p => w.appendChild(el('p', '', p))); d.appendChild(w);
+  const w = el('div', 'priv'); T[S.lang].privacy_t.forEach(p => w.appendChild(el('p', '', p)));
+  const m = el('a', 'btn ghost more', t('priv_more')); m.href = '/huquqiy.html#maxfiylik'; w.appendChild(m); d.appendChild(w);
 }));
 
 /* ---------------- Fonda suzuvchi narsalar ---------------- */
