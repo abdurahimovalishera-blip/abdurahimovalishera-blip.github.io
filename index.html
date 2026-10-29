@@ -769,22 +769,30 @@ html[data-theme="light"] .bgv video{filter:saturate(.9) brightness(1.05)}
 @media (max-width:560px){.bar .mus{margin-left:auto}.bar .mus + .thm{margin-left:0}}
 @media (prefers-reduced-motion:reduce){.mus.playing svg{animation:none}}
 
-/* ---------- v3: video intro ---------- */
-#vintro{position:fixed;inset:0;z-index:1000;background:#000;color:#fff;overflow:hidden;transition:opacity .7s ease}
-#vintro.out{opacity:0}
-#vintro video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.04);transition:opacity .55s ease,transform 3.2s ease}
-#vintro video.on{opacity:1;transform:scale(1)}
-#vintro .vcap{position:absolute;left:0;right:0;bottom:18%;text-align:center;font:500 clamp(28px,6vw,64px)/1 var(--f-d);letter-spacing:-.03em;text-shadow:0 4px 30px rgba(0,0,0,.6);opacity:0;transform:translateY(12px);transition:opacity .45s,transform .45s}
-#vintro .vcap.on{opacity:1;transform:none}
-#vintro .vfin{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:14px;background:radial-gradient(60% 60% at 50% 50%,rgba(14,116,144,.35),rgba(0,0,0,.92));opacity:0;transition:opacity .6s}
-#vintro .vfin.on{opacity:1}
-#vintro .vfin img{width:88px;height:88px;border-radius:22px;box-shadow:0 20px 60px -10px rgba(14,116,144,.8)}
-#vintro .vfin b{font:500 clamp(30px,6vw,54px)/1 var(--f-d);letter-spacing:-.03em}
-#vintro .vfin span{font:400 13px var(--f-m);letter-spacing:.16em;text-transform:uppercase;color:#7DD3FC}
-#vintro .vctl{position:absolute;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;gap:8px}
-#vintro .vctl button{border:1px solid rgba(255,255,255,.35);background:rgba(0,0,0,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;border-radius:999px;padding:9px 15px;font:500 13px var(--f-b,inherit);cursor:pointer}
-#vintro .vbar{position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.15)}
-#vintro .vbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#0E7490,#38BDF8)}
+/* ---------- v4: qisqa logo intro (taxm. 2,6 s) ---------- */
+#vintro{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:var(--bg);color:var(--tx);transition:opacity .6s ease,transform .6s ease}
+#vintro.out{opacity:0;transform:translateY(-14px);pointer-events:none}
+#vintro .vi{display:grid;justify-items:center;gap:0}
+#vintro .vi-row{display:flex;align-items:center;gap:18px}
+#vintro .vi-mark{position:relative;flex:none;width:84px;height:84px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#0E7490,#1E3A8A);box-shadow:0 18px 50px -14px rgba(14,116,144,.75);animation:viPop .75s cubic-bezier(.2,1.35,.3,1) both}
+#vintro .vi-wave{position:absolute;left:0;bottom:0;width:100%;height:46%;animation:viRise .9s .15s cubic-bezier(.2,.8,.2,1) both}
+#vintro .vi-wave svg{position:absolute;left:0;bottom:0;width:200%;height:100%;animation:viWave 2.2s linear infinite}
+#vintro .vi-wave .w2 svg{animation-duration:3.1s;animation-direction:reverse}
+#vintro .vi-mark b{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:4px;font:600 48px/1 var(--f-d);letter-spacing:-.04em;color:#fff;animation:viA .55s .45s cubic-bezier(.2,1.35,.3,1) both}
+#vintro .vi-word{display:flex;font:500 clamp(36px,6vw,54px)/1 var(--f-d);letter-spacing:-.035em;white-space:nowrap}
+#vintro .vi-word span{display:inline-block;opacity:0;transform:translateY(16px);animation:viL .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(.7s + var(--i) * 40ms)}
+#vintro .vi-word .dot{color:var(--sea)}
+#vintro .vi-line{height:2px;width:0;margin-top:20px;border-radius:2px;background:linear-gradient(90deg,#0E7490,#38BDF8);animation:viLine .8s 1.25s cubic-bezier(.2,.8,.2,1) forwards}
+#vintro .vi-tag{margin-top:12px;font:400 12.5px var(--f-m);letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);opacity:0;animation:viF .6s 1.45s forwards}
+#vintro .vi-skip{position:absolute;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));border:1px solid var(--line2);background:var(--glass);color:var(--tx2);border-radius:999px;padding:8px 14px;font:500 12.5px var(--f-m);cursor:pointer}
+@keyframes viPop{from{opacity:0;transform:scale(.55) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes viRise{from{transform:translateY(100%)}to{transform:none}}
+@keyframes viWave{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes viA{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes viL{to{opacity:1;transform:none}}
+@keyframes viLine{to{width:132px}}
+@keyframes viF{to{opacity:1}}
+@media (max-width:520px){#vintro .vi-row{flex-direction:column;gap:16px}#vintro .vi-line{margin-top:18px}}
 </style>
 </head>
 <body class="lock" data-page="home">
@@ -2245,7 +2253,7 @@ setInterval(() => { if (!document.hidden && !Q) loadBoard(); }, 60000);
   }
 })();
 
-/* ---------- v3: video intro (bosh sahifa, bir kirishda bir marta) ---------- */
+/* ---------- v4: qisqa logo intro (bosh sahifa, bir kirishda bir marta) ---------- */
 (function(){
   if (document.body.dataset.page !== 'home') return;
   var force = location.search.indexOf('intro') >= 0, seen = null;
@@ -2253,62 +2261,26 @@ setInterval(() => { if (!document.hidden && !Q) loadBoard(); }, 60000);
   if (!force && (seen || matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
   try { sessionStorage.setItem('vintro', '1'); } catch (e) {}
   var lang = null; try { lang = localStorage.getItem('lang'); } catch (e) {} if (['uz', 'en', 'ru'].indexOf(lang) < 0) lang = 'uz';
-  var T = { uz: { c: ['Tabiat', 'Koinot', 'Sport', 'Vaqt', 'Texnologiya', 'Fan qudrati'], skip: 'Oʻtkazib yuborish', snd: '🔊 Ovoz bilan', tag: 'Bilim · Testlar · Reyting' },
-            en: { c: ['Nature', 'Space', 'Sport', 'Time', 'Technology', 'The power of science'], skip: 'Skip', snd: '🔊 With sound', tag: 'Knowledge · Tests · Rating' },
-            ru: { c: ['Природа', 'Космос', 'Спорт', 'Время', 'Технологии', 'Сила науки'], skip: 'Пропустить', snd: '🔊 Со звуком', tag: 'Знания · Тесты · Рейтинг' } }[lang];
-  var SC = [['intro-1-qush', 2.6], ['intro-2-raketa', 2.6], ['intro-3-top', 2.3], ['intro-4-soat', 2.4], ['intro-5-telefon', 2.2], ['intro-6-portlash', 4.6]];
-  var TOTAL = SC.reduce(function(s, x){ return s + x[1]; }, 0) + 1.6;
+  var T = { uz: ['Bilim · Testlar · Reyting', 'Oʻtkazib yuborish'], en: ['Knowledge · Tests · Rating', 'Skip'], ru: ['Знания · Тесты · Рейтинг', 'Пропустить'] }[lang];
   window.__introBusy = true;
-  var box = document.createElement('div'); box.id = 'vintro'; box.setAttribute('role', 'presentation');
-  var vids = SC.map(function(s){ var v = document.createElement('video'); v.muted = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto'; v.src = '/media/' + s[0] + '.mp4'; box.appendChild(v); return v; });
-  var cap = document.createElement('div'); cap.className = 'vcap';
-  var fin = document.createElement('div'); fin.className = 'vfin'; fin.innerHTML = '<img src="/favicon.svg" alt=""><b>alisher.live</b><span></span>'; fin.querySelector('span').textContent = T.tag;
-  var bar = document.createElement('div'); bar.className = 'vbar'; bar.innerHTML = '<i></i>';
-  var ctl = document.createElement('div'); ctl.className = 'vctl';
-  var bs = document.createElement('button'); bs.type = 'button'; bs.textContent = T.snd;
-  var bk = document.createElement('button'); bk.type = 'button'; bk.textContent = T.skip;
-  ctl.append(bs, bk); box.append(cap, fin, bar, ctl); document.body.appendChild(box);
+  var WAVE = '<svg viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14C25 4 50 24 75 14S125 4 150 14 175 24 200 14V40H0z" fill="rgba(255,255,255,.%A)"/></svg>';
+  var word = 'alisher.live'.split('').map(function(c, i){ return '<span' + (c === '.' ? ' class="dot"' : '') + ' style="--i:' + i + '">' + c + '</span>'; }).join('');
+  var box = document.createElement('div'); box.id = 'vintro'; box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = '<div class="vi"><div class="vi-row"><div class="vi-mark"><div class="vi-wave w2">' + WAVE.replace('%A', '14') + '</div><div class="vi-wave">' + WAVE.replace('%A', '24') + '</div><b>a</b></div><div class="vi-word">' + word + '</div></div><div class="vi-line"></div><div class="vi-tag"></div></div><button class="vi-skip" type="button"></button>';
+  box.querySelector('.vi-tag').textContent = T[0];
+  var skip = box.querySelector('.vi-skip'); skip.textContent = T[1];
+  document.body.appendChild(box);
   var htmlO = document.documentElement.style.overflow; document.documentElement.style.overflow = 'hidden';
-
-  /* Ovoz effektlari (faqat «Ovoz bilan» bosilganda) */
-  var snd = false, ctx = null;
-  function noise(dur){ var b = ctx.createBuffer(1, ctx.sampleRate * dur, ctx.sampleRate), d = b.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; var s = ctx.createBufferSource(); s.buffer = b; return s; }
-  function env(node, t, a, peak, dec){ var g = ctx.createGain(); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + dec); node.connect(g); g.connect(ctx.destination); return g; }
-  function tick(t, hi){ var o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = hi ? 2400 : 1700; var f = ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = hi ? 3200 : 2200; o.connect(f); env(f, t, 0.001, 0.35, 0.03); o.start(t); o.stop(t + 0.05);
-    var n = noise(0.03), hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 3000; n.connect(hp); env(hp, t, 0.001, 0.25, 0.02); n.start(t); }
-  function rumble(t, dur, peak, freq){ var n = noise(dur + 0.2), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(freq, t); lp.frequency.linearRampToValueAtTime(freq * 0.4, t + dur); n.connect(lp); env(lp, t, 0.08, peak, dur); n.start(t); }
-  function thump(t){ var o = ctx.createOscillator(); o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.18); env(o, t, 0.003, 0.9, 0.22); o.start(t); o.stop(t + 0.3); }
-  function tap(t){ var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = 880; env(o, t, 0.002, 0.18, 0.08); o.start(t); o.stop(t + 0.12); }
-  function sfx(i){ if (!snd || !ctx) return; var t = ctx.currentTime + 0.02;
-    if (i === 1) rumble(t, 2.6, 0.5, 600);
-    if (i === 2) thump(t + 0.9);
-    if (i === 3) for (var k = 0; k < 6; k++) tick(t + k * 0.45, k % 2 === 0);
-    if (i === 4) { tap(t + 0.4); tap(t + 1.3); tap(t + 2.0); }
-    if (i === 5) { rumble(t + 0.05, 4.2, 1.0, 900); thump(t + 0.05); } }
-  bs.addEventListener('click', function(e){ e.stopPropagation(); ctx = window.__actx && window.__actx(); snd = !!ctx; bs.remove(); sfx(cur); });
-
-  var cur = -1, timer = null, t0 = 0, done = false, started = false;
-  function show(i){
-    cur = i; vids.forEach(function(v, k){ if (k !== i) v.classList.remove('on'); });
-    var v = vids[i]; try { v.currentTime = 0; } catch (e) {} var p = v.play(); if (p && p.catch) p.catch(function(){});
-    v.classList.add('on'); cap.classList.remove('on'); setTimeout(function(){ cap.textContent = T.c[i]; cap.classList.add('on'); }, 250);
-    sfx(i);
-    timer = setTimeout(function(){ if (i + 1 < SC.length) show(i + 1); else final(); }, SC[i][1] * 1000);
-  }
-  function final(){ cap.classList.remove('on'); vids.forEach(function(v){ v.classList.remove('on'); }); fin.classList.add('on'); timer = setTimeout(end, 1600); }
+  var done = false;
   function end(){
-    if (done) return; done = true; clearTimeout(timer); box.classList.add('out');
-    vids.forEach(function(v){ try { v.pause(); } catch (e) {} });
+    if (done) return; done = true; box.classList.add('out');
     document.documentElement.style.overflow = htmlO; window.__introBusy = false;
-    setTimeout(function(){ box.remove(); if (window.__music) window.__music.play(); }, 700);
+    setTimeout(function(){ box.remove(); if (window.__music) window.__music.play(); }, 650);
   }
-  (function prog(){ if (done) return; if (started) bar.firstChild.style.width = Math.min(100, (performance.now() - t0) / 10 / TOTAL) + '%'; requestAnimationFrame(prog); })();
-  bk.addEventListener('click', function(e){ e.stopPropagation(); end(); });
+  skip.addEventListener('click', function(e){ e.stopPropagation(); end(); });
+  box.addEventListener('click', end);
   document.addEventListener('keydown', function k(e){ if (e.key === 'Escape') { document.removeEventListener('keydown', k); end(); } });
-  /* Birinchi video tayyor boʻlsa boshlanadi; 4 soniyada tayyor boʻlmasa intro oʻtkazib yuboriladi */
-  var go = function(){ if (started || done) return; started = true; t0 = performance.now(); show(0); };
-  if (vids[0].readyState >= 3) go(); else vids[0].addEventListener('canplay', go, { once: true });
-  setTimeout(function(){ if (!started) end(); }, 4000);
+  setTimeout(end, 2600);
 })();
 </script>
 </body>
