@@ -145,10 +145,29 @@ html[data-theme="light"] .alert p{color:var(--tx)}
 html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px 60px -22px rgba(17,24,39,.45)}
 @keyframes ckIn{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
 @media (max-width:560px){.ckb-a{width:100%}.ckb-a button{flex:1 1 auto}}
+
+/* ---------- v3: fon videolari, barglar, musiqa tugmasi ---------- */
+.sea{display:none}
+#drift{display:none}
+.bgv{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgv video{position:absolute;left:0;width:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.bgv video.on{opacity:var(--bgo,.34)}
+.bgv .bg-top{top:0;height:30vh;-webkit-mask:linear-gradient(180deg,#000 35%,transparent);mask:linear-gradient(180deg,#000 35%,transparent)}
+.bgv .bg-bot{bottom:0;height:34vh;-webkit-mask:linear-gradient(0deg,#000 40%,transparent);mask:linear-gradient(0deg,#000 40%,transparent)}
+.bgv .leaves{position:absolute;inset:0;width:100%;height:100%}
+html[data-theme="light"] .bgv{--bgo:.42}
+html[data-theme="light"] .bgv video{filter:saturate(.9) brightness(1.05)}
+.mus{position:relative}
+.mus .slash{position:absolute;left:9px;right:9px;top:50%;height:2px;border-radius:2px;background:currentColor;transform:rotate(-45deg);opacity:.85}
+.mus[aria-pressed="true"] .slash{display:none}
+.mus.playing svg{animation:musPulse 1.6s ease-in-out infinite}
+@keyframes musPulse{50%{transform:scale(1.12)}}
+@media (max-width:560px){.bar .mus{margin-left:auto}.bar .mus + .thm{margin-left:0}}
+@media (prefers-reduced-motion:reduce){.mus.playing svg{animation:none}}
 </style>
 </head>
 <body>
-<div class="sea" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="bgv" id="bgv" aria-hidden="true"><video class="bg-top" muted loop playsinline preload="none"></video><video class="bg-bot" muted loop playsinline preload="none"></video><canvas class="leaves"></canvas></div>
 
 
 <header>
@@ -163,6 +182,7 @@ html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px
       <a href="/#donate">Donat</a>
       <a href="/#contact">Aloqa</a>
     </nav>
+    <button class="thm mus" id="mus" type="button" aria-label="Musiqa" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><i class="slash" aria-hidden="true"></i></button>
     <button class="thm" id="thm" type="button" aria-label="Oq / qora rejim"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg></button>
   </div>
 </header>
@@ -252,6 +272,7 @@ html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px
         <li>Viktorina va testlardagi savollar, izohlar va sayt dizayni alisher.live uchun tayyorlangan. Ulardan foydalanganda saytga faol havola koʻrsating.</li>
         <li>Belgilar: <a href="https://tabler.io/icons" target="_blank" rel="noopener">Tabler Icons</a> (MIT litsenziyasi) va <a href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</a> (CC0). Shriftlar: Geist va Onest (SIL Open Font License).</li>
         <li>Rasmlar: <a href="https://pixabay.com" target="_blank" rel="noopener">Pixabay</a> litsenziyasi asosida.</li>
+        <li>Video va musiqa: intro va fondagi videolar <a href="https://www.pexels.com/license/" target="_blank" rel="noopener">Pexels litsenziyasi</a> asosida (mualliflar: Ton Souza, Pixabay, Pressmaster, Tima Miroshnichenko, Murilo Castro, Videas Cl, Jozef Papp, Suzy Hazelwood, Kmeel.com Videos, Andrew Soloviov). Portlash kadri — AQSh hukumatining 1946-yilgi «Baker» sinovi arxiv filmi (jamoat mulki, <a href="https://commons.wikimedia.org/wiki/File:Baker_Shot.ogv" target="_blank" rel="noopener">Wikimedia Commons</a>). Musiqa: Erik Sati, «Gymnopédie No. 1», ijrochi Michael Laucke (jamoat mulki, <a href="https://commons.wikimedia.org/wiki/File:Satie_Gymnopedie_No_1_performed_by_Michael_Laucke.flac" target="_blank" rel="noopener">Wikimedia Commons</a>).</li>
         <li>Yangiliklar boʻlimida boshqa nashrlarning materiallari toʻliq koʻchirilmaydi: faqat sarlavha, oʻz soʻzlarimiz bilan qisqa mazmun va asl manbaga faol havola beriladi. Rasm faqat manba ruxsat bergan hollarda qoʻyiladi.</li>
         <li>Agar biror material mualliflik huquqingizni buzayotgan deb hisoblasangiz, bizga yozing — material tekshirilib, zarur boʻlsa olib tashlanadi.</li>
       </ul>
@@ -353,6 +374,87 @@ html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px
     if (t) { e.preventDefault(); show(); }
   });
   if (!get()) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show(); }
+})();
+</script>
+<script>
+/* ---------- v3: umumiy ovoz, musiqa, fon ---------- */
+(function(){
+  var LS = { get: function(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function(k, v){ try { localStorage.setItem(k, v); } catch (e) {} } };
+  var SS = { get: function(k){ try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: function(k, v){ try { sessionStorage.setItem(k, v); } catch (e) {} } };
+  var lang = LS.get('lang'); if (['uz', 'en', 'ru'].indexOf(lang) < 0) lang = 'uz';
+  var TX = { uz: ['Musiqani yoqish', 'Musiqani oʻchirish'], en: ['Turn music on', 'Turn music off'], ru: ['Включить музыку', 'Выключить музыку'] }[lang];
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saveData = !!(navigator.connection && navigator.connection.saveData);
+
+  /* Ovoz konteksti (bitta, hammaga) */
+  var AC = null;
+  window.__actx = function(){ if (!AC) { var C = window.AudioContext || window.webkitAudioContext; if (!C) return null; AC = new C(); } if (AC.state === 'suspended') AC.resume(); return AC; };
+
+  /* Musiqa */
+  var VOL = 0.2, a = null, g = null, playing = false, ducked = false;
+  var btn = document.getElementById('mus');
+  function want(){ return LS.get('music') !== 'off'; }
+  function ui(){ if (!btn) return; var on = want(); btn.setAttribute('aria-pressed', String(on)); btn.classList.toggle('playing', playing); btn.title = on ? TX[1] : TX[0]; btn.setAttribute('aria-label', btn.title); }
+  function ensure(){
+    if (a) return true; var ctx = window.__actx(); if (!ctx) return false;
+    a = new Audio('/media/musiqa-gymnopedie.mp3'); a.loop = true; a.preload = 'auto';
+    var t = +SS.get('musT') || 0; if (t) { try { a.currentTime = t; } catch (e) {} }
+    g = ctx.createGain(); g.gain.value = 0; ctx.createMediaElementSource(a).connect(g); g.connect(ctx.destination); return true;
+  }
+  function ramp(to, sec){ if (!g) return; var c = window.__actx(), n = c.currentTime; g.gain.cancelScheduledValues(n); g.gain.setValueAtTime(g.gain.value, n); g.gain.linearRampToValueAtTime(to, n + sec); }
+  function play(){ if (!want() || playing || window.__introBusy) return; if (!ensure()) return; var p = a.play(); playing = true; ramp(ducked ? VOL * 0.25 : VOL, 2.5); ui(); if (p && p.catch) p.catch(function(){ playing = false; ui(); }); }
+  function stop(){ if (!a || !playing) return; playing = false; ramp(0, 0.5); setTimeout(function(){ if (!playing) a.pause(); }, 550); ui(); }
+  window.__music = { play: play, stop: stop, duck: function(on){ ducked = on; if (playing) ramp(on ? VOL * 0.25 : VOL, 0.4); } };
+  if (btn) btn.addEventListener('click', function(e){ e.stopPropagation(); if (want()) { LS.set('music', 'off'); stop(); } else { LS.set('music', 'on'); play(); } ui(); });
+  function first(){ document.removeEventListener('pointerdown', first, true); document.removeEventListener('keydown', first, true); setTimeout(play, 0); }
+  document.addEventListener('pointerdown', first, true); document.addEventListener('keydown', first, true);
+  addEventListener('pagehide', function(){ if (a && playing) SS.set('musT', String(a.currentTime)); });
+  ui();
+
+  /* Fasl */
+  var m = new Date().getMonth();
+  var season = m >= 2 && m <= 4 ? 'bahor' : m >= 5 && m <= 7 ? 'yoz' : m >= 8 && m <= 10 ? 'kuz' : 'qish';
+
+  /* Fon videolari */
+  var box = document.getElementById('bgv');
+  if (box) {
+    var top = box.querySelector('.bg-top'), bot = box.querySelector('.bg-bot');
+    if (!saveData) {
+      top.src = '/media/shox-' + season + '.mp4'; bot.src = '/media/fon-ot.mp4';
+      [top, bot].forEach(function(v){ v.preload = 'auto'; v.addEventListener('playing', function(){ v.classList.add('on'); });
+        if (reduce) { v.addEventListener('loadeddata', function(){ v.classList.add('on'); }); v.load(); }
+        else { var p = v.play(); if (p && p.catch) p.catch(function(){}); } });
+      document.addEventListener('visibilitychange', function(){ [top, bot].forEach(function(v){ if (document.hidden) v.pause(); else if (!reduce) { var p = v.play(); if (p && p.catch) p.catch(function(){}); } }); });
+    }
+    /* Uchib tushayotgan barglar / gul barglari / qor */
+    var cv = box.querySelector('.leaves');
+    if (cv && !reduce) {
+      var cx = cv.getContext('2d'), W = 0, H = 0, dpr = Math.min(1.5, devicePixelRatio || 1), P = [];
+      var COL = { bahor: ['#F9A8D4', '#FBCFE8', '#FDF2F8', '#F472B6'], yoz: ['#4ADE80', '#22C55E', '#86EFAC'], kuz: ['#F59E0B', '#D97706', '#B45309', '#EAB308', '#DC2626', '#EA580C'], qish: ['#FFFFFF', '#E0F2FE', '#F1F5F9'] }[season];
+      var N = (innerWidth < 640 ? 9 : 16) * (season === 'yoz' ? 0.5 : 1);
+      var size = function(){ W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+      var spawn = function(p, init){ p.x = Math.random() * W; p.y = init ? Math.random() * H : -20 - Math.random() * 80; p.s = season === 'qish' ? 2 + Math.random() * 3 : 7 + Math.random() * 8;
+        p.vy = (season === 'qish' ? 22 : 30) + Math.random() * 40; p.sw = 20 + Math.random() * 40; p.ph = Math.random() * 6.28; p.r = Math.random() * 6.28; p.vr = (Math.random() - .5) * 2.4; p.c = COL[(Math.random() * COL.length) | 0]; return p; };
+      size(); addEventListener('resize', size);
+      for (var i = 0; i < N; i++) P.push(spawn({}, true));
+      var last = performance.now(), light = function(){ return document.documentElement.getAttribute('data-theme') === 'light'; };
+      var frame = function(now){
+        var dt = Math.min(0.05, (now - last) / 1000); last = now; cx.clearRect(0, 0, W, H);
+        var alpha = light() ? (season === 'qish' ? 0.0 : 0.55) : 0.5;
+        P.forEach(function(p){
+          p.y += p.vy * dt; p.ph += dt * 1.3; p.r += p.vr * dt; var x = p.x + Math.sin(p.ph) * p.sw;
+          if (p.y > H + 30) spawn(p, false);
+          cx.save(); cx.translate(x, p.y); cx.rotate(p.r); cx.globalAlpha = season === 'qish' ? (light() ? 0.9 : 0.7) : alpha; cx.fillStyle = p.c;
+          if (season === 'qish') { if (light()) { cx.fillStyle = '#94A3B8'; } cx.beginPath(); cx.arc(0, 0, p.s, 0, 6.283); cx.fill(); }
+          else { cx.scale(1, 0.55 + 0.45 * Math.abs(Math.cos(p.ph))); cx.beginPath(); cx.moveTo(0, -p.s); cx.quadraticCurveTo(p.s * 0.9, 0, 0, p.s); cx.quadraticCurveTo(-p.s * 0.9, 0, 0, -p.s); cx.fill();
+            cx.globalAlpha *= 0.5; cx.strokeStyle = 'rgba(0,0,0,.35)'; cx.lineWidth = 0.8; cx.beginPath(); cx.moveTo(0, -p.s); cx.lineTo(0, p.s); cx.stroke(); }
+          cx.restore();
+        });
+        if (!document.hidden) requestAnimationFrame(frame); else document.addEventListener('visibilitychange', function v(){ document.removeEventListener('visibilitychange', v); last = performance.now(); requestAnimationFrame(frame); });
+      };
+      requestAnimationFrame(frame);
+    }
+  }
 })();
 </script>
 </body>
