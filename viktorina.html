@@ -2,6 +2,8 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bilimlar viktorinasi — alisher.live</title>
@@ -701,6 +703,52 @@ html[data-theme="light"] #drift{opacity:.3}
 @media (max-width:720px){html[data-theme="light"] .links{background:linear-gradient(180deg,#F1F5F9,#D5E1EB)}
 }
 
+
+/* yangi logo (favicon.svg) */
+.logo-t{background:url(/favicon.svg) center/100% 100% no-repeat !important;color:transparent !important;box-shadow:none !important;border:0 !important;font-size:0 !important}
+
+/* cookie roziligi */
+.ckb{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:900;width:min(760px,calc(100% - 24px));display:flex;gap:14px 18px;align-items:center;flex-wrap:wrap;padding:16px 18px;border-radius:20px;border:1px solid var(--line2);background:rgba(16,18,24,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--tx);box-shadow:0 24px 60px -20px rgba(0,0,0,.8);font-size:14px;animation:ckIn .35s ease both}
+.ckb-t{flex:1 1 320px;min-width:0}
+.ckb-t b{display:block;margin-bottom:3px;font-weight:600;font-size:15px}
+.ckb-t p{margin:0;color:var(--tx2);line-height:1.45}
+.ckb-a{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ckb-a button{border:1px solid var(--line2);border-radius:999px;padding:9px 16px;font:500 14px inherit;font-family:inherit;cursor:pointer;background:transparent;color:var(--tx)}
+.ckb-a .ck-all{border-color:transparent;color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A)}
+.ckb-a a{color:var(--tx2);font-size:13.5px;padding:0 4px}
+html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px 60px -22px rgba(17,24,39,.45)}
+@keyframes ckIn{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (max-width:560px){.ckb-a{width:100%}.ckb-a button{flex:1 1 auto}}
+
+/* v2: ixcham kartalar, «Yana», toʻlov oynasi */
+.bcard{aspect-ratio:auto;padding:12px 14px;gap:10px;border-radius:14px}
+.bc-chip{display:none}
+.bc-badge img{width:24px;height:24px}
+.bc-num{font-size:clamp(14px,1.25vw,16px)}
+.bcards.more{margin-top:12px}
+.more-btn{margin-top:12px;padding:8px 14px;font-size:13.5px}
+.paybtn{width:100%;justify-content:center;margin:0 0 14px}
+.dlg.paydlg{width:min(520px,100%)}
+.paydlg h3{margin:0 0 4px;font:400 24px/1.15 var(--f-d);letter-spacing:-.02em}
+.paydlg .dsub{margin:0 0 4px;color:var(--tx2);font-size:14px;line-height:1.45}
+.plb{margin:16px 0 8px;font:500 12px var(--f-m);color:var(--tx3);text-transform:uppercase;letter-spacing:.06em}
+.pamts{display:flex;flex-wrap:wrap;gap:8px}
+.pamts button,.pc{border:1px solid var(--line2);background:var(--glass);color:var(--tx);border-radius:12px;padding:9px 13px;cursor:pointer;font:500 14px var(--f-b)}
+.pamts button[aria-pressed="true"],.pc[aria-pressed="true"]{border-color:var(--sea);box-shadow:0 0 0 2px color-mix(in srgb,var(--sea) 35%,transparent)}
+.pinp{display:block;box-sizing:border-box;margin-top:8px;width:100%;border:1px solid var(--line2);background:var(--glass);color:var(--tx);border-radius:12px;padding:10px 13px;font:400 15px var(--f-b)}
+.pcards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pc{text-align:left;display:grid;gap:3px;min-width:0}
+.pc span{font:400 12.5px var(--f-m);color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.psum{margin-top:12px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;padding:10px 13px;border-radius:12px;background:var(--glass);font-size:13.5px}
+.psum span{color:var(--tx3)}
+.papps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.papp{display:flex;align-items:center;gap:10px;min-width:0;padding:10px 12px;border-radius:14px;border:1px solid color-mix(in srgb,var(--bc) 55%,transparent);background:color-mix(in srgb,var(--bc) 14%,transparent);color:var(--tx);text-decoration:none;font-weight:500;font-size:14px}
+.papp img{width:30px;height:30px;border-radius:8px;flex:none}
+.phow{margin:14px 0 0;padding-left:20px;color:var(--tx2);font-size:13.5px;line-height:1.5}
+.pnote{margin:10px 0 0;font-size:12.5px;color:var(--tx3)}
+.dlg .plb{margin:18px 0 8px}.dlg .dsub{margin:0 0 4px}.dlg .pnote{margin:12px 0 0}
+@media (max-width:480px){.pcards,.papps{grid-template-columns:1fr}}
+html[data-theme="light"] .dlg.paydlg .pamts button,html[data-theme="light"] .dlg.paydlg .pc,html[data-theme="light"] .pinp{background:#fff}
 </style>
 </head>
 <body class="lock" data-page="quiz">
@@ -742,47 +790,6 @@ html[data-theme="light"] #drift{opacity:.3}
 </header>
 
 <main id="top">
-  <section class="hero-sec home-only" id="home">
-    <div class="wrap">
-      <div class="hero">
-        <div>
-          <h1 data-i18n-html="hero_t">Bilimingizni sinang va <em>bosqichma-bosqich</em> oʻsib boring</h1>
-        </div>
-        <div>
-          <p class="sub" data-i18n="hero_s">Bepul viktorina, ingliz tili va abituriyent testlari, dunyo reytingi — barchasi bir joyda.</p>
-          <div class="hero-act">
-            <a class="btn sun" href="/testlar.html" data-i18n="hero_b1">Testlarni boshlash</a>
-            <a class="btn ghost" href="/viktorina.html" data-i18n="hero_b2">Viktorina va reyting</a>
-            <a class="btn ghost" href="/ijara.html" data-i18n="hero_b3">Ijara joylari</a>
-          </div>
-        </div>
-        <ul class="hero-f">
-          <li><i class="ti ti-atom-2"></i><span data-i18n="hero_f1">8 yoʻnalish</span></li>
-          <li><i class="ti ti-list-check"></i><span data-i18n="hero_f2">1 000+ savol</span></li>
-          <li><i class="ti ti-language"></i><span data-i18n="hero_f3">Ingliz tili A1–C1</span></li>
-          <li><i class="ti ti-trophy"></i><span data-i18n="hero_f4">Dunyo reytingi</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="dirs-sec home-only" id="dirs">
-    <div class="wrap">
-      <h2 data-i18n="dir_title">Yoʻnalishlar</h2>
-      <p class="sub" data-i18n="dir_sub">Kerakli boʻlimni tanlang. Hammasi bepul.</p>
-      <div class="hdirs">
-        <a class="hdir" href="/testlar.html#english" style="--c:#2563EB"><i class="ti ti-language" aria-hidden="true"></i><b data-i18n="d_eng_t"></b><span data-i18n="d_eng_s"></span></a>
-        <a class="hdir" href="/viktorina.html" style="--c:#F97316"><i class="ti ti-atom-2" aria-hidden="true"></i><b data-i18n="d_quiz_t"></b><span data-i18n="d_quiz_s"></span></a>
-        <a class="hdir" href="/testlar.html#d/abit" style="--c:#F59E0B"><i class="ti ti-school" aria-hidden="true"></i><b data-i18n="d_abit_t"></b><span data-i18n="d_abit_s"></span></a>
-        <a class="hdir" href="/testlar.html#d/iq" style="--c:#8B5CF6"><i class="ti ti-bulb" aria-hidden="true"></i><b data-i18n="d_iq_t"></b><span data-i18n="d_iq_s"></span></a>
-        <a class="hdir" href="/testlar.html#d/psy" style="--c:#10B981"><i class="ti ti-brain" aria-hidden="true"></i><b data-i18n="d_psy_t"></b><span data-i18n="d_psy_s"></span></a>
-        <a class="hdir" href="/testlar.html#d/job" style="--c:#EF4444"><i class="ti ti-briefcase" aria-hidden="true"></i><b data-i18n="d_job_t"></b><span data-i18n="d_job_s"></span></a>
-        <a class="hdir" href="/testlar.html#d/preg" style="--c:#EC4899"><i class="ti ti-heart" aria-hidden="true"></i><b data-i18n="d_preg_t"></b><span data-i18n="d_preg_s"></span></a>
-        <a class="hdir" href="/ijara.html" style="--c:#0EA5E9"><i class="ti ti-building-warehouse" aria-hidden="true"></i><b data-i18n="d_rent_t"></b><span data-i18n="d_rent_s"></span></a>
-      </div>
-    </div>
-  </section>
-
   <section class="table-sec quiz-only" id="quiz">
     <div class="wrap">
       <div class="quiz-head">
@@ -882,6 +889,7 @@ html[data-theme="light"] #drift{opacity:.3}
       <a href="/huquqiy.html#shartlar" data-i18n="f_rules">Foydalanish shartlari</a>
       <button type="button" class="linkbtn" id="privacyBtn" data-i18n="privacy">Maxfiylik siyosati</button>
       <a href="/#ads" data-i18n="f_ads">Reklama</a>
+      <button type="button" class="linkbtn" data-cookie data-i18n="ck_set">Cookie sozlamalari</button>
       <a class="btn sun" href="/#donate" data-i18n="f_donate">Donat qilish</a>
     </div>
   </div>
@@ -915,14 +923,12 @@ const CONFIG = {
     holder: 'ALISHER A',
     cards: [
       { id: 'uzcard',    name: 'Uzcard',           number: '5614 6821 1403 7064' },
-      { id: 'humo',      name: 'Humo',             number: '9860 1701 1442 8197' },
-      { id: 'visa',      name: 'Visa',             number: '4023 0506 1621 9531' },
-      { id: 'visa_uzum', name: 'Visa · Uzum Bank', number: '4916 9903 4687 3257' }
+      { id: 'visa_uzum', name: 'Visa · Uzum Bank', number: '4916 9903 4687 3257' },
+      { id: 'humo',      name: 'Humo',             number: '9860 1701 1442 8197', more: true },
+      { id: 'visa',      name: 'Visa',             number: '4023 0506 1621 9531', more: true }
     ],
     apps: [
       { id: 'payme',  name: 'Payme',     url: 'https://payme.uz',     color: '#33CCCC' },
-      { id: 'click',  name: 'Click',     url: 'https://click.uz',     color: '#1B6CFF' },
-      { id: 'paynet', name: 'Paynet',    url: 'https://paynet.uz',    color: '#2BD46B' },
       { id: 'uzum',   name: 'Uzum Bank', url: 'https://uzumbank.uz',  color: '#7000FF' }
     ]
   }
@@ -1052,6 +1058,28 @@ const CAT_T = {
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], DON_T[l]));
 const NEW_T = {"uz": {"intro_tag": "Viktorina · Testlar · Reyting", "hero_t": "Bilimingizni sinang va bosqichma-bosqich oʻsib boring", "hero_s": "Bepul viktorina, ingliz tili va abituriyent testlari, dunyo reytingi — barchasi bir joyda.", "hero_b1": "Viktorinani boshlash", "hero_b2": "Testlar", "hero_b3": "Ijara joylari", "hero_f1": "8 yoʻnalish", "hero_f2": "1 000+ savol", "hero_f3": "Ingliz tili A1–C1", "hero_f4": "Dunyo reytingi", "nav_tests": "Testlar", "nav_rent": "Ijara", "ads_title": "Reklama", "ads_sub": "Mahsulot yoki xizmatingizni saytimiz tashrifchilariga koʻrsating.", "ads_card_t": "Bu yerda sizning reklamangiz boʻlishi mumkin edi", "ads_card_s": "Narx, muddat va joylashuv boʻyicha bogʻlaning — shartlarni birga kelishamiz.", "ads_btn": "Reklama berish", "ads_note": "Barcha reklamalar «Reklama» belgisi bilan alohida ajratib koʻrsatiladi.", "don_title": "Moliyaviy qoʻllab-quvvatlash", "don_sub": "Sayt bepul. Foydali boʻlsa, xohlagan summangizni oʻtkazishingiz mumkin. Har bir donat ixtiyoriy.", "f_legal": "Huquqiy maʼlumot", "f_rules": "Foydalanish shartlari", "f_ads": "Reklama", "f_donate": "Donat qilish", "priv_more": "Toʻliq maxfiylik siyosati", "ads_more": "Batafsil"}, "en": {"intro_tag": "Quiz · Tests · Leaderboard", "hero_t": "Test your knowledge and grow step by step", "hero_s": "Free quiz, English and entrance-exam tests, and a world leaderboard — all in one place.", "hero_b1": "Start the quiz", "hero_b2": "Tests", "hero_b3": "Spaces for rent", "hero_f1": "8 subjects", "hero_f2": "1,000+ questions", "hero_f3": "English A1–C1", "hero_f4": "World leaderboard", "nav_tests": "Tests", "nav_rent": "For rent", "ads_title": "Advertising", "ads_sub": "Show your product or service to our visitors.", "ads_card_t": "Your advert could be here", "ads_card_s": "Get in touch about price, duration and placement — we will agree the terms together.", "ads_btn": "Advertise", "ads_note": "All adverts are clearly marked with an «Ad» label.", "don_title": "Financial support", "don_sub": "The site is free. If you find it useful, you can send any amount you like. Every donation is voluntary.", "f_legal": "Legal information", "f_rules": "Terms of use", "f_ads": "Advertising", "f_donate": "Donate", "priv_more": "Full privacy policy", "ads_more": "Learn more"}, "ru": {"intro_tag": "Викторина · Тесты · Рейтинг", "hero_t": "Проверьте свои знания и растите шаг за шагом", "hero_s": "Бесплатная викторина, тесты по английскому и для абитуриентов, мировой рейтинг — всё в одном месте.", "hero_b1": "Начать викторину", "hero_b2": "Тесты", "hero_b3": "Аренда помещений", "hero_f1": "8 направлений", "hero_f2": "1 000+ вопросов", "hero_f3": "Английский A1–C1", "hero_f4": "Мировой рейтинг", "nav_tests": "Тесты", "nav_rent": "Аренда", "ads_title": "Реклама", "ads_sub": "Покажите свой товар или услугу посетителям сайта.", "ads_card_t": "Здесь могла быть ваша реклама", "ads_card_s": "Свяжитесь с нами по цене, сроку и размещению — условия согласуем вместе.", "ads_btn": "Разместить рекламу", "ads_note": "Вся реклама отдельно помечается знаком «Реклама».", "don_title": "Финансовая поддержка", "don_sub": "Сайт бесплатный. Если он полезен, вы можете перевести любую сумму. Каждый донат добровольный.", "f_legal": "Правовая информация", "f_rules": "Условия использования", "f_ads": "Реклама", "f_donate": "Поддержать", "priv_more": "Полная политика конфиденциальности", "ads_more": "Подробнее"}};
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], NEW_T[l]));
+const V2_T = {
+  uz: { don_more: n => `Yana ${n} ta karta`, don_less: 'Yopish', pay_btn: 'Toʻlov oynasini ochish', pay_t: 'Donat qilish',
+    pay_s: 'Summani va kartani tanlang. Ilova tugmasini bossangiz, karta raqami avtomatik nusxalanadi va ilova ochiladi.',
+    pay_amt: '1. Summa', pay_other: 'Boshqa summa, soʻm', pay_card: '2. Qaysi kartaga', pay_app: '3. Qaysi ilova orqali',
+    pay_open: n => `${n} orqali toʻlash`, pay_to: 'Karta', pay_sum: 'Summa', pay_copied: n => `Karta raqami nusxalandi: ${n}`,
+    pay_how: ['Ilova ochilgach «Oʻtkazmalar → Kartaga» boʻlimini tanlang.', 'Karta raqamini joylang — u allaqachon nusxalangan.', 'Summani yozing va tasdiqlang.'],
+    pay_note: 'Toʻlov bankingiz ilovasida amalga oshadi. Sayt karta maʼlumotlaringizni koʻrmaydi va saqlamaydi.', ck_set: 'Cookie sozlamalari' },
+  en: { don_more: n => `${n} more cards`, don_less: 'Hide', pay_btn: 'Open payment window', pay_t: 'Make a donation',
+    pay_s: 'Choose the amount and the card. When you tap an app button, the card number is copied automatically and the app opens.',
+    pay_amt: '1. Amount', pay_other: 'Other amount, UZS', pay_card: '2. To which card', pay_app: '3. Which app',
+    pay_open: n => `Pay with ${n}`, pay_to: 'Card', pay_sum: 'Amount', pay_copied: n => `Card number copied: ${n}`,
+    pay_how: ['In the app, open “Transfers → To card”.', 'Paste the card number — it is already copied.', 'Enter the amount and confirm.'],
+    pay_note: 'The payment happens in your bank app. The site never sees or stores your card details.', ck_set: 'Cookie settings' },
+  ru: { don_more: n => `Ещё ${n} карты`, don_less: 'Скрыть', pay_btn: 'Открыть окно оплаты', pay_t: 'Сделать донат',
+    pay_s: 'Выберите сумму и карту. Нажмите кнопку приложения — номер карты скопируется автоматически, и приложение откроется.',
+    pay_amt: '1. Сумма', pay_other: 'Другая сумма, сум', pay_card: '2. На какую карту', pay_app: '3. Через какое приложение',
+    pay_open: n => `Оплатить через ${n}`, pay_to: 'Карта', pay_sum: 'Сумма', pay_copied: n => `Номер карты скопирован: ${n}`,
+    pay_how: ['В приложении откройте «Переводы → На карту».', 'Вставьте номер карты — он уже скопирован.', 'Введите сумму и подтвердите.'],
+    pay_note: 'Оплата проходит в приложении вашего банка. Сайт не видит и не хранит данные вашей карты.', ck_set: 'Настройки cookie' }
+};
+['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], V2_T[l]));
+
 const AUTH_T = {"uz": {"tg_btn": "Telegram orqali kirish", "tg_hint": "Telegram ochiladi. Botda «Start» (Boshlash) tugmasini bosing — sayt sizni oʻzi kiritadi.", "tg_wait": "Telegram’da «Start» bosilishi kutilmoqda… Bosgach, shu sahifaga qayting.", "tg_exp": "Havola eskirdi. Oynani yopib, qaytadan oching.", "tab_new": "Yangi ism", "tab_old": "Ism va PIN bilan kirish", "pin_label": "PIN-kod (4–6 ta raqam)", "pin_hint": "Shu PIN bilan keyin istalgan qurilmadan qayta kirasiz. Uni eslab qoling.", "pin_bad": "PIN 4–6 ta raqamdan iborat boʻlsin.", "login_go": "Kirish", "login_bad": "Ism yoki PIN notoʻgʻri.", "login_wait": "Juda koʻp urinish. 15 daqiqadan keyin qayta urinib koʻring.", "login_nopin": "Bu ism uchun PIN oʻrnatilmagan. Yangi ism bilan roʻyxatdan oʻting.", "login_nopin_tg": "Bu akkaunt Telegram orqali ochilgan. «Telegram orqali kirish» tugmasini bosing.", "pin_set": "PIN oʻrnatish", "pin_set_t": "PIN-kod oʻrnating", "pin_set_s": "PIN oʻrnatsangiz, chiqib ketganingizdan keyin ham shu ism bilan istalgan qurilmadan qayta kira olasiz.", "pin_save": "Saqlash", "pin_saved": "PIN saqlandi. Endi ism va PIN bilan qayta kira olasiz.", "pin_nudge": "Keyin qayta kira olishingiz uchun PIN oʻrnating: yuqoridagi ismingizni bosing.", "out_warn_t": "Chiqishdan oldin PIN oʻrnating", "out_warn_s": "PIN oʻrnatmasangiz, bu ism bilan qayta kira olmaysiz va natijalaringiz yoʻqoladi.", "out_anyway": "Baribir chiqish", "name_device": "PIN bilan istalgan qurilmadan qayta kira olasiz."}, "en": {"tg_btn": "Sign in with Telegram", "tg_hint": "Telegram will open. Tap «Start» in the bot — the site will sign you in automatically.", "tg_wait": "Waiting for you to tap «Start» in Telegram… Then come back to this page.", "tg_exp": "The link has expired. Close this window and open it again.", "tab_new": "New name", "tab_old": "Sign in with name and PIN", "pin_label": "PIN (4–6 digits)", "pin_hint": "Use this PIN to sign in again from any device. Remember it.", "pin_bad": "The PIN must be 4–6 digits.", "login_go": "Sign in", "login_bad": "Wrong name or PIN.", "login_wait": "Too many attempts. Try again in 15 minutes.", "login_nopin": "This name has no PIN. Please register with a new name.", "login_nopin_tg": "This account was created with Telegram. Tap «Sign in with Telegram».", "pin_set": "Set a PIN", "pin_set_t": "Set a PIN", "pin_set_s": "With a PIN you can sign in again with this name from any device, even after signing out.", "pin_save": "Save", "pin_saved": "PIN saved. You can now sign in with your name and PIN.", "pin_nudge": "Set a PIN so you can sign in again later: tap your name at the top.", "out_warn_t": "Set a PIN before signing out", "out_warn_s": "Without a PIN you won’t be able to sign in with this name again and your results will be lost.", "out_anyway": "Sign out anyway", "name_device": "With a PIN you can sign in again from any device."}, "ru": {"tg_btn": "Войти через Telegram", "tg_hint": "Откроется Telegram. Нажмите «Start» в боте — сайт впустит вас автоматически.", "tg_wait": "Ждём нажатия «Start» в Telegram… Затем вернитесь на эту страницу.", "tg_exp": "Ссылка устарела. Закройте окно и откройте снова.", "tab_new": "Новое имя", "tab_old": "Войти по имени и PIN", "pin_label": "PIN-код (4–6 цифр)", "pin_hint": "С этим PIN вы сможете снова войти с любого устройства. Запомните его.", "pin_bad": "PIN должен состоять из 4–6 цифр.", "login_go": "Войти", "login_bad": "Неверное имя или PIN.", "login_wait": "Слишком много попыток. Попробуйте через 15 минут.", "login_nopin": "Для этого имени PIN не установлен. Зарегистрируйтесь с новым именем.", "login_nopin_tg": "Этот аккаунт создан через Telegram. Нажмите «Войти через Telegram».", "pin_set": "Установить PIN", "pin_set_t": "Установите PIN-код", "pin_set_s": "С PIN вы сможете снова войти под этим именем с любого устройства, даже после выхода.", "pin_save": "Сохранить", "pin_saved": "PIN сохранён. Теперь можно входить по имени и PIN.", "pin_nudge": "Установите PIN, чтобы потом снова войти: нажмите на своё имя вверху.", "out_warn_t": "Установите PIN перед выходом", "out_warn_s": "Без PIN вы не сможете снова войти под этим именем, и результаты пропадут.", "out_anyway": "Всё равно выйти", "name_device": "С PIN можно снова войти с любого устройства."}};
 ['uz', 'en', 'ru'].forEach(l => Object.assign(T[l], AUTH_T[l]));
 const PAGE_T = {"uz": {"nav_home": "Bosh sahifa", "nav_quiz": "Viktorina", "home_title": "testlar, viktorina va bilim", "hero_t": "Bilimingizni sinang va <em>bosqichma-bosqich</em> oʻsib boring", "hero_s": "Ingliz tili, abituriyent, IQ va psixologik testlar, bilimlar viktorinasi va dunyo reytingi — barchasi bepul.", "hero_b1": "Testlarni boshlash", "hero_b2": "Viktorina va reyting", "hero_b3": "Ijara joylari", "dir_title": "Yoʻnalishlar", "dir_sub": "Kerakli boʻlimni tanlang. Hammasi bepul.", "d_eng_t": "Ingliz tili", "d_eng_s": "A1 dan C1 gacha, 450 savol", "d_quiz_t": "Bilimlar viktorinasi", "d_quiz_s": "8 fan va dunyo reytingi", "d_abit_t": "Abituriyentlar", "d_abit_s": "Ona tili, matematika, tarix", "d_iq_t": "IQ va mantiq", "d_iq_s": "Mantiqiy fikrlash masalalari", "d_psy_t": "Psixologik testlar", "d_psy_s": "Xarakter va stress darajasi", "d_job_t": "Ish suhbati", "d_job_s": "Savollar va namunaviy javoblar", "d_preg_t": "Homiladorlik belgilari", "d_preg_s": "Maʼlumot uchun soʻrovnoma", "d_rent_t": "Ijara joylari", "d_rent_s": "Noturar joylar va omborlar", "quiz_sub": "8 ta fan, har oʻyinda 10 ta savol. Toʻgʻri javoblar uchun ball toʻplang va dunyo reytingida oʻrningizni egallang."}, "en": {"nav_home": "Home", "nav_quiz": "Quiz", "home_title": "tests, quiz and knowledge", "hero_t": "Test your knowledge and grow <em>step by step</em>", "hero_s": "English, entrance-exam, IQ and personality tests, a knowledge quiz and a world leaderboard — all free.", "hero_b1": "Start the tests", "hero_b2": "Quiz and leaderboard", "hero_b3": "Spaces for rent", "dir_title": "Sections", "dir_sub": "Pick a section. Everything is free.", "d_eng_t": "English", "d_eng_s": "A1 to C1, 450 questions", "d_quiz_t": "Knowledge quiz", "d_quiz_s": "8 subjects and a world leaderboard", "d_abit_t": "Entrance exams", "d_abit_s": "Uzbek, maths, history", "d_iq_t": "IQ and logic", "d_iq_s": "Logical thinking puzzles", "d_psy_t": "Personality tests", "d_psy_s": "Character and stress level", "d_job_t": "Job interview", "d_job_s": "Questions and sample answers", "d_preg_t": "Pregnancy signs", "d_preg_s": "Information questionnaire", "d_rent_t": "Spaces for rent", "d_rent_s": "Commercial premises and warehouses", "quiz_sub": "8 subjects, 10 questions per game. Earn points for correct answers and take your place on the world leaderboard."}, "ru": {"nav_home": "Главная", "nav_quiz": "Викторина", "home_title": "тесты, викторина и знания", "hero_t": "Проверьте знания и растите <em>шаг за шагом</em>", "hero_s": "Тесты по английскому, для абитуриентов, IQ и психологические тесты, викторина и мировой рейтинг — всё бесплатно.", "hero_b1": "Начать тесты", "hero_b2": "Викторина и рейтинг", "hero_b3": "Аренда помещений", "dir_title": "Разделы", "dir_sub": "Выберите раздел. Всё бесплатно.", "d_eng_t": "Английский язык", "d_eng_s": "От A1 до C1, 450 вопросов", "d_quiz_t": "Викторина знаний", "d_quiz_s": "8 предметов и мировой рейтинг", "d_abit_t": "Абитуриентам", "d_abit_s": "Родной язык, математика, история", "d_iq_t": "IQ и логика", "d_iq_s": "Задачи на логическое мышление", "d_psy_t": "Психологические тесты", "d_psy_s": "Характер и уровень стресса", "d_job_t": "Собеседование", "d_job_s": "Вопросы и примеры ответов", "d_preg_t": "Признаки беременности", "d_preg_s": "Информационный опросник", "d_rent_t": "Аренда помещений", "d_rent_s": "Нежилые помещения и склады", "quiz_sub": "8 предметов, 10 вопросов в игре. Набирайте баллы за верные ответы и займите место в мировом рейтинге."}};
@@ -1219,7 +1247,7 @@ function renderLinks() {
       const pool = el('span', 'pool');
       pool.append(el('span', 'ring'), el('span', 'ring r2'), el('span', 'spl'), el('span', 'spl s2'), el('span', 'spl s3'));
       const handle = k === 'gmail' ? L.email : href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
-      a.append(bead, pool, el('span', 'dn', name), el('span', 'dh', handle));
+      a.append(bead, pool, el('span', 'dn', name)); a.title = handle; a.setAttribute('aria-label', name);
       a.addEventListener('mouseenter', () => { a.classList.remove('hit'); void a.offsetWidth; a.classList.add('hit'); });
       box.appendChild(a);
     });
@@ -1822,7 +1850,9 @@ async function hit(beat) {
   if (!API) return;
   const q = new URLSearchParams(location.search);
   const ref = document.referrer || q.get('utm_source') || q.get('via') || '';
-  try { const r = await api('/hit', { body: { ref: beat ? '' : ref, lang: S.lang, beat: beat ? 1 : 0 } }); if (r.ok) { ST = r.data; renderStats(); } } catch (e) {}
+  const ok = store.get('consent') === 'all';
+  if (!ok && beat) return;
+  try { const r = ok ? await api('/hit', { body: { ref: beat ? '' : ref, lang: S.lang, beat: beat ? 1 : 0 } }) : await api('/stats'); if (r.ok) { ST = r.data; renderStats(); } } catch (e) {}
 }
 
 
@@ -1838,12 +1868,62 @@ async function copyText(txt) {
   }
 }
 function donEvent(kind, item) { if (API) api('/donate/event', { body: { kind, item } }).catch(() => {}); }
+
+/* Toʻlov oynasi: summa → karta → ilova (raqam avtomatik nusxalanadi) */
+function payDialog(pre) {
+  const D = CONFIG.DONATE; const main = D.cards.filter(c => !c.more);
+  let amt = 0, card = pre && main.some(c => c.id === pre) ? pre : main[0].id;
+  dialog(d => {
+    d.classList.add('paydlg');
+    d.append(el('h3', '', t('pay_t')), el('p', 'dsub', t('pay_s')));
+    const am = el('div', 'pamts');
+    const inp = el('input', 'pinp'); inp.id = 'payAmt'; inp.inputMode = 'numeric'; inp.placeholder = t('pay_other');
+    const sum = el('div', 'psum');
+    const upd = () => {
+      const c = D.cards.find(x => x.id === card); sum.textContent = '';
+      sum.append(el('span', '', t('pay_to')), el('b', '', c.name + ' · ' + c.number));
+      if (amt) sum.append(el('span', '', t('pay_sum')), el('b', '', fmt(amt) + ' ' + t('som')));
+    };
+    [10000, 20000, 50000, 100000].forEach(v => {
+      const b = el('button', '', fmt(v)); b.type = 'button'; b.setAttribute('aria-pressed', 'false');
+      b.onclick = () => { amt = v; inp.value = ''; am.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); upd(); };
+      am.appendChild(b);
+    });
+    inp.addEventListener('input', () => {
+      const dg = inp.value.replace(/\D/g, '').slice(0, 9);
+      inp.value = dg ? Number(dg).toLocaleString('ru-RU').replace(/ /g, ' ') : ''; amt = +dg || 0;
+      am.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', 'false')); upd();
+    });
+    const cs = el('div', 'pcards');
+    main.forEach(c => {
+      const b = el('button', 'pc'); b.type = 'button'; b.dataset.c = c.id; b.setAttribute('aria-pressed', c.id === card);
+      b.append(el('b', '', c.name), el('span', '', c.number));
+      b.onclick = () => { card = c.id; cs.querySelectorAll('.pc').forEach(x => x.setAttribute('aria-pressed', x === b)); upd(); };
+      cs.appendChild(b);
+    });
+    const ap = el('div', 'papps');
+    D.apps.forEach(a => {
+      const l = el('a', 'papp'); l.href = a.url; l.target = '_blank'; l.rel = 'noopener'; l.style.setProperty('--bc', a.color);
+      const im = new Image(); im.src = PAY[a.id] || ''; im.alt = '';
+      l.append(im, el('span', '', t('pay_open', a.name)));
+      l.addEventListener('click', () => {
+        const c = D.cards.find(x => x.id === card);
+        copyText(c.number.replace(/\s/g, '')).then(ok => toast(ok ? t('pay_copied', c.number) : c.number));
+        donEvent('copy', c.id); donEvent('open', a.id);
+      });
+      ap.appendChild(l);
+    });
+    const how = el('ol', 'phow'); t('pay_how').forEach(x => how.appendChild(el('li', '', x)));
+    upd();
+    d.append(el('p', 'plb', t('pay_amt')), am, inp, el('p', 'plb', t('pay_card')), cs, sum, el('p', 'plb', t('pay_app')), ap, how, el('p', 'pnote', t('pay_note')));
+  });
+}
 function renderDonate() {
   const box = $('donBox'); if (!box) return; const D = CONFIG.DONATE; box.textContent = '';
   const step = (n, title, hint, cls) => { const s = el('div', 'dstep' + (cls ? ' ' + cls : '')); const h = el('h3'); h.append(el('span', 'n', String(n)), title); s.appendChild(h); if (hint) s.appendChild(el('p', 'dh2', hint)); return s; };
   // 1. Kartalar
   const s1 = step(1, t('don_s1'), t('don_s1h'));
-  const grid = el('div', 'bcards');
+  const grid = el('div', 'bcards'); const grid2 = el('div', 'bcards more'); grid2.id = 'bcMore'; grid2.hidden = true;
   D.cards.forEach(c => {
     const b = el('button', 'bcard'); b.type = 'button'; b.dataset.c = c.id; b.setAttribute('aria-label', `${c.name}: ${c.number}. ${t('don_copy')}`);
     const top = el('div', 'bc-top'); const badge = el('span', 'bc-badge');
@@ -1868,12 +1948,20 @@ function renderDonate() {
       } else toast(c.number);
       donEvent('copy', c.id);
     });
-    grid.appendChild(b);
+    (c.more ? grid2 : grid).appendChild(b);
   });
   s1.appendChild(grid);
+  if (grid2.children.length) {
+    const mb = el('button', 'btn ghost more-btn'); mb.type = 'button'; mb.setAttribute('aria-controls', 'bcMore');
+    const lab = () => { mb.setAttribute('aria-expanded', String(!grid2.hidden)); mb.innerHTML = grid2.hidden ? '<i class="ti ti-chevron-down"></i>' : '<i class="ti ti-chevron-up"></i>'; mb.append(grid2.hidden ? t('don_more', grid2.children.length) : t('don_less')); };
+    lab(); mb.onclick = () => { grid2.hidden = !grid2.hidden; lab(); };
+    s1.append(grid2, mb);
+  }
   const safe = el('div', 'safe'); safe.innerHTML = '<i class="ti ti-shield-check"></i>'; safe.append(t('don_safe')); s1.appendChild(safe);
   // 2. Ilovalar
   const s2 = step(2, t('don_s2'), t('don_s2h'));
+  const pb = el('button', 'btn sun paybtn'); pb.type = 'button'; pb.innerHTML = '<i class="ti ti-wallet"></i>'; pb.append(t('pay_btn'));
+  pb.onclick = () => payDialog(); s2.appendChild(pb);
   const apps = el('div', 'apps');
   D.apps.forEach((a, i) => {
     const l = el('a', 'app'); l.href = a.url; l.target = '_blank'; l.rel = 'noopener'; l.style.setProperty('--bc', a.color); l.style.setProperty('--dl', (-i * 1.1) + 's');
@@ -1991,6 +2079,7 @@ intro();
 if (S.token) { S.me = { name: '…' }; loadMe(); }
 loadMeta(); loadBoard(); hit(false); loadAds();
 setInterval(() => { if (!document.hidden) hit(true); }, 120000);
+window.addEventListener('consent', e => { if (e.detail === 'all') hit(false); });
 document.addEventListener('visibilitychange', () => { if (!document.hidden) hit(true); });
 setInterval(() => { if (!document.hidden && !Q) loadBoard(); }, 60000);
 })();
@@ -2004,6 +2093,38 @@ setInterval(() => { if (!document.hidden && !Q) loadBoard(); }, 60000);
     b.setAttribute('aria-label', t === 'light' ? 'Qora rejimga oʻtish' : 'Oq rejimga oʻtish'); b.title = b.getAttribute('aria-label'); }
   set(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
   b.addEventListener('click', function(){ set(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
+})();
+</script>
+<script>
+/* ---------- Cookie roziligi ---------- */
+(function(){
+  var K = 'consent';
+  var L = {
+    uz: { t:'Cookie va brauzer xotirasi', p:'Sayt ishlashi uchun zarur maʼlumot (kirish, til, oq/qora rejim) brauzeringizda saqlanadi. Tashrif statistikasini (davlat, qurilma, brauzer) yozishga ruxsat berasizmi?', a:'Qabul qilish', m:'Faqat zarurlari', d:'Batafsil' },
+    en: { t:'Cookies and browser storage', p:'Data the site needs to work (sign-in, language, light/dark mode) is kept in your browser. May we also record visit statistics (country, device, browser)?', a:'Accept', m:'Necessary only', d:'Details' },
+    ru: { t:'Cookie и память браузера', p:'Данные, нужные для работы сайта (вход, язык, светлая/тёмная тема), хранятся в вашем браузере. Разрешаете записывать статистику посещений (страна, устройство, браузер)?', a:'Принять', m:'Только необходимые', d:'Подробнее' }
+  };
+  function get(){ try { return localStorage.getItem(K); } catch (e) { return null; } }
+  function put(v){ try { localStorage.setItem(K, v); } catch (e) {} try { window.dispatchEvent(new CustomEvent('consent', { detail: v })); } catch (e) {} }
+  function lang(){ var l = null; try { l = localStorage.getItem('lang'); } catch (e) {} return L[l] ? l : 'uz'; }
+  function show(){
+    var old = document.getElementById('ckb'); if (old) old.remove();
+    var x = L[lang()], b = document.createElement('div');
+    b.id = 'ckb'; b.className = 'ckb'; b.setAttribute('role', 'dialog'); b.setAttribute('aria-label', x.t);
+    b.innerHTML = '<div class="ckb-t"><b></b><p></p></div><div class="ckb-a"><button type="button" class="ck-all"></button><button type="button" class="ck-min"></button><a href="/huquqiy.html#cookie"></a></div>';
+    b.querySelector('b').textContent = x.t; b.querySelector('p').textContent = x.p;
+    var ba = b.querySelector('.ck-all'), bm = b.querySelector('.ck-min');
+    ba.textContent = x.a; bm.textContent = x.m; b.querySelector('a').textContent = x.d;
+    ba.onclick = function(){ put('all'); b.remove(); };
+    bm.onclick = function(){ put('min'); b.remove(); };
+    document.body.appendChild(b);
+  }
+  window.cookieConsent = { get: get, show: show };
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('[data-cookie]') : null;
+    if (t) { e.preventDefault(); show(); }
+  });
+  if (!get()) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show(); }
 })();
 </script>
 </body>

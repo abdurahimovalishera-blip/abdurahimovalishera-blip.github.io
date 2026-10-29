@@ -2,6 +2,8 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Testlar — alisher.live</title>
@@ -277,6 +279,40 @@ html[data-theme="light"] .kind,html[data-theme="light"] .qc-b .lb{color:var(--se
 html[data-theme="light"] .qtext .gap{border-bottom-color:var(--sea)}
 html[data-theme="light"] .qc-b .sample{border-left-color:var(--sea)}
 
+
+/* yangi logo (favicon.svg) */
+.logo-t{background:url(/favicon.svg) center/100% 100% no-repeat !important;color:transparent !important;box-shadow:none !important;border:0 !important;font-size:0 !important}
+
+/* cookie roziligi */
+.ckb{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:900;width:min(760px,calc(100% - 24px));display:flex;gap:14px 18px;align-items:center;flex-wrap:wrap;padding:16px 18px;border-radius:20px;border:1px solid var(--line2);background:rgba(16,18,24,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--tx);box-shadow:0 24px 60px -20px rgba(0,0,0,.8);font-size:14px;animation:ckIn .35s ease both}
+.ckb-t{flex:1 1 320px;min-width:0}
+.ckb-t b{display:block;margin-bottom:3px;font-weight:600;font-size:15px}
+.ckb-t p{margin:0;color:var(--tx2);line-height:1.45}
+.ckb-a{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ckb-a button{border:1px solid var(--line2);border-radius:999px;padding:9px 16px;font:500 14px inherit;font-family:inherit;cursor:pointer;background:transparent;color:var(--tx)}
+.ckb-a .ck-all{border-color:transparent;color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A)}
+.ckb-a a{color:var(--tx2);font-size:13.5px;padding:0 4px}
+html[data-theme="light"] .ckb{background:rgba(255,255,255,.97);box-shadow:0 24px 60px -22px rgba(17,24,39,.45)}
+@keyframes ckIn{from{opacity:0;transform:translate(-50%,14px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (max-width:560px){.ckb-a{width:100%}.ckb-a button{flex:1 1 auto}}
+
+/* v2: katta kirish bloki */
+.thero{margin:26px 0 8px;padding:30px;border-radius:30px;border:1px solid var(--line);background:radial-gradient(60% 120% at 100% 0%,rgba(56,189,248,.08),transparent 60%),rgba(12,13,18,.72);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px 32px;align-items:end}
+.thero h1{font:400 clamp(30px,4.4vw,52px)/1.04 var(--f-d);letter-spacing:-.045em;margin:0;text-wrap:balance}
+.thero h1 em{font-style:normal;background:linear-gradient(90deg,#7DD3FC,#A5B4FC);-webkit-background-clip:text;background-clip:text;color:transparent}
+.thero-r p{margin:0 0 14px;color:var(--tx2);line-height:1.5}
+.thero-act{display:flex;gap:10px;flex-wrap:wrap}
+.thero-act a{text-decoration:none}
+.btn.pri{background:linear-gradient(135deg,#0E7490,#1E3A8A);color:#fff}
+.thero-f{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.thero-f li{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font:400 12.5px var(--f-m);color:var(--tx2)}
+.thero-f .i{width:14px;height:14px;color:var(--amber)}
+@media (max-width:760px){.thero{grid-template-columns:1fr;padding:22px 18px;margin-top:14px;border-radius:24px}}
+html[data-theme="light"] .thero{background:radial-gradient(60% 120% at 100% 0%,rgba(14,116,144,.07),transparent 60%),radial-gradient(50% 120% at 0% 100%,rgba(217,119,6,.06),transparent 60%),#fff;box-shadow:var(--sh)}
+html[data-theme="light"] .thero h1 em{background:linear-gradient(90deg,#0E7490,#1E3A8A);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[data-theme="light"] .thero-f li{background:#fff}
+html[data-theme="light"] .thero-f .i{color:var(--sea)}
+html[data-theme="light"] .btn.pri{color:#fff;background:linear-gradient(135deg,#0E7490,#1E3A8A)}
 </style>
 </head>
 <body>
@@ -296,6 +332,8 @@ html[data-theme="light"] .qc-b .sample{border-left-color:var(--sea)}
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6M13 6l6 6"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.363 3.591L2.257 17.125a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636-2.87L13.637 3.59a1.914 1.914 0 0 0-3.274 0z"/></symbol>
   <symbol id="i-atom" viewBox="0 0 24 24"><path d="M12 12v.01"/><path d="M19.071 4.929c-1.562-1.562-6 .337-9.9 4.243-3.905 3.905-5.804 8.337-4.242 9.9 1.562 1.561 6-.338 9.9-4.244 3.905-3.905 5.804-8.337 4.242-9.9"/><path d="M4.929 4.929c-1.562 1.562.337 6 4.243 9.9 3.905 3.905 8.337 5.804 9.9 4.242 1.561-1.562-.338-6-4.244-9.9-3.905-3.905-8.337-5.804-9.9-4.242"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></symbol>
   <symbol id="i-redo" viewBox="0 0 24 24"><path d="M19.95 11a8 8 0 1 0-.5 4m.5 5v-5h-5"/></symbol>
 </svg>
 
@@ -306,9 +344,9 @@ html[data-theme="light"] .qc-b .sample{border-left-color:var(--sea)}
       <a href="/">Bosh sahifa</a>
       <a href="/testlar.html" aria-current="page">Testlar</a>
       <a href="/viktorina.html">Viktorina</a>
-      <a href="/ijara.html">Ijara</a>
       <a href="/viktorina.html#board">Reyting</a>
-      <a href="/#donate">Qoʻllab-quvvatlash</a>
+      <a href="/ijara.html">Ijara</a>
+      <a href="/#donate">Donat</a>
       <a href="/#contact">Aloqa</a>
     </nav>
     <button class="thm" id="thm" type="button" aria-label="Oq / qora rejim"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8-9v1m8 8h1m-9 8v1M5.6 5.6l.7.7m12.1-.7l-.7.7m0 11.4l.7.7m-12.1-.7l-.7.7"/></svg></button>
@@ -321,7 +359,7 @@ html[data-theme="light"] .qc-b .sample{border-left-color:var(--sea)}
   <div class="wrap">
     <span>© 2026 alisher.live</span>
     <span>Testlar bepul. Natijalar faqat shu qurilmada saqlanadi.</span>
-    <span class="fl"><a href="/huquqiy.html#shartlar">Foydalanish shartlari</a> · <a href="/huquqiy.html#maxfiylik">Maxfiylik siyosati</a> · <a href="/huquqiy.html#ogohlantirish">Ogohlantirish</a></span>
+    <span class="fl"><a href="/huquqiy.html#shartlar">Foydalanish shartlari</a> · <a href="/huquqiy.html#maxfiylik">Maxfiylik siyosati</a> · <a href="/huquqiy.html#ogohlantirish">Ogohlantirish</a> · <a href="#" data-cookie>Cookie sozlamalari</a></span>
   </div>
 </footer>
 
@@ -1305,11 +1343,23 @@ function band(bands, v){ return bands.find(b => v <= b[0]) || bands[bands.length
 /* ================= BOSH SAHIFA ================= */
 function renderHome(){
   app.innerHTML = `
-    <section class="hero">
-      <h1>Testlar</h1>
-      <p class="lead">Bilimingizni tekshiring va bosqichma-bosqich oʻsib boring. Hamma testlar bepul, roʻyxatdan oʻtish shart emas.</p>
+    <section class="thero">
+      <h1>Bilimingizni sinang va <em>bosqichma-bosqich</em> oʻsib boring</h1>
+      <div class="thero-r">
+        <p>Ingliz tili, abituriyent, IQ va psixologik testlar, bilimlar viktorinasi va dunyo reytingi — barchasi bepul. Roʻyxatdan oʻtish shart emas.</p>
+        <div class="thero-act">
+          <button class="btn pri" type="button" data-start>Testlarni boshlash</button>
+          <a class="btn ghost" href="/viktorina.html">Viktorina va reyting</a>
+        </div>
+      </div>
+      <ul class="thero-f">
+        <li>${ic('i-atom')}8 yoʻnalish</li>
+        <li>${ic('i-list')}1 000+ savol</li>
+        <li>${ic('i-lang')}Ingliz tili A1–C1</li>
+        <li>${ic('i-trophy')}Dunyo reytingi</li>
+      </ul>
     </section>
-    <section class="dirs">
+    <section class="dirs" id="dirs">
       ${DIRS.map(d => {
         const n = d.id === 'english' ? null : TESTS.filter(t => t.dir === d.id).length;
         return `
@@ -1322,6 +1372,7 @@ function renderHome(){
       }).join('')}
     </section>
     <p class="note">Psixologik, IQ va homiladorlik testlari maʼlumot uchun moʻljallangan. Ular shifokor yoki psixolog xulosasining oʻrnini bosmaydi.</p>`;
+  const st = app.querySelector('[data-start]'); if (st) st.onclick = () => document.getElementById('dirs').scrollIntoView({ behavior: 'smooth', block: 'start' });
   app.querySelectorAll('[data-dir]').forEach(b => b.onclick = () => { const d = dirOf(b.dataset.dir); if (d && d.link) location.href = d.link; else go(b.dataset.dir === 'english' ? 'english' : 'd/' + b.dataset.dir); });
 }
 
@@ -1641,6 +1692,38 @@ route();
     b.setAttribute('aria-label', t === 'light' ? 'Qora rejimga oʻtish' : 'Oq rejimga oʻtish'); b.title = b.getAttribute('aria-label'); }
   set(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
   b.addEventListener('click', function(){ set(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
+})();
+</script>
+<script>
+/* ---------- Cookie roziligi ---------- */
+(function(){
+  var K = 'consent';
+  var L = {
+    uz: { t:'Cookie va brauzer xotirasi', p:'Sayt ishlashi uchun zarur maʼlumot (kirish, til, oq/qora rejim) brauzeringizda saqlanadi. Tashrif statistikasini (davlat, qurilma, brauzer) yozishga ruxsat berasizmi?', a:'Qabul qilish', m:'Faqat zarurlari', d:'Batafsil' },
+    en: { t:'Cookies and browser storage', p:'Data the site needs to work (sign-in, language, light/dark mode) is kept in your browser. May we also record visit statistics (country, device, browser)?', a:'Accept', m:'Necessary only', d:'Details' },
+    ru: { t:'Cookie и память браузера', p:'Данные, нужные для работы сайта (вход, язык, светлая/тёмная тема), хранятся в вашем браузере. Разрешаете записывать статистику посещений (страна, устройство, браузер)?', a:'Принять', m:'Только необходимые', d:'Подробнее' }
+  };
+  function get(){ try { return localStorage.getItem(K); } catch (e) { return null; } }
+  function put(v){ try { localStorage.setItem(K, v); } catch (e) {} try { window.dispatchEvent(new CustomEvent('consent', { detail: v })); } catch (e) {} }
+  function lang(){ var l = null; try { l = localStorage.getItem('lang'); } catch (e) {} return L[l] ? l : 'uz'; }
+  function show(){
+    var old = document.getElementById('ckb'); if (old) old.remove();
+    var x = L[lang()], b = document.createElement('div');
+    b.id = 'ckb'; b.className = 'ckb'; b.setAttribute('role', 'dialog'); b.setAttribute('aria-label', x.t);
+    b.innerHTML = '<div class="ckb-t"><b></b><p></p></div><div class="ckb-a"><button type="button" class="ck-all"></button><button type="button" class="ck-min"></button><a href="/huquqiy.html#cookie"></a></div>';
+    b.querySelector('b').textContent = x.t; b.querySelector('p').textContent = x.p;
+    var ba = b.querySelector('.ck-all'), bm = b.querySelector('.ck-min');
+    ba.textContent = x.a; bm.textContent = x.m; b.querySelector('a').textContent = x.d;
+    ba.onclick = function(){ put('all'); b.remove(); };
+    bm.onclick = function(){ put('min'); b.remove(); };
+    document.body.appendChild(b);
+  }
+  window.cookieConsent = { get: get, show: show };
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('[data-cookie]') : null;
+    if (t) { e.preventDefault(); show(); }
+  });
+  if (!get()) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show(); }
 })();
 </script>
 </body>
