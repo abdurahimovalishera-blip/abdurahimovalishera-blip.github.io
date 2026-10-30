@@ -8,6 +8,7 @@
 <title>Boshqaruv — alisher.live</title>
 <meta name="theme-color" content="#07080B">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -282,18 +283,18 @@ async function boot() {
   } catch (e) { if (S.token) app.innerHTML = '<p class="msg bad">Maʼlumotni yuklab boʻlmadi. Sahifani yangilang.</p>'; }
 }
 function render() {
-  const T = { rent: 'Ijara eʼlonlari', ad: 'Reklama', firms: 'Firmalar' };
+  const T = { rent: 'Ijara eʼlonlari', ad: 'Reklama', banner: 'Bannerlar', firms: 'Firmalar' };
   app.innerHTML = `
     <nav class="tabs" aria-label="Boʻlimlar">${Object.entries(T).map(([k, v]) => `<button type="button" data-tab="${k}" aria-pressed="${S.tab === k}">${v}</button>`).join('')}</nav>
     <section id="pane"></section>`;
   app.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => { S.tab = b.dataset.tab; render(); });
   const pane = document.getElementById('pane');
-  if (S.tab === 'rent') renderRent(pane); else if (S.tab === 'ad') renderAds(pane); else renderFirms(pane);
+  if (S.tab === 'rent') renderRent(pane); else if (S.tab === 'ad') renderAds(pane); else if (S.tab === 'banner') renderBanners(pane); else renderFirms(pane);
 }
 const firmName = id => (S.firms.find(f => f.id === id) || {}).name || id || '—';
 function itemHtml(p) {
   const th = (p.photos || [])[0];
-  const meta = p.kind === 'ad'
+  const meta = (p.kind === 'ad' || p.kind === 'banner')
     ? [p.expires ? 'Muddati: ' + new Date(p.expires * 1000).toLocaleDateString('ru-RU') : 'Muddatsiz', p.url ? esc(p.url.replace(/^https?:\/\//, '').slice(0, 40)) : '']
     : [p.m2 ? p.m2 + ' m²' : '', p.price ? esc(p.price + ' ' + (p.unit || '')) : 'Narx kelishiladi'];
   return `
@@ -344,6 +345,15 @@ function renderAds(pane) {
   document.getElementById('newAd').onclick = () => openForm({ kind: 'ad', active: true, photos: [] });
   wireItems(pane);
 }
+function renderBanners(pane) {
+  const bs = S.posts.filter(p => p.kind === 'banner');
+  pane.innerHTML = `
+    <div class="head"><h2>Bannerlar</h2><button class="btn sun" type="button" id="newBn">${ic('i-plus')} Yangi banner</button></div>
+    <div class="items">${bs.length ? bs.map(itemHtml).join('') : '<div class="empty">Qoʻshimcha banner yoʻq. Bosh sahifada saytning oʻz bannerlari aylanib turibdi: Testlar, Ingliz tili, Viktorina, Ijara, Donat va Reklama.</div>'}</div>
+    <p class="msg">Bu yerda qoʻshilgan bannerlar bosh sahifadagi aylanib turuvchi oynaning boshida, «Reklama» belgisi bilan chiqadi. Muddati tugagach oʻzi yashiriladi. <a href="/" target="_blank" rel="noopener">Saytda koʻrish</a></p>`;
+  document.getElementById('newBn').onclick = () => openForm({ kind: 'banner', active: true, photos: [] });
+  wireItems(pane);
+}
 function renderFirms(pane) {
   pane.innerHTML = `
     <div class="head"><h2>Firmalar</h2></div>
@@ -376,7 +386,7 @@ function renderFirms(pane) {
 
 /* ---------------- Saqlash va oʻchirish ---------------- */
 function payload(p) {
-  const data = p.kind === 'ad'
+  const data = (p.kind === 'ad' || p.kind === 'banner')
     ? { title: p.title, text: p.text, url: p.url, btn: p.btn, photos: p.photos }
     : { title: p.title, addr: p.addr, map: p.map, m2: p.m2, price: p.price, unit: p.unit, free: p.free, cond: p.cond, use: p.use, note: p.note, photos: p.photos };
   return { id: p.id, kind: p.kind, firm: p.firm, active: p.active !== false, sort: p.sort || 0, expires: p.expires || null, data };
@@ -444,7 +454,7 @@ async function uploadFiles(files, list, onChange, limit) {
 /* ---------------- Eʼlon formasi ---------------- */
 function openForm(p0) {
   const p = JSON.parse(JSON.stringify(p0)); p.photos = p.photos || [];
-  const isAd = p.kind === 'ad';
+  const isAd = p.kind === 'ad' || p.kind === 'banner'; const isBn = p.kind === 'banner';
   const chk = (arr, all, name) => {
     const extra = (arr || []).filter(x => !all.includes(x));
     return `<div class="checks">${all.map(x => `<label><input type="checkbox" name="${name}" value="${esc(x)}"${(arr || []).includes(x) ? ' checked' : ''}> ${esc(x)}</label>`).join('')}</div>
@@ -452,7 +462,7 @@ function openForm(p0) {
   };
   const dateVal = p.expires ? new Date(p.expires * 1000).toISOString().slice(0, 10) : '';
   const html = isAd ? `
-    <h2>${p.id ? 'Reklamani tahrirlash' : 'Yangi reklama'}</h2>
+    <h2>${isBn ? (p.id ? 'Bannerni tahrirlash' : 'Yangi banner') : (p.id ? 'Reklamani tahrirlash' : 'Yangi reklama')}</h2>
     <form id="pf" class="grid" novalidate>
       <label class="f full">Sarlavha<input type="text" name="title" maxlength="120" required value="${esc(p.title)}"></label>
       <label class="f full">Matn<textarea name="text" maxlength="600">${esc(p.text)}</textarea></label>
@@ -460,7 +470,7 @@ function openForm(p0) {
       <label class="f">Tugma matni<small>masalan: Batafsil</small><input type="text" name="btn" maxlength="40" value="${esc(p.btn)}"></label>
       <label class="f">Muddati (shu kungacha koʻrsatiladi)<small>Boʻsh qoldirsangiz — muddatsiz</small><input type="date" name="exp" value="${dateVal}"></label>
       <label class="f">Tartib raqami<small>Kattasi yuqorida turadi</small><input type="number" name="sort" value="${esc(p.sort || 0)}"></label>
-      <div class="f full"><span>Rasm (1 ta)</span><div class="photos" id="phs"></div></div>
+      <div class="f full"><span>Rasm (1 ta)${isBn ? ' — keng rasm yuklang, masalan 1600×600; matn chap tomonda koʻrinadi' : ''}</span><div class="photos" id="phs"></div></div>
       <label class="switch full"><input type="checkbox" name="active"${p.active !== false ? ' checked' : ''}> Saytda koʻrsatish</label>
     </form>` : `
     <h2>${p.id ? 'Eʼlonni tahrirlash' : 'Yangi ijara eʼloni'}</h2>
