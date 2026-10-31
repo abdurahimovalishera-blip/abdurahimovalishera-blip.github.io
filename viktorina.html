@@ -1054,6 +1054,7 @@ const T = {
     q_of:(n,t)=>`${n} / ${t}-savol`, points:'ball', correct:'Toʻgʻri!', wrong:'Notoʻgʻri', timeout:'Vaqt tugadi',
     res_points:'ball toʻpladingiz', res_correct:'toʻgʻri javob', res_rank:'dunyo reytingida', res_total:'jami ballingiz',
     again:'Yana oʻynash', other:'Boshqa yoʻnalish', see_board:'Reytingni koʻrish', retry:'Qayta urinish',
+    cert_btn:'Sertifikat olish', cert_dir:'Bilimlar viktorinasi', cert_need:'Sertifikat uchun avval ism bilan kiring.', cert_low:'Sertifikat uchun kamida 60% toʻplang.', cert_make:'Sertifikat tayyorlanmoqda…', cert_dl:'Rasmni yuklab olish', cert_share:'Ulashish', cert_err:'Xatolik. Keyinroq urinib koʻring.', cert_title:'Sizning sertifikatingiz', cert_hint:'Rasmni yuklab oling va doʻstlaringizga ulashing.', cert_close:'Yopish',
     quit_q:'Oʻyinni toʻxtatasizmi? Bu oʻyin natijasi hisobga olinmaydi.', welcome:n=>`Xush kelibsiz, ${n}!`, logged_out:'Akkauntdan chiqdingiz.',
     rank_line:r=>`${r}-oʻrin`
   },
@@ -1087,6 +1088,7 @@ const T = {
     q_of:(n,t)=>`Question ${n} of ${t}`, points:'points', correct:'Correct!', wrong:'Wrong', timeout:'Time’s up',
     res_points:'points earned', res_correct:'correct answers', res_rank:'world rank', res_total:'total points',
     again:'Play again', other:'Another subject', see_board:'See leaderboard', retry:'Try again',
+    cert_btn:'Get certificate', cert_dir:'Bilimlar viktorinasi', cert_need:'Sign in with a name first to get a certificate.', cert_low:'Score at least 60% to earn a certificate.', cert_make:'Preparing certificate…', cert_dl:'Download image', cert_share:'Share', cert_err:'Error. Try again later.', cert_title:'Your certificate', cert_hint:'Download the image and share it with friends.', cert_close:'Close',
     quit_q:'Stop this game? Its result won’t be counted.', welcome:n=>`Welcome, ${n}!`, logged_out:'You signed out.',
     rank_line:r=>`#${r}`
   },
@@ -1120,6 +1122,7 @@ const T = {
     q_of:(n,t)=>`Вопрос ${n} из ${t}`, points:'баллов', correct:'Верно!', wrong:'Неверно', timeout:'Время вышло',
     res_points:'баллов набрано', res_correct:'верных ответов', res_rank:'место в мире', res_total:'всего баллов',
     again:'Сыграть ещё', other:'Другое направление', see_board:'Открыть рейтинг', retry:'Повторить',
+    cert_btn:'Получить сертификат', cert_dir:'Bilimlar viktorinasi', cert_need:'Сначала войдите с именем, чтобы получить сертификат.', cert_low:'Наберите минимум 60% для сертификата.', cert_make:'Готовим сертификат…', cert_dl:'Скачать изображение', cert_share:'Поделиться', cert_err:'Ошибка. Попробуйте позже.', cert_title:'Ваш сертификат', cert_hint:'Скачайте изображение и поделитесь с друзьями.', cert_close:'Закрыть',
     quit_q:'Остановить игру? Её результат не будет засчитан.', welcome:n=>`Добро пожаловать, ${n}!`, logged_out:'Вы вышли из аккаунта.',
     rank_line:r=>`${r}-е место`
   }
@@ -1775,13 +1778,137 @@ function showResult(s) {
   f(fmt(s.totalPoints), t('res_total'));
   res.appendChild(facts);
   const acts = el('div', 'acts');
-  const b1 = el('button', 'btn', t('again')); b1.type = 'button'; b1.onclick = () => startQuiz(Q.cat);
+  const pct = Math.round(s.correct / Math.max(1, s.total) * 100);
+  if (pct >= 60) {
+    const bc = el('button', 'btn', t('cert_btn')); bc.type = 'button'; bc.innerHTML = '<i class="ti ti-certificate"></i>'; bc.append(t('cert_btn'));
+    bc.onclick = () => certFlow(s, pct, bc); acts.appendChild(bc);
+  }
+  const b1 = el('button', 'btn ghost', t('again')); b1.type = 'button'; b1.onclick = () => startQuiz(Q.cat);
   const b2 = el('button', 'btn ghost', t('other')); b2.type = 'button'; b2.onclick = () => { endQuiz(); $('quiz').scrollIntoView(); };
   const b3 = el('button', 'btn ghost', t('see_board')); b3.type = 'button'; b3.onclick = () => { const c = Q.cat; endQuiz(); S.boardCat = 'all'; renderChips(); loadBoard(); $('board').scrollIntoView(); };
   acts.append(b1, b2, b3); res.appendChild(acts); body.appendChild(res);
-  b1.focus();
+  (acts.firstChild || b1).focus();
   loadMe(); loadBoard(); loadMeta();
 }
+
+/* ---------------- Sertifikat ---------------- */
+// drawCert(canvas, d) — d: {name, dirTitle, points, correct, total, pct, rank, date, code}
+function drawCert(canvas, d) {
+  var W = 1600, H = 1131, s = 2; canvas.width = W * s; canvas.height = H * s;
+  var g = canvas.getContext('2d'); g.scale(s, s);
+  var SER = "Georgia, 'Times New Roman', 'Liberation Serif', serif", SANS = "Inter, 'DejaVu Sans', sans-serif";
+  var teal = '#0E7490', navy = '#0E2A3A', gold = '#B8860B', goldL = '#C8A24A', ink = '#2A3942', mut = '#5A6A76';
+  // bg
+  g.fillStyle = '#FBF9F2'; g.fillRect(0, 0, W, H);
+  var rg = g.createRadialGradient(320, 0, 0, 320, 0, 900); rg.addColorStop(0, 'rgba(14,116,144,.05)'); rg.addColorStop(1, 'rgba(14,116,144,0)'); g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  var rg2 = g.createRadialGradient(W, H, 0, W, H, 900); rg2.addColorStop(0, 'rgba(184,134,11,.06)'); rg2.addColorStop(1, 'rgba(184,134,11,0)'); g.fillStyle = rg2; g.fillRect(0, 0, W, H);
+  // watermark emblem
+  g.save(); g.globalAlpha = .04; g.strokeStyle = teal; g.lineWidth = 10; g.lineJoin = 'round'; g.lineCap = 'round';
+  var cx = W / 2, my = 560, sc = 7; g.beginPath(); g.moveTo(cx - 27 * sc, my + 13 * sc); g.lineTo(cx - 13 * sc, my - 9 * sc); g.lineTo(cx - 5 * sc, my + sc); g.lineTo(cx + 3 * sc, my - 13 * sc); g.lineTo(cx + 17 * sc, my + 13 * sc); g.stroke(); g.restore();
+  // borders
+  g.strokeStyle = teal; g.lineWidth = 2; g.strokeRect(26, 26, W - 52, H - 52);
+  g.strokeStyle = goldL; g.lineWidth = 1; g.strokeRect(34, 34, W - 68, H - 68);
+  // corners
+  g.strokeStyle = gold; g.lineWidth = 5; var cs = 56;
+  function corner(x, y, dx, dy) { g.beginPath(); g.moveTo(x, y + dy * cs); g.lineTo(x, y); g.lineTo(x + dx * cs, y); g.stroke(); }
+  corner(34, 34, 1, 1); corner(W - 34, 34, -1, 1); corner(34, H - 34, 1, -1); corner(W - 34, H - 34, -1, -1);
+  g.textAlign = 'center';
+  // brand
+  var by = 112;
+  roundRect(g, cx - 108, by - 28, 56, 56, 14); var bg = g.createLinearGradient(cx - 108, by - 28, cx - 52, by + 28); bg.addColorStop(0, teal); bg.addColorStop(1, '#1E3A8A'); g.fillStyle = bg; g.fill();
+  g.fillStyle = '#fff'; g.font = '600 32px ' + SANS; g.textAlign = 'center'; g.fillText('a', cx - 80, by + 11);
+  g.fillStyle = teal; g.font = '600 26px ' + SANS; g.textAlign = 'left'; g.fillText('alisher.live', cx - 42, by + 9); g.textAlign = 'center';
+  // eyebrow
+  g.fillStyle = gold; g.font = '600 15px ' + SANS; letterText(g, 'B I L I M   V A   S A L O H I Y A T   S E R T I F I K A T I', cx, 190, 2.5);
+  // title
+  g.fillStyle = navy; g.font = '700 92px ' + SER; letterText(g, 'SERTIFIKAT', cx, 290, 5);
+  // rule
+  var ru = g.createLinearGradient(cx - 75, 0, cx + 75, 0); ru.addColorStop(0, 'rgba(200,162,74,0)'); ru.addColorStop(.5, goldL); ru.addColorStop(1, 'rgba(200,162,74,0)'); g.fillStyle = ru; g.fillRect(cx - 75, 322, 150, 3);
+  // pre
+  g.fillStyle = '#4A5A66'; g.font = '400 20px ' + SANS; g.fillText('Ushbu sertifikat quyidagi shaxsga taqdim etiladi:', cx, 376);
+  // name
+  g.fillStyle = teal; g.font = '700 60px ' + SER; g.fillText(d.name || '—', cx, 452);
+  g.strokeStyle = goldL; g.lineWidth = 2; g.globalAlpha = .7; g.beginPath(); g.moveTo(cx - 260, 480); g.lineTo(cx + 260, 480); g.stroke(); g.globalAlpha = 1;
+  // for text (wrapped)
+  g.fillStyle = ink; g.font = '400 21px ' + SANS;
+  wrap(g, '«' + (d.dirTitle || '') + '» yoʻnalishi boʻyicha bilim sinovini muvaffaqiyatli yakunlagani va natija koʻrsatgani uchun.', cx, 526, 900, 31);
+  // stats
+  var sy = 640, gap = 230;
+  stat(g, cx - gap, sy, (d.points != null ? fmt(d.points) : '—'), 'TOʻPLANGAN BALL');
+  stat(g, cx, sy, (d.pct != null ? d.pct + '%' : '—'), 'NATIJA');
+  stat(g, cx + gap, sy, (d.rank ? '#' + fmt(d.rank) : (d.correct + '/' + d.total)), d.rank ? 'DUNYO REYTINGI' : 'TOʻGʻRI JAVOB');
+  // footer
+  var fy = 980;
+  // signature left
+  g.textAlign = 'center'; g.fillStyle = navy; g.font = 'italic 30px ' + SER; g.fillText('A. Abduraximov', 300, fy);
+  g.strokeStyle = '#8595A0'; g.lineWidth = 1; g.beginPath(); g.moveTo(170, fy + 16); g.lineTo(430, fy + 16); g.stroke();
+  g.fillStyle = mut; g.font = '500 14px ' + SANS; g.fillText('Loyiha asoschisi', 300, fy + 38);
+  // date mid
+  g.fillStyle = navy; g.font = '30px ' + SER; g.fillText(d.date || '', cx, fy);
+  g.beginPath(); g.moveTo(cx - 100, fy + 16); g.lineTo(cx + 100, fy + 16); g.stroke();
+  g.fillStyle = mut; g.font = '500 14px ' + SANS; g.fillText('Berilgan sana', cx, fy + 38);
+  // seal right
+  seal(g, W - 260, fy - 20, 70);
+  // verify code
+  g.fillStyle = '#7A8894'; g.font = '500 14px ' + SANS; g.textAlign = 'center';
+  g.fillText('Tekshiruv kodi: ' + (d.code || '') + '   ·   Haqiqiyligini tekshirish: alisher.live/sert', cx, H - 64);
+
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function stat(g, x, y, v, l) { g.textAlign = 'center'; g.fillStyle = navy; g.font = '700 46px ' + SER; g.fillText(v, x, y); g.fillStyle = '#8A7A4A'; g.font = '600 13px ' + SANS; letterText(g, l.split('').join(' '), x, y + 30, 1.2); }
+  function wrap(g, text, x, y, maxW, lh) { var words = text.split(' '), line = '', lines = []; for (var i = 0; i < words.length; i++) { var test = line + words[i] + ' '; if (g.measureText(test).width > maxW && line) { lines.push(line); line = words[i] + ' '; } else line = test; } lines.push(line); for (var j = 0; j < lines.length; j++) g.fillText(lines[j].trim(), x, y + j * lh); }
+  function letterText(g, text, x, y, ls) { var total = 0, ws = []; for (var i = 0; i < text.length; i++) { var w = g.measureText(text[i]).width + ls; ws.push(w); total += w; } var cur = x - total / 2; g.textAlign = 'left'; for (i = 0; i < text.length; i++) { g.fillText(text[i], cur, y); cur += ws[i]; } g.textAlign = 'center'; }
+  function roundRect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function seal(g, x, y, r) {
+    var gr = g.createLinearGradient(x - r, y - r, x + r, y + r); gr.addColorStop(0, '#E7C96A'); gr.addColorStop(.5, '#B8860B'); gr.addColorStop(1, '#8A6508');
+    g.beginPath(); g.arc(x, y, r, 0, 7); g.fillStyle = gr; g.fill(); g.strokeStyle = '#6E5207'; g.lineWidth = 2; g.stroke();
+    g.beginPath(); g.arc(x, y, r - 13, 0, 7); g.strokeStyle = 'rgba(251,249,242,.55)'; g.lineWidth = 2; g.stroke();
+    // circular text
+    g.fillStyle = '#FBF9F2'; g.font = '700 12px ' + SANS; var txt = 'ALISHER.LIVE · RASMIY SERTIFIKAT · '; var ang = -Math.PI / 2, rr = r - 7;
+    for (var i = 0; i < txt.length; i++) { var ch = txt[i], cw = g.measureText(ch).width; ang += (cw + 3) / rr; g.save(); g.translate(x + Math.cos(ang) * rr, y + Math.sin(ang) * rr); g.rotate(ang + Math.PI / 2); g.textAlign = 'center'; g.fillText(ch, 0, 0); g.restore(); }
+    // emblem
+    g.strokeStyle = '#FBF9F2'; g.lineWidth = 6; g.lineJoin = 'round'; g.lineCap = 'round'; var e = r / 7; g.beginPath(); g.moveTo(x - 2.7 * e, y + 1.3 * e); g.lineTo(x - 1.3 * e, y - 1.1 * e); g.lineTo(x - .5 * e, y + .2 * e); g.lineTo(x + .3 * e, y - 1.3 * e); g.lineTo(x + 1.7 * e, y + 1.3 * e); g.stroke();
+  }
+}
+async function certFlow(s, pct, btn) {
+  if (!S.me || !S.me.name || S.me.name === '…') { toast(t('cert_need')); if (typeof openLogin === 'function') openLogin(); return; }
+  const old = btn.innerHTML; btn.disabled = true; btn.textContent = t('cert_make');
+  let code = '', date = '';
+  try {
+    const r = await api('/cert', { body: { points: s.points, correct: s.correct, total: s.total, rank: s.rank || 0, pct } });
+    if (r.ok && r.data && r.data.code) { code = r.data.code; date = r.data.date; }
+  } catch (e) {}
+  btn.disabled = false; btn.innerHTML = old;
+  if (!code) { toast(t('cert_err')); return; }
+  certShow({ name: S.me.name, dirTitle: t('cert_dir'), points: s.points, correct: s.correct, total: s.total, pct, rank: s.rank || 0, date, code });
+}
+function certShow(d) {
+  if (!document.getElementById('certcss')) {
+    const st = el('style'); st.id = 'certcss';
+    st.textContent = '.certov{position:fixed;inset:0;z-index:120;background:rgba(3,6,12,.82);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;padding:16px;overflow:auto}'
+      + '.certbox{width:min(760px,100%);display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}'
+      + '.certbox h3{margin:0;font:600 22px var(--f-d);color:#fff}.certbox p{margin:0;color:var(--tx2);font-size:14px}'
+      + '.certbox canvas{width:100%;height:auto;border-radius:12px;box-shadow:0 30px 80px -24px rgba(0,0,0,.8)}'
+      + '.certbox .ca{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}'
+      + '.certbox .cc{font:500 12.5px var(--f-m);color:var(--tx3)}';
+    document.head.appendChild(st);
+  }
+  const ov = el('div', 'certov'); const box = el('div', 'certbox');
+  box.append(el('h3', '', t('cert_title')));
+  const cv = el('canvas'); drawCert(cv, d); box.appendChild(cv);
+  box.append(el('p', '', t('cert_hint')));
+  const ca = el('div', 'ca');
+  const dl = el('button', 'btn sun', t('cert_dl')); dl.type = 'button'; dl.innerHTML = '<i class="ti ti-download"></i>'; dl.append(t('cert_dl'));
+  dl.onclick = () => cv.toBlob(b => { const u = URL.createObjectURL(b); const a = el('a'); a.href = u; a.download = 'alisher-live-sertifikat.png'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); }, 'image/png');
+  ca.appendChild(dl);
+  if (navigator.canShare) { const sh = el('button', 'btn ghost', t('cert_share')); sh.type = 'button'; sh.innerHTML = '<i class="ti ti-share"></i>'; sh.append(t('cert_share'));
+    sh.onclick = () => cv.toBlob(b => { const f = new File([b], 'sertifikat.png', { type: 'image/png' }); if (navigator.canShare({ files: [f] })) navigator.share({ files: [f], title: 'alisher.live' }).catch(() => {}); else dl.click(); }, 'image/png'); ca.appendChild(sh); }
+  const cl = el('button', 'btn ghost', t('cert_close')); cl.type = 'button'; cl.onclick = () => ov.remove(); ca.appendChild(cl);
+  box.appendChild(ca); box.append(el('div', 'cc', 'ALISHER.LIVE · ' + d.code));
+  ov.appendChild(box); ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+  document.addEventListener('keydown', function k(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', k); } });
+  document.body.appendChild(ov);
+}
+
 
 /* ---------------- Statistika ---------------- */
 async function loadMeta() {
