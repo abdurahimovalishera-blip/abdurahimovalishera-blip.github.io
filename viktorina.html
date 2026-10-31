@@ -1851,7 +1851,7 @@ function drawCert(canvas, d) {
   seal(g, W - 260, fy - 20, 70);
   // verify code
   g.fillStyle = '#7A8894'; g.font = '500 14px ' + SANS; g.textAlign = 'center';
-  g.fillText('Tekshiruv kodi: ' + (d.code || '') + '   ·   Haqiqiyligini tekshirish: alisher.live/sert', cx, H - 64);
+  g.fillText('Tekshiruv kodi: ' + (d.code || '') + '   ·   Haqiqiyligini tekshirish: alisher.live/sert.html', cx, H - 64);
 
   function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
   function stat(g, x, y, v, l) { g.textAlign = 'center'; g.fillStyle = navy; g.font = '700 46px ' + SER; g.fillText(v, x, y); g.fillStyle = '#8A7A4A'; g.font = '600 13px ' + SANS; letterText(g, l.split('').join(' '), x, y + 30, 1.2); }
