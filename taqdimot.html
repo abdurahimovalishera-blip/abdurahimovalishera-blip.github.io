@@ -31,6 +31,33 @@ header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 8
 .bar nav{display:flex;gap:4px}
 .bar nav a{text-decoration:none;color:var(--tx2);padding:8px 13px;border-radius:999px;font-weight:500;font-size:14.5px}
 .bar nav a:hover,.bar nav a[aria-current]{color:var(--tx);background:var(--glass)}
+.acctwrap{display:flex;align-items:center}
+.acctbtn{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:0;cursor:pointer;color:#fff;background:linear-gradient(100deg,#229ED9,#1E6FB8);font:600 13.5px var(--f-b)}
+.acctbtn:hover{filter:brightness(1.07)}
+.acctbox{display:flex;align-items:center;gap:8px}
+.acctbadge{display:inline-flex;align-items:center;gap:6px;font:600 12.5px var(--f-b);padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--glass);color:var(--tx2);white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis}
+.acctbadge.sub{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
+.acctout{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--tx3);cursor:pointer;display:grid;place-items:center}
+.acctout:hover{color:var(--bad)}
+.ob{margin:14px 0 0;padding:16px;border-radius:16px;border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);background:color-mix(in srgb,var(--gold) 8%,transparent);display:flex;gap:13px;align-items:flex-start}
+.ob i{color:var(--gold);font-size:22px;margin-top:1px}
+.ob b{font:600 15px var(--f-b);color:var(--tx)}
+.ob p{margin:4px 0 0;font-size:13.5px;color:var(--tx2)}
+.ob button{margin-top:10px;border:0;border-radius:10px;padding:9px 15px;font:600 13.5px var(--f-b);color:#fff;background:linear-gradient(100deg,#B8860B,#8a6508);cursor:pointer}
+dialog{border:1px solid var(--line);border-radius:22px;background:var(--panel);color:var(--tx);padding:24px;width:min(460px,calc(100% - 24px));box-shadow:0 40px 90px -30px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(3,6,12,.55);backdrop-filter:blur(4px)}
+dialog h3{margin:0 0 8px;font:600 20px var(--f-d)}
+dialog p{margin:0 0 8px;color:var(--tx2);font-size:14.5px}
+dialog ul{margin:10px 0;padding-left:4px;list-style:none;color:var(--tx);font-size:14.5px}
+dialog ul li{padding:4px 0 4px 26px;position:relative}
+dialog ul li:before{content:'✓';position:absolute;left:4px;color:var(--ok);font-weight:700}
+dialog .foot{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+dialog .foot button{border:0;border-radius:11px;padding:10px 18px;font:600 14px var(--f-b);cursor:pointer}
+dialog .foot .sec{background:var(--glass);color:var(--tx)}
+dialog .foot .pri{color:#fff;background:linear-gradient(100deg,#0E7490,#1E3A8A)}
+.adminrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.adminrow input{flex:1 1 120px;min-width:0;border:1px solid var(--line2);background:var(--bg);color:var(--tx);border-radius:10px;padding:9px 12px;font:500 14px var(--f-b)}
+#tgwidget{display:flex;justify-content:center;margin:12px 0 4px;min-height:46px}
 .hero{padding:40px 0 6px}
 .eyebrow{font:500 12px var(--f-m);letter-spacing:.16em;text-transform:uppercase;color:var(--sea);margin:0 0 10px}
 h1{margin:0;font:500 clamp(30px,5vw,48px)/1.05 var(--f-d);letter-spacing:-.03em}
@@ -129,6 +156,10 @@ footer a{text-decoration:none}
   <div class="wrap bar">
     <a class="logo" href="/"><span class="mk">a</span><b>alisher.live</b></a>
     <nav><a href="/testlar.html">Testlar</a><a href="/viktorina.html">Viktorina</a><a href="/taqdimot.html" aria-current="page">Taqdimot</a><a href="/manbalar.html">Manbalar</a></nav>
+    <div class="acctwrap">
+      <button class="acctbtn" id="loginBtn" type="button" hidden><i class="ti ti-brand-telegram"></i><span>Kirish</span></button>
+      <div class="acctbox" id="acctBox" hidden><span class="acctbadge" id="acctBadge"></span><button class="acctout" id="logoutBtn" type="button" title="Chiqish"><i class="ti ti-logout"></i></button></div>
+    </div>
   </div>
 </header>
 <main>
@@ -183,6 +214,7 @@ footer a{text-decoration:none}
       <button class="go" id="go" type="submit"><i class="ti ti-sparkles"></i>Taqdimot yaratish</button>
       <p class="hint"><i class="ti ti-bolt"></i>Bepul: kuniga 2 ta (yengil suv belgisi bilan). Faktlarni, sana va raqamlarni yuklashdan oldin bir koʻzdan kechiring.</p>
       <div class="err" id="err" hidden></div>
+      <div class="ob" id="obBox" hidden><i class="ti ti-crown"></i><div><b id="obTitle">Obuna — suv belgisisiz, cheksiz</b><p id="obText">15 000 soʻm / oy. Obunachilar uchun taqdimotlar suv belgisisiz va kunlik cheklovsiz.</p><button type="button" id="obBtn">Batafsil</button></div></div>
     </form>
 
     <div class="loading" id="loading" hidden>
@@ -214,12 +246,45 @@ footer a{text-decoration:none}
 </main>
 <footer><div class="wrap"><span>© 2026 alisher.live</span><span><a href="/huquqiy.html#shartlar">Foydalanish shartlari</a> · <a href="/huquqiy.html#maxfiylik">Maxfiylik</a></span></div></footer>
 
+<dialog id="loginDlg">
+  <h3>Telegram orqali kirish</h3>
+  <p>Obuna va shaxsiy imkoniyatlar uchun Telegram orqali kiring. Hech qanday parol kerak emas.</p>
+  <div id="tgwidget"></div>
+  <p style="font-size:12.5px;color:var(--tx3)">Agar tugma chiqmasa, saytni Telegram ilovasi ichida oching yoki brauzeringiz Telegram’ga ruxsat berganiga ishonch hosil qiling.</p>
+  <div class="foot"><button class="sec" id="loginClose" type="button">Yopish</button></div>
+</dialog>
+
+<dialog id="subDlg">
+  <h3>Obuna — 15 000 soʻm / oy</h3>
+  <ul>
+    <li>Suv belgisisiz, toza taqdimotlar</li>
+    <li>Kunlik cheklovsiz — xohlagancha yarating</li>
+    <li>Yangi imkoniyatlar birinchi boʻlib</li>
+  </ul>
+  <p id="subMsg">Toʻlov tizimi (Payme/Click) tez orada ulanadi. Hozircha obuna uchun biz bilan Telegram orqali bogʻlaning — faollashtiramiz.</p>
+  <div class="foot"><button class="sec" id="subClose" type="button">Yopish</button><a class="pri" id="subContact" href="https://t.me/BazaAl_bot" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;padding:10px 18px;border-radius:11px">Bogʻlanish</a></div>
+</dialog>
+
+<dialog id="admDlg">
+  <h3>Obuna berish (admin)</h3>
+  <p>Foydalanuvchining Telegram ID raqamini va kun sonini kiriting.</p>
+  <div class="adminrow">
+    <input id="admId" inputmode="numeric" placeholder="Telegram ID (masalan 2007592379)">
+    <input id="admDays" inputmode="numeric" placeholder="Kun (30)" style="flex:0 0 90px">
+  </div>
+  <p id="admMsg" style="min-height:1.1em;margin-top:8px"></p>
+  <div class="foot"><button class="sec" id="admClose" type="button">Yopish</button><button class="pri" id="admGo" type="button">Faollashtirish</button></div>
+</dialog>
+
 <div id="print"></div>
 
 <script>
 (function(){
   'use strict';
   var API = 'https://alisher-present.abdurahimovalishera.workers.dev';
+  var BOT = 'BazaAl_bot';
+  var TOK=null, ACCT=null;
+  try { TOK = localStorage.getItem('alv_tok') || null; } catch(e){}
 
   var THEMES = {
     amber: { accent:'#E8900C', dark:'#14171F', ppt:'E8900C', pptDark:'14171F' },
@@ -230,8 +295,8 @@ footer a{text-decoration:none}
   var $ = function(id){ return document.getElementById(id); };
   var form=$('form'), topic=$('topic'), err=$('err'), loading=$('loading'), result=$('result'),
       stage=$('stage'), cnt=$('cnt'), thumbs=$('thumbs'), notesBox=$('notes'), go=$('go');
-  var DECK=null, THEME='amber', cur=0, editing=false, PAID=false; // PAID=true bo'lsa suv belgisi chiqmaydi (obunachilar uchun)
-  var WM='alisher.live';
+  var DECK=null, THEME='amber', cur=0, editing=false;
+  var WM='alisher.live', WM_ON=true; // WM_ON=false bo'lsa suv belgisi chiqmaydi (obunachilar uchun). Server /gen javobidagi watermark bilan belgilanadi.
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function showErr(m){ err.textContent=m; err.hidden=false; }
@@ -263,11 +328,13 @@ footer a{text-decoration:none}
     if(t.length<2){ showErr('Iltimos, mavzuni yozing.'); topic.focus(); return; }
     var body={ topic:t, lang:$('lang').value, slides:parseInt($('n').value,10), level:$('level').value };
     go.disabled=true; result.hidden=true; loading.hidden=false;
-    fetch(API+'/gen',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+    var hdr={'content-type':'application/json'}; if(TOK) hdr['authorization']='Bearer '+TOK;
+    fetch(API+'/gen',{method:'POST',headers:hdr,body:JSON.stringify(body)})
       .then(function(r){ return r.json().then(function(j){ return {s:r.status,j:j}; }); })
       .then(function(res){
         loading.hidden=true; go.disabled=false;
         if(res.s!==200 || !res.j || !res.j.ok){ showErr((res.j&&res.j.message)||'Xatolik yuz berdi. Qaytadan urinib koʻring.'); return; }
+        WM_ON = res.j.watermark !== false; // obunachiga server watermark:false qaytaradi
         DECK=buildDeck(res.j); cur=0; editing=false;
         document.body.classList.remove('edit-on'); $('editbadge').hidden=true;
         result.hidden=false; render();
@@ -306,7 +373,7 @@ footer a{text-decoration:none}
         +'<span class="foot" style="color:'+t.dark+'">alisher.live</span><span class="pg" style="color:'+t.dark+'">'+cur+'</span></div>';
     }
     stage.innerHTML=html;
-    if(!PAID){
+    if(WM_ON){
       var layer=document.createElement('div'); layer.className='wm'; layer.setAttribute('aria-hidden','true');
       layer.style.color=(s.type==='title')?'#FFFFFF':'#111827';
       var words=''; for(var i=0;i<80;i++) words+='<span>'+WM+'</span>';
@@ -368,7 +435,7 @@ footer a{text-decoration:none}
         sl.addText(String(i),{x:12.2,y:6.95,w:0.8,h:0.35,fontFace:'Arial',fontSize:11,color:'B5BBC7',align:'right'});
         if(s.notes) sl.addNotes(s.notes);
       }
-      if(!PAID) sl.addText(WM,{x:0.3,y:2.3,w:12.7,h:2.8,fontFace:'Arial',fontSize:54,bold:true,color:(s.type==='title'?'FFFFFF':'9AA3AF'),align:'center',valign:'middle',rotate:315,transparency:(s.type==='title'?87:83)});
+      if(WM_ON) sl.addText(WM,{x:0.3,y:2.3,w:12.7,h:2.8,fontFace:'Arial',fontSize:54,bold:true,color:(s.type==='title'?'FFFFFF':'9AA3AF'),align:'center',valign:'middle',rotate:315,transparency:(s.type==='title'?87:83)});
     });
     pptx.writeFile({fileName:safeName()+'.pptx'}).catch(function(){ showErr('Yuklab boʻlmadi. Oddiy brauzerda (Chrome) ochib koʻring.'); });
   }
@@ -383,17 +450,99 @@ footer a{text-decoration:none}
         html+='<div class="pslide title-slide" style="background:'+t.dark+'"><h2 class="st">'+esc(s.title)+'</h2>'
           +'<div class="bar2" style="background:'+t.accent+'"></div>'
           +(s.subtitle?'<p class="ssub" style="color:rgba(255,255,255,.92)">'+esc(s.subtitle)+'</p>':'')
-          +'<span class="foot" style="color:#fff">alisher.live</span>'+(PAID?'':'<span class="wm" style="color:#FFFFFF">'+WM+'</span>')+'</div>';
+          +'<span class="foot" style="color:#fff">alisher.live</span>'+(WM_ON?'<span class="wm" style="color:#FFFFFF">'+WM+'</span>':'')+'</div>';
       } else {
         var lis=s.bullets.map(function(b){ return '<li><span style="position:absolute;left:3pt;top:7pt;width:8pt;height:8pt;border-radius:2pt;background:'+t.accent+'"></span>'+esc(b)+'</li>'; }).join('');
         html+='<div class="pslide" style="background:#fff"><h2 class="st" style="color:'+t.dark+'">'+esc(s.title)+'</h2>'
           +'<div class="bar2" style="background:'+t.accent+'"></div><ul>'+lis+'</ul>'
-          +'<span class="foot" style="color:'+t.dark+'">alisher.live · '+i+'</span>'+(PAID?'':'<span class="wm" style="color:#111827">'+WM+'</span>')+'</div>';
+          +'<span class="foot" style="color:'+t.dark+'">alisher.live · '+i+'</span>'+(WM_ON?'<span class="wm" style="color:#111827">'+WM+'</span>':'')+'</div>';
       }
     });
     box.innerHTML=html;
     setTimeout(function(){ window.print(); },60);
   }
+
+  // ---- Hisob / obuna ----
+  var loginBtn=$('loginBtn'), acctBox=$('acctBox'), acctBadge=$('acctBadge'), logoutBtn=$('logoutBtn'),
+      obBox=$('obBox'), obBtn=$('obBtn'), loginDlg=$('loginDlg'), subDlg=$('subDlg'), admDlg=$('admDlg');
+
+  function fmtDate(ts){ try{ var d=new Date(ts*1000); return d.getDate()+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+d.getFullYear(); }catch(e){ return ''; } }
+
+  function applyAccount(st){
+    ACCT = st || { logged:false };
+    var sub = ACCT.logged && ACCT.subscribed;
+    WM_ON = !sub;
+    if(!ACCT.logged){
+      loginBtn.hidden=false; acctBox.hidden=true;
+      obBox.hidden=false; obBtn.textContent='Batafsil';
+    } else {
+      loginBtn.hidden=true; acctBox.hidden=false;
+      if(sub){ acctBadge.className='acctbadge sub'; acctBadge.innerHTML='<i class="ti ti-crown"></i>Obuna · '+fmtDate(ACCT.until); obBox.hidden=true; }
+      else { acctBadge.className='acctbadge'; acctBadge.textContent=(ACCT.name||'Siz'); obBox.hidden=false; }
+      acctBadge.style.cursor = ACCT.admin ? 'pointer' : 'default';
+      acctBadge.onclick = ACCT.admin ? function(){ admDlg.showModal(); } : null;
+      if(ACCT.admin){ acctBadge.className='acctbadge sub'; acctBadge.innerHTML='<i class="ti ti-shield-check"></i>Admin'; obBox.hidden=true; }
+    }
+  }
+
+  function refreshAccount(){
+    if(!TOK){ applyAccount({logged:false}); return; }
+    fetch(API+'/sub-status',{headers:{'authorization':'Bearer '+TOK}})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j && j.logged){ applyAccount({logged:true,name:j.name,subscribed:j.subscribed,until:j.until,admin:j.admin}); } else { TOK=null; try{localStorage.removeItem('alv_tok');}catch(e){} applyAccount({logged:false}); } })
+      .catch(function(){ applyAccount({logged:false}); });
+  }
+
+  function doAuth(payload){
+    fetch(API+'/auth',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j && j.ok && j.token){ TOK=j.token; try{localStorage.setItem('alv_tok',TOK);}catch(e){} applyAccount({logged:true,name:j.name,subscribed:j.subscribed,until:j.until,admin:j.admin}); } })
+      .catch(function(){});
+  }
+
+  window.onTgAuth = function(user){ try{ loginDlg.close(); }catch(e){} doAuth({widget:user}); };
+
+  function renderWidget(){
+    var c=$('tgwidget'); c.innerHTML='';
+    var s=document.createElement('script');
+    s.async=true; s.src='https://telegram.org/js/telegram-widget.js?22';
+    s.setAttribute('data-telegram-login', BOT);
+    s.setAttribute('data-size','large'); s.setAttribute('data-radius','10');
+    s.setAttribute('data-onauth','onTgAuth(user)'); s.setAttribute('data-request-access','write');
+    c.appendChild(s);
+  }
+
+  loginBtn.addEventListener('click', function(){
+    // Telegram ichida bo'lsak initData bilan kiramiz
+    var w = window.Telegram && window.Telegram.WebApp;
+    if(w && w.initData){ doAuth({initData:w.initData}); return; }
+    renderWidget(); loginDlg.showModal();
+  });
+  $('loginClose').addEventListener('click', function(){ loginDlg.close(); });
+  logoutBtn.addEventListener('click', function(){ TOK=null; try{localStorage.removeItem('alv_tok');}catch(e){} applyAccount({logged:false}); });
+  obBtn.addEventListener('click', function(){ if(ACCT&&ACCT.admin){ admDlg.showModal(); } else { subDlg.showModal(); } });
+  $('subClose').addEventListener('click', function(){ subDlg.close(); });
+  $('admClose').addEventListener('click', function(){ admDlg.close(); });
+  $('admGo').addEventListener('click', function(){
+    var id=($('admId').value||'').replace(/[^0-9]/g,''), days=parseInt($('admDays').value,10)||30, m=$('admMsg');
+    if(!id){ m.style.color='var(--bad)'; m.textContent='Telegram ID kiriting.'; return; }
+    m.style.color='var(--tx3)'; m.textContent='Yuborilmoqda…';
+    fetch(API+'/admin/grant',{method:'POST',headers:{'content-type':'application/json','authorization':'Bearer '+TOK},body:JSON.stringify({tg_id:id,days:days})})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(j&&j.ok){ m.style.color='var(--ok)'; m.textContent='✓ Faollashtirildi — '+fmtDate(j.until)+' gacha.'; } else { m.style.color='var(--bad)'; m.textContent='Xatolik: '+((j&&j.error)||'?'); } })
+      .catch(function(){ m.style.color='var(--bad)'; m.textContent='Aloqa xatosi.'; });
+  });
+
+  // Telegram Mini App ichida avtomatik kirish
+  (function tgInit(tries){
+    if(TOK) return;
+    var w = window.Telegram && window.Telegram.WebApp;
+    if(w && w.initData){ doAuth({initData:w.initData}); return; }
+    if(tries>0 && /tgWebApp/.test(location.hash+location.search)) setTimeout(function(){ tgInit(tries-1); }, 400);
+  })(12);
+
+  applyAccount({logged:false});
+  refreshAccount();
 
   // mavzu kiritilsa darhol fokus
   topic.focus();
