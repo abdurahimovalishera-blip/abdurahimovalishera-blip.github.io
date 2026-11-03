@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Taqdimot yaratuvchi — alisher.live</title>
+<meta name="description" content="Mavzuni yozing — sunʼiy intellekt bir necha soniyada tayyor taqdimot (PowerPoint va PDF) tuzib beradi. Bepul.">
+<meta name="theme-color" content="#F5F6F8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Onest:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet">
+<script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
+<script src="/tg.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" defer></script>
+<style>
+:root{--bg:#F5F6F8;--bg2:#fff;--panel:#fff;--line:rgba(17,24,39,.1);--line2:rgba(17,24,39,.18);--glass:rgba(17,24,39,.035);--tx:#111827;--tx2:#4B5563;--tx3:#6B7280;--sea:#0E7490;--gold:#B8860B;--ok:#047857;--bad:#BE123C;
+  --f-d:'Geist',system-ui,sans-serif;--f-b:'Onest',system-ui,sans-serif;--f-m:'Geist Mono',ui-monospace,monospace;--sh:0 10px 28px -18px rgba(17,24,39,.28);color-scheme:light}
+html[data-theme="dark"]{--bg:#07080B;--bg2:#0F1115;--panel:#0F1115;--line:rgba(160,200,230,.12);--line2:rgba(160,200,230,.2);--glass:rgba(160,200,230,.05);--tx:#EAF2FB;--tx2:#A9BED0;--tx3:#6F8598;--sea:#38BDF8;--gold:#F4C430;--ok:#34D399;--bad:#FB7185;--sh:0 14px 34px -18px rgba(0,0,0,.6);color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.6 var(--f-b);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--tx)}
+.logo .mk{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#0E7490,#1E3A8A);display:grid;place-items:center;color:#fff;font:600 18px var(--f-d);padding-bottom:2px}
+.logo b{font:500 17px var(--f-d);letter-spacing:-.02em}
+.bar nav{display:flex;gap:4px}
+.bar nav a{text-decoration:none;color:var(--tx2);padding:8px 13px;border-radius:999px;font-weight:500;font-size:14.5px}
+.bar nav a:hover,.bar nav a[aria-current]{color:var(--tx);background:var(--glass)}
+.hero{padding:40px 0 6px}
+.eyebrow{font:500 12px var(--f-m);letter-spacing:.16em;text-transform:uppercase;color:var(--sea);margin:0 0 10px}
+h1{margin:0;font:500 clamp(30px,5vw,48px)/1.05 var(--f-d);letter-spacing:-.03em}
+.lead{max-width:640px;margin:14px 0 0;color:var(--tx2)}
+main{padding:14px 0 70px}
+/* ---- forma ---- */
+.form{margin:26px 0 0;padding:22px;border-radius:22px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--sh)}
+.fld{margin:0 0 16px}
+.fld:last-child{margin-bottom:0}
+label.lb{display:block;font:600 13px var(--f-b);color:var(--tx2);margin:0 0 7px}
+.topic{width:100%;border:1px solid var(--line2);background:var(--bg);color:var(--tx);border-radius:14px;padding:15px 16px;font:500 17px var(--f-b);resize:vertical;min-height:54px}
+.topic:focus{outline:2px solid color-mix(in srgb,var(--sea) 55%,transparent);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+select{width:100%;border:1px solid var(--line2);background:var(--bg);color:var(--tx);border-radius:12px;padding:12px 14px;font:500 15px var(--f-b);cursor:pointer}
+.themes{display:flex;gap:10px;flex-wrap:wrap}
+.themes label{position:relative;cursor:pointer}
+.themes input{position:absolute;opacity:0;pointer-events:none}
+.sw{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);font:600 14px var(--f-b);color:var(--tx2)}
+.sw .dot{width:18px;height:18px;border-radius:6px}
+.themes input:checked+.sw{border-color:var(--sea);color:var(--tx);background:var(--glass)}
+.go{margin-top:20px;width:100%;border:0;border-radius:14px;padding:16px;font:600 17px var(--f-b);color:#fff;background:linear-gradient(100deg,#0E7490,#1E3A8A);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.go:hover{filter:brightness(1.07)}
+.go:disabled{opacity:.6;cursor:default}
+.hint{margin:12px 2px 0;font-size:13px;color:var(--tx3);display:flex;align-items:center;gap:7px}
+.hint i{color:var(--sea)}
+.err{margin:14px 0 0;padding:13px 15px;border-radius:14px;border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);background:color-mix(in srgb,var(--bad) 8%,transparent);color:var(--bad);font-size:14.5px}
+/* ---- yuklanish ---- */
+.loading{margin:30px 0;text-align:center;color:var(--tx2)}
+.spin{width:46px;height:46px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--sea);margin:0 auto 16px;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loading b{display:block;font:600 18px var(--f-d);color:var(--tx);margin-bottom:4px}
+/* ---- natija ---- */
+.result{margin:28px 0 0}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--tx);font:600 14px var(--f-b);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--glass)}
+.btn.pri{border:0;color:#fff;background:linear-gradient(100deg,#0E7490,#1E3A8A)}
+.btn.pri:hover{filter:brightness(1.07)}
+.btn i{font-size:18px}
+.stage-wrap{border-radius:20px;border:1px solid var(--line);background:var(--glass);padding:16px;box-shadow:var(--sh)}
+.stage{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 10px 30px -14px rgba(0,0,0,.4)}
+/* slayd (WYSIWYG, oq fon) */
+.slide{position:absolute;inset:0;padding:5.5% 6.5%;display:flex;flex-direction:column;color:#1A1D23;font-family:var(--f-b)}
+.slide.title-slide{justify-content:center;align-items:flex-start}
+.slide .st{font:700 clamp(22px,4.2vw,40px)/1.12 var(--f-d);letter-spacing:-.02em;margin:0}
+.slide.title-slide .st{color:#fff}
+.slide .ssub{margin:14px 0 0;font-size:clamp(13px,2.2vw,20px);opacity:.92}
+.slide.title-slide .ssub{color:rgba(255,255,255,.92)}
+.slide .bar2{width:64px;height:6px;border-radius:3px;margin:10px 0 0}
+.slide ul{margin:18px 0 0;padding:0 0 0 2px;list-style:none;display:flex;flex-direction:column;gap:clamp(6px,1.4vw,13px)}
+.slide li{position:relative;padding-left:26px;font-size:clamp(12px,2.1vw,19px);line-height:1.35;color:#2A2E37}
+.slide li:before{content:'';position:absolute;left:4px;top:.5em;width:9px;height:9px;border-radius:3px}
+.slide .foot{position:absolute;left:6.5%;bottom:4%;font:600 11px var(--f-m);letter-spacing:.1em;opacity:.5}
+.slide .pg{position:absolute;right:6.5%;bottom:4%;font:600 12px var(--f-m);opacity:.5}
+.slide .wm{position:absolute;inset:-40%;transform:rotate(-24deg);display:flex;flex-wrap:wrap;gap:8px 26px;align-content:center;justify-content:center;pointer-events:none;opacity:.11;overflow:hidden;font:800 clamp(13px,2vw,20px) var(--f-d);letter-spacing:.02em;word-break:keep-all}
+.slide[contenteditable] .st,.slide [contenteditable]{outline:none}
+.edit-on .slide .st,.edit-on .slide li,.edit-on .slide .ssub{cursor:text;border-radius:4px}
+.edit-on .slide .st:focus,.edit-on .slide li:focus,.edit-on .slide .ssub:focus{box-shadow:0 0 0 2px color-mix(in srgb,var(--sea) 60%,transparent)}
+.nav{display:flex;align-items:center;justify-content:center;gap:16px;margin:14px 0 0}
+.nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--tx);cursor:pointer;font-size:20px;display:grid;place-items:center}
+.nav button:hover{background:var(--glass)}
+.nav .cnt{font:600 14px var(--f-m);color:var(--tx2);min-width:60px;text-align:center}
+.thumbs{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:14px 0 0}
+.thumbs b{width:9px;height:9px;border-radius:50%;background:var(--line2);cursor:pointer;transition:.15s}
+.thumbs b.on{background:var(--sea);transform:scale(1.25)}
+.notes{margin:14px 0 0;padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--panel);font-size:14px;color:var(--tx2)}
+.notes b{color:var(--tx);font:600 13px var(--f-b);display:block;margin-bottom:5px}
+.editbadge{margin:12px 2px 0;font-size:13px;color:var(--tx3)}
+footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));color:var(--tx3);font:500 12px var(--f-m);letter-spacing:.08em;text-transform:uppercase}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{text-decoration:none}
+@media (max-width:560px){.bar nav a{padding:8px 9px;font-size:12.5px}.row{grid-template-columns:1fr}}
+/* ---- bosib chiqarish (PDF) ---- */
+#print{display:none}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  header,main,footer{display:none!important}
+  #print{display:block}
+  .pslide{width:297mm;height:209mm;page-break-after:always;position:relative;padding:16mm 18mm;color:#1A1D23;font-family:'Onest',sans-serif;overflow:hidden}
+  .pslide.title-slide{display:flex;flex-direction:column;justify-content:center}
+  .pslide .st{font-size:30pt;font-weight:700;margin:0;line-height:1.1}
+  .pslide.title-slide .st{color:#fff}
+  .pslide .ssub{font-size:15pt;margin-top:10pt}
+  .pslide.title-slide .ssub{color:rgba(255,255,255,.92)}
+  .pslide .bar2{width:70pt;height:6pt;border-radius:3pt;margin-top:10pt}
+  .pslide ul{margin-top:18pt;padding-left:0;list-style:none}
+  .pslide li{position:relative;padding-left:22pt;font-size:15pt;line-height:1.5;margin-bottom:8pt;color:#2A2E37}
+  .pslide li:before{content:'';position:absolute;left:3pt;top:7pt;width:8pt;height:8pt;border-radius:2pt}
+  .pslide .foot{position:absolute;left:18mm;bottom:10mm;font-size:9pt;opacity:.5;letter-spacing:.1em}
+  .pslide .wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-24deg);font-size:60pt;font-weight:800;opacity:.12;white-space:nowrap;pointer-events:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/"><span class="mk">a</span><b>alisher.live</b></a>
+    <nav><a href="/testlar.html">Testlar</a><a href="/viktorina.html">Viktorina</a><a href="/taqdimot.html" aria-current="page">Taqdimot</a><a href="/manbalar.html">Manbalar</a></nav>
+  </div>
+</header>
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow">AI Taqdimot</p>
+    <h1>Mavzuni yozing — taqdimot tayyor</h1>
+    <p class="lead">Sunʼiy intellekt bir necha soniyada toʻliq taqdimot tuzib beradi. Koʻrib chiqing, tahrirlang va PowerPoint yoki PDF koʻrinishida yuklab oling. Mutlaqo bepul.</p>
+  </section>
+
+  <section class="wrap">
+    <form class="form" id="form" autocomplete="off">
+      <div class="fld">
+        <label class="lb" for="topic">Mavzu</label>
+        <textarea class="topic" id="topic" rows="1" maxlength="200" placeholder="Masalan: Suvning tabiatdagi aylanishi"></textarea>
+      </div>
+      <div class="fld row">
+        <div>
+          <label class="lb" for="lang">Til</label>
+          <select id="lang">
+            <option value="uz" selected>Oʻzbekcha</option>
+            <option value="ru">Ruscha</option>
+            <option value="en">Inglizcha</option>
+          </select>
+        </div>
+        <div>
+          <label class="lb" for="n">Slaydlar soni</label>
+          <select id="n">
+            <option value="6">6 ta</option>
+            <option value="8" selected>8 ta</option>
+            <option value="10">10 ta</option>
+            <option value="12">12 ta</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld">
+        <label class="lb" for="level">Daraja</label>
+        <select id="level">
+          <option value="" selected>Umumiy</option>
+          <option value="maktab oʻquvchisi">Maktab</option>
+          <option value="litsey va kollej">Litsey / Kollej</option>
+          <option value="universitet talabasi">Universitet</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label class="lb">Rang uslubi</label>
+        <div class="themes" id="themes">
+          <label><input type="radio" name="theme" value="amber" checked><span class="sw"><span class="dot" style="background:#E8900C"></span>Amber</span></label>
+          <label><input type="radio" name="theme" value="blue"><span class="sw"><span class="dot" style="background:#2563EB"></span>Koʻk</span></label>
+          <label><input type="radio" name="theme" value="green"><span class="sw"><span class="dot" style="background:#059669"></span>Yashil</span></label>
+        </div>
+      </div>
+      <button class="go" id="go" type="submit"><i class="ti ti-sparkles"></i>Taqdimot yaratish</button>
+      <p class="hint"><i class="ti ti-bolt"></i>Bepul: kuniga 2 ta (yengil suv belgisi bilan). Faktlarni, sana va raqamlarni yuklashdan oldin bir koʻzdan kechiring.</p>
+      <div class="err" id="err" hidden></div>
+    </form>
+
+    <div class="loading" id="loading" hidden>
+      <div class="spin"></div>
+      <b>AI taqdimot tuzyapti…</b>
+      <span>Bu bir necha soniya davom etadi</span>
+    </div>
+
+    <div class="result" id="result" hidden>
+      <div class="tools">
+        <button class="btn pri" id="dl-pptx" type="button"><i class="ti ti-file-type-ppt"></i>PowerPoint (.pptx)</button>
+        <button class="btn" id="dl-pdf" type="button"><i class="ti ti-file-type-pdf"></i>PDF</button>
+        <button class="btn" id="edit" type="button"><i class="ti ti-pencil"></i>Tahrirlash</button>
+        <button class="btn" id="regen" type="button"><i class="ti ti-refresh"></i>Qaytadan</button>
+      </div>
+      <div class="stage-wrap">
+        <div class="stage" id="stage"></div>
+        <div class="nav">
+          <button id="prev" aria-label="Oldingi"><i class="ti ti-chevron-left"></i></button>
+          <span class="cnt" id="cnt">1 / 1</span>
+          <button id="next" aria-label="Keyingi"><i class="ti ti-chevron-right"></i></button>
+        </div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <p class="editbadge" id="editbadge" hidden><i class="ti ti-info-circle"></i> Tahrir rejimi yoniq — slayddagi matnni bosib oʻzgartiring. Oʻzgarishlar yuklamaga ham tushadi.</p>
+      <div class="notes" id="notes" hidden></div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>© 2026 alisher.live</span><span><a href="/huquqiy.html#shartlar">Foydalanish shartlari</a> · <a href="/huquqiy.html#maxfiylik">Maxfiylik</a></span></div></footer>
+
+<div id="print"></div>
+
+<script>
+(function(){
+  'use strict';
+  var API = 'https://alisher-present.abdurahimovalishera.workers.dev';
+
+  var THEMES = {
+    amber: { accent:'#E8900C', dark:'#14171F', ppt:'E8900C', pptDark:'14171F' },
+    blue:  { accent:'#2563EB', dark:'#0F1A33', ppt:'2563EB', pptDark:'0F1A33' },
+    green: { accent:'#059669', dark:'#08231C', ppt:'059669', pptDark:'08231C' }
+  };
+
+  var $ = function(id){ return document.getElementById(id); };
+  var form=$('form'), topic=$('topic'), err=$('err'), loading=$('loading'), result=$('result'),
+      stage=$('stage'), cnt=$('cnt'), thumbs=$('thumbs'), notesBox=$('notes'), go=$('go');
+  var DECK=null, THEME='amber', cur=0, editing=false, PAID=false; // PAID=true bo'lsa suv belgisi chiqmaydi (obunachilar uchun)
+  var WM='alisher.live';
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function showErr(m){ err.textContent=m; err.hidden=false; }
+  function theme(){ return THEMES[THEME]||THEMES.amber; }
+
+  // auto-grow textarea
+  topic.addEventListener('input', function(){ topic.style.height='auto'; topic.style.height=(topic.scrollHeight)+'px'; });
+
+  document.querySelectorAll('input[name=theme]').forEach(function(r){
+    r.addEventListener('change', function(){ THEME=r.value; if(DECK) render(); });
+  });
+
+  form.addEventListener('submit', function(e){ e.preventDefault(); generate(); });
+  $('regen').addEventListener('click', generate);
+  $('prev').addEventListener('click', function(){ goTo(cur-1); });
+  $('next').addEventListener('click', function(){ goTo(cur+1); });
+  $('edit').addEventListener('click', toggleEdit);
+  $('dl-pptx').addEventListener('click', buildPptx);
+  $('dl-pdf').addEventListener('click', buildPdf);
+  document.addEventListener('keydown', function(e){
+    if(result.hidden||editing) return;
+    if(e.key==='ArrowLeft') goTo(cur-1);
+    if(e.key==='ArrowRight') goTo(cur+1);
+  });
+
+  function generate(){
+    var t=topic.value.trim();
+    err.hidden=true;
+    if(t.length<2){ showErr('Iltimos, mavzuni yozing.'); topic.focus(); return; }
+    var body={ topic:t, lang:$('lang').value, slides:parseInt($('n').value,10), level:$('level').value };
+    go.disabled=true; result.hidden=true; loading.hidden=false;
+    fetch(API+'/gen',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){ return r.json().then(function(j){ return {s:r.status,j:j}; }); })
+      .then(function(res){
+        loading.hidden=true; go.disabled=false;
+        if(res.s!==200 || !res.j || !res.j.ok){ showErr((res.j&&res.j.message)||'Xatolik yuz berdi. Qaytadan urinib koʻring.'); return; }
+        DECK=buildDeck(res.j); cur=0; editing=false;
+        document.body.classList.remove('edit-on'); $('editbadge').hidden=true;
+        result.hidden=false; render();
+        result.scrollIntoView({behavior:'smooth',block:'start'});
+      })
+      .catch(function(){ loading.hidden=true; go.disabled=false; showErr('Internet bilan aloqa yoʻq. Qaytadan urinib koʻring.'); });
+  }
+
+  // serverdan kelgan maʼlumotni slaydlar roʻyxatiga aylantiramiz
+  function buildDeck(j){
+    var d=[{ type:'title', title:j.title||topic.value.trim(), subtitle:j.subtitle||'' }];
+    (j.slides||[]).forEach(function(s){
+      d.push({ type:'content', title:s.title||'', bullets:(s.bullets||[]).filter(Boolean), notes:s.notes||'' });
+    });
+    return d;
+  }
+
+  function goTo(i){ if(!DECK) return; cur=Math.max(0,Math.min(DECK.length-1,i)); render(); }
+
+  function render(){
+    if(!DECK) return;
+    var s=DECK[cur], t=theme();
+    var html='';
+    if(s.type==='title'){
+      html='<div class="slide title-slide" style="background:'+t.dark+'">'
+        +'<h2 class="st" data-k="title" '+(editing?'contenteditable':'')+'>'+esc(s.title)+'</h2>'
+        +'<div class="bar2" style="background:'+t.accent+'"></div>'
+        +(s.subtitle?'<p class="ssub" data-k="subtitle" '+(editing?'contenteditable':'')+'>'+esc(s.subtitle)+'</p>':'')
+        +'<span class="foot" style="color:#fff">alisher.live</span></div>';
+    } else {
+      var lis=s.bullets.map(function(b,bi){ return '<li data-bi="'+bi+'" '+(editing?'contenteditable':'')+'><span style="position:absolute;left:4px;top:.5em;width:9px;height:9px;border-radius:3px;background:'+t.accent+'"></span>'+esc(b)+'</li>'; }).join('');
+      html='<div class="slide" style="background:#fff">'
+        +'<h2 class="st" data-k="title" style="color:'+t.dark+'" '+(editing?'contenteditable':'')+'>'+esc(s.title)+'</h2>'
+        +'<div class="bar2" style="background:'+t.accent+'"></div>'
+        +'<ul>'+lis+'</ul>'
+        +'<span class="foot" style="color:'+t.dark+'">alisher.live</span><span class="pg" style="color:'+t.dark+'">'+cur+'</span></div>';
+    }
+    stage.innerHTML=html;
+    if(!PAID){
+      var layer=document.createElement('div'); layer.className='wm'; layer.setAttribute('aria-hidden','true');
+      layer.style.color=(s.type==='title')?'#FFFFFF':'#111827';
+      var words=''; for(var i=0;i<80;i++) words+='<span>'+WM+'</span>';
+      layer.innerHTML=words;
+      var sl=stage.querySelector('.slide'); if(sl) sl.appendChild(layer);
+    }
+    cnt.textContent=(cur+1)+' / '+DECK.length;
+    thumbs.innerHTML=DECK.map(function(_,i){ return '<b class="'+(i===cur?'on':'')+'" data-i="'+i+'"></b>'; }).join('');
+    thumbs.querySelectorAll('b').forEach(function(b){ b.onclick=function(){ goTo(+b.dataset.i); }; });
+    if(s.type==='content' && s.notes){ notesBox.hidden=false; notesBox.innerHTML='<b>Notiq uchun izoh</b>'+esc(s.notes); }
+    else notesBox.hidden=true;
+    if(editing) bindEdit();
+  }
+
+  function bindEdit(){
+    var s=DECK[cur];
+    stage.querySelectorAll('[contenteditable]').forEach(function(el){
+      el.addEventListener('input', function(){
+        var k=el.dataset.k, bi=el.dataset.bi;
+        if(k==='title') s.title=el.textContent;
+        else if(k==='subtitle') s.subtitle=el.textContent;
+        else if(bi!=null) s.bullets[+bi]=el.textContent;
+      });
+    });
+  }
+
+  function toggleEdit(){
+    editing=!editing;
+    document.body.classList.toggle('edit-on',editing);
+    $('editbadge').hidden=!editing;
+    $('edit').innerHTML=editing?'<i class="ti ti-check"></i>Tayyor':'<i class="ti ti-pencil"></i>Tahrirlash';
+    render();
+  }
+
+  function safeName(){ return (DECK[0].title||'taqdimot').replace(/[^\p{L}\p{N} _-]/gu,'').trim().slice(0,60)||'taqdimot'; }
+
+  // ---- PowerPoint ----
+  function buildPptx(){
+    if(!DECK) return;
+    if(typeof PptxGenJS==='undefined'){ showErr('Yuklash kutubxonasi hali tayyor emas, bir soniyadan soʻng qayta bosing.'); return; }
+    var t=theme();
+    var pptx=new PptxGenJS();
+    pptx.defineLayout({name:'W',width:13.333,height:7.5}); pptx.layout='W';
+    DECK.forEach(function(s,i){
+      var sl=pptx.addSlide();
+      if(s.type==='title'){
+        sl.background={color:t.pptDark};
+        sl.addText(s.title,{x:0.8,y:2.5,w:11.7,h:2,fontFace:'Arial',fontSize:40,bold:true,color:'FFFFFF',align:'left',valign:'middle'});
+        sl.addShape(pptx.ShapeType.rect,{x:0.85,y:4.55,w:1.4,h:0.09,fill:{color:t.ppt}});
+        if(s.subtitle) sl.addText(s.subtitle,{x:0.8,y:4.8,w:11.7,h:1,fontFace:'Arial',fontSize:20,color:'E6EAF2',align:'left'});
+        sl.addText('alisher.live',{x:0.8,y:6.85,w:4,h:0.4,fontFace:'Arial',fontSize:12,color:'8A93A6'});
+      } else {
+        sl.background={color:'FFFFFF'};
+        sl.addText(s.title,{x:0.7,y:0.45,w:12,h:0.95,fontFace:'Arial',fontSize:27,bold:true,color:t.pptDark,align:'left',valign:'middle'});
+        sl.addShape(pptx.ShapeType.rect,{x:0.75,y:1.45,w:1.3,h:0.08,fill:{color:t.ppt}});
+        var bul=s.bullets.map(function(b){ return {text:String(b),options:{bullet:{code:'2022',indent:16},fontSize:18,color:'2A2E37',paraSpaceAfter:10,fontFace:'Arial'}}; });
+        sl.addText(bul,{x:0.8,y:1.75,w:11.8,h:5,valign:'top',lineSpacingMultiple:1.05});
+        sl.addText('alisher.live',{x:0.7,y:6.95,w:3,h:0.35,fontFace:'Arial',fontSize:10,color:'B5BBC7'});
+        sl.addText(String(i),{x:12.2,y:6.95,w:0.8,h:0.35,fontFace:'Arial',fontSize:11,color:'B5BBC7',align:'right'});
+        if(s.notes) sl.addNotes(s.notes);
+      }
+      if(!PAID) sl.addText(WM,{x:0.3,y:2.3,w:12.7,h:2.8,fontFace:'Arial',fontSize:54,bold:true,color:(s.type==='title'?'FFFFFF':'9AA3AF'),align:'center',valign:'middle',rotate:315,transparency:(s.type==='title'?87:83)});
+    });
+    pptx.writeFile({fileName:safeName()+'.pptx'}).catch(function(){ showErr('Yuklab boʻlmadi. Oddiy brauzerda (Chrome) ochib koʻring.'); });
+  }
+
+  // ---- PDF (bosib chiqarish orqali) ----
+  function buildPdf(){
+    if(!DECK) return;
+    var t=theme();
+    var box=$('print'); var html='';
+    DECK.forEach(function(s,i){
+      if(s.type==='title'){
+        html+='<div class="pslide title-slide" style="background:'+t.dark+'"><h2 class="st">'+esc(s.title)+'</h2>'
+          +'<div class="bar2" style="background:'+t.accent+'"></div>'
+          +(s.subtitle?'<p class="ssub" style="color:rgba(255,255,255,.92)">'+esc(s.subtitle)+'</p>':'')
+          +'<span class="foot" style="color:#fff">alisher.live</span>'+(PAID?'':'<span class="wm" style="color:#FFFFFF">'+WM+'</span>')+'</div>';
+      } else {
+        var lis=s.bullets.map(function(b){ return '<li><span style="position:absolute;left:3pt;top:7pt;width:8pt;height:8pt;border-radius:2pt;background:'+t.accent+'"></span>'+esc(b)+'</li>'; }).join('');
+        html+='<div class="pslide" style="background:#fff"><h2 class="st" style="color:'+t.dark+'">'+esc(s.title)+'</h2>'
+          +'<div class="bar2" style="background:'+t.accent+'"></div><ul>'+lis+'</ul>'
+          +'<span class="foot" style="color:'+t.dark+'">alisher.live · '+i+'</span>'+(PAID?'':'<span class="wm" style="color:#111827">'+WM+'</span>')+'</div>';
+      }
+    });
+    box.innerHTML=html;
+    setTimeout(function(){ window.print(); },60);
+  }
+
+  // mavzu kiritilsa darhol fokus
+  topic.focus();
+})();
+</script>
+</body>
+</html>
