@@ -248,9 +248,9 @@ footer a{text-decoration:none}
 
 <dialog id="loginDlg">
   <h3>Telegram orqali kirish</h3>
-  <p>Obuna va shaxsiy imkoniyatlar uchun Telegram orqali kiring. Hech qanday parol kerak emas.</p>
-  <div id="tgwidget"></div>
-  <p style="font-size:12.5px;color:var(--tx3)">Agar tugma chiqmasa, saytni Telegram ilovasi ichida oching yoki brauzeringiz Telegram’ga ruxsat berganiga ishonch hosil qiling.</p>
+  <p id="lgMsg">Tugmani bosing — Telegram ochiladi. Botda <b>«Boshlash» / «Start»</b> tugmasini bosing, va avtomatik kirasiz. Telefon raqam yoki parol kerak emas.</p>
+  <div style="display:flex;justify-content:center;margin:14px 0 2px"><a class="pri" id="lgOpen" href="#" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;color:#fff;background:linear-gradient(100deg,#229ED9,#1E6FB8);font:600 15px var(--f-b)"><i class="ti ti-brand-telegram"></i>Telegram'da ochish</a></div>
+  <p id="lgWait" hidden style="text-align:center;color:var(--sea);font-size:13.5px;margin-top:12px"><span class="spin" style="width:16px;height:16px;border-width:2px;display:inline-block;vertical-align:middle;margin-right:7px"></span>Tasdiqlashni kutyapmiz…</p>
   <div class="foot"><button class="sec" id="loginClose" type="button">Yopish</button></div>
 </dialog>
 
@@ -500,25 +500,51 @@ footer a{text-decoration:none}
       .catch(function(){});
   }
 
-  window.onTgAuth = function(user){ try{ loginDlg.close(); }catch(e){} doAuth({widget:user}); };
+  var pollTimer=null;
+  function stopPoll(){ if(pollTimer){ clearTimeout(pollTimer); pollTimer=null; } }
 
-  function renderWidget(){
-    var c=$('tgwidget'); c.innerHTML='';
-    var s=document.createElement('script');
-    s.async=true; s.src='https://telegram.org/js/telegram-widget.js?22';
-    s.setAttribute('data-telegram-login', BOT);
-    s.setAttribute('data-size','large'); s.setAttribute('data-radius','10');
-    s.setAttribute('data-onauth','onTgAuth(user)'); s.setAttribute('data-request-access','write');
-    c.appendChild(s);
+  function startCodeLogin(){
+    $('lgWait').hidden=true; $('lgOpen').href='#';
+    fetch(API+'/login-start',{method:'POST',headers:{'content-type':'application/json'}})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(!j || !j.ok){ $('lgMsg').textContent=(j&&j.message)||'Kirishni boshlab boʻlmadi. Qaytadan urining.'; return; }
+        $('lgOpen').href=j.url;
+        try{ window.open(j.url,'_blank'); }catch(e){}
+        $('lgWait').hidden=false;
+        pollLogin(j.code, 60);
+      })
+      .catch(function(){ $('lgMsg').textContent='Internet bilan aloqa yoʻq.'; });
+  }
+  function pollLogin(code, tries){
+    stopPoll();
+    if(tries<=0){ $('lgWait').innerHTML='Vaqt tugadi. «Telegram’da ochish»ni qayta bosing.'; return; }
+    fetch(API+'/login-poll?code='+encodeURIComponent(code))
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(j && j.status==='done' && j.token){
+          TOK=j.token; try{ localStorage.setItem('alv_tok',TOK); }catch(e){}
+          applyAccount({logged:true,name:j.name,subscribed:j.subscribed,until:j.until,admin:j.admin});
+          try{ loginDlg.close(); }catch(e){}
+          return;
+        }
+        if(j && j.status==='expired'){ $('lgWait').innerHTML='Havola eskirdi. Qaytadan oching.'; return; }
+        pollTimer=setTimeout(function(){ pollLogin(code, tries-1); }, 2000);
+      })
+      .catch(function(){ pollTimer=setTimeout(function(){ pollLogin(code, tries-1); }, 2500); });
   }
 
   loginBtn.addEventListener('click', function(){
-    // Telegram ichida bo'lsak initData bilan kiramiz
+    // Telegram ilovasi ichida bo'lsak — initData bilan avtomatik
     var w = window.Telegram && window.Telegram.WebApp;
     if(w && w.initData){ doAuth({initData:w.initData}); return; }
-    renderWidget(); loginDlg.showModal();
+    $('lgMsg').innerHTML='Tugmani bosing — Telegram ochiladi. Botda <b>«Boshlash» / «Start»</b> tugmasini bosing, va avtomatik kirasiz.';
+    $('lgWait').hidden=true;
+    loginDlg.showModal();
+    startCodeLogin();
   });
-  $('loginClose').addEventListener('click', function(){ loginDlg.close(); });
+  $('lgOpen').addEventListener('click', function(){ $('lgWait').hidden=false; });
+  $('loginClose').addEventListener('click', function(){ stopPoll(); loginDlg.close(); });
   logoutBtn.addEventListener('click', function(){ TOK=null; try{localStorage.removeItem('alv_tok');}catch(e){} applyAccount({logged:false}); });
   obBtn.addEventListener('click', function(){ if(ACCT&&ACCT.admin){ admDlg.showModal(); } else { subDlg.showModal(); } });
   $('subClose').addEventListener('click', function(){ subDlg.close(); });

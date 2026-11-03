@@ -94,6 +94,14 @@ async function subState(env, tgId) {
     return { subscribed: until > now(), until: until };
   } catch (e) { return { subscribed: false, until: 0 }; }
 }
+async function makeSession(env, id, name) {
+  const token = crypto.randomUUID() + crypto.randomUUID().replace(/-/g, '');
+  const th = await sha256hex(token);
+  const exp = now() + SESSION_DAYS * 86400;
+  await env.DB.prepare('INSERT INTO web_sessions(token_hash,tg_id,name,created,expires) VALUES(?,?,?,?,?)')
+    .bind(th, String(id), name || '', now(), exp).run();
+  return token;
+}
 
 export default {
   async fetch(req, env) {
@@ -103,6 +111,8 @@ export default {
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: h });
     if (p === '/gen' && req.method === 'POST') return gen(req, env, h);
     if (p === '/auth' && req.method === 'POST') return auth(req, env, h);
+    if (p === '/login-start' && req.method === 'POST') return loginStart(req, env, h);
+    if (p === '/login-poll') return loginPoll(req, env, h);
     if (p === '/sub-status') return subStatus(req, env, h);
     if (p === '/admin/grant' && req.method === 'POST') return adminGrant(req, env, h);
     if (p === '/admin/subs') return adminSubs(req, env, h);
@@ -128,15 +138,35 @@ async function auth(req, env, h) {
   else if (body.widget) user = await verifyWidget(body.widget, env.BOT_TOKEN);
   if (!user) return J({ error: 'bad_auth', message: 'Kirishni tasdiqlab boʻlmadi.' }, 401, h);
 
-  const token = crypto.randomUUID() + crypto.randomUUID().replace(/-/g, '');
-  const th = await sha256hex(token);
-  const exp = now() + SESSION_DAYS * 86400;
-  try {
-    await env.DB.prepare('INSERT INTO web_sessions(token_hash,tg_id,name,created,expires) VALUES(?,?,?,?,?)')
-      .bind(th, user.id, user.name, now(), exp).run();
-  } catch (e) { return J({ error: 'db' }, 500, h); }
+  let token;
+  try { token = await makeSession(env, user.id, user.name); } catch (e) { return J({ error: 'db' }, 500, h); }
   const st = await subState(env, user.id);
   return J({ ok: true, token: token, name: user.name, admin: String(env.ADMIN_ID) === String(user.id), subscribed: st.subscribed, until: st.until }, 200, h);
+}
+
+// Kodli kirish: sayt kod oladi, foydalanuvchi botda /start login_<code> bosadi (shop worker yozadi), sayt poll qiladi
+async function loginStart(req, env, h) {
+  if (!env.BOT_TOKEN) return J({ error: 'no_bot', message: 'Kirish hali sozlanmagan.' }, 503, h);
+  const code = hex(crypto.getRandomValues(new Uint8Array(12)));
+  try {
+    await env.DB.prepare('INSERT INTO login_codes(code,tg_id,name,created) VALUES(?,?,?,?)').bind(code, null, null, now()).run();
+  } catch (e) { return J({ error: 'db' }, 500, h); }
+  return J({ ok: true, code: code, bot: 'BazaAl_bot', url: 'https://t.me/BazaAl_bot?start=login_' + code }, 200, h);
+}
+async function loginPoll(req, env, h) {
+  const url = new URL(req.url);
+  const code = (url.searchParams.get('code') || '').replace(/[^a-f0-9]/g, '');
+  if (code.length !== 24) return J({ error: 'bad_code' }, 400, h);
+  let row;
+  try { row = await env.DB.prepare('SELECT tg_id,name,created FROM login_codes WHERE code=?').bind(code).first(); }
+  catch (e) { return J({ error: 'db' }, 500, h); }
+  if (!row) return J({ ok: true, status: 'expired' }, 200, h);
+  if (now() - row.created > 900) { try { await env.DB.prepare('DELETE FROM login_codes WHERE code=?').bind(code).run(); } catch (e) {} return J({ ok: true, status: 'expired' }, 200, h); }
+  if (!row.tg_id) return J({ ok: true, status: 'pending' }, 200, h);
+  const token = await makeSession(env, row.tg_id, row.name || '');
+  try { await env.DB.prepare('DELETE FROM login_codes WHERE code=?').bind(code).run(); } catch (e) {}
+  const st = await subState(env, row.tg_id);
+  return J({ ok: true, status: 'done', token: token, name: row.name || '', admin: String(env.ADMIN_ID) === String(row.tg_id), subscribed: st.subscribed, until: st.until }, 200, h);
 }
 
 async function subStatus(req, env, h) {
