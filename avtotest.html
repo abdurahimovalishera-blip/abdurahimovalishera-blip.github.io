@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>(function(){var t='light';try{var s=localStorage.getItem('theme');if(s==='dark'||s==='light')t=s;}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
+<script src="/tg.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haydovchilik testi — alisher.live</title>
+<meta name="description" content="Haydovchilik guvohnomasi uchun nazariy test: yoʻl belgilari, chorrahada ustunlik, tezlik rejimi va boshqalar. Rasmli savollar, haqiqiy imtihondek.">
+<meta name="theme-color" content="#07080B">
+<link rel="canonical" href="https://alisher.live/avtotest.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#07080B; --bg2:#0C0E13; --panel:#101217;
+  --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.075);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.17);
+  --tx:#F3F4F6; --tx2:#A4A9B5; --tx3:#6F7581;
+  --amber:#FFB547; --ember:#FF7A45; --blue:#7EA6FF;
+  --ok:#3DDC97; --bad:#FF6B6B;
+  --r:20px;
+  --f-d:"Geist",Onest,system-ui,sans-serif;
+  --f-b:Onest,system-ui,sans-serif;
+  --f-m:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:10px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+svg.i{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:-.125em}
+
+/* Header */
+header{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(7,8,11,.95),rgba(7,8,11,.82));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-t{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#FFE0A8,var(--amber) 45%,var(--ember));color:#111;display:grid;place-items:center;font:600 17px var(--f-d);box-shadow:0 0 22px -4px rgba(255,140,60,.55)}
+.logo span:last-child{font:500 17px var(--f-d);letter-spacing:-.02em}
+nav{display:flex;gap:2px;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--glass);overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{text-decoration:none;color:var(--tx2);font-size:14.5px;padding:7px 14px;border-radius:999px;white-space:nowrap}
+nav a:hover{color:var(--tx);background:var(--glass2)}
+nav a[aria-current="page"]{background:var(--tx);color:#0B0C10}
+
+/* Hero */
+.hero{padding:40px 0 10px}
+.crumbs{font:500 12.5px var(--f-m);color:var(--tx3);margin:0 0 12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.crumbs a{color:var(--tx2);text-decoration:underline;text-underline-offset:3px}
+h1{font:500 clamp(28px,4.4vw,46px)/1.05 var(--f-d);letter-spacing:-.035em;margin:0 0 10px}
+.lead{color:var(--tx2);max-width:640px;margin:0;font-size:16.5px}
+
+/* Mode cards */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:26px 0 18px}
+@media(max-width:720px){.modes{grid-template-columns:1fr}}
+.mode{--c:var(--amber);position:relative;border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:left;cursor:pointer;min-height:150px;display:flex;flex-direction:column;gap:8px;overflow:hidden;
+  background:radial-gradient(90% 80% at 85% 0%,color-mix(in srgb,var(--c) 26%,transparent),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012));background-color:rgba(12,13,18,.8);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.mode:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--c) 45%,var(--line));box-shadow:0 24px 50px -26px color-mix(in srgb,var(--c) 80%,transparent)}
+.mode.blue{--c:var(--blue)}
+.mode .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+.mode .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mode h3{margin:2px 0 0;font:500 20px/1.2 var(--f-d);letter-spacing:-.015em}
+.mode p{margin:0;color:var(--tx2);font-size:14.5px}
+.mode .go{margin-top:auto;font:500 13px var(--f-m);color:var(--c);display:flex;align-items:center;gap:6px}
+
+.stat{display:flex;gap:10px;flex-wrap:wrap;padding:4px 0 46px}
+.pill{font:500 12.5px var(--f-m);color:var(--tx2);border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:7px 13px;display:flex;gap:7px;align-items:center}
+.pill b{color:var(--amber);font-weight:600}
+
+/* Category list */
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:8px 0 50px}
+@media(max-width:720px){.cats{grid-template-columns:1fr}}
+.cat{display:flex;align-items:center;gap:14px;text-align:left;border:1px solid var(--line);border-radius:16px;background:rgba(10,11,15,.55);padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s}
+.cat:hover{border-color:var(--line2);background:var(--glass2)}
+.cat .n{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font:600 16px var(--f-d);color:#0B0C10;background:linear-gradient(135deg,#FFE0A8,var(--amber) 55%,var(--ember));flex:none}
+.cat .tt{font-weight:500;font-size:15.5px}
+.cat .ss{font:400 12.5px var(--f-m);color:var(--tx3)}
+.cat .ar{margin-left:auto;color:var(--tx3)}
+
+/* Exam */
+.exam{max-width:760px;margin:0 auto;padding:22px 0 70px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font:500 13px var(--f-m);color:var(--tx2)}
+.timer{color:var(--amber)}
+.timer.warn{color:var(--bad)}
+.prog{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-bottom:20px}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--ember));transition:width .35s ease}
+.card{border:1px solid var(--line);border-radius:24px;background:radial-gradient(120% 90% at 50% 0%,#141821 0%,#0A0B0F 65%);padding:22px}
+.kind{font:500 12px var(--f-m);color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin:0 0 12px}
+.qimg{display:flex;justify-content:center;margin:0 0 18px}
+.qimg .box{background:#0d0f14;border:1px solid var(--line);border-radius:16px;padding:14px;max-width:100%}
+.qimg svg{display:block;width:min(340px,78vw);height:auto}
+.qtext{font:500 clamp(18px,2.7vw,23px)/1.3 var(--f-d);letter-spacing:-.015em;margin:0 0 4px}
+.opts{display:grid;gap:10px;margin-top:18px}
+.opt{text-align:left;border:1px solid var(--line2);border-radius:14px;background:rgba(255,255,255,.03);padding:14px 16px;cursor:pointer;font-size:15.5px;display:flex;gap:12px;align-items:center;transition:background .15s,border-color .15s}
+.opt:hover:not([disabled]){background:var(--glass2)}
+.opt .k{font:500 12px var(--f-m);color:var(--tx3);width:24px;height:24px;border-radius:7px;border:1px solid var(--line2);display:grid;place-items:center;flex:none}
+.opt[disabled]{cursor:default}
+.opt.sel{border-color:var(--amber);background:color-mix(in srgb,var(--amber) 10%,transparent)}
+.opt.sel .k{border-color:var(--amber);color:var(--amber)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}
+.opt.right .k{border-color:var(--ok);color:var(--ok);background:var(--ok);color:#06240f}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.opt.wrong .k{border-color:var(--bad);color:var(--bad)}
+.fb{margin-top:16px;padding:12px 14px;border-radius:14px;font-size:14.5px;display:none}
+.fb.show{display:block}
+.fb.ok{background:color-mix(in srgb,var(--ok) 10%,transparent);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent)}
+.fb.no{background:color-mix(in srgb,var(--bad) 9%,transparent);border:1px solid color-mix(in srgb,var(--bad) 30%,transparent)}
+.fb b{color:var(--tx)}
+.foot{display:flex;gap:10px;margin-top:20px;align-items:center}
+.btn{border:1px solid var(--line2);background:var(--glass);color:var(--tx);border-radius:12px;padding:12px 18px;cursor:pointer;font:500 15px var(--f-b);display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--glass2)}
+.btn.primary{background:linear-gradient(135deg,var(--amber),var(--ember));color:#1a1000;border:0;font-weight:600}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.ghost{margin-left:auto;color:var(--tx3);border-color:transparent;background:none;padding:12px 6px}
+.btn.ghost:hover{color:var(--tx2)}
+
+/* Result */
+.result{max-width:640px;margin:0 auto;padding:40px 0 70px;text-align:center}
+.ring{width:150px;height:150px;margin:0 auto 18px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:grid;place-items:center;font:600 40px var(--f-d)}
+.rtitle{font:500 26px var(--f-d);margin:6px 0 4px;letter-spacing:-.02em}
+.rsub{color:var(--tx2);margin:0 0 22px}
+.rbadge{display:inline-flex;gap:8px;align-items:center;font:600 14px var(--f-m);padding:8px 16px;border-radius:999px;margin-bottom:22px}
+.rbadge.pass{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent);border:1px solid color-mix(in srgb,var(--ok) 35%,transparent)}
+.rbadge.fail{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent);border:1px solid color-mix(in srgb,var(--bad) 35%,transparent)}
+.review{text-align:left;display:grid;gap:8px;margin:26px 0}
+.rev{border:1px solid var(--line);border-radius:14px;background:rgba(10,11,15,.5);padding:12px 14px;font-size:14px;display:flex;gap:10px}
+.rev .dot{width:20px;height:20px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:12px;font-weight:700}
+.rev .dot.y{background:color-mix(in srgb,var(--ok) 20%,transparent);color:var(--ok)}
+.rev .dot.n{background:color-mix(in srgb,var(--bad) 20%,transparent);color:var(--bad)}
+.rev .rq{color:var(--tx2)}
+.rev .rq b{color:var(--tx);font-weight:500}
+.ctr{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--tx3);font-size:13px;text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/"><span class="logo-t">A</span><span>alisher.live</span></a>
+    <nav>
+      <a href="/">Bosh sahifa</a>
+      <a href="/testlar.html">Testlar</a>
+      <a href="/avtotest.html" aria-current="page">Haydovchilik</a>
+      <a href="/viktorina.html">Viktorina</a>
+      <a href="/taqdimot.html">Taqdimot</a>
+      <a href="/manbalar.html">Manbalar</a>
+      <a href="/#contact">Aloqa</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- LANDING -->
+  <section id="landing">
+    <div class="hero">
+      <p class="crumbs"><a href="/">Bosh sahifa</a> › Haydovchilik testi</p>
+      <h1>Haydovchilik guvohnomasi — nazariy test</h1>
+      <p class="lead">Rasmli savollar, haqiqiy imtihondek. Yoʻl belgilari, chorrahada ustunlik, tezlik rejimi, svetofor va boshqa mavzular. Barchasi bepul.</p>
+    </div>
+
+    <div class="modes">
+      <button class="mode" type="button" id="mStart">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <h3>Imtihon rejimi</h3>
+        <p>20 ta tasodifiy savol, 25 daqiqa. Haqiqiy imtihondek: xatolar oxirida koʻrsatiladi. 2 tagacha xato — oʻtdingiz.</p>
+        <span class="go">Imtihonni boshlash →</span>
+      </button>
+      <button class="mode blue" type="button" id="mStudy">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        <h3>Mavzu boʻyicha oʻrganish</h3>
+        <p>Har bir mavzuni alohida oʻrganing. Har savoldan keyin darhol toʻgʻri javob va izoh koʻrsatiladi.</p>
+        <span class="go">Mavzularni koʻrish →</span>
+      </button>
+    </div>
+
+    <div class="stat">
+      <span class="pill">Jami savollar: <b id="stTotal">0</b></span>
+      <span class="pill">Mavzular: <b id="stCats">0</b></span>
+      <span class="pill" id="stBestPill" hidden>Eng yaxshi natija: <b id="stBest">—</b></span>
+    </div>
+  </section>
+
+  <!-- CATEGORY PICK -->
+  <section id="catpick" hidden>
+    <div class="hero">
+      <p class="crumbs"><a href="#" id="backFromCats">Haydovchilik testi</a> › Mavzular</p>
+      <h1>Mavzu tanlang</h1>
+      <p class="lead">Har bir mavzu boʻyicha savollarni oʻrganing. Javobdan soʻng izoh beriladi.</p>
+    </div>
+    <div class="cats" id="catList"></div>
+  </section>
+
+  <!-- EXAM -->
+  <section id="exam" class="exam" hidden>
+    <div class="qhead">
+      <span id="qCounter">1 / 20</span>
+      <span id="qMode">Imtihon</span>
+      <span class="timer" id="qTimer" hidden>25:00</span>
+    </div>
+    <div class="prog"><i id="qProg"></i></div>
+    <div class="card">
+      <p class="kind" id="qKind">Yoʻl belgilari</p>
+      <div class="qimg" id="qImg" hidden><div class="box"></div></div>
+      <h2 class="qtext" id="qText">—</h2>
+      <div class="opts" id="qOpts"></div>
+      <div class="fb" id="qFb"></div>
+      <div class="foot">
+        <button class="btn primary" id="qNext" disabled>Keyingi →</button>
+        <button class="btn ghost" id="qQuit">Chiqish</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="result" hidden>
+    <div class="ring">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="66" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="12"/>
+        <circle id="rArc" cx="75" cy="75" r="66" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="414.7" stroke-dashoffset="414.7"/>
+        <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB547"/><stop offset="1" stop-color="#FF7A45"/></linearGradient></defs>
+      </svg>
+      <div class="num" id="rNum">0%</div>
+    </div>
+    <div class="rbadge" id="rBadge"></div>
+    <h2 class="rtitle" id="rTitle">Natija</h2>
+    <p class="rsub" id="rSub">—</p>
+    <div class="ctr">
+      <button class="btn primary" id="rAgain">Qayta urinish</button>
+      <button class="btn" id="rHome">Bosh menyu</button>
+    </div>
+    <div class="review" id="rReview"></div>
+  </section>
+</main>
+
+<footer class="wrap">alisher.live — haydovchilik nazariy testi. Maʼlumot oʻquv maqsadida; rasmiy imtihon talablari oʻzgarishi mumkin.</footer>
+
+<script>
+/* ====================== SVG BELGI KUTUBXONASI ====================== */
+const VB = s => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">${s}</svg>`;
+// Freymlar
+const warnFrame = inner => VB(`<path d="M60 8 L114 106 H6 Z" fill="#FFF" stroke="#E4322B" stroke-width="9" stroke-linejoin="round"/>${inner}`);
+const prohFrame = inner => VB(`<circle cx="60" cy="60" r="50" fill="#FFF" stroke="#E4322B" stroke-width="11"/>${inner}`);
+const mandFrame = inner => VB(`<circle cx="60" cy="60" r="52" fill="#0A58CA"/>${inner}`);
+const infoFrame = (inner,bg='#0A58CA') => VB(`<rect x="12" y="12" width="96" height="96" rx="8" fill="${bg}"/>${inner}`);
+// Piyoda figurasi (original sxematik stick-figure)
+const ped = (cx,cy,s,col='#111') => `<g transform="translate(${cx},${cy}) scale(${s})"><circle cx="0" cy="-15" r="4.6" fill="${col}"/><path d="M0 -10 L-7 3 M0 -10 L7 3 M0 -10 L0 7 M0 7 L-6 21 M0 7 L6 21" stroke="${col}" stroke-width="4.4" stroke-linecap="round" fill="none"/></g>`;
+// Kichik mashina (belgi ichida, tepadan koʻrinish)
+const carMini = (cx,cy,col) => `<g transform="translate(${cx},${cy})"><rect x="-8" y="-13" width="16" height="26" rx="4" fill="${col}"/><rect x="-5.5" y="-8" width="11" height="7" rx="1.5" fill="#ffffff66"/><path d="M0 -16 l5 6 -10 0 z" fill="${col}"/></g>`;
+// Mashina (ustunlik sxemasida) — rangli, yoʻnalish oʻqi bilan
+function car(x,y,dir,color){
+  // dir: 'up','down','left','right'; x,y markaz
+  const rot={up:0,right:90,down:180,left:270}[dir];
+  return `<g transform="translate(${x},${y}) rotate(${rot})">
+    <rect x="-10" y="-16" width="20" height="32" rx="5" fill="${color}" stroke="#0008" stroke-width="1"/>
+    <rect x="-7" y="-10" width="14" height="9" rx="2" fill="#ffffff55"/>
+    <path d="M0 -20 l6 8 -12 0 z" fill="${color}" stroke="#0008" stroke-width="1"/>
+  </g>`;
+}
+/* Chorraha sxemasi: yoʻllar + mashinalar. cfg.roads: 'cross'|'t-up'|'t-left'|'t-right', cfg.cars:[{dir,color,pos}] */
+function intersection(cfg){
+  const W=240,H=240,cx=120,cy=120,rw=74; // yoʻl kengligi
+  let bg=`<rect x="0" y="0" width="${W}" height="${H}" fill="#2b2f36"/>`;
+  const vRoad=`<rect x="${cx-rw/2}" y="0" width="${rw}" height="${H}" fill="#54595f"/>`;
+  const hRoad=`<rect x="0" y="${cy-rw/2}" width="${W}" height="${rw}" fill="#54595f"/>`;
+  let roads='';
+  const type=cfg.roads||'cross';
+  if(type==='cross') roads=vRoad+hRoad;
+  else if(type==='t-up') roads=`<rect x="0" y="${cy-rw/2}" width="${W}" height="${rw}" fill="#54595f"/><rect x="${cx-rw/2}" y="0" width="${rw}" height="${cy+rw/2}" fill="#54595f"/>`;
+  else if(type==='t-down') roads=`<rect x="0" y="${cy-rw/2}" width="${W}" height="${rw}" fill="#54595f"/><rect x="${cx-rw/2}" y="${cy-rw/2}" width="${rw}" height="${H}" fill="#54595f"/>`;
+  else if(type==='t-left') roads=`<rect x="${cx-rw/2}" y="0" width="${rw}" height="${H}" fill="#54595f"/><rect x="0" y="${cy-rw/2}" width="${cx+rw/2}" height="${rw}" fill="#54595f"/>`;
+  else if(type==='t-right') roads=`<rect x="${cx-rw/2}" y="0" width="${rw}" height="${H}" fill="#54595f"/><rect x="${cx-rw/2}" y="${cy-rw/2}" width="${W}" height="${rw}" fill="#54595f"/>`;
+  // markaziy chiziqlar (dashed)
+  const dash=`stroke="#f2c84b" stroke-width="2.5" stroke-dasharray="10 9"`;
+  let lines='';
+  if(type==='cross'||type.startsWith('t')){
+    lines=`<line x1="${cx}" y1="0" x2="${cx}" y2="${H}" ${dash}/><line x1="0" y1="${cy}" x2="${W}" y2="${cy}" ${dash}/>`;
+  }
+  // mashinalar
+  const posMap={
+    up:[cx-18,H-34],      // pastdan yuqoriga (quyida turadi)
+    down:[cx+18,34],      // yuqoridan pastga
+    left:[W-34,cy-18],    // oʻngdan chapga
+    right:[34,cy+18]      // chapdan oʻngga
+  };
+  let cars=(cfg.cars||[]).map(c=>{const p=c.pos||posMap[c.from]; return car(p[0],p[1],c.dir||dirFromTo(c.from),c.color);}).join('');
+  // belgilar (ixtiyoriy): type 'main' (bosh yoʻl) yoki 'give' (yoʻl bering)
+  let signs=(cfg.signs||[]).map(s=>{
+    if(s.type==='main') return `<rect x="${s.x-11}" y="${s.y-11}" width="22" height="22" transform="rotate(45 ${s.x} ${s.y})" fill="#F5C518" stroke="#fff" stroke-width="3"/>`;
+    if(s.type==='give') return `<path d="M${s.x} ${s.y+12} L${s.x-12} ${s.y-10} H${s.x+12} Z" fill="#fff" stroke="#E4322B" stroke-width="3"/>`;
+    return '';
+  }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${bg}${roads}${lines}${cars}${signs}</svg>`;
+}
+function dirFromTo(from){return {up:'up',down:'down',left:'left',right:'right'}[from];}
+
+/* Tez-tez kerak belgilar (SVG inner) */
+const S = {
+  stop: VB(`<path d="M38 12 H82 L108 38 V82 L82 108 H38 L12 82 V38 Z" fill="#C1272D" stroke="#fff" stroke-width="5"/><text x="60" y="71" font-family="Geist,Arial" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">STOP</text>`),
+  giveWay: VB(`<path d="M60 108 L8 16 H112 Z" fill="#FFF" stroke="#E4322B" stroke-width="10" stroke-linejoin="round"/>`),
+  mainRoad: VB(`<rect x="60" y="14" width="46" height="46" transform="rotate(45 60 60)" fill="#F5C518" stroke="#fff" stroke-width="5"/>`),
+  noEntry: VB(`<circle cx="60" cy="60" r="50" fill="#C1272D"/><rect x="26" y="50" width="68" height="20" rx="2" fill="#fff"/>`),
+  speed60: prohFrame(`<text x="60" y="76" font-family="Geist,Arial" font-size="42" font-weight="700" fill="#111" text-anchor="middle">60</text>`),
+  speed40: prohFrame(`<text x="60" y="76" font-family="Geist,Arial" font-size="42" font-weight="700" fill="#111" text-anchor="middle">40</text>`),
+  noOvertake: prohFrame(`${carMini(47,60,'#C1272D')}${carMini(73,60,'#222')}`),
+  children: warnFrame(`${ped(50,66,1.1,'#111')}${ped(70,66,1.0,'#111')}`),
+  pedCrossWarn: warnFrame(`${ped(60,70,1.5,'#111')}<path d="M44 92 h32" stroke="#111" stroke-width="4"/>`),
+  pedCrossInfo: VB(`<rect x="12" y="12" width="96" height="96" rx="8" fill="#0A58CA"/><path d="M30 86 L60 26 L90 86 Z" fill="#fff"/>${ped(60,66,1.3,'#0A58CA')}<path d="M48 84 h24" stroke="#0A58CA" stroke-width="4"/>`),
+  straightOnly: mandFrame(`<path d="M60 86 V40 M60 40 l-12 14 M60 40 l12 14" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`),
+  rightOnly: mandFrame(`<path d="M40 60 H80 M80 60 l-14 -12 M80 60 l-14 12" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`),
+  roundabout: mandFrame(`<g fill="none" stroke="#fff" stroke-width="7"><circle cx="60" cy="60" r="22"/></g><path d="M60 30 l-8 10 M60 30 l8 10" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M84 66 l-10 -6 M84 66 l-6 10" stroke="#0A58CA" stroke-width="0"/>`),
+  noTruck: prohFrame(`<g transform="translate(60,60) scale(0.9)"><rect x="-30" y="-6" width="34" height="18" rx="2" fill="#111"/><rect x="4" y="-2" width="16" height="14" fill="#111"/><circle cx="-18" cy="14" r="5" fill="#111"/><circle cx="12" cy="14" r="5" fill="#111"/></g>`),
+  slippery: warnFrame(`<path d="M44 44 q10 10 0 20 q-10 10 0 20" stroke="#111" stroke-width="4" fill="none"/><path d="M62 70 l14 -20 2 8 6 -4" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round"/>`),
+  bump: warnFrame(`<path d="M34 86 q26 -46 52 0" stroke="#111" stroke-width="7" fill="none"/>`),
+  twoWay: warnFrame(`<g stroke="#111" stroke-width="6" fill="none" stroke-linecap="round"><path d="M50 40 V82"/><path d="M50 40 l-8 10 M50 40 l8 10 M50 82 l-8 -10 M50 82 l8 -10"/><path d="M70 40 V82"/><path d="M70 40 l-8 10 M70 40 l8 10 M70 82 l-8 -10 M70 82 l8 -10"/></g>`),
+  railway: warnFrame(`<path d="M30 76 L90 44 M36 86 L96 54" stroke="#111" stroke-width="5"/><path d="M52 50 L70 82" stroke="#111" stroke-width="5"/>`),
+  parking: infoFrame(`<text x="60" y="80" font-family="Geist,Arial" font-size="60" font-weight="700" fill="#fff" text-anchor="middle">P</text>`),
+  noStop: VB(`<circle cx="60" cy="60" r="50" fill="#0A58CA" stroke="#C1272D" stroke-width="9"/><line x1="26" y1="26" x2="94" y2="94" stroke="#C1272D" stroke-width="9"/><line x1="94" y1="26" x2="26" y2="94" stroke="#C1272D" stroke-width="9"/>`),
+  noPark: VB(`<circle cx="60" cy="60" r="50" fill="#0A58CA" stroke="#C1272D" stroke-width="9"/><line x1="26" y1="26" x2="94" y2="94" stroke="#C1272D" stroke-width="9"/><text x="60" y="76" font-family="Geist,Arial" font-size="40" font-weight="700" fill="#fff" text-anchor="middle">P</text>`)
+};
+
+/* ====================== SAVOLLAR BAZASI ====================== */
+/* cat: belgi | ustunlik | svetofor | tezlik | belgilanish | manyovr | umumiy */
+const CATS = {
+  belgi:{n:'Yoʻl belgilari', idx:1},
+  ustunlik:{n:'Chorrahada ustunlik', idx:2},
+  svetofor:{n:'Svetofor va signallar', idx:3},
+  tezlik:{n:'Tezlik rejimi', idx:4},
+  belgilanish:{n:'Yoʻl belgilanishi', idx:5},
+  manyovr:{n:'Manyovr va toʻxtash', idx:6},
+  umumiy:{n:'Umumiy qoidalar', idx:7}
+};
+
+const Q = [
+/* ---------- YOʻL BELGILARI ---------- */
+{c:'belgi', img:S.stop, q:'Ushbu belgi nimani bildiradi?', o:['Toʻxtamasdan harakatni davom ettirish','Toʻxtash majburiy — STOP chizigʻi oldida toʻxtab, ustunlikni bering','Faqat sekinlashtirish kifoya','Signal berib oʻtish'], a:1, e:'«STOP» belgisi — toʻxtash chizigʻi (yoki chorraha cheti) oldida majburan toʻxtab, kesib oʻtiladigan yoʻldagi transportga yoʻl berish talab etiladi.'},
+{c:'belgi', img:S.giveWay, q:'Ushbu belgi haydovchidan nimani talab qiladi?', o:['Toʻxtashni majbur qiladi','Kesishayotgan yoʻldagi transportga yoʻl berishni','Bosh yoʻlda ekanini bildiradi','Harakatni taqiqlaydi'], a:1, e:'«Yoʻl bering» belgisi — kesishayotgan yoʻldagi transport vositalariga yoʻl berish kerak. Toʻxtash shart emas, lekin xalaqit bermaslik lozim.'},
+{c:'belgi', img:S.mainRoad, q:'Ushbu belgi nimani anglatadi?', o:['Bosh yoʻl — sizda ustunlik bor','Yoʻl bering','Harakat taqiqlangan','Turar-joy zonasi'], a:0, e:'«Bosh yoʻl» belgisi harakatlanayotgan yoʻlingiz bosh yoʻl ekanini, tartibga solinmagan chorrahalarda sizda ustunlik borligini bildiradi.'},
+{c:'belgi', img:S.noEntry, q:'Oq koʻndalang chiziqli qizil doira — bu belgi nimani bildiradi?', o:['Toʻxtash taqiqlangan','Harakatlanish taqiqlangan (kirish mumkin emas)','Bir tomonlama harakat','Tezlik cheklovi'], a:1, e:'«Kirish taqiqlangan» (“gʻisht”) belgisi — bu yoʻnalishda barcha transport vositalarining harakati taqiqlanadi.'},
+{c:'belgi', img:S.speed60, q:'Ushbu belgidan keyin ruxsat etilgan eng katta tezlik qancha?', o:['60 km/soat dan oshmaslik','Kamida 60 km/soat','60 km/soat faqat yuk mashinalariga','Tavsiya etilgan tezlik 60'], a:0, e:'«Eng katta tezlikni cheklash» belgisi — koʻrsatilgan qiymatdan (60 km/soat) yuqori tezlikda harakatlanish taqiqlanadi.'},
+{c:'belgi', img:S.noOvertake, q:'Ushbu belgi nimani taqiqlaydi?', o:['Yuk mashinalari harakatini','Barcha transportga oboganishni (quvib oʻtishni)','Toʻxtab turishni','Signal berishni'], a:1, e:'«Oboganish taqiqlangan» belgisi — sekin harakatlanayotgan transportdan tashqari, barcha transport vositalarini quvib oʻtish taqiqlanadi.'},
+{c:'belgi', img:S.children, q:'Uchburchak ichidagi bolalar tasviri — bu belgi nimani ogohlantiradi?', o:['Maktab majburiy toʻxtash joyi','«Bolalar» — yoʻl yaqinida bolalar boʻlishi mumkin','Oʻyin maydoni taqiqlangan','Piyodalar harakati taqiqlangan'], a:1, e:'«Bolalar» ogohlantiruvchi belgisi — maktab, bogʻcha yaqinida bolalar yoʻlga chiqishi mumkin, ehtiyot boʻling va tezlikni kamaytiring.'},
+{c:'belgi', img:S.pedCrossInfo, q:'Koʻk kvadrat ichidagi piyoda tasviri (axborot belgisi) nimani bildiradi?', o:['Piyodalar oʻtish joyi','Piyodalar harakati taqiqlangan','Piyodalar yoʻli','Yer osti yoʻlagi'], a:0, e:'Koʻk «Piyodalar oʻtish joyi» axborot-koʻrsatma belgisi — shu joyda piyodalar yoʻlni kesib oʻtadi; ularga yoʻl bering.'},
+{c:'belgi', img:S.straightOnly, q:'Koʻk doiradagi yuqoriga oʻq — bu belgi nimani buyuradi?', o:['Faqat toʻgʻriga harakatlanish','Toʻgʻriga harakat taqiqlangan','Bir tomonlama yoʻl','Tavsiya etilgan yoʻnalish'], a:0, e:'«Harakat yoʻnalishi» buyuruvchi belgisi — faqat oʻq koʻrsatgan yoʻnalishda (bu holda toʻgʻriga) harakatlanishga ruxsat.'},
+{c:'belgi', img:S.noStop, q:'Qizil kesishgan chiziqli koʻk doira nimani bildiradi?', o:['Toʻxtab turish taqiqlangan','Toʻxtash taqiqlangan (toʻxtab turish ham)','Parkovka joyi','Harakat taqiqlangan'], a:1, e:'«Toʻxtash taqiqlangan» belgisi — transportni bu yerda toʻxtatish ham, toʻxtab turish ham taqiqlanadi (yoʻlovchi tushirish bundan mustasno emas).'},
+{c:'belgi', img:S.noPark, q:'Qizil kesishgan chiziqli koʻk doira ichida «P» harfi nimani bildiradi?', o:['Toʻxtab turish taqiqlangan (toʻxtash mumkin)','Parkovka','Toʻxtash ham taqiqlangan','Yuk tushirish joyi'], a:0, e:'«Toʻxtab turish taqiqlangan» belgisi — uzoq toʻxtab turish taqiqlanadi, lekin yoʻlovchi tushirish/olish uchun qisqa toʻxtash mumkin.'},
+{c:'belgi', img:S.parking, q:'Koʻk kvadrat ichida «P» harfi nimani bildiradi?', o:['Toʻxtash taqiqlangan','Toʻxtab turish (parkovka) joyi','Politsiya posti','Benzin shoxobchasi'], a:1, e:'«Toʻxtab turish joyi» axborot belgisi — transportni qoʻyish uchun ruxsat etilgan joy.'},
+{c:'belgi', img:S.noTruck, q:'Ichida yuk mashinasi tasviri boʻlgan qizil doira nimani bildiradi?', o:['Yuk mashinalari toʻxtab turishi','Yuk avtomobillari harakati taqiqlangan','Yuk tushirish joyi','Faqat yuk mashinalari uchun'], a:1, e:'Belgi — ruxsat etilgan eng katta massasi koʻrsatilgan qiymatdan ortiq yuk avtomobillari harakatini taqiqlaydi.'},
+{c:'belgi', img:S.slippery, q:'Uchburchak ichida sirpanayotgan mashina izi — bu belgi nimani ogohlantiradi?', o:['Notekis yoʻl','Sirpanchiq yoʻl','Yoʻl taʼmirlanmoqda','Tik nishablik'], a:1, e:'«Sirpanchiq yoʻl» ogohlantiruvchi belgisi — yoʻl qoplamasi sirpanchiq; keskin tormoz va manyovrdan saqlaning.'},
+{c:'belgi', img:S.bump, q:'Uchburchak ichidagi doʻnglik tasviri nimani bildiradi?', o:['Notekis yoʻl / sunʼiy doʻnglik','Koʻprik','Tik koʻtarilish','Chuqurlik'], a:0, e:'«Notekis yoʻl» yoki «Sunʼiy notekislik» belgisi — oldinda doʻnglik bor, tezlikni kamaytiring.'},
+{c:'belgi', img:S.railway, q:'Shlagbaumsiz temir yoʻl kesishmasini qaysi belgi ogohlantiradi?', o:['Koʻprik belgisi','Shlagbaumsiz temir yoʻl kesishmasi','Tramvay yoʻli','Avtomagistral'], a:1, e:'Uchburchak ichida bugʻ lokomotivi/relslar tasviri — shlagbaumsiz temir yoʻl kesishmasi yaqinlashayotganini bildiradi.'},
+
+/* ---------- CHORRAHADA USTUNLIK ---------- */
+{c:'ustunlik', img:intersection({roads:'cross',cars:[{from:'up',color:'#E4322B'},{from:'left',color:'#2d7dd2'}]}), q:'Teng ahamiyatli chorraha (belgisiz). Qizil mashina — siz. Koʻk mashina oʻngingizdan kelmoqda. Kim birinchi oʻtadi?', o:['Qizil (siz), chunki toʻgʻri ketyapsiz','Koʻk mashina — u oʻng tomonda','Yoʻlda kim tez boʻlsa','Bir vaqtda'], a:1, e:'Teng ahamiyatli (tartibga solinmagan) chorrahada «oʻng qoʻl qoidasi» amal qiladi — oʻngdan kelayotgan transportga yoʻl beriladi.'},
+{c:'ustunlik', img:intersection({roads:'cross',cars:[{from:'up',color:'#E4322B'},{from:'down',color:'#2d7dd2'}]}), q:'Qizil mashina (siz) chapga burilmoqchi. Koʻk mashina qarshidan toʻgʻriga ketmoqda. Kim yoʻl beradi?', o:['Koʻk mashina yoʻl beradi','Qizil (siz) yoʻl berasiz','Hech kim, bemalol','Signal bergan oʻtadi'], a:1, e:'Chapga burilayotganda qarama-qarshi yoʻnalishdan toʻgʻriga yoki oʻngga ketayotgan transportga yoʻl berish kerak. Demak siz yoʻl berasiz.'},
+{c:'ustunlik', img:intersection({roads:'cross',cars:[{from:'up',color:'#E4322B'},{from:'right',color:'#2d7dd2'}],signs:[{x:150,y:150,type:'main'}]}), q:'Siz (qizil) bosh yoʻldasiz (sariq romb belgisi). Koʻk mashina oʻngdan, ikkinchi darajali yoʻldan kelmoqda. Kim oʻtadi?', o:['Qizil (siz) — bosh yoʻldasiz','Koʻk — u oʻng tomonda','Navbat bilan','Koʻk, chunki tezroq'], a:0, e:'«Oʻng qoʻl qoidasi» faqat teng yoʻllarda ishlaydi. Bu yerda siz bosh yoʻldasiz — ikkinchi darajali yoʻldan kelayotgan koʻk mashina sizga yoʻl beradi.'},
+{c:'ustunlik', img:intersection({roads:'t-right',cars:[{from:'left',color:'#E4322B'},{from:'right',color:'#2d7dd2'}]}), q:'T-shaklidagi chorraha. Qizil va koʻk toʻgʻri yoʻ (koʻndalang yoʻl) boʻylab, qoʻshimcha yoʻl oʻngdan qoʻshiladi. Belgisiz holatda ustunlik kimda?', o:['Koʻndalang (asosiy) yoʻldagilarda','Yon yoʻldan chiqayotganda','Doim oʻngdagida','Qizilda'], a:0, e:'T-shaklidagi tartibga solinmagan chorrahada yon (tutash) yoʻldan chiqayotgan transport, toʻgʻri davom etayotgan koʻndalang yoʻldagi transportga yoʻl beradi.'},
+{c:'ustunlik', img:intersection({roads:'cross',cars:[{from:'up',color:'#E4322B'},{from:'left',color:'#2d7dd2'},{from:'right',color:'#36b37e'}]}), q:'Teng chorrahada uchta mashina. Siz (qizil) toʻgʻriga. Oʻngingizda koʻk, chapingizda yashil. Kimga yoʻl berasiz?', o:['Chapdagi yashilga','Oʻngdagi koʻkga','Hech kimga','Ikkalasiga'], a:1, e:'Oʻng qoʻl qoidasiga koʻra oʻngdan kelayotgan (koʻk) transportga yoʻl berasiz; chapdagi (yashil) esa sizga yoʻl beradi.'},
+
+/* ---------- SVETOFOR VA SIGNALLAR ---------- */
+{c:'svetofor', q:'Svetoforning qizil va sariq chiroqlari bir vaqtda yonsa, bu nimani bildiradi?', o:['Harakatni boshlang','Tez yurib oʻting','Yashil yoqilishiga tayyorlaning, lekin hali harakat taqiqlangan','Svetofor ishlamayapti'], a:2, e:'Qizil+sariq birgalikda — tez orada yashil yonadi, harakatga tayyorlaning. Ammo bu signalda hali harakatlanish taqiqlanadi.'},
+{c:'svetofor', q:'Yashil chiroq miltillayotgan boʻlsa, bu nimani anglatadi?', o:['Harakat taqiqlangan','Yashil tugab, tez orada sariq yonadi','Svetofor buzilgan','Faqat oʻngga burilish mumkin'], a:1, e:'Miltillovchi yashil — ruxsat etilgan harakat vaqti tugayapti, tez orada taqiqlovchi signal yonadi.'},
+{c:'svetofor', q:'Sariq chiroq miltillayotgan chorraha qanday hisoblanadi?', o:['Harakat butunlay taqiqlangan','Tartibga solinmagan — ehtiyotkorlik bilan, ustunlik qoidalari asosida','Faqat chapga','Bosh yoʻl'], a:1, e:'Doimiy miltillovchi sariq — chorraha tartibga solinmagan. Belgilarga yoki «oʻng qoʻl qoidasi»ga amal qilib, ehtiyotkorlik bilan oʻting.'},
+{c:'svetofor', q:'Qizil chiroqda qoʻshimcha yashil oʻq (strelka) yonsa, nima qilish mumkin?', o:['Toʻliq harakat mumkin','Oʻq koʻrsatgan yoʻnalishda, boshqalarga yoʻl berib harakatlanish mumkin','Hech qanday harakat mumkin emas','Signal berib oʻtish'], a:1, e:'Asosiy qizilda yonayotgan qoʻshimcha yashil oʻq — faqat oʻq yoʻnalishida, boshqa yoʻnalishdagi transport va piyodalarga yoʻl berib harakatlanishga ruxsat beradi.'},
+{c:'svetofor', q:'Regulirovchi (tartibga soluvchi) qoʻllarini yon tomonga yoygan holda tursa, uning koʻkragi/orqasi tomonidan nima qilish mumkin?', o:['Harakatlanish mumkin','Harakat taqiqlangan','Faqat oʻngga','Faqat piyodalar'], a:1, e:'Regulirovchi qoʻllarini yonga yoyganda: koʻkrak va orqa tomonidan barcha transportga harakat taqiqlanadi; yon tomonlaridan esa toʻgʻriga va oʻngga ruxsat (umumiy qoida).'},
+
+/* ---------- TEZLIK REJIMI ---------- */
+{c:'tezlik', q:'Oʻzbekistonda aholi punktida (shahar ichida) yengil avtomobil uchun ruxsat etilgan eng katta tezlik qancha? (belgi boʻlmasa)', o:['90 km/soat','70 km/soat','60 km/soat','50 km/soat'], a:2, e:'2023-yildan buyon Oʻzbekiston shaharlarida umumiy tezlik chegarasi 60 km/soat etib belgilangan (maxsus belgilar boʻlmasa).'},
+{c:'tezlik', q:'Turar-joy zonasida (hovli, «Turar-joy dahasi» belgisi) ruxsat etilgan eng katta tezlik qancha?', o:['20 km/soat','40 km/soat','60 km/soat','10 km/soat'], a:0, e:'Turar-joy dahasida harakat tezligi 20 km/soatdan oshmasligi kerak; piyodalar ustunlikka ega.'},
+{c:'tezlik', q:'Aholi punktidan tashqarida oddiy yoʻlda yengil avtomobil uchun eng katta tezlik (belgi boʻlmasa)?', o:['110 km/soat','90 km/soat','70 km/soat','100 km/soat'], a:1, e:'Aholi punktidan tashqarida oddiy yoʻllarda yengil avtomobillar uchun odatda 90 km/soat; avtomagistralda esa 100 km/soat.'},
+{c:'tezlik', q:'Avtomagistralda yengil avtomobil uchun ruxsat etilgan eng katta tezlik qancha?', o:['120 km/soat','100 km/soat','90 km/soat','130 km/soat'], a:1, e:'Avtomagistralda yengil avtomobillar uchun eng katta tezlik 100 km/soat (agar belgi boshqacha koʻrsatmasa).'},
+{c:'tezlik', q:'Tuman yomon (tuman, qor, yomgʻir) va yoʻ sirti yomon boʻlsa haydovchi nima qilishi kerak?', o:['Tezlikni oshirish','Ruxsat etilgan maksimalda yurish','Koʻrinish va yoʻl holatiga qarab tezlikni kamaytirish','Faqat yaqin chiroqlarni yoqish'], a:2, e:'Haydovchi harakat sharoitiga — koʻrinish, yoʻl holati, ob-havoga qarab xavfsiz tezlikni tanlashi, keraklicha sekinlashtirishi shart.'},
+
+/* ---------- YOʻL BELGILANISHI ---------- */
+{c:'belgilanish', img:VB(`<rect width="120" height="120" fill="#3a3f46"/><rect x="54" y="0" width="12" height="120" fill="#e8c23a"/>`), q:'Yoʻlning oʻrtasidagi uzluksiz sariq (yoki oq) chiziq nimani bildiradi?', o:['Chiziqni kesib oʻtish mumkin','Chiziqni kesib oʻtish taqiqlanadi','Faqat oboganishda kesish mumkin','Toʻxtash joyi'], a:1, e:'Uzluksiz chiziq qarama-qarshi oqimlarni ajratadi; uni kesib oʻtish yoki ustiga chiqish taqiqlanadi.'},
+{c:'belgilanish', img:VB(`<rect width="120" height="120" fill="#3a3f46"/><g fill="#e8c23a"><rect x="54" y="6" width="12" height="20"/><rect x="54" y="38" width="12" height="20"/><rect x="54" y="70" width="12" height="20"/><rect x="54" y="102" width="12" height="14"/></g>`), q:'Yoʻ oʻrtasidagi uzuq-uzuq (punktir) chiziq nimani anglatadi?', o:['Kesib oʻtish taqiqlangan','Yoʻllar sonini ajratadi va kesib oʻtishga ruxsat (xavfsiz boʻlsa)','Toʻxtash chizigʻi','Piyoda oʻtish joyi'], a:1, e:'Uzuq-uzuq chiziq oqimlarni/yoʻlaklarni ajratadi va zarur boʻlsa (xavfsiz holatda) kesib oʻtishga ruxsat beradi.'},
+{c:'belgilanish', img:VB(`<rect width="120" height="120" fill="#3a3f46"/><g fill="#fff"><rect x="18" y="20" width="14" height="80"/><rect x="40" y="20" width="14" height="80"/><rect x="62" y="20" width="14" height="80"/><rect x="84" y="20" width="14" height="80"/></g>`), q:'Yoʻ boʻ keng oq yoʻ-yoʻl chiziqlar («zebra») nimani bildiradi?', o:['Toʻxtash taqiqlangan','Piyodalar oʻtish joyi','Avtobus toʻxtashi','Parkovka chiziqlari'], a:1, e:'Keng oq parallel chiziqlar («zebra») — piyodalar oʻtish joyini bildiradi; piyoda chiqsa, unga yoʻl bering.'},
+
+/* ---------- MANYOVR VA TOʻXTASH ---------- */
+{c:'manyovr', q:'Oboganish (quvib oʻtish)ni boshlashdan oldin haydovchi nimaga ishonch hosil qilishi kerak?', o:['Orqadagi mashina signal berishiga','Qarshi yoʻ boʻsh va manyovr xavfsiz ekaniga','Faqat old mashina sekinlashishiga','Fara yoqilganiga'], a:1, e:'Oboganishdan oldin: qarshi yoʻnalish boʻsh, old va orqa transport manyovr boshlamagan, oʻzingiz xalaqit bermasligingizga ishonch hosil qilish shart.'},
+{c:'manyovr', q:'Quyidagi joylarning qaysi birida oboganish TAQIQLANADI?', o:['Toʻgʻri, ravshan yoʻlda','Chorrahalarda, piyoda oʻtish joylarida, temir yoʻl kesishmasida','Keng magistralda','Shahar tashqarisida'], a:1, e:'Oboganish tartibga solinmagan chorrahalarda, piyoda oʻtish joylari, koʻpriklar, tunnellar va temir yoʻl kesishmalarida hamda ularning oldida taqiqlanadi.'},
+{c:'manyovr', q:'Burilish yoki qayrilishdan oldin haydovchi birinchi navbatda nima qilishi kerak?', o:['Tezlikni oshirish','Oldindan tegishli tomonga burilish signalini (povorotnik) yoqish','Signal berib ovoz chiqarish','Favqulodda chiroqni yoqish'], a:1, e:'Har qanday manyovrdan (burilish, qayrilish, qator almashtirish) oldin oldindan burilish koʻrsatkichi yoqilishi va manyovr xavfsiz bajarilishi kerak.'},
+{c:'manyovr', q:'Transportni toʻxtab turish uchun qoldirganda haydovchi nima qilishi shart?', o:['Dvigatelni oʻchirmaslik','Stояnoyka tormozini qoʻyib, gʻildiraklar siljib ketmasligini taʼminlash','Faqat eshikni yopish','Oynani ochiq qoldirish'], a:1, e:'Toʻxtab turishda transport oʻzicha harakatga kelmasligi uchun stoyanka (qoʻl) tormozi qoʻyilishi, nishablikda qoʻshimcha choralar koʻrilishi kerak.'},
+
+/* ---------- UMUMIY QOIDALAR ---------- */
+{c:'umumiy', q:'Haydovchi haydashdan oldin qanday holatda boʻlishi SHART emas?', o:['Hushyor, sogʻlom holatda','Spirtli ichimlik yoki giyohvand taʼsirida','Dam olgan','Guvohnomasi bilan'], a:1, e:'Spirtli ichimlik, giyohvand yoki haydash qobiliyatini pasaytiruvchi vositalar taʼsirida transport boshqarish qatʼiyan taqiqlanadi.'},
+{c:'umumiy', q:'Harakat vaqtida old oʻrindiqdagi (va mavjud boʻlsa barcha) yoʻlovchilar nima qilishi shart?', o:['Xavfsizlik kamarini taqish','Oynani ochish','Telefon ushlash','Hech narsa'], a:0, e:'Xavfsizlik kamari bilan jihozlangan transportda haydovchi va yoʻlovchilar harakat vaqtida kamarni taqishi shart.'},
+{c:'umumiy', q:'Harakat vaqtida qoʻ telefondan foydalanish qanday amalga oshiriladi?', o:['Qoʻlda ushlab gaplashish mumkin','Faqat «hands-free» (qoʻlsiz) qurilma orqali','Umuman mumkin emas','Faqat shaharda mumkin'], a:1, e:'Haydash chogʻida telefonni qoʻlda ushlab foydalanish taqiqlanadi; faqat qoʻllarни band qilmaydigan qurilma orqali ruxsat etiladi.'},
+{c:'umumiy', q:'Yoʻl-transport hodisasiga (avariyaga) aralashgan haydovchi birinchi navbatda nima qilishi kerak?', o:['Tez joyni tark etish','Transportni toʻxtatib, avariya chirogʻini yoqib, joyni oʻzgartirmaslik','Faqat surat olish','Mashinani chetga surib yuvib tashlash'], a:1, e:'YTH sodir boʻlsa: darhol toʻxtab, avariya chirogʻini yoqish, ogohlantirish uchburchagini qoʻyish, jabrlanganlarga yordam, hodisa joyini oʻzgartirmaslik va xizmatlarga xabar berish lozim.'},
+{c:'umumiy', q:'Favqulodda (avariya) yorugʻlik signalizatsiyasi qachon yoqiladi?', o:['Yomgʻirda doimo','Majburan toʻxtaganda, avariyada, boshqalarni ogohlantirish zarur boʻlganda','Tunda yurganda','Oboganishda'], a:1, e:'Avariya signali majburiy toʻxtash, YTH, buksirlash yoki boshqa haydovchilarni xavf haqida ogohlantirish zarur boʻlgan holatlarda yoqiladi.'},
+{c:'umumiy', q:'Yaqin masofa (gabarit emas, yaqin nur) faralari shahar ichida qachon yoqilishi kerak?', o:['Faqat tunda','Qorongʻida va koʻrinish yomonlashganda (tunnel, tuman)','Hech qachon','Faqat magistralda'], a:1, e:'Qorongʻi vaqtda va koʻrinish yetarli boʻlmagan sharoitlarda (tuman, tunnel) yaqin yoki uzoq nur faralari yoqilishi shart.'}
+];
+
+/* ====================== LOGIKA ====================== */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const ABC=['A','B','C','D','E'];
+let state=null;
+
+// stats
+$('#stTotal').textContent=Q.length;
+$('#stCats').textContent=Object.keys(CATS).length;
+try{const b=localStorage.getItem('avtotest_best');if(b){$('#stBestPill').hidden=false;$('#stBest').textContent=b+'%';}}catch(e){}
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function show(id){['landing','catpick','exam','result'].forEach(s=>$('#'+s).hidden=(s!==id));window.scrollTo(0,0);}
+
+// ---- Imtihon rejimi ----
+$('#mStart').onclick=()=>{
+  const qs=shuffle(Q).slice(0,Math.min(20,Q.length)).map(prepQ);
+  state={mode:'exam',qs,i:0,answers:[],reveal:false,timeLeft:25*60};
+  $('#qMode').textContent='Imtihon';
+  $('#qTimer').hidden=false;
+  startTimer();
+  show('exam');renderQ();
+};
+// ---- Mavzu boʻyicha ----
+$('#mStudy').onclick=()=>{
+  const list=$('#catList');list.innerHTML='';
+  Object.entries(CATS).forEach(([k,v])=>{
+    const n=Q.filter(q=>q.c===k).length;
+    const b=document.createElement('button');b.className='cat';b.type='button';
+    b.innerHTML=`<span class="n">${v.idx}</span><span><span class="tt">${v.n}</span><br><span class="ss">${n} ta savol</span></span><span class="ar">→</span>`;
+    b.onclick=()=>startStudy(k);
+    list.appendChild(b);
+  });
+  show('catpick');
+};
+$('#backFromCats').onclick=e=>{e.preventDefault();show('landing');};
+function startStudy(cat){
+  const qs=shuffle(Q.filter(q=>q.c===cat)).map(prepQ);
+  state={mode:'study',qs,i:0,answers:[],reveal:true,cat};
+  $('#qMode').textContent=CATS[cat].n;
+  $('#qTimer').hidden=true;
+  show('exam');renderQ();
+}
+
+function prepQ(q){
+  // variantlarni aralashtirish, toʻgʻri indeksni kuzatish
+  const order=shuffle(q.o.map((t,i)=>({t,ok:i===q.a})));
+  return {c:q.c,img:q.img,q:q.q,opts:order,e:q.e};
+}
+
+let timerId=null;
+function startTimer(){
+  clearInterval(timerId);
+  timerId=setInterval(()=>{
+    if(!state||state.mode!=='exam')return clearInterval(timerId);
+    state.timeLeft--;
+    const m=Math.floor(state.timeLeft/60),s=state.timeLeft%60;
+    const el=$('#qTimer');el.textContent=`${m}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('warn',state.timeLeft<=60);
+    if(state.timeLeft<=0){clearInterval(timerId);finish();}
+  },1000);
+}
+
+function renderQ(){
+  const q=state.qs[state.i];
+  $('#qCounter').textContent=`${state.i+1} / ${state.qs.length}`;
+  $('#qProg').style.width=((state.i)/state.qs.length*100)+'%';
+  $('#qKind').textContent=CATS[q.c].n;
+  const imgBox=$('#qImg');
+  if(q.img){imgBox.hidden=false;imgBox.querySelector('.box').innerHTML=q.img;}else{imgBox.hidden=true;}
+  $('#qText').textContent=q.q;
+  const opts=$('#qOpts');opts.innerHTML='';
+  q.opts.forEach((o,idx)=>{
+    const b=document.createElement('button');b.className='opt';b.type='button';
+    b.innerHTML=`<span class="k">${ABC[idx]}</span><span>${o.t}</span>`;
+    b.onclick=()=>pick(idx);
+    opts.appendChild(b);
+  });
+  const fb=$('#qFb');fb.className='fb';fb.innerHTML='';
+  const nb=$('#qNext');
+  nb.disabled=true;
+  nb.textContent=(state.i===state.qs.length-1)?(state.mode==='exam'?'Yakunlash':'Natija'):'Keyingi →';
+  state.picked=null;
+}
+
+function pick(idx){
+  if(state.picked!==null && state.reveal)return; // study: bir marta
+  const q=state.qs[state.i];
+  const btns=$$('#qOpts .opt');
+  state.picked=idx;
+  const correct=q.opts[idx].ok;
+  state.answers[state.i]={picked:idx,correct};
+  if(state.reveal){
+    // study: darhol koʻrsat
+    btns.forEach((b,i)=>{b.disabled=true;if(q.opts[i].ok)b.classList.add('right');});
+    if(!correct)btns[idx].classList.add('wrong');
+    const fb=$('#qFb');fb.classList.add('show',correct?'ok':'no');
+    fb.innerHTML=(correct?'<b>Toʻgʻri!</b> ':'<b>Notoʻgʻri.</b> ')+q.e;
+  }else{
+    // exam: faqat tanlovni belgila
+    btns.forEach(b=>b.classList.remove('sel'));
+    btns[idx].classList.add('sel');
+  }
+  $('#qNext').disabled=false;
+}
+
+$('#qNext').onclick=()=>{
+  if(state.i<state.qs.length-1){state.i++;renderQ();}
+  else finish();
+};
+$('#qQuit').onclick=()=>{if(confirm('Testdan chiqasizmi? Natija saqlanmaydi.')){clearInterval(timerId);show('landing');}};
+
+function finish(){
+  clearInterval(timerId);
+  const total=state.qs.length;
+  const right=state.answers.filter(a=>a&&a.correct).length;
+  const pct=Math.round(right/total*100);
+  // ring
+  const C=2*Math.PI*66;
+  $('#rArc').style.strokeDashoffset=C*(1-pct/100);
+  $('#rNum').textContent=pct+'%';
+  $('#rTitle').textContent=`${right} / ${total} toʻgʻri`;
+  const badge=$('#rBadge');
+  if(state.mode==='exam'){
+    const wrong=total-right;const pass=wrong<=2;
+    badge.className='rbadge '+(pass?'pass':'fail');
+    badge.innerHTML=pass?'✓ Imtihondan oʻtdingiz':'✗ Oʻtmadingiz';
+    $('#rSub').textContent=pass?`Faqat ${wrong} ta xato. Barakalla!`:`${wrong} ta xato. Imtihondan oʻtish uchun 2 tadan ortiq xato boʻlmasligi kerak.`;
+    try{const prev=+(localStorage.getItem('avtotest_best')||0);if(pct>prev){localStorage.setItem('avtotest_best',pct);}}catch(e){}
+  }else{
+    badge.className='rbadge '+(pct>=80?'pass':'fail');
+    badge.innerHTML=CATS[state.cat].n;
+    $('#rSub').textContent=`«${CATS[state.cat].n}» mavzusi boʻyicha natijangiz.`;
+  }
+  // review
+  const rev=$('#rReview');rev.innerHTML='';
+  state.qs.forEach((q,i)=>{
+    const a=state.answers[i];const ok=a&&a.correct;
+    const corr=q.opts.find(o=>o.ok).t;
+    const d=document.createElement('div');d.className='rev';
+    d.innerHTML=`<span class="dot ${ok?'y':'n'}">${ok?'✓':'✕'}</span><span class="rq"><b>${i+1}. ${q.q}</b><br>Toʻgʻri javob: ${corr}</span>`;
+    rev.appendChild(d);
+  });
+  show('result');
+}
+$('#rAgain').onclick=()=>{if(state.mode==='exam')$('#mStart').click();else startStudy(state.cat);};
+$('#rHome').onclick=()=>show('landing');
+</script>
+</body>
+</html>
